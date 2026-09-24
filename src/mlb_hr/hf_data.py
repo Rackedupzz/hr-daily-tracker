@@ -13,7 +13,9 @@ app has refreshed since the last push.
 """
 
 import os
+import shutil
 import sys
+import tempfile
 from pathlib import Path
 
 DATA_DIR = Path(__file__).parent / "data"
@@ -37,13 +39,18 @@ def push() -> None:
         sys.exit("[hf_data] set HF_TOKEN and HF_DATA_REPO to push")
     api = HfApi(token=token)
     api.create_repo(repo, repo_type="dataset", private=True, exist_ok=True)
-    api.upload_folder(
-        repo_id=repo,
-        repo_type="dataset",
-        folder_path=str(DATA_DIR),
-        allow_patterns=PATTERNS,
-        commit_message="Sync data/",
-    )
+    # Upload a frozen copy: the running app appends to the PA file, and a file
+    # that changes between hashing and upload is rejected by the Hub.
+    with tempfile.TemporaryDirectory() as staging:
+        for pattern in PATTERNS:
+            for path in DATA_DIR.glob(pattern):
+                shutil.copy2(path, staging)
+        api.upload_folder(
+            repo_id=repo,
+            repo_type="dataset",
+            folder_path=staging,
+            commit_message="Sync data/",
+        )
     print(f"[hf_data] pushed {DATA_DIR} -> datasets/{repo}")
 
 
