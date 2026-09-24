@@ -1,0 +1,6 @@
+# Heavy ML wheels, kept in their own file so a change to the light
+# dependencies below does not invalidate the Docker layer that downloads
+# ~450MB of torch and xgboost.
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch==2.5.1
+xgboost==2.1.3

@@ -1,0 +1,1801 @@
+{
+ "bot": "HOMER",
+ "date": "2026-09-14",
+ "built_at": "2026-09-15 00:27:28",
+ "book_through": "2026-09-14",
+ "league": {
+  "pa": 168758,
+  "hr_rate": 0.030600030813354034,
+  "woba": 0.3133060951183753,
+  "games": 2245
+ },
+ "method": "learned",
+ "evidence": {
+  "fitted_at": "2026-09-14 22:19:55",
+  "through": "2026-09-13",
+  "hits_serve": "learned",
+  "hit_scores": {
+   "learned": {
+    "n": 28773,
+    "log_loss": 0.66177,
+    "brier": 0.23459,
+    "auc": 0.5705,
+    "accuracy": 0.6118,
+    "accuracy_se": 0.0029
+   },
+   "rules": {
+    "n": 28773,
+    "log_loss": 0.66569,
+    "brier": 0.23643,
+    "auc": 0.565,
+    "accuracy": 0.6093,
+    "accuracy_se": 0.0029
+   },
+   "baseline": {
+    "n": 28773,
+    "log_loss": 0.66784,
+    "brier": 0.2374,
+    "auc": 0.5561,
+    "accuracy": 0.6092,
+    "accuracy_se": 0.0029
+   }
+  },
+  "hit_picks": {
+   "calibrated": {
+    "days": 121,
+    "picks": 719,
+    "hit": 514,
+    "rate": 0.7149,
+    "rate_se": 0.0168,
+    "expected": 519.6
+   },
+   "rules": {
+    "days": 121,
+    "picks": 719,
+    "hit": 500,
+    "rate": 0.6954,
+    "rate_se": 0.0172,
+    "expected": 534.8
+   },
+   "base": {
+    "days": 121,
+    "picks": 719,
+    "hit": 497,
+    "rate": 0.6912,
+    "rate_se": 0.0172,
+    "expected": 534.6
+   }
+  },
+  "hit_grades": [
+   {
+    "grade": "A",
+    "min_prob": 0.7266,
+    "top_share": 0.02,
+    "n": 507,
+    "hit": 372,
+    "rate": 0.7337,
+    "avg_prob": 0.7371
+   },
+   {
+    "grade": "B",
+    "min_prob": 0.7052,
+    "top_share": 0.05,
+    "n": 761,
+    "hit": 552,
+    "rate": 0.7254,
+    "avg_prob": 0.7131
+   },
+   {
+    "grade": "C",
+    "min_prob": 0.6828,
+    "top_share": 0.13,
+    "n": 2029,
+    "hit": 1388,
+    "rate": 0.6841,
+    "avg_prob": 0.695
+   },
+   {
+    "grade": "D",
+    "min_prob": 0.6485,
+    "top_share": 0.3,
+    "n": 4313,
+    "hit": 2877,
+    "rate": 0.6671,
+    "avg_prob": 0.6641
+   },
+   {
+    "grade": "E",
+    "min_prob": 0.0,
+    "top_share": 1.0,
+    "n": 17757,
+    "hit": 10501,
+    "rate": 0.5914,
+    "avg_prob": 0.5907
+   }
+  ],
+  "hit_weights": [
+   {
+    "feature": "exp_pa",
+    "label": "Lineup spot (trips to the plate)",
+    "odds_per_sd": 0.1756,
+    "overlap": false
+   },
+   {
+    "feature": "k_rate",
+    "label": "Strikeout rate",
+    "odds_per_sd": -0.062,
+    "overlap": false
+   },
+   {
+    "feature": "sample",
+    "label": "Size of track record",
+    "odds_per_sd": 0.0542,
+    "overlap": false
+   },
+   {
+    "feature": "hit_park",
+    "label": "Ballpark (hits)",
+    "odds_per_sd": 0.0504,
+    "overlap": false
+   },
+   {
+    "feature": "sp_k",
+    "label": "Starter's strikeout rate",
+    "odds_per_sd": -0.048,
+    "overlap": false
+   },
+   {
+    "feature": "bb_rate",
+    "label": "Walk rate",
+    "odds_per_sd": -0.0397,
+    "overlap": true
+   },
+   {
+    "feature": "sp_hit",
+    "label": "Starter's hits allowed",
+    "odds_per_sd": 0.0386,
+    "overlap": false
+   },
+   {
+    "feature": "xhit",
+    "label": "Expected hits (contact quality)",
+    "odds_per_sd": 0.0375,
+    "overlap": false
+   },
+   {
+    "feature": "hit_platoon",
+    "label": "League platoon edge (hits)",
+    "odds_per_sd": -0.0353,
+    "overlap": true
+   },
+   {
+    "feature": "pen_hit",
+    "label": "Opposing bullpen hits allowed",
+    "odds_per_sd": 0.0311,
+    "overlap": false
+   }
+  ],
+  "hit_dropped": [
+   {
+    "dropped": "hit_form",
+    "log_loss_before": 0.661882,
+    "log_loss_after": 0.661834
+   },
+   {
+    "dropped": "hit_rate",
+    "log_loss_before": 0.661834,
+    "log_loss_after": 0.6618
+   },
+   {
+    "dropped": "hit_split",
+    "log_loss_before": 0.6618,
+    "log_loss_after": 0.661769
+   }
+  ],
+  "hit_board_rate": 0.6185,
+  "parlays": {
+   "potd": {
+    "name": "Parlay of the Day",
+    "days": 120,
+    "won": 7,
+    "predicted": 0.061,
+    "rate": 0.0583
+   },
+   "lock3": {
+    "name": "The Lock",
+    "days": 120,
+    "won": 50,
+    "predicted": 0.3936,
+    "rate": 0.4167
+   },
+   "power3": {
+    "name": "Power Trio",
+    "days": 120,
+    "won": 13,
+    "predicted": 0.1176,
+    "rate": 0.1083
+   },
+   "moon5": {
+    "name": "Moonshot Five",
+    "days": 120,
+    "won": 5,
+    "predicted": 0.0179,
+    "rate": 0.0417
+   }
+  },
+  "hr_serve": "learned",
+  "games_serve": "rules",
+  "hr_scores": {
+   "learned": {
+    "n": 28773,
+    "log_loss": 0.35739,
+    "brier": 0.10336,
+    "auc": 0.6113,
+    "accuracy": 0.8809,
+    "accuracy_se": 0.0019
+   },
+   "rules": {
+    "n": 28773,
+    "log_loss": 0.358,
+    "brier": 0.10346,
+    "auc": 0.6049,
+    "accuracy": 0.8809,
+    "accuracy_se": 0.0019
+   },
+   "baseline": {
+    "n": 28773,
+    "log_loss": 0.35996,
+    "brier": 0.10384,
+    "auc": 0.5903,
+    "accuracy": 0.8809,
+    "accuracy_se": 0.0019
+   }
+  },
+  "hr_picks": {
+   "calibrated": {
+    "days": 121,
+    "picks": 719,
+    "hit": 144,
+    "rate": 0.2003,
+    "rate_se": 0.0149,
+    "expected": 149.3
+   },
+   "rules": {
+    "days": 121,
+    "picks": 719,
+    "hit": 135,
+    "rate": 0.1878,
+    "rate_se": 0.0146,
+    "expected": 151.6
+   },
+   "base": {
+    "days": 121,
+    "picks": 719,
+    "hit": 140,
+    "rate": 0.1947,
+    "rate_se": 0.0148,
+    "expected": 156.8
+   }
+  },
+  "hr_weights": [
+   {
+    "feature": "xhr",
+    "label": "Expected HR rate (contact quality)",
+    "odds_per_sd": 0.3724,
+    "overlap": false
+   },
+   {
+    "feature": "exp_pa",
+    "label": "Lineup spot (trips to the plate)",
+    "odds_per_sd": 0.15,
+    "overlap": false
+   },
+   {
+    "feature": "sp_fly",
+    "label": "Starter's fly-ball rate",
+    "odds_per_sd": 0.1061,
+    "overlap": false
+   },
+   {
+    "feature": "weather",
+    "label": "Temperature & wind",
+    "odds_per_sd": 0.0977,
+    "overlap": false
+   },
+   {
+    "feature": "park",
+    "label": "Ballpark",
+    "odds_per_sd": 0.061,
+    "overlap": false
+   },
+   {
+    "feature": "sample",
+    "label": "Size of track record",
+    "odds_per_sd": 0.0595,
+    "overlap": false
+   },
+   {
+    "feature": "barrel",
+    "label": "Barrel rate",
+    "odds_per_sd": -0.0564,
+    "overlap": true
+   },
+   {
+    "feature": "form",
+    "label": "Last 21 days vs season",
+    "odds_per_sd": 0.0482,
+    "overlap": false
+   }
+  ],
+  "hr_dropped": [
+   {
+    "dropped": "sp_form",
+    "log_loss_before": 0.357579,
+    "log_loss_after": 0.3575
+   },
+   {
+    "dropped": "pen",
+    "log_loss_before": 0.3575,
+    "log_loss_after": 0.357468
+   },
+   {
+    "dropped": "platoon",
+    "log_loss_before": 0.357468,
+    "log_loss_after": 0.35744
+   },
+   {
+    "dropped": "split",
+    "log_loss_before": 0.35744,
+    "log_loss_after": 0.357416
+   },
+   {
+    "dropped": "hr",
+    "log_loss_before": 0.357416,
+    "log_loss_after": 0.357398
+   },
+   {
+    "dropped": "sp_hr",
+    "log_loss_before": 0.357398,
+    "log_loss_after": 0.357393
+   }
+  ],
+  "grades": [
+   {
+    "grade": "A",
+    "min_prob": 0.201,
+    "top_share": 0.05,
+    "n": 1268,
+    "hit": 263,
+    "rate": 0.2074,
+    "avg_prob": 0.2073
+   },
+   {
+    "grade": "B",
+    "min_prob": 0.1751,
+    "top_share": 0.13,
+    "n": 2029,
+    "hit": 373,
+    "rate": 0.1838,
+    "avg_prob": 0.1896
+   },
+   {
+    "grade": "C",
+    "min_prob": 0.1395,
+    "top_share": 0.3,
+    "n": 4313,
+    "hit": 711,
+    "rate": 0.1649,
+    "avg_prob": 0.1599
+   },
+   {
+    "grade": "D",
+    "min_prob": 0.0,
+    "top_share": 1.0,
+    "n": 17757,
+    "hit": 1794,
+    "rate": 0.101,
+    "avg_prob": 0.1003
+   }
+  ],
+  "board_rate": 0.1238,
+  "game_scores": {
+   "learned": {
+    "n": 1617,
+    "log_loss": 0.68393,
+    "brier": 0.24546,
+    "auc": 0.57,
+    "accuracy": 0.5541,
+    "accuracy_se": 0.0124
+   },
+   "rules": {
+    "n": 1617,
+    "log_loss": 0.68361,
+    "brier": 0.24528,
+    "auc": 0.5706,
+    "accuracy": 0.5529,
+    "accuracy_se": 0.0124
+   },
+   "home_team": {
+    "n": 1617,
+    "log_loss": 0.69164,
+    "brier": 0.24925,
+    "auc": 0.5,
+    "accuracy": 0.5275,
+    "accuracy_se": 0.0124
+   }
+  },
+  "game_weights": [
+   {
+    "feature": "starter",
+    "label": "Starting pitcher matchup",
+    "odds_per_sd": 0.2392,
+    "overlap": false
+   },
+   {
+    "feature": "bullpen",
+    "label": "Bullpen matchup",
+    "odds_per_sd": 0.1754,
+    "overlap": false
+   }
+  ],
+  "confidence": [
+   {
+    "label": "Strong",
+    "min_prob": 0.6,
+    "n": 238,
+    "won": 147,
+    "rate": 0.6176
+   },
+   {
+    "label": "Lean",
+    "min_prob": 0.55,
+    "n": 540,
+    "won": 309,
+    "rate": 0.5722
+   },
+   {
+    "label": "Coin flip",
+    "min_prob": 0.0,
+    "n": 839,
+    "won": 438,
+    "rate": 0.5221
+   }
+  ],
+  "house_winners": {
+   "n": 1937,
+   "accuracy": 0.5467217346411978,
+   "accuracy_se": 0.01131099490937996,
+   "brier": 0.24697265034737342,
+   "log_loss": 0.6870700122028418
+  }
+ },
+ "hr_picks": [
+  {
+   "rules_prob": 0.2204106752061643,
+   "xhr_rate": 0.05179395848219799,
+   "hr_rate": 0.05316940732605301,
+   "recent_rate": 0.077956607858683,
+   "recent_pa": 88,
+   "recent_hr": 8,
+   "season_pa": 665,
+   "season_hr": 41,
+   "season_xhr": 36.98625371092294,
+   "barrel_rate": 0.09410735268044636,
+   "hard_rate": 0.49382716049382713,
+   "split_index": 1.169897220232938,
+   "split_pa": 450,
+   "split_hr": 30,
+   "sp_index": 1.0871874410733493,
+   "sp_fly": 0.2755627593832652,
+   "sp_form_index": 1.0777018118662045,
+   "pen_index": 0.9466775828765847,
+   "platoon": 1.055896444117897,
+   "park": 1.063,
+   "weather": 1.0,
+   "weather_note": "",
+   "exp_pa": 4.65,
+   "slot": null,
+   "usual_slot": 1,
+   "pa_vs_sp": 2.42,
+   "pa_vs_pen": 2.23,
+   "sp_hand": "R",
+   "bat_side": "L",
+   "lg": 0.030600030813354034,
+   "batter": "Pete Crow-Armstrong",
+   "batter_id": 691718,
+   "team": "Chicago Cubs",
+   "game_pk": 824629,
+   "matchup": "Atlanta Braves @ Chicago Cubs",
+   "venue": "Wrigley Field",
+   "sp_name": "Reynaldo L\u00f3pez",
+   "model_prob": 0.17094454677941803,
+   "injury_note": null,
+   "lineup_posted": false,
+   "lineup_confirmed": false,
+   "prob": 0.2043709149393735,
+   "method": "learned",
+   "contrib": {
+    "xhr": 0.5623,
+    "form": 0.0946,
+    "barrel": -0.0943,
+    "sp_fly": 0.032,
+    "park": 0.0374,
+    "weather": -0.0498,
+    "exp_pa": 0.2076,
+    "sample": 0.0865
+   },
+   "take": [
+    "Contact quality: 37.0 xHR in 665 PA (1.69&times; league) <span class='muted'>(+75% odds)</span>",
+    "Lineup not posted; usually bats 1 (4.7 trips) <span class='muted'>(+23% odds)</span>",
+    "Last 21 days: contact running 1.51&times; his season pace (8 HR in 88 PA) <span class='muted'>(+10% odds)</span>"
+   ],
+   "grade": "A",
+   "evidence": {
+    "grade": "A",
+    "min_prob": 0.201,
+    "top_share": 0.05,
+    "n": 1268,
+    "hit": 263,
+    "rate": 0.2074,
+    "avg_prob": 0.2073
+   },
+   "edge": 0.03342636815995548,
+   "result": {
+    "hr": 1,
+    "summary": "4-5 | HR, 2B, 4 RBI",
+    "final": true,
+    "state": "Final"
+   }
+  },
+  {
+   "rules_prob": 0.1783160324171743,
+   "xhr_rate": 0.04684466035801473,
+   "hr_rate": 0.05867610244645052,
+   "recent_rate": 0.04037495020016827,
+   "recent_pa": 71,
+   "recent_hr": 4,
+   "season_pa": 528,
+   "season_hr": 38,
+   "season_xhr": 26.683336214391062,
+   "barrel_rate": 0.07983059686870662,
+   "hard_rate": 0.44694533762057875,
+   "split_index": 1.1092482881417751,
+   "split_pa": 352,
+   "split_hr": 27,
+   "sp_index": 0.975021911736854,
+   "sp_fly": 0.3074785211503521,
+   "sp_form_index": 1.1119650217266506,
+   "pen_index": 0.8606092394833634,
+   "platoon": 0.992740281006591,
+   "park": 1.04,
+   "weather": 1.126,
+   "weather_note": "84&deg;F air carries",
+   "exp_pa": 4.45,
+   "slot": 3,
+   "usual_slot": 3,
+   "pa_vs_sp": 2.45,
+   "pa_vs_pen": 2.0,
+   "sp_hand": "R",
+   "bat_side": "R",
+   "lg": 0.030600030813354034,
+   "batter": "Hunter Goodman",
+   "batter_id": 696100,
+   "team": "Colorado Rockies",
+   "game_pk": 824308,
+   "matchup": "San Diego Padres @ Colorado Rockies",
+   "venue": "Coors Field",
+   "sp_name": "Casey Mize",
+   "model_prob": 0.15728918124696534,
+   "injury_note": null,
+   "lineup_posted": true,
+   "lineup_confirmed": true,
+   "prob": 0.20123595219594081,
+   "method": "learned",
+   "contrib": {
+    "xhr": 0.4622,
+    "form": -0.0162,
+    "barrel": -0.0559,
+    "sp_fly": 0.1558,
+    "park": 0.0236,
+    "weather": 0.058,
+    "exp_pa": 0.108,
+    "sample": 0.0717
+   },
+   "take": [
+    "Contact quality: 26.7 xHR in 528 PA (1.53&times; league) <span class='muted'>(+59% odds)</span>",
+    "Casey Mize lives in the air: 31% fly balls <span class='muted'>(+17% odds)</span>",
+    "Batting 3: 4.5 projected trips <span class='muted'>(+11% odds)</span>"
+   ],
+   "grade": "A",
+   "evidence": {
+    "grade": "A",
+    "min_prob": 0.201,
+    "top_share": 0.05,
+    "n": 1268,
+    "hit": 263,
+    "rate": 0.2074,
+    "avg_prob": 0.2073
+   },
+   "tag": "HAMMER IT &#128296;",
+   "edge": 0.04394677094897548,
+   "result": {
+    "hr": 0,
+    "summary": "2-3 | 3B, 2B, BB",
+    "final": true,
+    "state": "Final"
+   }
+  },
+  {
+   "rules_prob": 0.16920664380019879,
+   "xhr_rate": 0.054196072973986015,
+   "hr_rate": 0.04754738874396712,
+   "recent_rate": 0.05806162883523169,
+   "recent_pa": 83,
+   "recent_hr": 5,
+   "season_pa": 647,
+   "season_hr": 35,
+   "season_xhr": 37.89638427344479,
+   "barrel_rate": 0.10635914045665161,
+   "hard_rate": 0.5623471882640587,
+   "split_index": 1.0611291905049602,
+   "split_pa": 451,
+   "split_hr": 26,
+   "sp_index": 0.9916221670224953,
+   "sp_fly": 0.3015945695390445,
+   "sp_form_index": 0.8527631786457074,
+   "pen_index": 0.981252686409913,
+   "platoon": 0.992740281006591,
+   "park": 0.937,
+   "weather": 1.0,
+   "weather_note": "",
+   "exp_pa": 4.55,
+   "slot": null,
+   "usual_slot": 2,
+   "pa_vs_sp": 2.54,
+   "pa_vs_pen": 2.01,
+   "sp_hand": "R",
+   "bat_side": "R",
+   "lg": 0.030600030813354034,
+   "batter": "Pete Alonso",
+   "batter_id": 624413,
+   "team": "Baltimore Orioles",
+   "game_pk": 823575,
+   "matchup": "Baltimore Orioles @ New York Mets",
+   "venue": "Citi Field",
+   "sp_name": "Jonah Tong",
+   "model_prob": 0.1628069783306557,
+   "injury_note": null,
+   "lineup_posted": false,
+   "lineup_confirmed": false,
+   "prob": 0.20014571106861978,
+   "method": "learned",
+   "contrib": {
+    "xhr": 0.6075,
+    "form": 0.0271,
+    "barrel": -0.1272,
+    "sp_fly": 0.134,
+    "park": -0.0418,
+    "weather": -0.0498,
+    "exp_pa": 0.1578,
+    "sample": 0.0847
+   },
+   "take": [
+    "Contact quality: 37.9 xHR in 647 PA (1.77&times; league) <span class='muted'>(+84% odds)</span>",
+    "Lineup not posted; usually bats 2 (4.5 trips) <span class='muted'>(+17% odds)</span>",
+    "Jonah Tong lives in the air: 30% fly balls <span class='muted'>(+14% odds)</span>"
+   ],
+   "grade": "B",
+   "evidence": {
+    "grade": "B",
+    "min_prob": 0.1751,
+    "top_share": 0.13,
+    "n": 2029,
+    "hit": 373,
+    "rate": 0.1838,
+    "avg_prob": 0.1896
+   },
+   "edge": 0.03733873273796409,
+   "result": {
+    "hr": 0,
+    "summary": "0-3 | BB, K",
+    "final": true,
+    "state": "Final"
+   }
+  },
+  {
+   "rules_prob": 0.17001436560549843,
+   "xhr_rate": 0.05133351891372821,
+   "hr_rate": 0.053205137183378215,
+   "recent_rate": 0.04992757424467007,
+   "recent_pa": 76,
+   "recent_hr": 4,
+   "season_pa": 608,
+   "season_hr": 38,
+   "season_xhr": 33.69879807159165,
+   "barrel_rate": 0.09680288303148864,
+   "hard_rate": 0.4816753926701571,
+   "split_index": 1.110503336317716,
+   "split_pa": 402,
+   "split_hr": 28,
+   "sp_index": 1.3131432874326672,
+   "sp_fly": 0.29918355755779397,
+   "sp_form_index": 0.9708728179380268,
+   "pen_index": 0.8507069166046316,
+   "platoon": 1.055896444117897,
+   "park": 0.848,
+   "weather": 1.0,
+   "weather_note": "",
+   "exp_pa": 4.65,
+   "slot": null,
+   "usual_slot": 1,
+   "pa_vs_sp": 2.6,
+   "pa_vs_pen": 2.05,
+   "sp_hand": "R",
+   "bat_side": "L",
+   "lg": 0.030600030813354034,
+   "batter": "Ben Rice",
+   "batter_id": 700250,
+   "team": "New York Yankees",
+   "game_pk": 823656,
+   "matchup": "New York Yankees @ Minnesota Twins",
+   "venue": "Target Field",
+   "sp_name": "Dean Kremer",
+   "model_prob": 0.14696623696928446,
+   "injury_note": null,
+   "lineup_posted": false,
+   "lineup_confirmed": false,
+   "prob": 0.19493683640778628,
+   "method": "learned",
+   "contrib": {
+    "xhr": 0.5534,
+    "form": 0.0079,
+    "barrel": -0.1015,
+    "sp_fly": 0.1249,
+    "park": -0.1044,
+    "weather": -0.0498,
+    "exp_pa": 0.2076,
+    "sample": 0.0808
+   },
+   "take": [
+    "Contact quality: 33.7 xHR in 608 PA (1.68&times; league) <span class='muted'>(+74% odds)</span>",
+    "Lineup not posted; usually bats 1 (4.7 trips) <span class='muted'>(+23% odds)</span>",
+    "Dean Kremer lives in the air: 30% fly balls <span class='muted'>(+13% odds)</span>",
+    "Knock: Target Field plays 0.85&times; for home runs <span class='muted'>(-10% odds)</span>"
+   ],
+   "grade": "B",
+   "evidence": {
+    "grade": "B",
+    "min_prob": 0.1751,
+    "top_share": 0.13,
+    "n": 2029,
+    "hit": 373,
+    "rate": 0.1838,
+    "avg_prob": 0.1896
+   },
+   "edge": 0.04797059943850182,
+   "result": {
+    "hr": 0,
+    "summary": "2-3 | BB, 2 RBI, R",
+    "final": true,
+    "state": "Final"
+   }
+  },
+  {
+   "rules_prob": 0.165006084388153,
+   "xhr_rate": 0.0500929669916959,
+   "hr_rate": 0.04527898097759443,
+   "recent_rate": 0.057025805325886504,
+   "recent_pa": 87,
+   "recent_hr": 5,
+   "season_pa": 449,
+   "season_hr": 24,
+   "season_xhr": 24.830894520672484,
+   "barrel_rate": 0.10005745570000942,
+   "hard_rate": 0.4748201438848921,
+   "split_index": 0.9633336267751833,
+   "split_pa": 295,
+   "split_hr": 14,
+   "sp_index": 0.9744517396184598,
+   "sp_fly": 0.2862223049721675,
+   "sp_form_index": 0.9287395983466211,
+   "pen_index": 0.8946707326127875,
+   "platoon": 0.992740281006591,
+   "park": 0.992,
+   "weather": 1.0,
+   "weather_note": "roof closed",
+   "exp_pa": 4.55,
+   "slot": 2,
+   "usual_slot": 2,
+   "pa_vs_sp": 2.3,
+   "pa_vs_pen": 2.25,
+   "sp_hand": "R",
+   "bat_side": "R",
+   "lg": 0.030600030813354034,
+   "batter": "Heriberto Hern\u00e1ndez",
+   "batter_id": 681715,
+   "team": "Miami Marlins",
+   "game_pk": 825034,
+   "matchup": "Miami Marlins @ Arizona Diamondbacks",
+   "venue": "Chase Field",
+   "sp_name": "Corbin Burnes",
+   "model_prob": 0.16278541367496135,
+   "injury_note": null,
+   "lineup_posted": true,
+   "lineup_confirmed": true,
+   "prob": 0.19207861068816887,
+   "method": "learned",
+   "contrib": {
+    "xhr": 0.529,
+    "form": 0.0391,
+    "barrel": -0.1102,
+    "sp_fly": 0.0749,
+    "park": -0.006,
+    "weather": -0.0498,
+    "exp_pa": 0.1578,
+    "sample": 0.0613
+   },
+   "take": [
+    "Contact quality: 24.8 xHR in 449 PA (1.64&times; league) <span class='muted'>(+70% odds)</span>",
+    "Batting 2: 4.5 projected trips <span class='muted'>(+17% odds)</span>",
+    "Corbin Burnes lives in the air: 29% fly balls <span class='muted'>(+8% odds)</span>"
+   ],
+   "grade": "B",
+   "evidence": {
+    "grade": "B",
+    "min_prob": 0.1751,
+    "top_share": 0.13,
+    "n": 2029,
+    "hit": 373,
+    "rate": 0.1838,
+    "avg_prob": 0.1896
+   },
+   "tag": "LOVE IT",
+   "edge": 0.02929319701320751,
+   "result": {
+    "hr": 0,
+    "summary": "1-4 | BB, K",
+    "final": true,
+    "state": "Final"
+   }
+  },
+  {
+   "rules_prob": 0.13092631013583866,
+   "xhr_rate": 0.043976051443446094,
+   "hr_rate": 0.04078405461257016,
+   "recent_rate": 0.050491015538741885,
+   "recent_pa": 81,
+   "recent_hr": 3,
+   "season_pa": 477,
+   "season_hr": 22,
+   "season_xhr": 22.581699014134834,
+   "barrel_rate": 0.07847064597263971,
+   "hard_rate": 0.4484848484848485,
+   "split_index": 1.1311084470591455,
+   "split_pa": 119,
+   "split_hr": 5,
+   "sp_index": 0.9400515822791464,
+   "sp_fly": 0.29551013256598724,
+   "sp_form_index": 0.7164945231017544,
+   "pen_index": 0.9051151594479891,
+   "platoon": 0.786347155046321,
+   "park": 0.832,
+   "weather": 1.18,
+   "weather_note": "wind 8 mph out to RF",
+   "exp_pa": 4.45,
+   "slot": 3,
+   "usual_slot": 2,
+   "pa_vs_sp": 2.66,
+   "pa_vs_pen": 1.79,
+   "sp_hand": "L",
+   "bat_side": "L",
+   "lg": 0.030600030813354034,
+   "batter": "Dominic Canzone",
+   "batter_id": 686527,
+   "team": "Seattle Mariners",
+   "game_pk": 823981,
+   "matchup": "Seattle Mariners @ Los Angeles Angels",
+   "venue": "Angel Stadium",
+   "sp_name": "Reid Detmers",
+   "model_prob": 0.12897716700937423,
+   "injury_note": null,
+   "lineup_posted": true,
+   "lineup_confirmed": true,
+   "prob": 0.18397166871825676,
+   "method": "learned",
+   "contrib": {
+    "xhr": 0.3992,
+    "form": 0.0408,
+    "barrel": -0.0522,
+    "sp_fly": 0.1109,
+    "park": -0.1163,
+    "weather": 0.1005,
+    "exp_pa": 0.108,
+    "sample": 0.0652
+   },
+   "take": [
+    "Contact quality: 22.6 xHR in 477 PA (1.44&times; league) <span class='muted'>(+49% odds)</span>",
+    "Reid Detmers lives in the air: 30% fly balls <span class='muted'>(+12% odds)</span>",
+    "Batting 3: 4.5 projected trips <span class='muted'>(+11% odds)</span>",
+    "Knock: Angel Stadium plays 0.83&times; for home runs <span class='muted'>(-11% odds)</span>"
+   ],
+   "grade": "B",
+   "evidence": {
+    "grade": "B",
+    "min_prob": 0.1751,
+    "top_share": 0.13,
+    "n": 2029,
+    "hit": 373,
+    "rate": 0.1838,
+    "avg_prob": 0.1896
+   },
+   "tag": "LOVE IT",
+   "edge": 0.05499450170888254,
+   "result": {
+    "hr": 0,
+    "summary": "1-4 | 2 K, R",
+    "final": true,
+    "state": "Final"
+   }
+  }
+ ],
+ "hit_picks": [
+  {
+   "rules_prob": 0.8039845175076031,
+   "season_pa": 642,
+   "season_hits": 167,
+   "avg_line": 0.2601246105919003,
+   "hit_rate": 0.25019020475960757,
+   "xhit_rate": 0.25210195384637224,
+   "recent_hit_rate": 0.259074908529327,
+   "recent_pa": 79,
+   "recent_hits": 21,
+   "k_rate": 0.1923526618296644,
+   "bb_rate": 0.0931225737027536,
+   "split_index": 1.0284050525252495,
+   "split_pa": 488,
+   "split_hits": 126,
+   "platoon": 0.9950494491575769,
+   "sp_hit_index": 1.170656542181856,
+   "sp_k_rate": 0.1628108291830912,
+   "pen_hit_index": 1.0861863458660588,
+   "park": 1.045,
+   "exp_pa": 4.65,
+   "slot": 1,
+   "usual_slot": 1,
+   "sp_hand": "R",
+   "lg_hit": 0.21830076203794782,
+   "lg_k": 0.2222887211272947,
+   "batter": "Fernando Tatis Jr.",
+   "batter_id": 665487,
+   "team": "San Diego Padres",
+   "game_pk": 824308,
+   "matchup": "San Diego Padres @ Colorado Rockies",
+   "venue": "Coors Field",
+   "sp_name": "Tomoyuki Sugano",
+   "model_prob": 0.7540380089356776,
+   "injury_note": null,
+   "lineup_posted": true,
+   "lineup_confirmed": true,
+   "prob": 0.74044,
+   "method": "learned",
+   "take": [
+    "Batting 1: 4.7 trips to the plate <span class='muted'>(+27% odds)</span>",
+    "Tomoyuki Sugano strikes out 16% (league 22%) <span class='muted'>(+14% odds)</span>",
+    "Tomoyuki Sugano allows hits at 1.17&times; league <span class='muted'>(+12% odds)</span>"
+   ],
+   "grade": "A",
+   "evidence": {
+    "grade": "A",
+    "min_prob": 0.7266,
+    "top_share": 0.02,
+    "n": 507,
+    "hit": 372,
+    "rate": 0.7337,
+    "avg_prob": 0.7371
+   },
+   "tag": "BANK IT &#128176;",
+   "result": {
+    "hits": 1,
+    "summary": "1-5 | HR, K, 2 RBI",
+    "final": true,
+    "dnp": false,
+    "state": "Final"
+   }
+  },
+  {
+   "rules_prob": 0.7077671656277847,
+   "season_pa": 565,
+   "season_hits": 128,
+   "avg_line": 0.22654867256637168,
+   "hit_rate": 0.2243923560883524,
+   "xhit_rate": 0.2415834249946034,
+   "recent_hit_rate": 0.22443615931468938,
+   "recent_pa": 49,
+   "recent_hits": 11,
+   "k_rate": 0.16131931212460726,
+   "bb_rate": 0.08776654317843476,
+   "split_index": 0.95007515438334,
+   "split_pa": 418,
+   "split_hits": 87,
+   "platoon": 0.9950494491575769,
+   "sp_hit_index": 1.0357863985624118,
+   "sp_k_rate": 0.18182128440878656,
+   "pen_hit_index": 0.9083616990308319,
+   "park": 1.024,
+   "exp_pa": 4.55,
+   "slot": 2,
+   "usual_slot": 2,
+   "sp_hand": "R",
+   "lg_hit": 0.21830076203794782,
+   "lg_k": 0.2222887211272947,
+   "batter": "Ketel Marte",
+   "batter_id": 606466,
+   "team": "Arizona Diamondbacks",
+   "game_pk": 825034,
+   "matchup": "Miami Marlins @ Arizona Diamondbacks",
+   "venue": "Chase Field",
+   "sp_name": "Sandy Alcantara",
+   "model_prob": 0.6678280252352644,
+   "injury_note": null,
+   "lineup_posted": true,
+   "lineup_confirmed": true,
+   "prob": 0.7191019122982504,
+   "method": "learned",
+   "take": [
+    "Batting 2: 4.5 trips to the plate <span class='muted'>(+20% odds)</span>",
+    "Strikeout rate 16% (league 22%) <span class='muted'>(+11% odds)</span>",
+    "Sandy Alcantara strikes out 18% (league 22%) <span class='muted'>(+9% odds)</span>",
+    "Knock: Opposing bullpen allows hits at 0.91&times; league <span class='muted'>(-7% odds)</span>"
+   ],
+   "grade": "B",
+   "evidence": {
+    "grade": "B",
+    "min_prob": 0.7052,
+    "top_share": 0.05,
+    "n": 761,
+    "hit": 552,
+    "rate": 0.7254,
+    "avg_prob": 0.7131
+   },
+   "tag": "LOVE IT",
+   "result": {
+    "hits": 1,
+    "summary": "1-5 | 2B",
+    "final": true,
+    "dnp": false,
+    "state": "Final"
+   }
+  },
+  {
+   "rules_prob": 0.6604519139560839,
+   "season_pa": 416,
+   "season_hits": 90,
+   "avg_line": 0.21634615384615385,
+   "hit_rate": 0.21698076689543763,
+   "xhit_rate": 0.22500160939499345,
+   "recent_hit_rate": 0.19866798539504602,
+   "recent_pa": 76,
+   "recent_hits": 14,
+   "k_rate": 0.19848641019274593,
+   "bb_rate": 0.08966974977487784,
+   "split_index": 1.0033159646994794,
+   "split_pa": 159,
+   "split_hits": 35,
+   "platoon": 1.0079986823620555,
+   "sp_hit_index": 1.0156787783507204,
+   "sp_k_rate": 0.21065416106431686,
+   "pen_hit_index": 1.045647643835879,
+   "park": 0.963,
+   "exp_pa": 4.35,
+   "slot": 4,
+   "usual_slot": 4,
+   "sp_hand": "L",
+   "lg_hit": 0.21830076203794782,
+   "lg_k": 0.2222887211272947,
+   "batter": "Vaughn Grissom",
+   "batter_id": 687093,
+   "team": "Los Angeles Angels",
+   "game_pk": 823981,
+   "matchup": "Seattle Mariners @ Los Angeles Angels",
+   "venue": "Angel Stadium",
+   "sp_name": "Kade Anderson",
+   "model_prob": 0.6618298807277667,
+   "injury_note": null,
+   "lineup_posted": true,
+   "lineup_confirmed": true,
+   "prob": 0.6387242484002712,
+   "method": "learned",
+   "take": [
+    "Batting 4: 4.3 trips to the plate <span class='muted'>(+7% odds)</span>",
+    "Established: 416 PA of track record <span class='muted'>(+5% odds)</span>",
+    "Opposing bullpen allows hits at 1.05&times; league <span class='muted'>(+5% odds)</span>",
+    "Knock: Angel Stadium plays 0.96&times; for hits <span class='muted'>(-6% odds)</span>"
+   ],
+   "grade": "E",
+   "evidence": {
+    "grade": "E",
+    "min_prob": 0.0,
+    "top_share": 1.0,
+    "n": 17757,
+    "hit": 10501,
+    "rate": 0.5914,
+    "avg_prob": 0.5907
+   },
+   "tag": "FILLER",
+   "result": {
+    "hits": 1,
+    "summary": "1-2 | BB, RBI",
+    "final": true,
+    "dnp": false,
+    "state": "Final"
+   }
+  }
+ ],
+ "parlays": [
+  {
+   "key": "lock3",
+   "name": "The Lock",
+   "legs": 3,
+   "hr": 0,
+   "blurb": "Three of HOMER's highest-confidence hit legs. Built to cash.",
+   "featured": false,
+   "leg_list": [
+    {
+     "batter": "Fernando Tatis Jr.",
+     "batter_id": 665487,
+     "team": "San Diego Padres",
+     "game_pk": 824308,
+     "matchup": "San Diego Padres @ Colorado Rockies",
+     "sp_name": "Tomoyuki Sugano",
+     "prob": 0.74044,
+     "grade": "A",
+     "type": "hit",
+     "status": "won"
+    },
+    {
+     "batter": "Ketel Marte",
+     "batter_id": 606466,
+     "team": "Arizona Diamondbacks",
+     "game_pk": 825034,
+     "matchup": "Miami Marlins @ Arizona Diamondbacks",
+     "sp_name": "Sandy Alcantara",
+     "prob": 0.7191019122982504,
+     "grade": "B",
+     "type": "hit",
+     "status": "won"
+    },
+    {
+     "batter": "Vaughn Grissom",
+     "batter_id": 687093,
+     "team": "Los Angeles Angels",
+     "game_pk": 823981,
+     "matchup": "Seattle Mariners @ Los Angeles Angels",
+     "sp_name": "Kade Anderson",
+     "prob": 0.6387242484002712,
+     "grade": "E",
+     "type": "hit",
+     "status": "won"
+    }
+   ],
+   "prob": 0.34008988850188493,
+   "fair_odds": "+194",
+   "evidence": {
+    "name": "The Lock",
+    "days": 120,
+    "won": 50,
+    "predicted": 0.3936,
+    "rate": 0.4167
+   },
+   "status": "won"
+  },
+  {
+   "key": "power3",
+   "name": "Power Trio",
+   "legs": 3,
+   "hr": 1,
+   "blurb": "One home run swing, two hit legs to carry it.",
+   "featured": false,
+   "leg_list": [
+    {
+     "batter": "Hunter Goodman",
+     "batter_id": 696100,
+     "team": "Colorado Rockies",
+     "game_pk": 824308,
+     "matchup": "San Diego Padres @ Colorado Rockies",
+     "sp_name": "Casey Mize",
+     "prob": 0.20123595219594081,
+     "grade": "A",
+     "type": "hr",
+     "status": "lost"
+    },
+    {
+     "batter": "Ketel Marte",
+     "batter_id": 606466,
+     "team": "Arizona Diamondbacks",
+     "game_pk": 825034,
+     "matchup": "Miami Marlins @ Arizona Diamondbacks",
+     "sp_name": "Sandy Alcantara",
+     "prob": 0.7191019122982504,
+     "grade": "B",
+     "type": "hit",
+     "status": "won"
+    },
+    {
+     "batter": "Vaughn Grissom",
+     "batter_id": 687093,
+     "team": "Los Angeles Angels",
+     "game_pk": 823981,
+     "matchup": "Seattle Mariners @ Los Angeles Angels",
+     "sp_name": "Kade Anderson",
+     "prob": 0.6387242484002712,
+     "grade": "E",
+     "type": "hit",
+     "status": "won"
+    }
+   ],
+   "prob": 0.09242924821037242,
+   "fair_odds": "+982",
+   "evidence": {
+    "name": "Power Trio",
+    "days": 120,
+    "won": 13,
+    "predicted": 0.1176,
+    "rate": 0.1083
+   },
+   "status": "lost"
+  }
+ ],
+ "game_picks": [
+  {
+   "game_pk": 824465,
+   "matchup": "Los Angeles Dodgers @ Cincinnati Reds",
+   "away": "Los Angeles Dodgers",
+   "home": "Cincinnati Reds",
+   "venue": "Great American Ball Park",
+   "pick": "Los Angeles Dodgers",
+   "pick_side": "away",
+   "win_prob": 0.6745330813547272,
+   "confidence": "Strong",
+   "evidence": {
+    "label": "Strong",
+    "min_prob": 0.6,
+    "n": 238,
+    "won": 147,
+    "rate": 0.6176
+   },
+   "method": "rules",
+   "away_runs": 5.44,
+   "home_runs": 3.62,
+   "total": 9.1,
+   "park_runs": 0.966,
+   "take": [
+    "Pitching edge: Tarik Skubal allows 0.280 wOBA, Nick Lodolo 0.352",
+    "Los Angeles Dodgers lineup 0.325 wOBA vs 0.308"
+   ],
+   "model_pick_prob": 0.6430728568453026,
+   "result": {
+    "final": true,
+    "won": true,
+    "home_score": 1,
+    "away_score": 4,
+    "total": 5,
+    "state": "Final"
+   },
+   "tag": "HAMMER"
+  },
+  {
+   "game_pk": 824308,
+   "matchup": "San Diego Padres @ Colorado Rockies",
+   "away": "San Diego Padres",
+   "home": "Colorado Rockies",
+   "venue": "Coors Field",
+   "pick": "San Diego Padres",
+   "pick_side": "away",
+   "win_prob": 0.5760574239752729,
+   "confidence": "Lean",
+   "evidence": {
+    "label": "Lean",
+    "min_prob": 0.55,
+    "n": 540,
+    "won": 309,
+    "rate": 0.5722
+   },
+   "method": "rules",
+   "away_runs": 5.32,
+   "home_runs": 4.53,
+   "total": 9.9,
+   "park_runs": 1.056,
+   "take": [
+    "Pitching edge: Casey Mize allows 0.298 wOBA, Tomoyuki Sugano 0.344",
+    "San Diego Padres lineup 0.309 wOBA vs 0.319"
+   ],
+   "model_pick_prob": 0.5308696324668472,
+   "tag": "LEAN",
+   "result": {
+    "final": true,
+    "won": true,
+    "home_score": 7,
+    "away_score": 8,
+    "total": 15,
+    "state": "Final"
+   }
+  },
+  {
+   "game_pk": 823981,
+   "matchup": "Seattle Mariners @ Los Angeles Angels",
+   "away": "Seattle Mariners",
+   "home": "Los Angeles Angels",
+   "venue": "Angel Stadium",
+   "pick": "Los Angeles Angels",
+   "pick_side": "home",
+   "win_prob": 0.5600423435600583,
+   "confidence": "Lean",
+   "evidence": {
+    "label": "Lean",
+    "min_prob": 0.55,
+    "n": 540,
+    "won": 309,
+    "rate": 0.5722
+   },
+   "method": "rules",
+   "away_runs": 3.28,
+   "home_runs": 3.94,
+   "total": 7.2,
+   "park_runs": 0.888,
+   "take": [
+    "Pitching edge: Reid Detmers allows 0.278 wOBA, Kade Anderson 0.319",
+    "Los Angeles Angels lineup 0.302 wOBA vs 0.306"
+   ],
+   "model_pick_prob": 0.5744836706796562,
+   "tag": "LEAN",
+   "result": {
+    "final": true,
+    "won": true,
+    "home_score": 6,
+    "away_score": 4,
+    "total": 10,
+    "state": "Final"
+   }
+  },
+  {
+   "game_pk": 823656,
+   "matchup": "New York Yankees @ Minnesota Twins",
+   "away": "New York Yankees",
+   "home": "Minnesota Twins",
+   "venue": "Target Field",
+   "pick": "New York Yankees",
+   "pick_side": "away",
+   "win_prob": 0.5412375613459046,
+   "confidence": "Coin flip",
+   "evidence": {
+    "label": "Coin flip",
+    "min_prob": 0.0,
+    "n": 839,
+    "won": 438,
+    "rate": 0.5221
+   },
+   "method": "rules",
+   "away_runs": 4.57,
+   "home_runs": 4.42,
+   "total": 9.0,
+   "park_runs": 0.956,
+   "take": [
+    "Pitching edge: Will Warren allows 0.325 wOBA, Dean Kremer 0.329",
+    "New York Yankees lineup 0.313 wOBA vs 0.314"
+   ],
+   "model_pick_prob": 0.5042719044103303,
+   "tag": "SMALL PLAY",
+   "result": {
+    "final": true,
+    "won": true,
+    "home_score": 3,
+    "away_score": 8,
+    "total": 11,
+    "state": "Final"
+   }
+  },
+  {
+   "game_pk": 824629,
+   "matchup": "Atlanta Braves @ Chicago Cubs",
+   "away": "Atlanta Braves",
+   "home": "Chicago Cubs",
+   "venue": "Wrigley Field",
+   "pick": "Chicago Cubs",
+   "pick_side": "home",
+   "win_prob": 0.5324921631947936,
+   "confidence": "Coin flip",
+   "evidence": {
+    "label": "Coin flip",
+    "min_prob": 0.0,
+    "n": 839,
+    "won": 438,
+    "rate": 0.5221
+   },
+   "method": "rules",
+   "away_runs": 4.76,
+   "home_runs": 5.06,
+   "total": 9.8,
+   "park_runs": 1.018,
+   "take": [
+    "Pitching edge: David Peterson allows 0.330 wOBA, Reynaldo L\u00f3pez 0.320",
+    "Chicago Cubs lineup 0.330 wOBA vs 0.312"
+   ],
+   "model_pick_prob": 0.5543875357646648,
+   "tag": "SMALL PLAY",
+   "result": {
+    "final": true,
+    "won": true,
+    "home_score": 7,
+    "away_score": 3,
+    "total": 10,
+    "state": "Final"
+   }
+  },
+  {
+   "game_pk": 823575,
+   "matchup": "Baltimore Orioles @ New York Mets",
+   "away": "Baltimore Orioles",
+   "home": "New York Mets",
+   "venue": "Citi Field",
+   "pick": "New York Mets",
+   "pick_side": "home",
+   "win_prob": 0.5297232868476841,
+   "confidence": "Coin flip",
+   "evidence": {
+    "label": "Coin flip",
+    "min_prob": 0.0,
+    "n": 839,
+    "won": 438,
+    "rate": 0.5221
+   },
+   "method": "rules",
+   "away_runs": 4.06,
+   "home_runs": 4.31,
+   "total": 8.4,
+   "park_runs": 0.97,
+   "take": [
+    "Pitching edge: Jonah Tong allows 0.309 wOBA, Brandon Young 0.319",
+    "New York Mets lineup 0.308 wOBA vs 0.311"
+   ],
+   "model_pick_prob": 0.5340986805605199,
+   "tag": "SMALL PLAY",
+   "result": {
+    "final": true,
+    "won": false,
+    "home_score": 1,
+    "away_score": 2,
+    "total": 3,
+    "state": "Final"
+   }
+  },
+  {
+   "game_pk": 822765,
+   "matchup": "Detroit Tigers @ Toronto Blue Jays",
+   "away": "Detroit Tigers",
+   "home": "Toronto Blue Jays",
+   "venue": "Rogers Centre",
+   "pick": "Detroit Tigers",
+   "pick_side": "away",
+   "win_prob": 0.5130173619832213,
+   "confidence": "Coin flip",
+   "evidence": {
+    "label": "Coin flip",
+    "min_prob": 0.0,
+    "n": 839,
+    "won": 438,
+    "rate": 0.5221
+   },
+   "method": "rules",
+   "away_runs": 4.08,
+   "home_runs": 4.06,
+   "total": 8.1,
+   "park_runs": 1.018,
+   "take": [
+    "Pitching edge: Troy Melton allows 0.293 wOBA, Jos\u00e9 Soriano 0.299",
+    "Detroit Tigers lineup 0.312 wOBA vs 0.306"
+   ],
+   "model_pick_prob": 0.5126310218965042,
+   "tag": "SMALL PLAY",
+   "result": {
+    "final": true,
+    "won": true,
+    "home_score": 5,
+    "away_score": 6,
+    "total": 11,
+    "state": "Final"
+   }
+  },
+  {
+   "game_pk": 823006,
+   "matchup": "San Francisco Giants @ St. Louis Cardinals",
+   "away": "San Francisco Giants",
+   "home": "St. Louis Cardinals",
+   "venue": "Busch Stadium",
+   "pick": "St. Louis Cardinals",
+   "pick_side": "home",
+   "win_prob": 0.5111503712430457,
+   "confidence": "Coin flip",
+   "evidence": {
+    "label": "Coin flip",
+    "min_prob": 0.0,
+    "n": 839,
+    "won": 438,
+    "rate": 0.5221
+   },
+   "method": "rules",
+   "away_runs": 4.15,
+   "home_runs": 3.93,
+   "total": 8.1,
+   "park_runs": 0.943,
+   "take": [
+    "Pitching edge: Quinn Mathews allows 0.316 wOBA, Landen Roupp 0.296",
+    "St. Louis Cardinals lineup 0.308 wOBA vs 0.310"
+   ],
+   "model_pick_prob": 0.5510941795212685,
+   "tag": "SMALL PLAY",
+   "result": {
+    "final": true,
+    "won": true,
+    "home_score": 2,
+    "away_score": 1,
+    "total": 3,
+    "state": "Final"
+   }
+  },
+  {
+   "game_pk": 824386,
+   "matchup": "Chicago White Sox @ Cleveland Guardians",
+   "away": "Chicago White Sox",
+   "home": "Cleveland Guardians",
+   "venue": "Progressive Field",
+   "pick": "Chicago White Sox",
+   "pick_side": "away",
+   "win_prob": 0.5061449844796866,
+   "confidence": "Coin flip",
+   "evidence": {
+    "label": "Coin flip",
+    "min_prob": 0.0,
+    "n": 839,
+    "won": 438,
+    "rate": 0.5221
+   },
+   "method": "rules",
+   "away_runs": 4.09,
+   "home_runs": 3.97,
+   "total": 8.1,
+   "park_runs": 1.01,
+   "take": [
+    "Pitching edge: Sean Newcomb allows 0.287 wOBA, Gavin Williams 0.296",
+    "Chicago White Sox lineup 0.314 wOBA vs 0.305"
+   ],
+   "model_pick_prob": 0.5095815417020562,
+   "result": {
+    "final": true,
+    "won": true,
+    "home_score": 3,
+    "away_score": 7,
+    "total": 10,
+    "state": "Final"
+   },
+   "tag": "SMALL PLAY"
+  },
+  {
+   "game_pk": 825034,
+   "matchup": "Miami Marlins @ Arizona Diamondbacks",
+   "away": "Miami Marlins",
+   "home": "Arizona Diamondbacks",
+   "venue": "Chase Field",
+   "pick": "Miami Marlins",
+   "pick_side": "away",
+   "win_prob": 0.5021251157033242,
+   "confidence": "Coin flip",
+   "evidence": {
+    "label": "Coin flip",
+    "min_prob": 0.0,
+    "n": 839,
+    "won": 438,
+    "rate": 0.5221
+   },
+   "method": "rules",
+   "away_runs": 4.52,
+   "home_runs": 4.32,
+   "total": 8.8,
+   "park_runs": 1.034,
+   "take": [
+    "Pitching edge: Sandy Alcantara allows 0.303 wOBA, Corbin Burnes 0.313",
+    "Miami Marlins lineup 0.317 wOBA vs 0.310"
+   ],
+   "model_pick_prob": 0.47396190608611555,
+   "tag": "SMALL PLAY",
+   "result": {
+    "final": true,
+    "won": false,
+    "home_score": 8,
+    "away_score": 7,
+    "total": 15,
+    "state": "Final"
+   }
+  }
+ ],
+ "likes": [
+  {
+   "batter": "Dominic Canzone",
+   "batter_id": 686527,
+   "team": "Seattle Mariners",
+   "game_pk": 823981,
+   "matchup": "Seattle Mariners @ Los Angeles Angels",
+   "prob": 0.18397166871825676,
+   "model_prob": 0.12897716700937423,
+   "edge": 0.05499450170888254,
+   "barrel_rate": 0.07847064597263971,
+   "sp_name": "Reid Detmers",
+   "park": 0.832,
+   "weather": 1.18
+  },
+  {
+   "batter": "Connor Norby",
+   "batter_id": 681393,
+   "team": "Colorado Rockies",
+   "game_pk": 824308,
+   "matchup": "San Diego Padres @ Colorado Rockies",
+   "prob": 0.1633619884609896,
+   "model_prob": 0.11248852646056356,
+   "edge": 0.05087346200042603,
+   "barrel_rate": 0.06892969454755365,
+   "sp_name": "Casey Mize",
+   "park": 1.04,
+   "weather": 1.126
+  },
+  {
+   "batter": "Alec Burleson",
+   "batter_id": 676475,
+   "team": "St. Louis Cardinals",
+   "game_pk": 823006,
+   "matchup": "San Francisco Giants @ St. Louis Cardinals",
+   "prob": 0.15103776659746806,
+   "model_prob": 0.10305514618857851,
+   "edge": 0.04798262040888955,
+   "barrel_rate": 0.07191180755781854,
+   "sp_name": "Landen Roupp",
+   "park": 0.807,
+   "weather": 1.135
+  },
+  {
+   "batter": "Hunter Goodman",
+   "batter_id": 696100,
+   "team": "Colorado Rockies",
+   "game_pk": 824308,
+   "matchup": "San Diego Padres @ Colorado Rockies",
+   "prob": 0.20123595219594081,
+   "model_prob": 0.15728918124696534,
+   "edge": 0.04394677094897548,
+   "barrel_rate": 0.07983059686870662,
+   "sp_name": "Casey Mize",
+   "park": 1.04,
+   "weather": 1.126
+  },
+  {
+   "batter": "Fernando Tatis Jr.",
+   "batter_id": 665487,
+   "team": "San Diego Padres",
+   "game_pk": 824308,
+   "matchup": "San Diego Padres @ Colorado Rockies",
+   "prob": 0.1980088468330327,
+   "model_prob": 0.1550568779945352,
+   "edge": 0.04295196883849747,
+   "barrel_rate": 0.05801331803424726,
+   "sp_name": "Tomoyuki Sugano",
+   "park": 1.04,
+   "weather": 1.126
+  }
+ ],
+ "fades": [
+  {
+   "batter": "Javier Sanoja",
+   "batter_id": 691594,
+   "team": "Miami Marlins",
+   "game_pk": 825034,
+   "matchup": "Miami Marlins @ Arizona Diamondbacks",
+   "prob": 0.04302213593956833,
+   "model_prob": 0.09373067134608458,
+   "edge": -0.05070853540651625,
+   "barrel_rate": 0.013659261665734957,
+   "sp_name": "Corbin Burnes",
+   "park": 0.992,
+   "weather": 1.0
+  },
+  {
+   "batter": "Ha-Seong Kim",
+   "batter_id": 673490,
+   "team": "Atlanta Braves",
+   "game_pk": 824629,
+   "matchup": "Atlanta Braves @ Chicago Cubs",
+   "prob": 0.0317503287040257,
+   "model_prob": 0.07405396917682572,
+   "edge": -0.04230364047280002,
+   "barrel_rate": 0.03824480531431025,
+   "sp_name": "David Peterson",
+   "park": 1.063,
+   "weather": 0.991
+  },
+  {
+   "batter": "Nolan Arenado",
+   "batter_id": 571448,
+   "team": "Arizona Diamondbacks",
+   "game_pk": 825034,
+   "matchup": "Miami Marlins @ Arizona Diamondbacks",
+   "prob": 0.08613126038017109,
+   "model_prob": 0.12656417064838119,
+   "edge": -0.040432910268210095,
+   "barrel_rate": 0.06018378897343378,
+   "sp_name": "Sandy Alcantara",
+   "park": 0.992,
+   "weather": 1.0
+  },
+  {
+   "batter": "Sean Murphy",
+   "batter_id": 669221,
+   "team": "Atlanta Braves",
+   "game_pk": 824629,
+   "matchup": "Atlanta Braves @ Chicago Cubs",
+   "prob": 0.08467664344839042,
+   "model_prob": 0.1246657528409659,
+   "edge": -0.03998910939257548,
+   "barrel_rate": 0.07665534774120679,
+   "sp_name": "David Peterson",
+   "park": 1.063,
+   "weather": 0.991
+  },
+  {
+   "batter": "Francisco Alvarez",
+   "batter_id": 682626,
+   "team": "New York Mets",
+   "game_pk": 823575,
+   "matchup": "Baltimore Orioles @ New York Mets",
+   "prob": 0.08599858962876253,
+   "model_prob": 0.1226394276683566,
+   "edge": -0.03664083803959407,
+   "barrel_rate": 0.08789241870702247,
+   "sp_name": "Brandon Young",
+   "park": 0.937,
+   "weather": 0.78
+  }
+ ],
+ "locked": [
+  822765,
+  823006,
+  823575,
+  823656,
+  824308,
+  824386,
+  824465,
+  824629
+ ],
+ "record": {
+  "hr": {
+   "hit": 1,
+   "scored": 6,
+   "dnp": 0,
+   "pending": 0
+  },
+  "games": {
+   "won": 8,
+   "lost": 2,
+   "pending": 0
+  },
+  "hits": {
+   "hit": 3,
+   "scored": 3,
+   "dnp": 0,
+   "pending": 0
+  },
+  "parlays": {
+   "won": 1,
+   "lost": 1,
+   "void": 0,
+   "pending": 0
+  },
+  "graded_at": "2026-09-15 16:04:55",
+  "complete": true
+ }
+}

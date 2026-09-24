@@ -1,0 +1,157 @@
+date,kind,rank,batter,batter_id,team,game_pk,opponent_sp,facing_hand,lineup_slot,projected,projected_prob,projected_per_pa,expected_pa,park_factor,weather_factor,bullpen_index,sp_hr_index,season_hr,season_pa,result_pa,result_ab,result_hits,result_hr,result_rbi,result_line,game_state,final,won
+2026-09-10,hit,1,Luis Arraez,650333,Philadelphia Phillies,823413,,R,4,1.18,,0.01888287036651101,4.322,1.067,1.141,1.02,,6,600,3,3,1,0,0,1-3 | R,Final,True,True
+2026-09-10,hit,2,Yandy Díaz,650490,Tampa Bay Rays,824872,,R,1,1.14,,0.033616066679729495,4.637,1.053,1.104,0.95,,22,625,4,4,1,0,0,1-4 | K,Final,True,True
+2026-09-10,hit,3,Michael Harris II,671739,Atlanta Braves,824872,,L,4,1.13,,0.030524521524661685,4.322,0.972,1.104,1.111,,24,557,3,3,0,0,0,0-3,Final,True,False
+2026-09-10,hit,4,Yordan Alvarez,670541,Houston Astros,823413,,R,2,1.08,,0.06552607178051578,4.528,1.085,1.141,0.968,,38,632,4,3,0,0,0,"0-3 | BB, 3 K",Final,True,False
+2026-09-10,hit,5,Cody Bellinger,641355,New York Yankees,823499,,L,,1.04,,0.02201010936759098,4.254237288135593,1.12,1.0,0.944,,13,502,4,3,2,0,1,"2-3 | 2 2B, K, RBI",Final,True,True
+2026-09-10,hit,6,Josh Naylor,647304,Seattle Mariners,823088,,R,,1.02,,0.023243432108570012,4.272058823529412,1.164,1.0,0.989,,10,581,3,3,0,0,0,0-3 | 2 K,Final,True,False
+2026-09-10,hr,1,Kyle Schwarber,656941,Philadelphia Phillies,823413,,R,1,0.3112,,0.07904797356685013,4.637,1.098,1.141,1.02,,44,628,4,3,0,0,0,"0-3 | BB, 2 K",Final,True,False
+2026-09-10,hr,2,Corey Seager,608369,Texas Rangers,823088,,R,,0.2414,,0.06450394282478968,4.305882352941176,1.182,1.0,0.969,,17,366,4,4,0,0,0,0-4 | 2 K,Final,True,False
+2026-09-10,hr,3,Junior Caminero,691406,Tampa Bay Rays,824872,,R,3,0.2392,,0.06224041743660698,4.424,1.098,1.104,0.95,,39,635,4,3,0,0,0,0-3 | BB,Final,True,False
+2026-09-10,hr,4,Aaron Judge,,New York Yankees,,,L,,0.2163,,0.05719835048199352,4.39344262295082,0.997,1.0,0.944,,17,268,0,0,0,0,0,Did not play,Did not play,True,
+2026-09-10,hr,5,Ronald Acuña Jr.,660670,Atlanta Braves,824872,,L,2,0.2153,,0.04929254749498641,4.528,1.073,1.104,1.111,,16,408,4,4,0,0,0,0-4,Final,True,False
+2026-09-10,hr,6,Jeremy Peña,665161,Houston Astros,823413,,R,1,0.2143,,0.052864643125630224,4.637,1.186,1.141,0.968,,17,416,4,4,1,0,0,1-4 | 2 K,Final,True,False
+2026-09-11,hit,1,Brett Bateman,703520,Toronto Blue Jays,822767,,R,1,1.18,,0.006767986019888258,4.637,1.066,1.023,0.89,,0,129,5,5,3,1,2,"3-5 | HR, K, 2 RBI",Final,True,True
+2026-09-11,hit,2,Jake McCarthy,664983,Colorado Rockies,824227,,R,1,1.18,,0.02318054724796082,4.637,0.922,0.904,0.983,,15,528,5,5,3,0,0,3-5,Final,True,True
+2026-09-11,hit,3,Henry Bolte,703607,Athletics,824954,,L,1,1.18,,0.03901274512407836,4.637,1.093,1.148,0.967,,10,407,5,5,1,0,0,"1-5 | K, R, SB",Final,True,True
+2026-09-11,hit,4,Yandy Díaz,650490,Tampa Bay Rays,822930,,R,1,1.17,,0.031220613737952634,4.637,1.096,0.991,1.018,,22,629,4,4,0,0,0,0-4 | 2 K,Final,True,False
+2026-09-11,hit,5,Randal Grichuk,545341,Chicago White Sox,823012,,L,2,1.16,,0.04081020351021297,4.528,0.869,0.94,0.895,,12,230,4,4,2,0,0,"2-4 | 2B, K",Final,True,True
+2026-09-11,hit,6,Jackson Chourio,694192,Milwaukee Brewers,823736,,R,1,1.15,,0.04682464792125926,4.637,1.227,0.91,1.023,,23,509,6,6,4,0,2,"4-6 | 2 2B, K, 2 RBI",Final,True,True
+2026-09-11,hr,1,Cal Raleigh,663728,Seattle Mariners,824954,,R,4,0.2613,,0.06775208105388186,4.322,1.13,1.148,1.007,,21,466,5,4,0,0,1,"0-4 | BB, RBI",Final,True,False
+2026-09-11,hr,2,Rafael Flores Jr.,804668,Pittsburgh Pirates,824631,,R,4,0.2602,,0.06370723559062191,4.322,1.179,1.027,1.131,,8,122,4,4,1,0,0,1-4 | K,Final,True,False
+2026-09-11,hr,3,Juan Soto,665742,New York Mets,823498,,R,2,0.2578,,0.07167606727340083,4.528,1.115,1.027,0.885,,24,407,5,5,1,0,0,1-5 | 2 K,Final,True,False
+2026-09-11,hr,4,Yohandy Morales,691002,Washington Nationals,822684,,R,6,0.2418,,0.0682747339601316,4.106,1.051,0.958,0.929,,2,19,4,4,0,0,0,"0-4 | R, SB",Final,True,False
+2026-09-11,hr,5,Junior Caminero,691406,Tampa Bay Rays,822930,,R,3,0.2325,,0.05852737053215757,4.424,1.177,0.991,1.018,,39,639,4,4,1,1,2,"1-4 | HR, K, 2 RBI",Final,True,True
+2026-09-11,hr,6,Zack Gelof,680869,Athletics,824954,,L,3,0.2303,,0.060759475276387004,4.424,1.114,1.148,0.967,,17,373,5,5,1,0,0,1-5,Final,True,False
+2026-09-12,hit,1,Jackson Chourio,694192,Milwaukee Brewers,823737,Brady Singer,L,1,1.17,0.7382,0.06612295409370007,4.637,1.231,1.094,1.031,1.15,23,515,5,3,1,0,0,"1-3 | 2 BB, K, 2 R",Final,True,True
+2026-09-12,hit,2,Luis Arraez,650333,Philadelphia Phillies,824870,Tyler Mahle,L,4,1.17,0.7193,0.010845971239332267,4.322,0.975,0.983,0.953,1.011,6,608,4,4,0,0,0,0-4,Final,True,False
+2026-09-12,hit,3,Kevin McGonigle,805808,Detroit Tigers,824224,Tanner Gordon,L,1,1.15,0.7385,0.018839701527292578,4.637,0.927,0.941,0.953,1.119,16,639,6,5,2,1,1,"2-5 | HR, BB, K",Final,True,True
+2026-09-12,hit,4,Brett Bateman,703520,Toronto Blue Jays,822768,Kyle Bradish,R,1,1.13,0.7124,0.0161185859802111,4.637,1.071,1.026,0.895,0.963,1,134,5,4,1,1,1,"1-4 | HR, BB, 2 K",Final,True,True
+2026-09-12,hit,5,Yandy Díaz,650490,Tampa Bay Rays,822927,Peter Lambert,L,1,1.1,0.7102,0.03407411168106276,4.637,1.095,0.99,1.028,0.911,22,633,4,4,0,0,0,0-4 | K,Final,True,False
+2026-09-12,hit,6,Fernando Tatis Jr.,665487,San Diego Padres,823170,Cesar Perdomo,R,1,1.07,0.7121,0.02899312527157583,4.637,0.829,0.924,0.845,0.998,20,639,6,3,2,1,1,"2-3 | HR, 3 BB, RBI",Final,True,True
+2026-09-12,hr,1,Pete Crow-Armstrong,691718,Chicago Cubs,824630,Paul Skenes,R,1,0.2513,0.2513,0.07078776698802469,4.637,1.064,1.129,0.846,0.905,41,664,4,4,0,0,0,0-4 | 2 K,Final,True,False
+2026-09-12,hr,2,Kyle Schwarber,656941,Philadelphia Phillies,824870,Tyler Mahle,L,1,0.2267,0.2267,0.04488435155754511,4.637,0.964,0.983,0.953,1.011,44,637,4,4,0,0,0,0-4 | 2 K,Final,True,False
+2026-09-12,hr,3,Ben Rice,700250,New York Yankees,823496,Zac Thornton,R,,0.2248,0.2248,,,,,,,36,604,0,0,0,0,0,Did not play,Did not play,True,
+2026-09-12,hr,4,Yordan Alvarez,670541,Houston Astros,822927,Ian Seymour,R,,0.2231,0.2231,,,,,,,38,636,0,0,0,0,0,Did not play,Did not play,True,
+2026-09-12,hr,5,Oneil Cruz,665833,Pittsburgh Pirates,824630,Clay Holmes,R,1,0.2213,0.2213,0.05545115846006608,4.637,1.06,1.129,1.132,0.853,18,370,5,5,0,0,0,0-5 | K,Final,True,False
+2026-09-12,hr,6,Cal Raleigh,663728,Seattle Mariners,824955,Gage Jump,R,4,0.2458,0.2458,0.06288724953059797,4.322,1.131,1.122,1.01,0.928,21,471,6,4,0,0,0,"0-4 | 2 BB, K, R",Final,True,False
+2026-09-13,hit,1,Michael Harris II,671739,Atlanta Braves,824869,Andrew Painter,R,1,1.18,0.7455,0.044922877888351906,4.637,0.976,1.145,0.978,1.103,25,570,5,5,3,0,0,"3-5 | 2 K, 2 R",Final,True,True
+2026-09-13,hit,2,Jake McCarthy,664983,Colorado Rockies,824225,Jackson Jobe,R,1,1.13,0.7248,0.029311300158995527,4.637,0.924,1.095,0.982,1.039,15,538,3,2,0,0,0,"0-2 | HBP, K",Final,True,False
+2026-09-13,hit,3,Brett Bateman,703520,Toronto Blue Jays,822764,Trevor Rogers,R,1,1.1,0.7154,0.015216797695036026,4.637,1.073,0.988,0.889,0.933,2,139,5,3,0,0,1,"0-3 | 2 BB, K, RBI",Final,True,False
+2026-09-13,hit,4,Kevin McGonigle,805808,Detroit Tigers,824225,Gabriel Hughes,R,1,1.1,0.7144,0.033688580841826826,4.637,0.928,1.095,0.946,0.926,17,645,4,3,1,0,2,"1-3 | 3B, BB, 2 RBI",Final,True,True
+2026-09-13,hit,5,Yandy Díaz,650490,Tampa Bay Rays,822928,Hayden Wesneski,R,1,1.09,0.7109,0.02828316103121941,4.637,1.094,0.988,1.024,0.925,22,637,5,5,2,0,1,"2-5 | RBI, 2 R",Final,True,True
+2026-09-13,hit,6,Chase DeLauter,800050,Cleveland Guardians,823658,Joe Ryan,R,2,1.09,0.7112,0.025830054028053825,4.528,0.802,1.017,0.867,1.035,14,513,5,4,1,0,0,1-4 | BB,Final,True,True
+2026-09-13,hr,1,Yohandy Morales,691002,Washington Nationals,822682,Grayson Rodriguez,R,5,0.1938,0.1938,0.07816916364867758,4.217,1.044,1.085,0.921,1.072,2,23,4,4,2,0,1,"2-4 | RBI, 2 R",Final,True,False
+2026-09-13,hr,2,Juan Soto,665742,New York Mets,823495,Cam Schlittler,R,2,0.1919,0.1919,0.06887348513389428,4.528,1.156,1.081,0.911,0.891,25,417,4,4,0,0,0,0-4 | 2 K,Final,True,False
+2026-09-13,hr,3,Kyle Schwarber,656941,Philadelphia Phillies,824869,Grant Holmes,R,1,0.191,0.191,0.06862448593678494,4.637,0.972,1.145,0.959,1.029,44,641,5,4,2,0,2,"2-4 | BB, 2 RBI",Final,True,False
+2026-09-13,hr,4,Ben Rice,700250,New York Yankees,823495,Christian Scott,R,1,0.1887,0.1887,0.06465645716541854,4.637,1.163,1.081,0.985,0.924,37,608,4,2,1,1,1,"1-2 | HR, 2 BB, K",Final,True,True
+2026-09-13,hr,5,Matt Olson,621566,Atlanta Braves,824869,Andrew Painter,R,3,0.1809,0.1809,0.0667852380995594,4.424,0.976,1.145,0.978,1.103,38,645,5,5,3,1,3,"3-5 | HR, 3 RBI, R",Final,True,True
+2026-09-13,hr,6,Emmanuel Rodriguez,691181,Minnesota Twins,823658,Tanner Bibee,R,7,0.179,0.179,0.0748390675350442,3.993,0.822,1.017,0.905,1.116,1,4,4,4,1,0,0,1-4 | 2 K,Final,True,False
+2026-09-14,hit,1,Drake Baldwin,686948,Atlanta Braves,824629,David Peterson,R,,1.07,0.7074,0.04025484243895887,4.440944881889764,1.048,1.0,1.122,0.908,23,564,4,3,2,0,0,"2-3 | BB, K",Final,True,True
+2026-09-14,hit,2,Freddie Freeman,518692,Los Angeles Dodgers,824465,Nick Lodolo,L,,1.04,0.6972,0.029311215352041568,4.288732394366197,1.142,1.0,1.028,1.118,16,609,0,0,0,0,0,Did not play,Did not play,True,
+2026-09-14,hit,3,Brett Bateman,703520,Toronto Blue Jays,822765,Troy Melton,R,,1.03,0.6881,0.015592715128580117,4.645161290322581,1.067,1.0,0.979,0.995,2,144,5,5,1,0,0,"1-5 | K, R",Final,True,True
+2026-09-14,hit,4,Pete Crow-Armstrong,691718,Chicago Cubs,824629,Reynaldo López,L,,1.01,0.6827,0.04960781047773234,4.48,1.064,1.0,0.952,1.027,41,672,5,5,4,1,4,"4-5 | HR, 2B, 4 RBI",Final,True,True
+2026-09-14,hit,5,Fernando Tatis Jr.,665487,San Diego Padres,824308,Tomoyuki Sugano,R,1,1.21,0.754,0.0499416954535828,4.637,0.961,1.093,0.947,1.244,21,649,5,5,1,1,2,"1-5 | HR, K, 2 RBI",Final,True,True
+2026-09-14,hit,6,Jake McCarthy,664983,Colorado Rockies,824308,Casey Mize,R,1,1.11,0.7184,0.03591649034213867,4.637,1.186,1.093,0.879,0.982,15,541,5,5,2,0,2,"2-5 | 3B, 2B, 2 RBI",Final,True,True
+2026-09-14,hr,1,Pete Crow-Armstrong,691718,Chicago Cubs,824629,Reynaldo López,L,,0.1709,0.1709,0.04960781047773234,4.48,1.064,1.0,0.952,1.027,41,672,5,5,4,1,4,"4-5 | HR, 2B, 4 RBI",Final,True,True
+2026-09-14,hr,2,Pete Alonso,624413,Baltimore Orioles,823575,Jonah Tong,R,,0.1628,0.1628,0.053607138243119926,4.346666666666667,0.954,1.0,0.983,0.998,35,652,4,3,0,0,0,"0-3 | BB, K",Final,True,False
+2026-09-14,hr,3,Juan Soto,665742,New York Mets,823575,Brandon Young,R,,0.1607,0.1607,0.058413601898612645,4.295918367346939,0.909,1.0,0.886,1.035,25,421,4,3,1,0,0,"1-3 | BB, K, SB",Final,True,False
+2026-09-14,hr,4,Aaron Judge,592450,New York Yankees,823656,Dean Kremer,R,,0.1597,0.1597,0.05854807677666576,4.359375,0.954,1.0,0.87,1.189,17,279,4,4,1,1,3,"1-4 | HR, 2 K, 3 RBI",Final,True,True
+2026-09-14,hr,5,Jackson Merrill,701538,San Diego Padres,824308,Tomoyuki Sugano,R,5,0.2048,0.2048,0.09141730580187403,4.217,1.186,1.093,0.947,1.244,25,614,5,5,3,0,1,"3-5 | K, RBI, R",Final,True,False
+2026-09-14,hr,6,Kyle Stowers,669065,Miami Marlins,825034,Corbin Burnes,R,1,0.1655,0.1655,0.05596205745988069,4.637,1.046,0.995,0.909,0.986,19,472,5,5,1,0,1,"1-5 | 2B, K, RBI",Final,True,False
+2026-09-15,hit,1,Yandy Díaz,650490,Tampa Bay Rays,822925,Jack Perkins,R,1,1.2,0.7507,0.0344615138046393,4.637,1.103,0.99,1.023,1.135,22,642,4,4,0,0,0,0-4 | K,Final,True,False
+2026-09-15,hit,2,Luis Arraez,650333,Philadelphia Phillies,822683,Jackson Kent,L,4,1.13,0.7299,0.010409181710162498,4.322,1.106,1.086,1.106,0.907,6,617,4,3,2,0,1,"2-3 | 2 2B, BB, RBI",Final,True,True
+2026-09-15,hit,3,Drake Baldwin,686948,Atlanta Braves,824627,Kevin Gausman,L,1,1.11,0.72,0.032910936535749016,4.637,1.051,1.093,1.126,1.052,23,568,5,5,2,1,2,"2-5 | HR, K, 2 RBI",Final,True,True
+2026-09-15,hit,4,Freddie Freeman,518692,Los Angeles Dodgers,824466,Rhett Lowder,R,2,1.1,0.7182,0.031268165465722746,4.528,1.152,1.019,1.025,1.013,16,609,5,5,3,0,0,3-5,Final,True,True
+2026-09-15,hit,5,Fernando Tatis Jr.,665487,San Diego Padres,824307,Kyle Freeland,R,1,1.24,0.7625,0.047962400177253776,4.637,0.963,1.024,0.943,1.162,22,654,5,5,1,1,1,"1-5 | HR, K, RBI",Final,True,True
+2026-09-15,hit,6,Jake McCarthy,664983,Colorado Rockies,824307,Walker Buehler,L,1,1.14,0.7297,0.026325635881331317,4.637,1.185,1.024,0.883,1.025,15,546,5,5,2,0,0,2-5 | R,Final,True,True
+2026-09-15,hr,1,Pete Crow-Armstrong,691718,Chicago Cubs,824627,Martín Pérez,R,,0.1947,0.1947,0.06838579119400882,4.483443708609271,1.068,1.093,0.955,0.918,42,677,5,5,0,0,0,0-5 | K,Final,True,False
+2026-09-15,hr,2,Kyle Schwarber,656941,Philadelphia Phillies,822683,Jackson Kent,L,1,0.1883,0.1883,0.04969949518276115,4.637,1.155,1.086,1.106,0.907,44,646,4,3,1,1,1,"1-3 | HR, BB, RBI",Final,True,True
+2026-09-15,hr,3,Junior Caminero,691406,Tampa Bay Rays,822925,Jack Perkins,R,3,0.183,0.183,0.06665690375653718,4.424,1.188,0.99,1.023,1.135,40,651,4,4,1,1,1,"1-4 | HR, 2 K, RBI",Final,True,True
+2026-09-15,hr,4,Max Muncy,571970,Los Angeles Dodgers,824466,Rhett Lowder,R,6,0.1822,0.1822,0.0698997022006502,4.106,1.19,1.019,1.025,1.013,28,521,4,3,0,0,0,"0-3 | HBP, K, R",Final,True,False
+2026-09-15,hr,5,Matt Olson,621566,Atlanta Braves,824627,Kevin Gausman,L,3,0.1798,0.1798,0.0549897662601062,4.424,1.059,1.093,1.126,1.052,39,654,4,4,2,0,0,2-4 | K,Final,True,False
+2026-09-15,hr,6,Lazaro Montes,703155,Seattle Mariners,823980,Ryan Johnson,R,8,0.1921,0.1921,0.08700039746794767,3.875,0.976,1.065,0.923,1.181,3,29,2,2,1,0,0,1-2 | K,Final,True,False
+2026-09-16,hit,1,Jonah Cox,813841,San Francisco Giants,823004,Matthew Liberatore,R,1,1.09,0.7108,0.027044882376573265,4.637,0.92,0.992,0.888,1.17,4,127,5,4,3,0,1,"3-4 | BB, K, RBI",Final,True,True
+2026-09-16,hit,2,Luis García Jr.,671277,New York Yankees,823655,Zebby Matthews,L,4,1.08,0.7126,0.027395910799728952,4.322,0.781,0.881,0.886,1.183,30,515,4,4,0,0,0,0-4 | 3 K,Final,True,False
+2026-09-16,hit,3,Yandy Díaz,650490,Tampa Bay Rays,822926,Brady Basso,R,1,1.22,0.7562,0.028583875098341878,4.637,1.103,0.99,1.029,0.94,22,646,4,4,0,0,0,0-4,Final,True,False
+2026-09-16,hit,4,Luis Arraez,650333,Philadelphia Phillies,822680,Jared Simpson,R,,1.11,0.7217,0.017244215140222154,4.3426573426573425,1.112,1.0,1.102,0.985,6,621,5,2,1,0,1,"1-2 | 2B, 3 BB, RBI",Final,True,True
+2026-09-16,hit,5,Fernando Tatis Jr.,665487,San Diego Padres,824306,Mason Adams,L,1,1.15,0.7349,0.046540065730196506,4.637,0.973,0.922,0.939,1.089,23,659,5,4,0,0,0,"0-4 | HBP, K, R",Final,True,False
+2026-09-16,hit,6,Otto Lopez,672640,Miami Marlins,825031,Merrill Kelly,R,3,1.14,0.731,0.020704023733376934,4.424,1.041,0.99,0.898,1.146,10,645,5,5,2,0,0,"2-5 | K, SB",Final,True,True
+2026-09-16,hr,1,Riley Greene,682985,Detroit Tigers,822763,Max Scherzer,R,4,0.168,0.168,0.062458063931719904,4.322,1.074,1.073,0.907,1.138,20,549,4,4,1,0,1,1-4 | RBI,Final,True,False
+2026-09-16,hr,2,Kyle Schwarber,656941,Philadelphia Phillies,822680,Jared Simpson,R,,0.1992,0.1992,0.06869552902673728,4.482758620689655,1.162,1.0,1.102,0.985,45,650,5,4,0,0,0,"0-4 | BB, 2 K",Final,True,False
+2026-09-16,hr,3,Matt Olson,621566,Atlanta Braves,824626,Shota Imanaga,R,,0.1904,0.1904,0.07314580874205942,4.328947368421052,1.063,1.0,1.138,1.293,39,658,4,4,1,0,1,"1-4 | K, RBI",Final,True,False
+2026-09-16,hr,4,Junior Caminero,691406,Tampa Bay Rays,822926,Brady Basso,R,3,0.1757,0.1757,0.05723257216582183,4.424,1.187,0.99,1.029,0.94,41,655,4,4,1,0,0,"1-4 | 2B, K, R",Final,True,False
+2026-09-16,hr,5,Pete Crow-Armstrong,691718,Chicago Cubs,824626,JR Ritchie,L,,0.1698,0.1698,0.04827735718472256,4.4868421052631575,1.072,1.0,0.952,1.035,42,682,5,4,3,2,3,"3-4 | 2 HR, 3B, BB",Final,True,True
+2026-09-16,hr,6,Pete Alonso,624413,Baltimore Orioles,823576,Xzavion Curry,R,,0.1657,0.1657,0.055457701221700476,4.348684210526316,0.962,1.0,0.998,1.021,36,661,4,4,1,1,1,"1-4 | HR, K, RBI",Final,True,True
+2026-09-17,hit,1,Yandy Díaz,650490,Tampa Bay Rays,822924,Jeffrey Springs,R,1,1.2,0.7507,0.040432389698742605,4.637,1.104,0.991,1.025,1.33,22,650,5,5,0,0,0,0-5 | 2 K,Final,True,False
+2026-09-17,hit,2,Fernando Tatis Jr.,665487,San Diego Padres,824305,Tanner Gordon,R,,1.19,0.7502,0.043394459533723624,4.426666666666667,0.97,1.0,0.943,1.124,23,664,5,4,1,0,0,"1-4 | 2B, BB, K",Final,True,True
+2026-09-17,hit,3,Freddie Freeman,518692,Los Angeles Dodgers,824464,Brady Singer,L,2,1.12,0.7242,0.03662252855492347,4.528,1.152,1.166,1.025,1.193,16,619,5,3,2,0,1,"2-3 | BB, RBI, 2 R",Final,True,True
+2026-09-17,hit,4,Elly De La Cruz,682829,Cincinnati Reds,824464,Justin Wrobleski,R,2,1.05,0.6981,0.05281959822195295,4.528,0.918,1.166,0.93,1.096,28,593,4,4,0,0,0,0-4 | 3 K,Final,True,False
+2026-09-17,hit,5,Jeremy Peña,665161,Houston Astros,824141,Seth Lugo,R,1,1.18,0.7451,0.03939624258702458,4.637,1.008,0.998,1.069,0.948,19,438,5,5,2,1,2,"2-5 | HR, K, 2 RBI",Final,True,True
+2026-09-17,hit,6,Chase Meidroth,805367,Chicago White Sox,824548,Framber Valdez,R,1,1.06,0.7013,0.014711641910992885,4.637,0.972,1.044,0.973,0.864,14,613,4,4,1,0,0,1-4 | R,Final,True,True
+2026-09-17,hr,1,Junior Caminero,691406,Tampa Bay Rays,822924,Jeffrey Springs,R,3,0.1987,0.1987,0.08129155948058611,4.424,1.189,0.991,1.025,1.33,41,659,5,3,0,0,0,"0-3 | 2 BB, K, R",Final,True,False
+2026-09-17,hr,2,Jackson Merrill,701538,San Diego Padres,824305,Tanner Gordon,R,,0.1833,0.1833,0.07368486171812988,4.243243243243243,1.195,1.0,0.943,1.124,25,628,4,4,1,0,2,"1-4 | 3B, K, 2 RBI",Final,True,False
+2026-09-17,hr,3,Max Muncy,571970,Los Angeles Dodgers,824464,Brady Singer,L,5,0.1825,0.1825,0.0620563798497971,4.217,1.19,1.166,1.025,1.193,28,527,5,4,2,0,2,"2-4 | 2B, HBP, 2 RBI",Final,True,False
+2026-09-17,hr,4,Oneil Cruz,665833,Pittsburgh Pirates,823334,Kyle Harrison,R,2,0.1776,0.1776,0.0707261542585571,4.528,1.034,1.093,0.865,1.133,19,388,5,5,1,0,2,"1-5 | 2 K, 2 RBI, R",Final,True,False
+2026-09-17,hr,5,Zack Gelof,680869,Athletics,822924,Drew Rasmussen,L,4,0.161,0.161,0.0486403333086671,4.322,1.168,0.991,1.114,0.892,18,393,4,4,1,0,0,1-4,Final,True,False
+2026-09-17,hr,6,Juan Soto,665742,New York Mets,823573,Aaron Nola,R,2,0.1867,0.1867,0.07405051292540306,4.528,0.907,1.086,0.987,1.27,25,435,4,2,0,0,0,0-2 | 2 BB,Final,True,False
+2026-09-18,hit,1,Jake McCarthy,664983,Colorado Rockies,824303,Bryan Woo,R,1,1.14,0.7288,0.029862970664067616,4.637,1.189,0.893,0.962,0.959,15,558,5,5,3,0,2,"3-5 | 3B, K, 2 RBI",Final,True,True
+2026-09-18,hit,2,Brett Bateman,703520,Toronto Blue Jays,822847,Kumar Rocker,R,1,1.13,0.7251,0.013978151858235139,4.637,1.04,0.992,0.996,1.033,2,157,4,4,0,0,0,0-4 | K,Final,True,False
+2026-09-18,hit,3,Jackson Chourio,694192,Milwaukee Brewers,824790,Cade Povich,R,1,1.12,0.7231,0.03536960834134809,4.637,0.962,0.945,0.875,1.022,23,539,6,5,2,1,3,"2-5 | HR, BB, K",Final,True,True
+2026-09-18,hit,4,Luis Arraez,650333,Philadelphia Phillies,823572,Zac Thornton,L,4,1.11,0.7241,0.0085461188579437,4.322,0.928,0.933,0.991,1.086,6,630,4,4,0,0,0,0-4,Final,True,False
+2026-09-18,hit,5,Yandy Díaz,650490,Tampa Bay Rays,822923,Ranger Suarez,L,1,1.11,0.7183,0.027833567623106573,4.637,1.099,0.992,0.86,0.815,22,655,5,3,0,0,0,"0-3 | 2 BB, K, R",Final,True,False
+2026-09-18,hit,6,Randy Arozarena,668227,Seattle Mariners,824303,Gabriel Hughes,R,2,1.09,0.7133,0.02752086239567854,4.528,0.969,0.893,0.938,0.944,25,630,5,4,3,0,0,"3-4 | 2B, HBP, R",Final,True,True
+2026-09-18,hr,1,Pete Crow-Armstrong,691718,Chicago Cubs,824463,Chase Burns,R,1,0.2227,0.2227,0.08092460876767932,4.637,1.187,1.063,1.028,0.942,44,687,5,5,0,0,0,0-5 | 3 K,Final,True,False
+2026-09-18,hr,2,Jahmai Jones,663330,Boston Red Sox,822923,Ian Seymour,L,3,0.184,0.184,0.06684988280183973,4.424,1.183,0.992,1.118,1.177,5,164,3,3,1,1,1,"1-3 | HR, K, RBI",Final,True,True
+2026-09-18,hr,3,Lazaro Montes,703155,Seattle Mariners,824303,Gabriel Hughes,R,8,0.1735,0.1735,0.06826941262840869,3.875,1.168,0.893,0.938,0.944,3,31,4,4,1,1,1,"1-4 | HR, K, RBI",Final,True,True
+2026-09-18,hr,4,Elly De La Cruz,682829,Cincinnati Reds,824463,Clay Holmes,R,2,0.1707,0.1707,0.049175267235415016,4.528,1.143,1.063,1.135,0.86,28,597,4,2,2,0,0,"2-2 | 2 BB, 2 R, SB",Final,True,False
+2026-09-18,hr,5,Oneil Cruz,665833,Pittsburgh Pirates,823331,Randy Dobnak,R,4,0.1625,0.1625,0.053903602543791194,4.322,1.033,1.031,1.075,0.922,19,393,5,5,3,0,0,"3-5 | 2B, K, 2 R",Final,True,False
+2026-09-18,hr,6,Yordan Alvarez,670541,Houston Astros,824138,Tyler Mahle,R,2,0.1611,0.1611,0.05373588018278675,4.528,0.938,0.992,0.958,1.016,40,650,4,2,1,0,0,"1-2 | 2B, 2 BB, R",Final,True,False
+2026-09-19,hit,1,Jackson Chourio,694192,Milwaukee Brewers,824788,Trevor Rogers,L,,1.12,0.723,0.03916281784438894,4.579831932773109,0.964,1.0,0.868,0.981,24,545,4,4,0,0,0,0-4 | 2 K,Final,True,False
+2026-09-19,hit,2,Otto Lopez,672640,Miami Marlins,823249,Casey Mize,R,,1.09,0.7163,0.017258740172258716,4.36,0.998,1.0,0.879,0.965,10,654,6,4,1,1,2,"1-4 | HR, 2 BB, K",Final,True,True
+2026-09-19,hit,3,Brett Bateman,703520,Toronto Blue Jays,822843,Cal Quantrill,R,,1.07,0.7042,0.013557185266840549,4.6,1.036,1.0,0.992,0.992,2,161,4,4,1,0,0,1-4,Final,True,True
+2026-09-19,hit,4,Elly De La Cruz,682829,Cincinnati Reds,824461,Matthew Boyd,L,,1.06,0.7036,0.038549665467273175,4.451851851851852,1.144,1.0,1.132,1.015,28,601,4,2,0,0,0,"0-2 | 2 BB, K",Final,True,False
+2026-09-19,hit,5,Josh Naylor,647304,Seattle Mariners,824304,Jose Quintana,R,,1.06,0.7047,0.023147011362995528,4.277777777777778,1.199,1.0,0.942,1.015,10,616,4,4,0,0,0,0-4,Final,True,False
+2026-09-19,hit,6,Yandy Díaz,650490,Tampa Bay Rays,822921,,R,,1.06,0.7018,0.02990227768074253,4.45945945945946,1.097,1.0,0.856,1.0,22,660,0,0,0,0,0,Did not play,Did not play,True,
+2026-09-19,hr,1,Pete Crow-Armstrong,691718,Chicago Cubs,824461,Nick Lodolo,L,,0.193,0.193,0.05875857458910741,4.4935064935064934,1.187,1.0,1.022,1.145,44,692,5,5,0,0,0,0-5 | K,Final,True,False
+2026-09-19,hr,2,Willson Contreras,575929,Boston Red Sox,822921,Freddy Peralta,R,,0.1763,0.1763,0.06100534566243548,4.171875,1.179,1.0,1.114,1.046,27,534,0,0,0,0,0,Did not play,Did not play,True,
+2026-09-19,hr,3,Munetaka Murakami,808959,Chicago White Sox,824545,Jackson Jobe,R,,0.1643,0.1643,0.057693879346738156,4.34453781512605,1.029,1.0,0.971,1.047,32,517,4,4,1,0,1,"1-4 | 2 K, RBI",Final,True,False
+2026-09-19,hr,4,Juan Soto,665742,New York Mets,823571,Andrew Painter,R,,0.164,0.164,0.058896079166701934,4.310679611650485,0.897,1.0,0.985,1.085,26,444,5,5,1,0,1,"1-5 | 3 K, RBI",Final,True,False
+2026-09-19,hr,5,Ben Rice,700250,New York Yankees,825029,Brandon Pfaadt,R,,0.1638,0.1638,0.05737003932859983,4.335616438356165,1.075,1.0,0.891,0.963,39,633,4,3,0,0,1,"0-3 | K, RBI",Final,True,False
+2026-09-19,hr,6,Emmanuel Rodriguez,691181,Minnesota Twins,823976,Reid Detmers,R,,0.1604,0.1604,0.05908354688638471,4.0,0.977,1.0,0.919,0.935,1,28,2,2,0,0,0,0-2 | K,Final,True,False
+2026-09-21,hit,1,Brett Bateman,703520,Toronto Blue Jays,824787,Shane Baz,R,1,1.1,0.7149,0.010946150300925368,4.637,1.046,0.89,0.865,0.849,2,170,2,1,0,0,0,"0-1 | BB, R",Final,True,False
+2026-09-21,hit,2,Riley Greene,682985,Detroit Tigers,824221,DJ Herz,R,3,1.04,0.6959,0.04117630916130339,4.424,0.956,0.94,1.096,1.0,21,570,4,3,0,0,0,"0-3 | BB, K, R",Final,True,False
+2026-09-21,hit,3,Luke Keaschall,807712,Minnesota Twins,823169,Blade Tidwell,R,2,1.01,0.6829,0.01895228223219477,4.528,0.854,0.973,0.866,1.008,9,594,4,4,0,0,0,0-4 | K,Final,True,False
+2026-09-21,hit,4,Daylen Lile,695734,Washington Nationals,824221,River Ryan,L,2,1.0,0.679,0.021731151722105213,4.528,0.955,0.94,0.972,1.0,22,634,4,4,0,0,0,0-4 | K,Final,True,False
+2026-09-21,hit,5,Jung Hoo Lee,808982,San Francisco Giants,823169,Zebby Matthews,R,,0.98,0.6747,0.023165306539076766,4.048951048951049,0.921,0.973,0.876,1.166,10,579,0,0,0,0,0,Did not play,Did not play,True,
+2026-09-21,hit,6,Pete Alonso,624413,Baltimore Orioles,824787,Trey Yesavage,R,2,0.93,0.646,0.04773779619066088,4.528,0.951,0.89,0.899,0.956,38,678,4,4,2,2,3,"2-4 | 2 HR, K, 3 RBI",Final,True,True
+2026-09-21,hr,1,Pete Alonso,624413,Baltimore Orioles,824787,Trey Yesavage,R,2,0.152,0.152,0.04773779619066088,4.528,0.951,0.89,0.899,0.956,38,678,4,4,2,2,3,"2-4 | 2 HR, K, 3 RBI",Final,True,True
+2026-09-21,hr,2,Emmanuel Rodriguez,691181,Minnesota Twins,823169,Blade Tidwell,R,8,0.1504,0.1504,0.05751123010899105,3.875,0.924,0.973,0.866,1.008,1,34,3,3,1,1,1,"1-3 | HR, K, RBI",Final,True,True
+2026-09-21,hr,3,Riley Greene,682985,Detroit Tigers,824221,DJ Herz,R,3,0.145,0.145,0.04117630916130339,4.424,0.956,0.94,1.096,1.0,21,570,4,3,0,0,0,"0-3 | BB, K, R",Final,True,False
+2026-09-21,hr,4,James Wood,695578,Washington Nationals,824221,River Ryan,L,1,0.136,0.136,0.035278666397331286,4.637,0.961,0.94,0.972,1.0,30,598,4,4,1,0,0,"1-4 | 3 K, R",Final,True,False
+2026-09-21,hr,5,Bryce Eldridge,805811,San Francisco Giants,823169,Zebby Matthews,R,,0.132,0.132,0.04449769120295914,4.186915887850467,0.926,0.973,0.876,1.166,17,448,0,0,0,0,0,Did not play,Did not play,True,
+2026-09-21,hr,6,Kazuma Okamoto,672960,Toronto Blue Jays,824787,Shane Baz,R,6,0.1204,0.1204,0.0329954565535855,4.106,0.938,0.89,0.865,0.849,33,613,4,4,1,0,0,1-4 | K,Final,True,False
+2026-09-22,hit,1,Luis Arraez,650333,Philadelphia Phillies,823412,Dustin May,R,,1.1,0.7205,0.014536002778133716,4.351351351351352,1.094,1.0,0.855,0.864,6,644,4,4,2,0,0,2-4 | R,Final,True,True
+2026-09-22,hit,2,Brett Bateman,703520,Toronto Blue Jays,824785,Chris Bassitt,R,,1.1,0.7149,0.013103092135969873,4.526315789473684,1.046,1.0,0.863,0.919,2,172,0,0,0,0,0,Did not play,Postponed,True,
+2026-09-22,hit,3,Jackson Chourio,694192,Milwaukee Brewers,823412,Zack Wheeler,R,,1.06,0.7003,0.04455808489530679,4.570247933884297,1.144,1.0,0.977,1.04,24,553,4,3,0,0,0,"0-3 | BB, 2 K, R",Final,True,False
+2026-09-22,hit,4,Gabriel Moreno,672515,Arizona Diamondbacks,824302,Kyle Freeland,R,3,1.19,0.7518,0.042101800850137344,4.424,0.97,1.078,0.934,1.214,15,526,5,4,1,0,2,"1-4 | 2B, 2 RBI, R",Final,True,True
+2026-09-22,hit,5,Otto Lopez,672640,Miami Marlins,824624,Shota Imanaga,R,2,1.14,0.7314,0.024101433609036972,4.528,1.125,0.846,1.124,1.276,11,664,6,5,1,0,0,"1-5 | HBP, K, R",Final,True,True
+2026-09-22,hit,6,Jake McCarthy,664983,Colorado Rockies,824302,Michael Soroka,L,1,1.13,0.7258,0.023655595828065895,4.637,1.178,1.078,0.899,0.876,15,572,4,4,0,0,0,"0-4 | 2 K, CS",Final,True,False
+2026-09-22,hr,1,Pete Alonso,624413,Baltimore Orioles,824785,Max Scherzer,R,,0.1778,0.1778,0.06813605779193425,4.343949044585988,0.955,1.0,0.909,1.12,40,682,0,0,0,0,0,Did not play,Postponed,True,
+2026-09-22,hr,2,Kyle Schwarber,656941,Philadelphia Phillies,823412,Dustin May,R,,0.1654,0.1654,0.054052718099776575,4.493333333333333,1.137,1.0,0.855,0.864,45,674,4,4,0,0,0,0-4 | K,Final,True,False
+2026-09-22,hr,3,Miguel Vargas,678246,Chicago White Sox,824061,Daniel Lynch IV,L,1,0.2037,0.2037,0.06754292139507795,4.637,1.439,0.998,1.079,0.906,33,680,5,4,1,0,1,"1-4 | BB, RBI, R",Final,True,False
+2026-09-22,hr,4,Heriberto Hernández,681715,Miami Marlins,824624,Shota Imanaga,R,1,0.1754,0.1754,0.05900648219124826,4.637,1.171,0.846,1.124,1.276,24,479,6,5,1,0,0,"1-5 | BB, K, R",Final,True,False
+2026-09-22,hr,5,Lazaro Montes,703155,Seattle Mariners,823089,Cristian Javier,R,8,0.1887,0.1887,0.07775256412760372,3.875,1.122,1.007,1.07,1.054,4,42,4,4,0,0,0,0-4 | 2 K,Final,True,False
+2026-09-22,hr,6,Yordan Alvarez,670541,Houston Astros,823089,Logan Gilbert,R,2,0.1862,0.1862,0.0710569823197056,4.528,1.139,1.007,0.96,1.129,40,662,5,4,2,1,3,"2-4 | HR, BB, 3 RBI",Final,True,True
+2026-09-23,hit,1,Brett Bateman,703520,Toronto Blue Jays,824785,Chris Bassitt,R,,1.1,0.7149,0.011139696353360902,4.526315789473684,1.046,0.85,0.864,0.919,2,172,0,0,0,0,0,Did not play,Did not play,True,
+2026-09-23,hit,2,Kevin McGonigle,805808,Detroit Tigers,824223,Richard Lovelady,L,1,1.09,0.711,0.015354349752888631,4.637,0.961,0.85,1.1,0.975,17,689,5,5,3,0,0,"3-5 | 2B, K",Final,True,True
+2026-09-23,hit,3,Jackson Chourio,694192,Milwaukee Brewers,823410,Aaron Nola,R,,1.13,0.7263,0.046316205565561694,4.565573770491803,1.14,0.861,0.975,1.253,24,557,4,4,1,0,0,1-4 | 2 K,Final,True,True
+2026-09-23,hit,4,Otto Lopez,672640,Miami Marlins,824625,Kevin Gausman,R,1,1.2,0.7504,0.019709838219724628,4.637,1.117,0.855,1.124,1.06,11,670,4,4,1,0,0,"1-4 | K, R, SB",Final,True,True
+2026-09-23,hit,5,Jake McCarthy,664983,Colorado Rockies,824301,Merrill Kelly,R,1,1.16,0.7372,0.03791826027426256,4.637,1.178,0.988,0.898,1.152,15,576,4,4,1,0,0,1-4 | SB,Final,True,True
+2026-09-23,hit,6,Yordan Alvarez,670541,Houston Astros,823086,George Kirby,R,,1.14,0.7347,0.052604282819590654,4.359477124183006,1.139,0.832,0.974,0.985,41,667,2,2,1,0,0,"1-2 | 2B, R",In Progress,False,
+2026-09-23,hr,1,Ben Rice,700250,New York Yankees,823492,Mason Englert,R,1,0.171,0.171,0.056441608679417714,4.637,1.136,0.855,1.111,1.132,39,649,5,4,3,2,2,"3-4 | 2 HR, BB, 2 RBI",Final,True,True
+2026-09-23,hr,2,Pete Alonso,624413,Baltimore Orioles,824784,CJ Van Eyk,R,,0.1696,0.1696,0.0602884459595763,4.343949044585988,0.955,1.0,0.91,1.0,40,682,8,6,1,1,2,"1-3 | HR, BB, 2 K; 0-3 | HBP, K, R",Final,True,True
+2026-09-23,hr,3,Miguel Vargas,678246,Chicago White Sox,824060,Seth Lugo,L,3,0.1936,0.1936,0.06912990382479095,4.424,1.441,0.913,1.082,1.017,33,685,4,4,1,0,1,1-4 | RBI,Final,True,False
+2026-09-23,hr,4,Pete Crow-Armstrong,691718,Chicago Cubs,824625,Ryan Gusto,R,1,0.172,0.172,0.05887074569969881,4.637,1.046,0.855,0.892,0.995,45,708,4,3,0,0,0,"0-3 | BB, K",Final,True,False
+2026-09-23,hr,5,Juan Soto,665742,New York Mets,822841,Cody Bradford,R,2,0.1704,0.1704,0.05765718923822653,4.528,1.03,1.005,0.983,0.965,26,458,5,2,1,1,2,"1-2 | HR, 3 BB, 2 RBI",Final,True,True
+2026-09-23,hr,6,Zach Neto,687263,Los Angeles Angels,824951,Jeffrey Springs,R,1,0.1862,0.1862,0.06844066243507772,4.637,1.143,1.169,1.025,1.316,26,680,3,2,1,0,0,"1-2 | BB, CS",In Progress,False,

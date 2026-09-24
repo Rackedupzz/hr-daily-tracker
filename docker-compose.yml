@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  hr-tracker:
+    build: .
+    container_name: hr-daily-tracker
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_ENV=production
+      - PYTHONUNBUFFERED=1
+    # Optional API keys (see .env.example). Missing file is fine.
+    env_file:
+      - path: .env
+        required: false
+    volumes:
+      - ./src/mlb_hr/data:/app/src/mlb_hr/data
+      # Daily PDF archive lands in the project folder, not just the container.
+      - ./snapshots:/app/snapshots
+    restart: unless-stopped

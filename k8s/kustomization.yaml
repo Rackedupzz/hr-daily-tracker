@@ -1,0 +1,15 @@
+# kubectl apply -k k8s/
+# Local clusters (Docker Desktop, kind, minikube) can use the locally built
+# image directly. For a remote cluster, push the image and set newName below.
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: hr-daily-tracker
+resources:
+  - namespace.yaml
+  - storage.yaml
+  - deployment.yaml
+  - service.yaml
+images:
+  - name: hr-daily-tracker
+    newTag: latest
+    # newName: ghcr.io/rackedupzz/hr-daily-tracker

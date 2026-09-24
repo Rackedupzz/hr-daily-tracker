@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: hr-daily-tracker
+spec:
+  selector:
+    app: hr-daily-tracker
+  ports:
+    - name: http
+      port: 80
+      targetPort: http

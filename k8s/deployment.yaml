@@ -1,0 +1,81 @@
+# Single replica on purpose: the app is one Flask process that writes its
+# caches, fits and snapshots to local disk and runs refits in background
+# threads. Two pods would race on the same files, so scale is 1 and rollouts
+# use Recreate (the ReadWriteOnce volume can't be mounted by two pods anyway).
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hr-daily-tracker
+  labels:
+    app: hr-daily-tracker
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: hr-daily-tracker
+  template:
+    metadata:
+      labels:
+        app: hr-daily-tracker
+    spec:
+      initContainers:
+        # The image ships the season PA file and the fitted models. Copy them
+        # onto the empty volume on first boot; -n never overwrites, so later
+        # restarts keep the pod's own refreshed data.
+        - name: seed-data
+          image: hr-daily-tracker:latest
+          imagePullPolicy: IfNotPresent
+          command: ["sh", "-c", "cp -rn /app/src/mlb_hr/data/. /seed/"]
+          volumeMounts:
+            - name: data
+              mountPath: /seed
+      containers:
+        - name: app
+          image: hr-daily-tracker:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 5000
+          env:
+            - name: PYTHONUNBUFFERED
+              value: "1"
+            - name: FLASK_ENV
+              value: production
+          envFrom:
+            - secretRef:
+                name: hr-daily-tracker-keys
+                optional: true
+          resources:
+            requests:
+              cpu: 500m
+              memory: 1Gi
+            limits:
+              memory: 3Gi
+          # Startup loads ~165K PAs and fits the ensemble; give it 5 minutes.
+          startupProbe:
+            httpGet: { path: /health, port: http }
+            periodSeconds: 10
+            failureThreshold: 30
+          livenessProbe:
+            httpGet: { path: /health, port: http }
+            periodSeconds: 30
+            timeoutSeconds: 10
+            failureThreshold: 3
+          readinessProbe:
+            httpGet: { path: /health, port: http }
+            periodSeconds: 15
+            timeoutSeconds: 10
+          volumeMounts:
+            - name: data
+              mountPath: /app/src/mlb_hr/data
+            - name: snapshots
+              mountPath: /app/snapshots
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: hr-daily-tracker-data
+        - name: snapshots
+          persistentVolumeClaim:
+            claimName: hr-daily-tracker-snapshots
