@@ -63,7 +63,10 @@ def pull() -> None:
         from huggingface_hub import HfApi, hf_hub_download
 
         remote = HfApi(token=token).list_repo_files(repo, repo_type="dataset")
-        missing = [f for f in remote if "/" not in f and not (DATA_DIR / f).exists()]
+        missing = [
+            f for f in remote
+            if "/" not in f and not f.startswith(".") and not (DATA_DIR / f).exists()
+        ]
         DATA_DIR.mkdir(parents=True, exist_ok=True)
         for name in missing:
             hf_hub_download(repo, name, repo_type="dataset", token=token, local_dir=str(DATA_DIR))
