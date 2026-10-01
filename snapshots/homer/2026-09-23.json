@@ -1,7 +1,7 @@
 {
  "bot": "HOMER",
  "date": "2026-09-23",
- "built_at": "2026-09-24 03:25:42",
+ "built_at": "2026-09-24 04:11:48",
  "book_through": "2026-09-23",
  "league": {
   "pa": 177194,
@@ -868,9 +868,9 @@
    "edge": 0.026886954803585078,
    "result": {
     "hr": 0,
-    "summary": "1-2 | BB, CS",
-    "final": false,
-    "state": "In Progress"
+    "summary": "1-2 | 2 BB, CS",
+    "final": true,
+    "state": "Final"
    }
   },
   {
@@ -1033,8 +1033,8 @@
    "tag": "HAMMER IT &#128296;",
    "edge": 0.028651529592737313,
    "result": {
-    "hr": 1,
-    "summary": "1-3 | HR, BB, 2 K; 0-3 | HBP, K, R",
+    "hr": 0,
+    "summary": "0-3 | HBP, K, R",
     "final": true,
     "state": "Final"
    }
@@ -1117,9 +1117,9 @@
    "edge": 0.051801192935363505,
    "result": {
     "hr": 0,
-    "summary": "1-2",
-    "final": false,
-    "state": "In Progress"
+    "summary": "1-2 | 3 BB",
+    "final": true,
+    "state": "Final"
    }
   },
   {
@@ -1285,9 +1285,9 @@
    "edge": 0.02222918552186906,
    "result": {
     "hr": 0,
-    "summary": "1-2 | 2B, BB, R",
-    "final": false,
-    "state": "In Progress"
+    "summary": "2-4 | 2B, BB, 2 R",
+    "final": true,
+    "state": "Final"
    }
   }
  ],
@@ -1689,10 +1689,10 @@
    "tag": "BANK IT &#128176;",
    "result": {
     "hits": 2,
-    "summary": "2-3 | HR, 2 RBI, R",
+    "summary": "2-4 | HR, 2 RBI, R",
     "final": true,
     "dnp": false,
-    "state": "In Progress"
+    "state": "Final"
    }
   }
  ],
@@ -1882,7 +1882,7 @@
      "book_price": "-164",
      "book_edge": 0.11808644856812234,
      "type": "hit",
-     "status": "pending"
+     "status": "void"
     }
    ],
    "prob": 0.37907718943726293,
@@ -1953,7 +1953,7 @@
     "est_roi": 0.0814,
     "days_per_win": 2.7
    },
-   "status": "pending"
+   "status": "won"
   },
   {
    "key": "hit3e2",
@@ -2160,7 +2160,7 @@
      "book_price": "-164",
      "book_edge": 0.11808644856812234,
      "type": "hit",
-     "status": "pending"
+     "status": "void"
     }
    ],
    "prob": 0.2781629070487515,
@@ -2219,7 +2219,7 @@
     "est_roi": 0.1427,
     "days_per_win": 3.7
    },
-   "status": "pending"
+   "status": "won"
   },
   {
    "key": "hit3e3",
@@ -2416,10 +2416,12 @@
    "model_pick_prob": 0.6644788138857363,
    "tag": "HAMMER",
    "result": {
-    "final": false,
+    "final": true,
+    "won": false,
     "home_score": 1,
-    "away_score": 2,
-    "state": "In Progress"
+    "away_score": 5,
+    "total": 6,
+    "state": "Final"
    }
   },
   {
@@ -2710,10 +2712,12 @@
    "model_pick_prob": 0.5442897378433902,
    "tag": "LEAN",
    "result": {
-    "final": false,
-    "home_score": 5,
+    "final": true,
+    "won": false,
+    "home_score": 7,
     "away_score": 3,
-    "state": "In Progress"
+    "total": 10,
+    "state": "Final"
    }
   },
   {
@@ -2781,10 +2785,12 @@
    "model_pick_prob": 0.5047174744386365,
    "tag": "SMALL PLAY",
    "result": {
-    "final": false,
-    "home_score": 3,
-    "away_score": 4,
-    "state": "In Progress"
+    "final": true,
+    "won": false,
+    "home_score": 6,
+    "away_score": 5,
+    "total": 11,
+    "state": "Final"
    }
   },
   {
@@ -3100,15 +3106,15 @@
  ],
  "record": {
   "hr": {
-   "hit": 3,
-   "scored": 3,
+   "hit": 2,
+   "scored": 6,
    "dnp": 0,
-   "pending": 3
+   "pending": 0
   },
   "games": {
    "won": 8,
-   "lost": 5,
-   "pending": 3
+   "lost": 8,
+   "pending": 0
   },
   "hits": {
    "hit": 6,
@@ -3117,12 +3123,12 @@
    "pending": 0
   },
   "parlays": {
-   "won": 3,
+   "won": 5,
    "lost": 0,
    "void": 0,
-   "pending": 2
+   "pending": 0
   },
-  "graded_at": "2026-09-24 03:38:13",
-  "complete": false
+  "graded_at": "2026-09-30 11:03:22",
+  "complete": true
  }
 }

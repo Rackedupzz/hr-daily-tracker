@@ -1,22 +1,22 @@
 {
   "date": "2026-09-23",
-  "built_at": "2026-09-24 03:19:22",
+  "built_at": "2026-09-24 04:09:52",
   "results": {
-    "fetched_at": "2026-09-24 03:36:44",
-    "final_games": 13,
-    "live_games": 3,
+    "fetched_at": "2026-09-30 11:03:22",
+    "final_games": 16,
+    "live_games": 0,
     "upcoming_games": 0,
     "picks": {
-      "hit": 3,
-      "scored": 5,
+      "hit": 2,
+      "scored": 6,
       "dnp": 0,
-      "pending": 1
+      "pending": 0
     },
     "hit_picks": {
-      "hit": 4,
-      "scored": 4,
+      "hit": 5,
+      "scored": 5,
       "dnp": 1,
-      "pending": 1
+      "pending": 0
     },
     "any": true
   },
@@ -24,17 +24,25 @@
     "date": "2026-09-23",
     "games": 16,
     "hr_picks": 6,
-    "hr_picks_final": 5,
-    "hr_picks_hit": 3,
-    "hr_expected": 0.877,
+    "hr_picks_final": 6,
+    "hr_picks_hit": 2,
+    "hr_expected": 1.063,
     "hit_picks": 6,
-    "hit_picks_final": 4,
-    "hit_picks_hit": 4,
-    "hit_expected": 2.925,
+    "hit_picks_final": 5,
+    "hit_picks_hit": 5,
+    "hit_expected": 3.66,
     "avg_projected_hr": 0.1771,
     "picks_dnp": 1,
-    "settled": false,
-    "built_at": "2026-09-24 03:19:22"
+    "settled": true,
+    "built_at": "2026-09-24 04:09:52",
+    "slate_starters": 287,
+    "slate_hr_expected": 31.29,
+    "slate_hr_base": 31.29,
+    "slate_hr_actual": 26,
+    "slate_hits_expected": 264.86,
+    "slate_hits_actual": 240,
+    "hr_level": null,
+    "model_version": null
   },
   "picks": [
     {
@@ -89,15 +97,15 @@
       "sp_hr_index": 1.0,
       "season_hr": 40,
       "season_pa": 682,
-      "result_pa": 8,
-      "result_ab": 6,
-      "result_hits": 1,
-      "result_hr": 1,
-      "result_rbi": 2,
-      "result_line": "1-3 | HR, BB, 2 K; 0-3 | HBP, K, R",
+      "result_pa": 4,
+      "result_ab": 3,
+      "result_hits": 0,
+      "result_hr": 0,
+      "result_rbi": 0,
+      "result_line": "0-3 | HBP, K, R",
       "game_state": "Final",
       "final": true,
-      "won": true
+      "won": false
     },
     {
       "date": "2026-09-23",
@@ -213,15 +221,15 @@
       "sp_hr_index": 1.316,
       "season_hr": 26,
       "season_pa": 680,
-      "result_pa": 3,
+      "result_pa": 4,
       "result_ab": 2,
       "result_hits": 1,
       "result_hr": 0,
       "result_rbi": 0,
-      "result_line": "1-2 | BB, CS",
-      "game_state": "In Progress",
-      "final": false,
-      "won": null
+      "result_line": "1-2 | 2 BB, CS",
+      "game_state": "Final",
+      "final": true,
+      "won": false
     },
     {
       "date": "2026-09-23",
@@ -399,15 +407,15 @@
       "sp_hr_index": 0.985,
       "season_hr": 41,
       "season_pa": 667,
-      "result_pa": 2,
-      "result_ab": 2,
-      "result_hits": 1,
+      "result_pa": 5,
+      "result_ab": 4,
+      "result_hits": 2,
       "result_hr": 0,
       "result_rbi": 0,
-      "result_line": "1-2 | 2B, R",
-      "game_state": "In Progress",
-      "final": false,
-      "won": null
+      "result_line": "2-4 | 2B, BB, 2 R",
+      "game_state": "Final",
+      "final": true,
+      "won": true
     }
   ]
 }
