@@ -19,6 +19,26 @@ import numpy as np
 import pandas as pd
 
 
+# Fallback park factors for venues the measured pass cannot resolve.
+DEFAULT_PARK_FACTORS = {
+    "Coors Field": 1.22,
+    "Comerica Park": 0.94,
+    "Globe Life Field": 1.15,
+    "Citizens Bank Park": 0.99,
+    "Great American Ball Park": 1.05,
+    "Oriole Park at Camden Yards": 1.03,
+    "Oracle Park": 0.78,
+    "Petco Park": 0.82,
+    "Sutter Health Park": 1.05,
+    "Guaranteed Rate Field": 0.99,
+    "Minute Maid Park": 1.02,
+    "Dodger Stadium": 0.95,
+    "Fenway Park": 1.08,
+    "Yankee Stadium": 1.06,
+    "Tropicana Field": 0.88,
+}
+
+
 @dataclass
 class BatterStats:
     """Per-batter, per-handedness PA-based HR stats."""
@@ -95,25 +115,16 @@ class HRModel:
             return entry.for_batter(bat_side)
         return self.park_factors.get(venue, 1.0)
 
+    def hit_park_factor_for(self, venue: str, bat_side: str = "R") -> float:
+        """Hits-per-PA park factor for this venue and batter side (1.0 unmeasured)."""
+        entry = getattr(self, "park_model", {}).get(venue)
+        if entry is not None and getattr(entry, "measured", False):
+            return entry.hits_for_batter(bat_side)
+        return 1.0
+
     def _default_park_factors(self) -> dict[str, float]:
         """Fallback park factors for venues the measured pass cannot resolve."""
-        return {
-            "Coors Field": 1.22,
-            "Comerica Park": 0.94,
-            "Globe Life Field": 1.15,
-            "Citizens Bank Park": 0.99,
-            "Great American Ball Park": 1.05,
-            "Oriole Park at Camden Yards": 1.03,
-            "Oracle Park": 0.78,
-            "Petco Park": 0.82,
-            "Sutter Health Park": 1.05,
-            "Guaranteed Rate Field": 0.99,
-            "Minute Maid Park": 1.02,
-            "Dodger Stadium": 0.95,
-            "Fenway Park": 1.08,
-            "Yankee Stadium": 1.06,
-            "Tropicana Field": 0.88,
-        }
+        return dict(DEFAULT_PARK_FACTORS)
 
     def _build_from_pa_data(self) -> None:
         """Read PA JSONL, aggregate to per-batter splits."""
@@ -121,7 +132,7 @@ class HRModel:
             "name": "", "pa_total": 0, "hr_total": 0,
             "pa_vs_l": 0, "pa_vs_r": 0,
             "hr_vs_l": 0, "hr_vs_r": 0,
-            "games": set(), "bat_side": "R"
+            "games": set(), "bat_side": "R", "as_l": 0, "as_r": 0,
         })
 
         with open(self.pa_path) as fh:
@@ -144,6 +155,10 @@ class HRModel:
                 batter_data["name"] = pa.get("batter", "")
                 if pa.get("bat_side") in ("L", "R", "S"):
                     batter_data["bat_side"] = pa["bat_side"]
+                if pa.get("bat_side") == "L":
+                    batter_data["as_l"] += 1
+                elif pa.get("bat_side") == "R":
+                    batter_data["as_r"] += 1
                 batter_data["pa_total"] += 1
                 batter_data["hr_total"] += is_hr
                 batter_data["games"].add((pa.get("date"), pa.get("game_pk")))
@@ -160,7 +175,7 @@ class HRModel:
             self.batters[bid] = BatterStats(
                 batter_id=bid,
                 batter=d["name"],
-                hand=d["bat_side"],  # actual batting side from PA records
+                hand=_batting_hand(d["as_l"], d["as_r"], d["bat_side"]),
                 pa_total=d["pa_total"],
                 hr_total=d["hr_total"],
                 pa_vs_l=d["pa_vs_l"],
@@ -216,6 +231,22 @@ class HRModel:
             r["batter_id"]: BatterStats(**r)
             for r in records
         }
+
+
+def _batting_hand(as_l: int, as_r: int, last_side: str) -> str:
+    """'L', 'R' or 'S' from the sides a hitter has actually batted from.
+
+    The feed records the side of each plate appearance, so a switch hitter's
+    last one is just whichever hand the last pitcher threw with.
+    """
+    from mlb_hr.features import SWITCH_MIN_PA, SWITCH_MIN_SHARE
+
+    low, high = sorted((as_l, as_r))
+    if low >= SWITCH_MIN_PA and low / (low + high) >= SWITCH_MIN_SHARE:
+        return "S"
+    if as_l == as_r:
+        return last_side if last_side in ("L", "R") else "R"
+    return "L" if as_l > as_r else "R"
 
 
 def compute_calibration_metrics(

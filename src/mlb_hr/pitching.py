@@ -69,11 +69,69 @@ RUN_VALUE_PRIOR_BF = 900.0
 # Brett Bateman the top hit projection two days running.
 HIT_PRIOR_PA = 500.0
 
-# Starter home-run rates, shrunk this hard, carry through to the matchup at
-# almost exactly odds-ratio strength: a forward logistic fit gave 1.13 on
-# log(starter rate / league) with the batter's own rate controlled. The
-# backtest residual correction flagged the missing term (odds x1.05 per SD).
-SP_HR_PRIOR_BF = 900.0
+# Starter home-run rates carry through to the matchup at almost exactly
+# odds-ratio strength: a forward logistic fit gave 1.13 on log(starter rate /
+# league) with the batter's own rate controlled. The backtest residual
+# correction flagged the missing term (odds x1.05 per SD).
+#
+# 900 BF of league-average weight was too much: on the 2026 daily replay of
+# the live projection (39,078 starter-games, walk-forward), 400-500 beat 900
+# (log-likelihood +1.8, top-6 HR picks +11) while 1,500 and 3,000 were
+# significantly worse. A starter's HR tendency is real and shows early.
+SP_HR_PRIOR_BF = 400.0
+
+# Bullpens are the opposite: a club's relief corps turns over through the
+# season, so its year-to-date line is mostly noise about tonight's arms. With
+# 1,500 BF of prior the pen index added nothing to log-likelihood and knocked
+# 8-15 connected top-6 picks off the season (it reorders the very top of the
+# slate on noise); 4,000 keeps the direction and drops the noise.
+PEN_HR_PRIOR_BF = 4000.0
+
+# Hit projection: a stacked Poisson model on the logs of its components,
+#     log E[hits] = log(league hit rate) + intercept + sum_i coef_i * log(term_i)
+# fitted on the 2026 daily replay (39,078 starter-games, every input as of that
+# morning). The old projection -- hitter rate and starter rate by log5, bullpen
+# index, exposure -- left out the park (Coors, Fenway), strikeouts on either
+# side, and contact quality, and it ran 3.9% high over the season because its
+# exposure counted pinch hitters' plate appearances. Walk-forward against the
+# old projection on the same 33,874 starter-games: Poisson deviance
+# 1.0276 -> 1.0231, the season total within 0.25% (was +3.9%), calibrated by
+# lineup slot (0.98-1.04), and the daily six hit picks projected 956 hits and
+# got 952 (the old projection: 943 projected, 995 actual). Two candidates were
+# dropped: recent form added nothing, and the league hit-platoon factor only
+# "helped" with an inverted sign. Refit with `python -m mlb_hr.replay`
+# (writes data/model_fit.json); these defaults are the 2026 fit.
+HIT_STACK = {
+    "intercept": -0.2254,
+    "hitter_rate": 0.2071,  # log(hitter's shrunk hit rate / league)
+    "starter_hits": 0.4620, # log(starter's shrunk hits allowed / league)
+    "bullpen": 0.6622,      # log(opposing bullpen hit index)
+    "park": 1.0343,         # log(park hit factor, his side vs the starter)
+    "xhit": 0.5630,         # log(expected hits per PA from contact / league)
+    "k_rate": -0.1731,      # log(hitter's strikeout rate / league)
+    "starter_k": -0.2877,   # log(starter's strikeout rate / league)
+    "exposure": 1.1692,     # log(expected plate appearances)
+}
+XHIT_PRIOR_PA = 200.0
+BATTER_K_PRIOR_PA = 150.0
+SP_K_PRIOR_BF = 200.0
+
+# Like the HR model's top calibration (ensemble.HR_TOP_CAL): the stack runs hot
+# only at the very top of the slate, where the hit picks are chosen (the top 2%
+# projected 1.24 hits and got 1.15), so log(projected hits) gets a quadratic
+# second layer fitted to the replay's walk-forward projections. Monotone
+# (capped at the curve's turn, here 2.4 projected hits), so it never reorders
+# hitters.
+HIT_TOP_CAL = {"a": -0.0117, "b": 0.8484, "c": -0.4926}
+
+
+def hit_top_calibrate(mu: float, cal: Optional[dict] = None) -> float:
+    """exp(a + b*x + c*x^2), x = log(projected hits), held monotone."""
+    c = cal or HIT_TOP_CAL
+    x = math.log(max(mu, 1e-6))
+    if c["c"] < 0:
+        x = min(x, -c["b"] / (2 * c["c"]))
+    return math.exp(c["a"] + c["b"] * x + c["c"] * x * x)
 
 # A starter who is removed early still had a full lineup's worth of exposure
 # projected; clamp to plausible bounds.
@@ -225,7 +283,7 @@ class BullpenProfile:
             return self.hr_vs_l, self.bf_vs_l
         return self.hr_vs_r, self.bf_vs_r
 
-    def hr_index(self, league_hr_rate: float, prior_bf: float = 1500.0,
+    def hr_index(self, league_hr_rate: float, prior_bf: float = PEN_HR_PRIOR_BF,
                  late_only: bool = False) -> float:
         """Home runs allowed relative to league, shrunk toward 1.0.
 
@@ -600,12 +658,19 @@ def project_hits(
     bullpen: Optional[BullpenProfile],
     league: LeagueRates,
     expected_pa: float,
+    batter_xhit: Optional[float] = None,
+    batter_k: Optional[int] = None,
+    park_hit: float = 1.0,
+    coef: Optional[dict] = None,
+    top_cal: Optional[dict] = None,
 ) -> dict:
     """Projected hits for one hitter, starter and bullpen exposure separated.
 
     Same odds-ratio matchup logic as the strikeout projection: a hitter's rate
     and the pitcher's rate are combined relative to league rather than one
-    being used alone.
+    being used alone. With the hitter's expected hits and strikeouts supplied,
+    the published number comes from the stacked model (HIT_STACK); the log5
+    terms are still returned for display.
     """
     hitter_rate = _shrink(
         batter_hit_rate * batter_pa, batter_pa, league.hit_rate, HIT_PRIOR_PA
@@ -624,6 +689,38 @@ def project_hits(
 
     pa_sp, pa_pen = split_exposure(expected_pa)
     projected = pa_sp * vs_sp + pa_pen * vs_pen
+    # Probability of at least one hit, which is how the outcome is usually
+    # framed, computed from the two exposures separately.
+    at_least_one = 1.0 - (1.0 - vs_sp) ** pa_sp * (1.0 - vs_pen) ** pa_pen
+    model = "log5"
+
+    if batter_xhit is not None and batter_k is not None and league.hit_rate > 0:
+        c = coef or HIT_STACK
+        lg, lg_k = league.hit_rate, max(league.k_rate, 1e-3)
+        exposure = float(np.clip(expected_pa, 1.5, 5.2))
+        xhit_rate = _shrink(batter_xhit, batter_pa, lg, XHIT_PRIOR_PA)
+        k_rate = _shrink(batter_k, batter_pa, lg_k, BATTER_K_PRIOR_PA)
+        sp_k = (
+            _shrink(pitcher.strikeouts, pitcher.bf, lg_k, SP_K_PRIOR_BF)
+            if pitcher is not None and pitcher.bf > 0 else lg_k
+        )
+        eta = (
+            math.log(lg) + c["intercept"]
+            + c["hitter_rate"] * math.log(hitter_rate / lg)
+            + c["starter_hits"] * math.log(sp_rate / lg)
+            + c["bullpen"] * math.log(max(pen_index, 1e-3))
+            + c["park"] * math.log(max(park_hit, 1e-3))
+            + c["xhit"] * math.log(max(xhit_rate, 1e-6) / lg)
+            + c["k_rate"] * math.log(k_rate / lg_k)
+            + c["starter_k"] * math.log(sp_k / lg_k)
+            + c["exposure"] * math.log(exposure)
+        )
+        projected = math.exp(eta)
+        if top_cal is not None:
+            projected = hit_top_calibrate(projected, top_cal)
+        per_pa = min(projected / exposure, 0.9)
+        at_least_one = 1.0 - (1.0 - per_pa) ** exposure
+        model = "stack"
 
     return {
         "projected_hits": round(projected, 2),
@@ -633,14 +730,12 @@ def project_hits(
         "rate_vs_sp": vs_sp,
         "rate_vs_pen": vs_pen,
         "pen_hit_index": pen_index,
+        "park_hit_factor": park_hit,
         "pa_vs_sp": round(pa_sp, 1),
         "pa_vs_pen": round(pa_pen, 1),
         "expected_pa": round(expected_pa, 1),
-        # Probability of at least one hit, which is how the outcome is usually
-        # framed, computed from the two exposures separately.
-        "prob_at_least_one": float(
-            1.0 - (1.0 - vs_sp) ** pa_sp * (1.0 - vs_pen) ** pa_pen
-        ),
+        "prob_at_least_one": float(at_least_one),
+        "model": model,
     }
 
 

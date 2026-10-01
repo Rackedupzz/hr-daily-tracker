@@ -510,7 +510,10 @@ def boxscore_batting(game_pks: Iterable[int], workers: int = 8) -> dict[int, dic
     aggregated batting line, so scoring a slate against what happened does not
     need the play-by-play the season fetch pulls. A batter appears once; the
     same person cannot bat in two games on one slate except in a doubleheader,
-    where the later game wins and the earlier line is folded in.
+    where the top-level line is the two games combined and `by_game` keeps each
+    game's own line. A projection is for one game, so it must be scored with
+    that game's line (results.batter_line) -- scoring the combined line let a
+    pick in game one collect the home run he hit in game two.
     """
     pks = list(game_pks)
     out: dict[int, dict] = {}
@@ -547,6 +550,7 @@ def boxscore_batting(game_pks: Iterable[int], workers: int = 8) -> dict[int, dic
                 bid = row["batter_id"]
                 if bid is None:
                     continue
+                game_line = {k: row[k] for k in ("pa", "ab", "hits", "hr", "rbi", "summary")}
                 prior = out.get(bid)
                 if prior:  # doubleheader: add the second line to the first
                     row["pa"] += prior["pa"]
@@ -555,6 +559,7 @@ def boxscore_batting(game_pks: Iterable[int], workers: int = 8) -> dict[int, dic
                     row["hr"] += prior["hr"]
                     row["rbi"] += prior["rbi"]
                     row["summary"] = f"{prior['summary']}; {row['summary']}"
+                row["by_game"] = {**(prior or {}).get("by_game", {}), pk: game_line}
                 row["game_pk"] = pk
                 out[bid] = row
     return out

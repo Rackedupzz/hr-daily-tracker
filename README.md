@@ -87,6 +87,7 @@ mlb-hr-model/
 │   ├── render.py            # HTML renderers (slate + model lab)
 │   ├── render_review.py     # HTML renderers (results review + HOMER)
 │   ├── homer.py             # HOMER, the independent expert bot
+│   ├── replay.py            # Season replay of the live projection; fits the stacked models
 │   ├── app.py               # Flask server
 │   └── data/
 │       └── season_pa.jsonl  # Full 2026 season PA data (~165K records)
@@ -248,8 +249,9 @@ them, so the prior is the only thing that changes across the columns:
 
 | Prior | What it is |
 |---|---|
+| **Served (full season)** | KNN comparables refit on every PA to date, through the stacked model — the published number |
 | Flat league | The league HR rate for everyone — the null model |
-| KNN comps | Pooled rate of the nearest comparables (served, inside the core blend) |
+| KNN comps | Pooled rate of the nearest comparables (validation fit) |
 | SVR | Support-vector regression on the rate |
 | Random forest | Forest regression; a learned similarity metric |
 | **Linear regression** | sklearn `LinearRegression`, PA-weighted least squares |
@@ -259,9 +261,12 @@ them, so the prior is the only thing that changes across the columns:
 | Core / Forest blend | Weighted combinations, weights fitted out-of-fold |
 
 Every prior is fit on the identical feature matrix and cross-validated the same
-way, so the comparison isolates the model. The four marked in bold are
-**comparison-only** — they are scored but do not feed the served blend, which
-stays KNN + SVR until something beats it on held-out data.
+way, so the comparison isolates the model; every column goes through the same
+stacked model, so only the prior differs. The validation priors are fit on the
+first 80% of the season so they can be scored on the rest; the served prior is
+the KNN alone (it beat the KNN + SVR blend across the rolling backtest, AUC
++0.0010, 90% CI +0.0004 to +0.0017) refit on the whole season once scoring is
+done. Linear, logistic, neural net and XGBoost are **comparison-only**.
 
 Two notes on the newer priors. The logistic model is the only one that models
 the actual Bernoulli outcome rather than regressing a rate; it is fit on two
@@ -330,12 +335,21 @@ P(HR per PA) = (observed_hrs + K x prior) / (observed_pas + K)
 Where:
 - `prior` = the batter's **KNN comparables rate** (not a flat league constant)
 - `K` = shrinkage strength, estimated by method of moments from the residual
-  variance around the prior, not hand-tuned
+  variance around the prior, times `SHRINK_MULT` (1.5)
+- observed counts are recency-weighted (45-day half-life)
 
-The prior is the pooled HR rate of the batter's 15 nearest comparables, with
+The prior is the pooled HR rate of the batter's nearest comparables, with
 the batter himself excluded from his own neighbour set. A rookie with 30 PA is
 pulled toward what similar hitters do given his exit velocity, physique and
 age; a regular with 600 PA barely moves.
+
+The served prior (`ServingPrior`) is the KNN refit on every PA to date. The
+validation fit that scores the priors for the Model Lab holds out the last 20%
+of the season; the served prior used to come from that fit, so by September its
+neighbour pool was five weeks stale. The moment estimate of K almost never
+identifies against the KNN prior (barrels and exit velocity are measured on the
+same batted balls that became home runs), so it falls back to the flat prior's
+K; the replay found pulling 1.5-3x harder toward the prior consistently better.
 
 ### Comparables Features
 Neighbours are found on quality-of-contact and physical attributes — never on
@@ -351,21 +365,61 @@ Features are standardized and then weighted by their correlation with HR rate,
 so "nearest" means nearest in the directions that track home-run production.
 Barrel rate, hard-hit rate and 90th-percentile exit velocity dominate.
 
-### Per-Game vs Per-PA
-The model estimates a **per-PA** rate. The headline number on each pick is the
-**per-game** probability, converted through that batter's own plate appearances
-per game:
+### Per-Game Probability (the stacked model)
+The model estimates **per-PA** rates; the headline number on each pick is the
+**per-game** probability of at least one home run. The components -- the
+hitter's hand-agnostic rate and his rate against today's starter's hand, his
+expected-HR rate (every batted ball scored at the league's HR rate for its exit
+velocity x launch angle cell), the park, the weather, the starter's and the
+bullpen's HR indices, and his expected plate appearances -- are combined by a
+logistic regression on their logs, with the league rate as an offset:
 
 ```
-P(HR in game) = 1 - (1 - p_per_pa) ^ expected_PA
+logit(P) = logit(league) + a + sum_i b_i * log(component_i)
 ```
+
+then moved by the tracker's **level** (below) and a **top calibration**. The
+coefficients (`ensemble.HR_STACK`) are fitted on the season replay. They replaced
+a product of multipliers pushed through `1 - (1 - rate)^PA` and squeezed by one
+logistic recalibration: a single slope cannot fix a term that is too weak (the
+lineup slot) and one that is too strong (park, bullpen) at once.
+
+The top calibration (`HR_TOP_CAL`) is a second logistic layer with a squared
+term. The six picks are the day's highest projections, so they are where the
+winner's curse lives -- the estimates whose noise ran high; the replay's top 2%
+projected 24.9% and homered 21.8%. It is monotone, so it never reorders hitters.
+
+Expected plate appearances come from the lineup slot -- the **starter's** own PA
+per game in that slot (4.49 leadoff to 3.44 ninth), not every PA taken in the
+slot, which counted the pinch hitters who bat once the starter is gone. Before
+lineups post, a hitter's usual recent slot stands in.
+
+Hits use the same design (`pitching.HIT_STACK`, a Poisson regression): hitter
+and starter hit rates, bullpen, **park hit factor**, expected hits from contact,
+both sides' strikeout rates, and exposure, plus a top calibration.
+
+### Tracker level
+`snapshot.hr_level` compares the served model's own recent projections with
+what happened, across every starter on every settled slate (the daily summary's
+`slate_hr_base` / `slate_hr_actual`), with a 7-day half-life and 300 home runs of
+pseudo-count toward 1.0, and applies the ratio as an odds multiplier to the next
+slate. It learns only from days the current `MODEL_VERSION` projected, and from
+projections before any level was applied.
 
 ### Platoon Splits
 Left/right multipliers are measured from the season's own PA data per
-(bat side, pitcher hand) matchup, replacing hardcoded 1.10 / 0.93 constants.
+(batting hand, pitcher hand) matchup, replacing hardcoded 1.10 / 0.93 constants.
+Switch hitters are recognised from the sides they actually bat from (the feed
+records each PA's side, so the old "last side seen" handed a switch hitter the
+same-hand penalty about half the time); they get 1.0 both ways, and their park
+factor is the one for the side they bat from against the starter.
 
 ### Park Factors
-Home run-friendly parks adjusted upward (Coors +22%), pitcher parks downward (Oracle -22%).
+Measured home vs road for each club: the HR (and hit) rate in its park over the
+rate in its road games -- **both lineups on both sides**. The road side used to
+count only the club's own hitters, which left its pitching staff out and read a
+slugging club's park as a pitcher's park. Split by batter side, regressed toward
+1.0 with 6,000 PA of prior weight.
 
 ## API Reference
 
@@ -415,6 +469,36 @@ The comparables prior is what earns the ranking improvement (AUC 0.564 to
 0.578). Calibration is a wash, which is expected: for a regular with 600 PA the
 observed rate swamps any prior. Numbers above are from the 2026 season through
 Sep 8 and will move as data accumulates.
+
+### The season replay (`replay.py`)
+
+The per-PA split above scores the priors; it does not score what the slate
+publishes. `python -m mlb_hr.replay` does: for every day of the season it
+rebuilds, from the PAs before that day, every input the live projection uses
+and projects that day's starters, then fits the stacked models and validates
+them walk-forward (weekly refits, scored on the week after). It writes
+`data/model_fit.json`, which the model loads over its built-in defaults. It
+reproduced the published 9/12-9/27 slates (per-PA rates correlated 0.997-1.000
+day by day), and `tests/test_replay.py` holds it to the live code.
+
+2026 season, the model served until 2026-09-30 against the one that replaced it,
+on the same 33,874 starter-games (May 6 - Sep 27):
+
+| | Before | After |
+|---|---|---|
+| HR log-likelihood | | +32 (90% CI +11 to +55) |
+| HR AUC | 0.6091 | 0.6126 |
+| Daily six HR picks that homered | 164 of 847 (19.4%) | 177 of 847 (20.9%) |
+| 30-day windows, whole slate HR within 10% | 65% | 100% |
+| Hits projected vs actual, season | +3.9% | +0.25% |
+| Daily six hit picks, hits projected vs actual | 943 vs 995 | 956 vs 952 |
+
+**Judging accuracy.** Six HR picks a day is ~36 expected home runs a month, so
+even a perfectly calibrated model misses its 30-day total by 10% or more about
+half the time. The daily summary's whole-slate columns (`slate_starters`,
+`slate_hr_expected` / `slate_hr_actual`, `slate_hits_expected` /
+`slate_hits_actual`) cover every starter -- ~28 expected home runs a day -- and
+settle the question in days.
 
 ## Troubleshooting
 

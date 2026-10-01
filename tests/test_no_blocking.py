@@ -57,7 +57,7 @@ def _install_fakes(monkey_state: dict):
     app_module.live_games = lambda *a, **k: {}
     app_module.write_snapshot = lambda *a, **k: {"pdfs": []}
 
-    def slow_build(day, path, use_ensemble=True):
+    def slow_build(day, path, use_ensemble=True, **_kwargs):
         time.sleep(BUILD_SECONDS)
         return {"date": str(day), "games": [], "picks_6": [], "hit_picks": []}
 

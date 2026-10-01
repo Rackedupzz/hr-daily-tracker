@@ -391,12 +391,14 @@ def parlay_record(samples: list[dict]) -> dict:
     by_day = defaultdict(list)
     for s in samples:
         by_day[s["date"]].append(s)
+    plays = homer.PARLAY_PLAYS + homer.FIVE_PICK_PLAYS
     out = {p["key"]: {"name": p["name"], "legs": p["legs"], "hr": p["hr"],
                       "value": p.get("value", 0), "days": 0, "won": 0,
                       "predicted": 0.0, "prices": [], "profit": 0.0, "wins_on": []}
-           for p in homer.PARLAY_PLAYS}
+           for p in plays}
     for day, rows in sorted(by_day.items()):
-        for play in homer.build_parlays([s["hr_leg"] for s in rows], [s["hit_leg"] for s in rows]):
+        for play in homer.build_parlays([s["hr_leg"] for s in rows], [s["hit_leg"] for s in rows],
+                                        plays=plays):
             rec = out[play["key"]]
             won = all(leg["y"] for leg in play["leg_list"])
             rec["days"] += 1
@@ -411,7 +413,9 @@ def parlay_record(samples: list[dict]) -> dict:
         prices = sorted(rec.pop("prices"))
         rec["rate"] = round(rec["won"] / n, 4)
         rec["rate_se"] = round(math.sqrt(rec["rate"] * (1 - rec["rate"]) / n), 4)
-        rec["predicted"] = round(rec["predicted"] / n, 4)
+        # Summed chance: a five-homer ticket's daily ~0.02% rounds to nothing.
+        rec["expected_wins"] = round(rec["predicted"], 3)
+        rec["predicted"] = round(rec["predicted"] / n, 6)
         rec["typical_odds"] = homer.american(prices[len(prices) // 2]) if prices else None
         rec["est_roi"] = round(rec.pop("profit") / n, 4)
         rec["days_per_win"] = round(n / rec["won"], 1) if rec["won"] else None

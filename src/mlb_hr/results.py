@@ -16,6 +16,7 @@ from datetime import date, datetime
 from typing import Optional
 
 from mlb_hr.fetch import boxscore_batting, live_games
+from mlb_hr.parlays import grade as grade_parlays
 
 # A game whose state is not one of these has not started.
 _STARTED = ("Live", "Final")
@@ -46,9 +47,37 @@ def fetch_results(day: date, game_pks: Optional[list] = None) -> dict:
     }
 
 
+def batter_line(batters: dict, batter_id, game_pk=None) -> Optional[dict]:
+    """A batter's line in one game.
+
+    In a doubleheader the box-score line is both games combined, with each
+    game's own line under `by_game`; a projection is for one game, so it gets
+    that game's line, and none at all if he batted only in the other game.
+    """
+    if batter_id is None:
+        return None
+    line = batters.get(batter_id)
+    if line is None:
+        line = batters.get(str(batter_id))
+    if not line or game_pk is None:
+        return line or None
+    by_game = line.get("by_game") or {}
+    if by_game:
+        game_line = by_game.get(game_pk)
+        if game_line is None:
+            game_line = by_game.get(str(game_pk))
+        if game_line is None:
+            return None
+        return {**line, **game_line, "game_pk": game_pk}
+    if line.get("game_pk") is not None and str(line["game_pk"]) != str(game_pk):
+        return None
+    return line
+
+
 def _line_for(results: dict, hitter: dict) -> Optional[dict]:
     """The batting line for one projected hitter, if his game has started."""
-    line = results.get("batters", {}).get(hitter.get("batter_id"))
+    line = batter_line(results.get("batters", {}), hitter.get("batter_id"),
+                       hitter.get("game_pk"))
     if not line:
         return None
     game = results.get("games", {}).get(line.get("game_pk"), {})
@@ -125,6 +154,9 @@ def attach_results(slate_data: dict, results: dict) -> dict:
 
     picks = score(slate_data.get("picks_6") or [], "hr")
     hits = score(slate_data.get("hit_picks") or [], "hits")
+    grade_parlays(slate_data.get("parlays") or [],
+                  lambda leg: _line_for(results, leg),
+                  lambda leg: _did_not_play(results, leg))
 
     slate_data["results"] = {
         "fetched_at": results["fetched_at"],
@@ -133,6 +165,7 @@ def attach_results(slate_data: dict, results: dict) -> dict:
         "upcoming_games": results["upcoming_games"],
         "picks": picks,
         "hit_picks": hits,
+        "parlays": {p["key"]: p.get("status", "pending") for p in slate_data.get("parlays") or []},
         # Anything at all to show? Before first pitch there is not.
         "any": bool(results["batters"]),
     }

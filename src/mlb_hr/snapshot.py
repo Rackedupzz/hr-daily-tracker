@@ -53,7 +53,24 @@ SUMMARY_COLUMNS = [
     "date", "games", "hr_picks", "hr_picks_final", "hr_picks_hit",
     "hr_expected", "hit_picks", "hit_picks_final", "hit_picks_hit",
     "hit_expected", "avg_projected_hr", "picks_dnp", "settled", "built_at",
+    # Every starter on the slate, not just the picks (see slate_calibration).
+    "slate_starters", "slate_hr_expected", "slate_hr_base", "slate_hr_actual",
+    "slate_hits_expected", "slate_hits_actual", "hr_level", "model_version",
+    # The two 5-pick parlays (mlb_hr.parlays): won / lost / void / pending.
+    "hr_parlay", "hr_parlay_prob", "hit_parlay", "hit_parlay_prob",
 ]
+
+# The tracker's level (hr_level): recent actual-over-projected home runs across
+# every starter, as an odds multiplier on tomorrow's projections. On the 2026
+# replay a 7-day half-life with 300 home runs of pseudo-count toward 1.0 was
+# worth +7.7 log-likelihood (90% CI +3.9 to +12.6) on top of the stacked model
+# and cut the monthly miss from 0.89-1.15 to 0.92-1.03. The home-run
+# environment runs hot and cold for stretches that weather alone does not
+# explain.
+LEVEL_HALF_LIFE_DAYS = 7.0
+LEVEL_PSEUDO_HR = 300.0
+LEVEL_LOOKBACK_DAYS = 45
+LEVEL_CLAMP = (0.8, 1.25)
 
 MODEL_COLUMNS = [
     "date", "prior", "auc", "top_decile_lift", "brier", "log_loss",
@@ -143,12 +160,89 @@ def pick_rows(slate_data: dict) -> list[dict]:
 
 def summary_row(slate_data: dict) -> dict:
     """One row per day: what was promised against what was delivered."""
-    return summarize_rows(
+    row = summarize_rows(
         pick_rows(slate_data),
         day=slate_data.get("date", ""),
         games=slate_data.get("games_count", 0),
         built_at=slate_data.get("built_at", ""),
     )
+    row.update(slate_calibration(slate_data))
+    for play in slate_data.get("parlays") or []:
+        prefix = "hr_parlay" if play.get("kind") == "hr" else "hit_parlay"
+        row[prefix] = play.get("status", "pending") + (" (backfilled)" if play.get("backfilled") else "")
+        row[f"{prefix}_prob"] = round(play["prob"], 6)
+    return row
+
+
+def slate_calibration(slate_data: dict) -> dict:
+    """Projected against actual for every starter on the slate, not just the picks.
+
+    Six picks a day is too few to judge calibration: about 36 home runs are
+    expected over 30 days, so even a perfectly calibrated model misses by 10%
+    or more in roughly half of all 30-day windows. The whole slate -- ~250
+    starters, ~28 expected home runs a day -- settles that question in days.
+
+    Counts every hitter with a posted lineup slot whose game is final and who
+    came to the plate. Unposted-lineup hitters and substitutes are left out:
+    they were projected as starters and would read as misses.
+    """
+    n = 0
+    hr_exp = hr_base = hr_act = hits_exp = hits_act = 0.0
+    for game in slate_data.get("games", []):
+        for h in game.get("hitters", []):
+            line = h.get("result") or {}
+            if not h.get("lineup_slot") or not line.get("final") or not line.get("pa"):
+                continue
+            n += 1
+            p = float(h.get("prob_hr") or 0.0)
+            hr_exp += p
+            hr_base += float(h.get("prob_ensemble_base", p) or p)
+            hr_act += 1.0 if (line.get("hr") or 0) > 0 else 0.0
+            hits_exp += float((h.get("hits_proj") or {}).get("projected_hits_raw") or 0.0)
+            hits_act += float(line.get("hits") or 0)
+    if not n:
+        return {"hr_level": slate_data.get("hr_level"),
+                "model_version": slate_data.get("model_version")}
+    return {
+        "slate_starters": n,
+        "slate_hr_expected": round(hr_exp, 3),
+        "slate_hr_base": round(hr_base, 3),
+        "slate_hr_actual": int(hr_act),
+        "slate_hits_expected": round(hits_exp, 2),
+        "slate_hits_actual": int(hits_act),
+        "hr_level": slate_data.get("hr_level"),
+        "model_version": slate_data.get("model_version"),
+    }
+
+
+def hr_level(out_dir: Optional[Path] = None, before: Optional[date] = None,
+             model_version: Optional[str] = None) -> float:
+    """Odds multiplier from recent actual-over-projected home runs (see LEVEL_*).
+
+    Reads the daily summary's whole-slate columns for settled days before
+    `before`, from the current model version only -- a different model's
+    projections say nothing about this one's level. It compares actual home
+    runs with the projections *before* any level was applied, so it measures
+    the model rather than its own last correction. 1.0 with no record.
+    """
+    before = before or date.today()
+    earliest = str(before - timedelta(days=LEVEL_LOOKBACK_DAYS))
+    actual = expected = 0.0
+    for r in _read_csv(_out_dir(out_dir) / "daily_summary.csv"):
+        day = r.get("date") or ""
+        if not (earliest <= day < str(before)) or not _truthy(r.get("settled")):
+            continue
+        if model_version and r.get("model_version") != model_version:
+            continue
+        base, act = _num(r.get("slate_hr_base")), _num(r.get("slate_hr_actual"))
+        if base is None or act is None or base <= 0:
+            continue
+        age = (before - date.fromisoformat(day)).days
+        w = 0.5 ** (age / LEVEL_HALF_LIFE_DAYS)
+        actual += w * act
+        expected += w * base
+    level = (actual + LEVEL_PSEUDO_HR) / (expected + LEVEL_PSEUDO_HR)
+    return float(min(max(level, LEVEL_CLAMP[0]), LEVEL_CLAMP[1]))
 
 
 def _truthy(value) -> bool:
@@ -370,7 +464,8 @@ def write_snapshot(slate_data: dict, out_dir: Optional[Path] = None) -> dict:
             {"date": day, "built_at": slate_data.get("built_at"),
              "results": slate_data.get("results"),
              "summary": summary_row(slate_data),
-             "picks": pick_rows(slate_data)},
+             "picks": pick_rows(slate_data),
+             "parlays": slate_data.get("parlays") or []},
             indent=2, default=str,
         ),
         encoding="utf-8",
@@ -557,6 +652,7 @@ def _finalize_from_csv(day: str, out: Path) -> dict:
     import unicodedata
 
     from mlb_hr.fetch import boxscore_batting, live_games
+    from mlb_hr.results import batter_line
 
     def norm(name: str) -> str:
         return unicodedata.normalize("NFKD", name or "").encode(
@@ -580,6 +676,9 @@ def _finalize_from_csv(day: str, out: Path) -> dict:
         if line is None:
             matches = by_name.get(norm(r["batter"]), [])
             line = matches[0] if len(matches) == 1 else None
+        if line is not None and r.get("game_pk"):
+            # A doubleheader's other game is not this pick's game.
+            line = batter_line({0: line}, 0, int(float(r["game_pk"])))
         game = games.get(line["game_pk"]) if line else None
         if line and game:
             final = game.get("state") == "Final"
@@ -603,6 +702,8 @@ def _finalize_from_csv(day: str, out: Path) -> dict:
     prior = next((s for s in _read_csv(out / "daily_summary.csv") if s["date"] == day), {})
     summary = summarize_rows(rows, day=day, games=prior.get("games", ""),
                              built_at=prior.get("built_at", ""))
+    # No saved slate here, so the whole-slate columns stay as last written.
+    summary.update({k: prior.get(k) for k in SUMMARY_COLUMNS if k not in summary})
     _write_tracker_rows(out, day, rows, summary, None)
     return {"date": day, "source": "csv", "settled": summary["settled"]}
 
@@ -630,15 +731,18 @@ def main(day: Optional[str] = None) -> None:
     from mlb_hr.results import attach_results, fetch_results
     from mlb_hr.slate import build_slate_for_date
 
+    from mlb_hr.ensemble import MODEL_VERSION
+
     target = date.fromisoformat(day) if day else date.today()
     pa_path = str(Path(__file__).parent / "data" / "season_pa_v2.jsonl")
+    out = Path.cwd() / "snapshots" if not DEFAULT_DIR.exists() else DEFAULT_DIR
     print(f"[snapshot.py] building slate for {target}")
-    slate = build_slate_for_date(target, pa_path, use_ensemble=True)
+    slate = build_slate_for_date(target, pa_path, use_ensemble=True,
+                                 hr_level=hr_level(out, target, MODEL_VERSION))
     slate["built_at"] = ""
     attach_results(slate, fetch_results(target,
                                         [g.get("game_pk") for g in slate["games"]]))
-    written = write_snapshot(slate, Path.cwd() / "snapshots"
-                             if not DEFAULT_DIR.exists() else DEFAULT_DIR)
+    written = write_snapshot(slate, out)
     print(json.dumps(written, indent=2))
 
 

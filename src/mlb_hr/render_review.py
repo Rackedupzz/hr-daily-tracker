@@ -471,9 +471,10 @@ def _method() -> str:
                     <li><strong>Hit picks.</strong> Hit rate, expected hits from contact quality, strikeout and
                         walk rates, and his own split, against the starter's hits allowed and strikeout rate,
                         the bullpen and the park &mdash; learned and tested the same way.</li>
-                    <li><strong>HOMER'S PLAYS.</strong> 3- and 5-leg combos from his HR and hit boards, one leg
-                        per game. Every play type is rebuilt on every replayed day to check that its quoted
-                        odds hold up.</li>
+                    <li><strong>HOMER'S PLAYS.</strong> 3- and 4-leg hit combos, one leg per game, each held to
+                        cashing three days in ten &mdash; plus two 5-pick parlays (five homers, five hits) that
+                        carry their own record. Every ticket is rebuilt on every replayed day to check that its
+                        quoted odds hold up.</li>
                     <li><strong>Grows every day.</strong> His book refreshes with each data pull, and the whole
                         season replay reruns daily, so new results reshape his weights and grades.</li>
                     <li><strong>Selection rules.</strong> Six HR picks and six hit picks, one per game, 80+ PA, no
@@ -576,76 +577,122 @@ def _homer_hit_cards(card: dict) -> str:
     return cards
 
 
-def _plays(card: dict) -> str:
-    """HOMER'S PLAYS: his 3- and 5-leg combos, with honest odds."""
-    plays = card.get("parlays") or []
-    if not plays:
-        return ""
+def _chance(prob: float) -> str:
+    """A ticket's chance: a percentage, or '1 in N' once it is too small to read."""
+    if prob >= 0.01:
+        return f"{prob:.1%}"
+    return f"1 in {round(1 / prob):,}" if prob > 0 else "&mdash;"
+
+
+def _odds_with_commas(odds: str) -> str:
+    """'+476090' -> '+476,090' (fair odds on a long ticket run to six figures)."""
+    if odds and odds[0] in "+-" and odds[1:].isdigit():
+        return f"{odds[0]}{int(odds[1:]):,}"
+    return odds
+
+
+def _play_card(play: dict) -> str:
+    """One of HOMER's tickets: legs, chance, fair odds, book price, replay record."""
     labels = {"won": ("&#10003; CASHED", "ok"), "lost": ("&#10007; LOST", "bad"),
               "void": ("VOID", "muted"), "pending": ("", "")}
-    cards = ""
-    for play in sorted(plays, key=lambda p: not p.get("featured")):
-        legs = ""
-        for leg in play["leg_list"]:
-            st = leg.get("status", "pending")
-            cls = {"won": "leg-won", "lost": "leg-lost"}.get(st, "")
-            mark = {"won": " &#10003;", "lost": " &#10007;", "void": " (void)"}.get(st, "")
-            what = "HR" if leg["type"] == "hr" else "1+ HIT"
-            book = ""
-            if leg.get("book_implied"):
-                book = (f' &middot; book ~{leg["book_price"]} ({leg["book_implied"]:.0%})'
-                        f' &middot; edge {leg["book_edge"]:+.0%}')
-            legs += (f'<div class="leg"><span class="{cls}"><span class="leg-type">{what}</span>'
-                     f'{leg["batter"]}{mark}<br><span class="muted">{leg.get("team", "")} vs '
-                     f'{leg.get("sp_name", "")}{book}</span></span><strong>{leg["prob"]:.0%}</strong></div>')
-        status, cls = labels.get(play.get("status", "pending"), ("", ""))
-        ev = play.get("evidence")
-        record = ""
-        if ev and ev.get("days"):
-            # A play that lands every 2.4 days must not read as every 2, so keep a
-            # decimal while the cadence is short enough for one to matter.
-            cadence = ev.get("days_per_win")
-            every = (f', about once every {cadence:.1f} days' if cadence and cadence < 10
-                     else f', about once every {cadence:.0f} days' if cadence else "")
-            price = f'; typical ticket ~{ev["typical_odds"]}' if ev.get("typical_odds") else ""
-            record = (f'<div class="vs-model"><strong>Replay:</strong> this play cashed '
-                      f'{ev["won"]} of {ev["days"]} days ({ev["rate"]:.1%}{every}) vs '
-                      f'{ev["predicted"]:.1%} predicted{price}</div>')
-        book_line = ""
-        if play.get("book_odds"):
-            verdict = ("HOMER's number beats the price" if play["ev"] > 0
-                       else "the book's margin eats this one &mdash; shop for a boost")
-            book_line = f"""
+    legs = ""
+    for leg in play["leg_list"]:
+        st = leg.get("status", "pending")
+        cls = {"won": "leg-won", "lost": "leg-lost"}.get(st, "")
+        mark = {"won": " &#10003;", "lost": " &#10007;", "void": " (void)"}.get(st, "")
+        what = "HR" if leg["type"] == "hr" else "1+ HIT"
+        book = ""
+        if leg.get("book_implied"):
+            book = (f' &middot; book ~{leg["book_price"]} ({leg["book_implied"]:.0%})'
+                    f' &middot; edge {leg["book_edge"]:+.0%}')
+        legs += (f'<div class="leg"><span class="{cls}"><span class="leg-type">{what}</span>'
+                 f'{leg["batter"]}{mark}<br><span class="muted">{leg.get("team", "")} vs '
+                 f'{leg.get("sp_name", "")}{book}</span></span><strong>{leg["prob"]:.0%}</strong></div>')
+    status, cls = labels.get(play.get("status", "pending"), ("", ""))
+    ev = play.get("evidence")
+    record = ""
+    if ev and ev.get("days") and not ev.get("won") and ev.get("expected_wins") is not None:
+        record = (f'<div class="vs-model"><strong>Replay:</strong> built this way every day, this '
+                  f'ticket cashed 0 of {ev["days"]} days &mdash; HOMER expected '
+                  f'{ev["expected_wins"]:.2f} wins in all that time.</div>')
+    elif ev and ev.get("days"):
+        # A play that lands every 2.4 days must not read as every 2, so keep a
+        # decimal while the cadence is short enough for one to matter.
+        cadence = ev.get("days_per_win")
+        every = (f', about once every {cadence:.1f} days' if cadence and cadence < 10
+                 else f', about once every {cadence:.0f} days' if cadence else "")
+        price = f'; typical ticket ~{ev["typical_odds"]}' if ev.get("typical_odds") else ""
+        record = (f'<div class="vs-model"><strong>Replay:</strong> this play cashed '
+                  f'{ev["won"]} of {ev["days"]} days ({ev["rate"]:.1%}{every}) vs '
+                  f'{ev["predicted"]:.1%} predicted{price}</div>')
+    book_line = ""
+    if play.get("book_odds"):
+        verdict = ("HOMER's number beats the price" if play["ev"] > 0
+                   else "the book's margin eats this one &mdash; shop for a boost")
+        book_line = f"""
                     <div class="leg"><span>Est. book price &mdash; {verdict}</span>
-                        <span class="play-odds">{play['book_odds']}</span></div>
+                        <span class="play-odds">{_odds_with_commas(play['book_odds'])}</span></div>
                     <div class="leg"><span>HOMER's expected return per $1 at that price</span>
                         <strong>{play['ev']:+.0%}</strong></div>"""
-        n_val = play.get("value")
-        if n_val is None:
-            # Cards saved before the value mix was recorded carry the old
-            # all-or-nothing build instead.
-            build = "BUILT TO PAY" if play.get("build") == "value" else "BUILT TO CASH"
-        elif not n_val:
-            build = "BUILT TO CASH"
-        elif n_val == play["legs"]:
-            build = "BUILT TO PAY"
-        else:
-            build = f"{play['legs'] - n_val} LIKELY &middot; {n_val} VALUE"
-        cards += f"""
+    n_val = play.get("value")
+    if n_val is None:
+        # Cards saved before the value mix was recorded carry the old
+        # all-or-nothing build instead.
+        build = "BUILT TO PAY" if play.get("build") == "value" else "BUILT TO CASH"
+    elif not n_val:
+        build = "BUILT TO CASH"
+    elif n_val == play["legs"]:
+        build = "BUILT TO PAY"
+    else:
+        build = f"{play['legs'] - n_val} LIKELY &middot; {n_val} VALUE"
+    backfill = (' <span class="muted" style="font-size: 0.55em;">&middot; built after the fact</span>'
+                if play.get("backfilled") else "")
+    return f"""
                 <div class="play-card{' play-featured' if play.get('featured') else ''}">
                     <div class="play-head">
                         <span class="play-name">{'&#129506; ' if play.get('featured') else ''}{play['name']}
-                            <span class="muted" style="font-size: 0.6em;">{play['legs']}-leg &middot; {build}</span></span>
+                            <span class="muted" style="font-size: 0.6em;">{play['legs']}-leg &middot; {build}</span>{backfill}</span>
                         <span class="play-status {cls}">{status}</span>
                     </div>
                     <div class="play-blurb">{play['blurb']}</div>
                     {legs}
                     <div class="leg"><span>Hits if every leg cashes</span>
-                        <strong>{play['prob']:.1%}</strong></div>
+                        <strong>{_chance(play['prob'])}</strong></div>
                     <div class="leg"><span>Fair odds &mdash; only play it at a better price</span>
-                        <span class="play-odds">{play['fair_odds']}</span></div>{book_line}
+                        <span class="play-odds">{_odds_with_commas(play['fair_odds'])}</span></div>{book_line}
                     {record}
                 </div>"""
+
+
+def _five_picks(card: dict) -> str:
+    """HOMER's two 5-pick parlays: five homers, five hits, his likeliest legs."""
+    plays = card.get("five_picks") or []
+    if not plays:
+        return ""
+    cards = "".join(_play_card(p) for p in plays)
+    late = any(p.get("backfilled") for p in plays)
+    return f"""
+        <div class="section" id="five">
+            <h2 class="section-title">&#127920; HOMER's 5-Pick Parlays</h2>
+            <p class="section-note">HOMER's best judgment in two tickets: his five likeliest home run
+                bats and his five likeliest hit bats, one leg per game. These are not HOMER'S PLAYS
+                &mdash; that board only holds tickets that cash three days in ten, and no five-leg
+                ticket can. The five-hit ticket lands about one day in five; the five-homer ticket is a
+                moonshot. Both show their real chance, their fair odds and how often they cashed in the
+                season replay, and they keep their own record. Stake accordingly.{
+                    ' This card was finished before the parlays existed, so they were built from that'
+                    ' morning&rsquo;s numbers and graded against what happened.' if late else ''}</p>
+            <div class="plays-grid">{cards}
+            </div>
+        </div>"""
+
+
+def _plays(card: dict) -> str:
+    """HOMER'S PLAYS: his 3- and 4-leg combos, with honest odds."""
+    plays = card.get("parlays") or []
+    if not plays:
+        return ""
+    cards = "".join(_play_card(p) for p in sorted(plays, key=lambda p: not p.get("featured")))
     return f"""
         <div class="section" id="plays">
             <h2 class="section-title">&#128176; HOMER'S PLAYS</h2>
@@ -971,6 +1018,8 @@ def render_homer_html(card: dict | None, record: dict, days: list, day: str,
         _stat("Season HR Picks", hr_rate, "var(--success)")
         + _stat("Hit Picks", f"{record.get('hits_hit', 0)}/{record.get('hits_scored', 0)}")
         + _stat("Parlays W-L", f"{record.get('parlays_won', 0)}-{record.get('parlays_lost', 0)}")
+        + (_stat("5-Pick W-L", f"{record['five_won']}-{record['five_lost']}")
+           if record.get("five_won") or record.get("five_lost") else "")
         + _stat("Winners W-L", f"{record['games_won']}-{record['games_lost']}")
     )
     subtitle = "Top-tier MLB expert &middot; professional capper &middot; plays built to win"
@@ -1029,7 +1078,7 @@ def render_homer_html(card: dict | None, record: dict, days: list, day: str,
         </div>"""
     body = f"""
         <div class="section">{_homer_intro(record, card.get('evidence'))}{_method()}{pills}{backfill}
-        </div>{_plays(card)}
+        </div>{_plays(card)}{_five_picks(card)}
         <div class="section" id="hr">
             <h2 class="section-title">&#128163; HOMER's 6 Home Run Picks</h2>
             <p class="section-note">One per game, ranked by HOMER's own per-game probability.
@@ -1049,7 +1098,9 @@ def render_homer_html(card: dict | None, record: dict, days: list, day: str,
                 ensemble part ways the most.</p>
             {_disagreements(card)}
         </div>{_homework(card)}{history}"""
-    nav = ([("plays", "💰 HOMER'S PLAYS")] if card.get("parlays") else []) + [("hr", "💣 HR Picks")]
+    nav = (([("plays", "💰 HOMER'S PLAYS")] if card.get("parlays") else [])
+           + ([("five", "🎰 5-Pick Parlays")] if card.get("five_picks") else [])
+           + [("hr", "💣 HR Picks")])
     if hit_section:
         nav.append(("hits", "🥎 Hit Picks"))
     nav += [("games", "⚾ Winners"), ("vs", "🥊 vs the Model"), ("homework", "📚 Homework")]

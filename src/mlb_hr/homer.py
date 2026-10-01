@@ -42,6 +42,8 @@ from datetime import date, datetime, timedelta
 from pathlib import Path
 from typing import Iterable, Optional
 
+from mlb_hr.results import batter_line
+
 NAME = "HOMER"
 DATA_DIR = Path(__file__).parent / "data"
 FIT_PATH = DATA_DIR / "homer_fit.json"
@@ -1175,6 +1177,25 @@ PARLAY_PLAYS = [
 LEG_KEYS = ("batter", "batter_id", "team", "game_pk", "matchup", "sp_name", "prob",
             "grade", "y", "market_prob", "book_implied", "book_price", "book_edge")
 
+# HOMER's two 5-pick parlays, posted beside the slate's (mlb_hr.parlays) at the
+# user's request on 2026-09-30: five home runs, and five hitters with a hit, each
+# his five likeliest legs from five different games. They sit outside HOMER'S
+# PLAYS on purpose. That board is held to cashing three days in ten, which no
+# five-leg ticket can do -- the five-hit ticket lands about one day in five,
+# the five-homer ticket about one day in a few thousand -- so these carry their
+# own section, their own record, and their real odds. Same builder, locking and
+# grading as the plays; "hr_build": "prob" takes the likeliest home run bats
+# rather than the value-first ones the plays would use.
+FIVE_PICK_PLAYS = [
+    {"key": "hr5", "name": "Five-Homer Parlay", "legs": 5, "hr": 5, "value": 0,
+     "hr_build": "prob",
+     "blurb": "HOMER's five likeliest home run bats, one per game. Every one of them has to go deep, "
+              "so this is a moonshot priced like one &mdash; a ticket for the story, not the bankroll."},
+    {"key": "hit5", "name": "Five-Hit Parlay", "legs": 5, "hr": 0, "value": 0,
+     "blurb": "HOMER's five likeliest bats to get a hit, one per game. His steadiest five-leg ticket, "
+              "and still a long way from a sure thing."},
+]
+
 
 def fair_odds(prob: float) -> str:
     """American odds at which a play of this probability breaks even."""
@@ -1400,20 +1421,36 @@ def build_card(slate: dict, book: dict, previous: Optional[dict] = None,
 
     # A play is locked as soon as any of its legs is under way; otherwise it is
     # rebuilt from whatever has not started.
-    prev_plays = {p["key"]: p for p in (previous or {}).get("parlays", [])}
-    fresh_plays = {p["key"]: p for p in build_parlays(
-        [c for c in hr_all if c["game_pk"] not in started],
-        [c for c in hit_all if c["game_pk"] not in started])}
-    parlays = []
-    for play in PARLAY_PLAYS:
-        old = prev_plays.get(play["key"])
-        if old and any(leg["game_pk"] in started for leg in old["leg_list"]):
-            parlays.append(old)
-        elif play["key"] in fresh_plays:
-            parlays.append(fresh_plays[play["key"]])
     evidence = (fit or {}).get("parlays") or {}
-    for p in parlays:
-        p["evidence"] = play_evidence(evidence, p)
+
+    def locked_plays(key: str, specs: list, backfill: bool = False) -> list:
+        prev_plays = {p["key"]: p for p in (previous or {}).get(key, [])}
+        open_hr = [c for c in hr_all if c["game_pk"] not in started]
+        open_hit = [c for c in hit_all if c["game_pk"] not in started]
+        fresh = {p["key"]: p for p in build_parlays(open_hr, open_hit, plays=specs)}
+        slate_games = {g.get("game_pk") for g in slate.get("games", [])}
+        # A card first built after every game started (the five-pick plays
+        # arriving at season's end) gets them from the morning's numbers,
+        # flagged as built after the fact.
+        late = {}
+        if backfill and slate_games and slate_games <= started:
+            late = {p["key"]: dict(p, backfilled=True)
+                    for p in build_parlays(hr_all, hit_all, plays=specs)}
+        out = []
+        for play in specs:
+            old = prev_plays.get(play["key"])
+            if old and any(leg["game_pk"] in started for leg in old["leg_list"]):
+                out.append(old)
+            elif play["key"] in fresh:
+                out.append(fresh[play["key"]])
+            elif play["key"] in late:
+                out.append(late[play["key"]])
+        for p in out:
+            p["evidence"] = play_evidence(evidence, p)
+        return out
+
+    parlays = locked_plays("parlays", PARLAY_PLAYS)
+    five_picks = locked_plays("five_picks", FIVE_PICK_PLAYS, backfill=True)
 
     prev_games = {g["game_pk"]: g for g in (previous or {}).get("game_picks", [])}
     game_picks = [
@@ -1447,6 +1484,7 @@ def build_card(slate: dict, book: dict, previous: Optional[dict] = None,
         "hr_picks": hr_picks,
         "hit_picks": hit_picks,
         "parlays": parlays,
+        "five_picks": five_picks,
         "game_picks": game_picks,
         "likes": [slim(c) for c in likes],
         "fades": [slim(c) for c in fades],
@@ -1467,7 +1505,7 @@ def grade_card(card: dict, results: Optional[dict]) -> dict:
     hr_tally = {"hit": 0, "scored": 0, "dnp": 0, "pending": 0}
     for p in card.get("hr_picks", []):
         game = games.get(p["game_pk"]) or {}
-        line = batters.get(p.get("batter_id"))
+        line = batter_line(batters, p.get("batter_id"), p["game_pk"])
         final = game.get("state") == "Final"
         if line:
             p["result"] = {
@@ -1519,7 +1557,7 @@ def grade_card(card: dict, results: Optional[dict]) -> dict:
     def leg_status(kind: str, pk: int, bid) -> str:
         """won / lost / void / pending for one leg (a hit or a home run)."""
         game = games.get(pk) or {}
-        line = batters.get(bid)
+        line = batter_line(batters, bid, pk)
         got = (line or {}).get("hr" if kind == "hr" else "hits", 0)
         if got:
             return "won"  # already in the book, even mid-game
@@ -1531,7 +1569,7 @@ def grade_card(card: dict, results: Optional[dict]) -> dict:
     hit_tally = {"hit": 0, "scored": 0, "dnp": 0, "pending": 0}
     for p in card.get("hit_picks", []):
         status = leg_status("hit", p["game_pk"], p.get("batter_id"))
-        line = batters.get(p.get("batter_id")) or {}
+        line = batter_line(batters, p.get("batter_id"), p["game_pk"]) or {}
         game = games.get(p["game_pk"]) or {}
         if status == "pending" and game.get("state") != "Live":
             p.pop("result", None)
@@ -1545,30 +1583,38 @@ def grade_card(card: dict, results: Optional[dict]) -> dict:
         else:
             hit_tally["dnp" if status == "void" else "pending"] += 1
 
-    parlay_tally = {"won": 0, "lost": 0, "void": 0, "pending": 0}
-    for play in card.get("parlays", []):
-        statuses = []
-        for leg in play["leg_list"]:
-            leg["status"] = leg_status(leg["type"], leg["game_pk"], leg.get("batter_id"))
-            statuses.append(leg["status"])
-        # Sportsbook rules: a leg whose player never batted is voided and the
-        # parlay rides on the rest.
-        if "lost" in statuses:
-            outcome = "lost"
-        elif "pending" in statuses:
-            outcome = "pending"
-        elif "won" in statuses:
-            outcome = "won"
-        else:
-            outcome = "void"
-        play["status"] = outcome
-        parlay_tally[outcome] += 1
+    def grade_plays(plays: list) -> dict:
+        tally = {"won": 0, "lost": 0, "void": 0, "pending": 0}
+        for play in plays:
+            statuses = []
+            for leg in play["leg_list"]:
+                leg["status"] = leg_status(leg["type"], leg["game_pk"], leg.get("batter_id"))
+                statuses.append(leg["status"])
+            # Sportsbook rules: a leg whose player never batted is voided and
+            # the parlay rides on the rest.
+            if "lost" in statuses:
+                outcome = "lost"
+            elif "pending" in statuses:
+                outcome = "pending"
+            elif "won" in statuses:
+                outcome = "won"
+            else:
+                outcome = "void"
+            play["status"] = outcome
+            tally[outcome] += 1
+        return tally
+
+    parlay_tally = grade_plays(card.get("parlays", []))
+    # The 5-pick parlays keep their own tally, apart from HOMER'S PLAYS.
+    five_tally = grade_plays(card.get("five_picks", []))
 
     card["record"] = {
         "hr": hr_tally, "games": game_tally, "hits": hit_tally, "parlays": parlay_tally,
+        "five_picks": five_tally,
         "graded_at": results.get("fetched_at"),
         "complete": (hr_tally["pending"] == 0 and game_tally["pending"] == 0
-                     and hit_tally["pending"] == 0 and parlay_tally["pending"] == 0),
+                     and hit_tally["pending"] == 0 and parlay_tally["pending"] == 0
+                     and five_tally["pending"] == 0),
     }
     return card
 
@@ -1587,7 +1633,10 @@ def results_from_slate(slate: dict) -> dict:
         for h in g.get("hitters", []):
             line = h.get("result")
             if line and h.get("batter_id") is not None and not line.get("dnp"):
-                batters[int(h["batter_id"])] = dict(line, game_pk=g["game_pk"])
+                # A doubleheader lists him in both games: keep each game's line.
+                entry = batters.setdefault(int(h["batter_id"]), {"by_game": {}})
+                entry["by_game"][int(g["game_pk"])] = dict(line)
+                entry.update(dict(line, game_pk=g["game_pk"]))
     return {"games": games, "batters": batters,
             "fetched_at": (slate.get("results") or {}).get("fetched_at")}
 
@@ -1628,7 +1677,7 @@ def season_record(snapshot_dir: Path, through: Optional[str] = None) -> dict:
     """HOMER's running totals across every saved card, plus a per-day log."""
     total = {"hr_hit": 0, "hr_scored": 0, "hr_expected": 0.0,
              "games_won": 0, "games_lost": 0, "hits_hit": 0, "hits_scored": 0,
-             "parlays_won": 0, "parlays_lost": 0, "days": []}
+             "parlays_won": 0, "parlays_lost": 0, "five_won": 0, "five_lost": 0, "days": []}
     for day in card_days(snapshot_dir):
         if through and day > through:
             continue
@@ -1652,6 +1701,9 @@ def season_record(snapshot_dir: Path, through: Optional[str] = None) -> dict:
         total["hits_scored"] += hits["scored"]
         total["parlays_won"] += plays["won"]
         total["parlays_lost"] += plays["lost"]
+        five = rec.get("five_picks") or {"won": 0, "lost": 0}
+        total["five_won"] += five["won"]
+        total["five_lost"] += five["lost"]
         total["days"].append({
             "date": day, "hr_hit": hr["hit"], "hr_scored": hr["scored"],
             "hr_expected": round(expected, 2), "games_won": gm["won"],

@@ -191,11 +191,91 @@ def _render_hits_section(hit_picks: list) -> str:
         <div class="section" id="hits">
             <h2 class="section-title">🥎 Projected Hits</h2>
             <p class="section-note">
-                Same odds-ratio matchup as the strikeout model, applied to contact:
-                the hitter's rate and the pitcher's hits-allowed rate combined
-                relative to league, then split across starter and bullpen exposure.
+                Expected hits from the hitter's rate and his contact quality, the
+                starter's hits allowed and strikeout rate, the bullpen, the park,
+                and his plate appearances for his lineup slot, each weighted by
+                what the 2026 season replay showed it is worth. The rows below
+                show the matchup pieces.
             </p>
             <div class="hits-grid">{''.join(cards)}
+            </div>
+        </div>
+"""
+
+
+def _chance(prob: float) -> str:
+    """A ticket's chance: a percentage, or '1 in N' once it is too small to read."""
+    if prob >= 0.01:
+        return f"{prob:.1%}"
+    return f"1 in {round(1 / prob):,}" if prob > 0 else "&mdash;"
+
+
+def _render_parlays_section(slate_data: dict) -> str:
+    """The model's two 5-pick parlays (mlb_hr.parlays), graded as games finish."""
+    plays = slate_data.get("parlays") or []
+    if not plays:
+        return ""
+    badges = {"won": ("&#10003; CASHED", "won"), "lost": ("&#10007; LOST", "lost"),
+              "void": ("VOID", "void"), "pending": ("OPEN", "pending")}
+    cards = []
+    for play in plays:
+        legs = ""
+        for leg in play["leg_list"]:
+            st = leg.get("status", "pending")
+            mark = {"won": " &#10003;", "lost": " &#10007;", "void": " (void)"}.get(st, "")
+            line = (leg.get("result") or {}).get("summary") or ""
+            hand = "LHP" if leg.get("facing_hand") == "L" else "RHP"
+            vs = f"vs {leg['opp_sp']} ({hand})" if leg.get("opp_sp") else f"vs {hand}"
+            legs += f"""
+                    <div class="parlay-leg {st}">
+                        <span><span class="leg-type">{'HR' if leg['type'] == 'hr' else '1+ HIT'}</span>{leg['batter']}{mark}
+                            <span class="leg-sub">{leg.get('team', '')} &middot; {vs}{
+                                f' &middot; {line}' if line else ''}</span></span>
+                        <strong>{leg['prob']:.0%}</strong>
+                    </div>"""
+        label, cls = badges.get(play.get("status", "pending"), badges["pending"])
+        ev = play.get("evidence")
+        record = ""
+        if ev and ev.get("days"):
+            if ev["won"]:
+                record = (f"In the 2026 replay this ticket, built this way every day, cashed "
+                          f"{ev['won']} of {ev['days']} days ({ev['rate']:.1%}) &mdash; the model "
+                          f"expected {ev['predicted']:.1%}.")
+            else:
+                record = (f"In the 2026 replay this ticket, built this way every day, cashed 0 of "
+                          f"{ev['days']} days &mdash; the model expected "
+                          f"{ev['expected_wins']:.2f} wins in all that time.")
+        backfill = (' <span class="tag-backfill">built after the fact</span>'
+                    if play.get("backfilled") else "")
+        cards.append(f"""
+                <div class="parlay-card">
+                    <div class="parlay-head">
+                        <span class="parlay-name">{play['name']}{backfill}</span>
+                        <span class="parlay-status {cls}">{label}</span>
+                    </div>
+                    <div class="parlay-blurb">{play['blurb']}</div>{legs}
+                    <div class="parlay-total"><span>Cashes only if all five land</span>
+                        <span>{_chance(play['prob'])}</span></div>
+                    <div class="parlay-total"><span>Fair odds &mdash; the price it needs to break even</span>
+                        <span class="parlay-odds">{play['fair_odds']}</span></div>{
+                        f'<div class="parlay-record">{record}</div>' if record else ''}
+                </div>""")
+    backfilled = any(p.get("backfilled") for p in plays)
+    return f"""
+        <div class="section" id="parlays">
+            <h2 class="section-title">🎰 5-Pick Parlays</h2>
+            <p class="section-note">
+                The model's best judgment in two tickets: its five likeliest home run
+                bats and its five likeliest hit bats, one leg per game so the legs are
+                independent and the chance is simply their product. Tickets lock the
+                moment any of their games starts; a scratched player's leg is void and
+                the rest ride. Parlays are entertainment with a steep house edge &mdash;
+                never stake what you cannot afford to lose.{
+                    ' This day was over before the parlays existed, so they were built from'
+                    ' that morning&rsquo;s projections and graded against what happened.'
+                    if backfilled else ''}
+            </p>
+            <div class="parlay-grid">{''.join(cards)}
             </div>
         </div>
 """
@@ -1191,6 +1271,115 @@ _CSS = """
             gap: 20px;
         }
 
+        .parlay-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
+            gap: 20px;
+        }
+
+        .parlay-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 18px;
+        }
+
+        .parlay-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 10px;
+            margin-bottom: 6px;
+        }
+
+        .parlay-name { font-size: 1.15em; font-weight: 700; }
+
+        .parlay-blurb {
+            font-size: 0.85em;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+
+        .parlay-leg {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 0;
+            border-top: 1px solid var(--border);
+            font-size: 0.92em;
+        }
+
+        .parlay-leg .leg-type {
+            display: inline-block;
+            min-width: 3.6em;
+            font-size: 0.72em;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .parlay-leg .leg-sub {
+            display: block;
+            font-size: 0.8em;
+            color: var(--text-secondary);
+            margin-top: 2px;
+        }
+
+        .parlay-leg strong { font-variant-numeric: tabular-nums; }
+        .parlay-leg.won strong, .parlay-leg.won > span { color: var(--success); }
+        .parlay-leg.lost strong { color: var(--danger); }
+        .parlay-leg.void { opacity: 0.6; }
+
+        .parlay-total {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 9px 0 0;
+            margin-top: 6px;
+            border-top: 2px solid var(--border);
+            font-weight: 600;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .parlay-odds { color: var(--accent); font-weight: 700; }
+
+        .parlay-status {
+            font-size: 0.72em;
+            font-weight: 700;
+            padding: 3px 9px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            white-space: nowrap;
+        }
+
+        .parlay-status.won {
+            background: var(--success-light);
+            border-color: var(--success);
+            color: var(--success);
+        }
+
+        .parlay-status.lost { border-color: var(--danger); color: var(--danger); }
+
+        .parlay-record {
+            margin-top: 12px;
+            font-size: 0.8em;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .tag-backfill {
+            font-size: 0.6em;
+            font-weight: 600;
+            color: var(--text-secondary);
+            border: 1px dashed var(--border);
+            padding: 2px 6px;
+            border-radius: 10px;
+            margin-left: 6px;
+            vertical-align: middle;
+        }
+
         .hit-card {
             background: var(--bg-secondary);
             border: 1px solid var(--border);
@@ -1741,6 +1930,8 @@ def render_html(slate_data: dict) -> str:
         jump_targets.append(("remaining", "🌙 Still to Play"))
     if hit_picks:
         jump_targets.append(("hits", "🥎 Projected Hits"))
+    if slate_data.get("parlays"):
+        jump_targets.append(("parlays", "🎰 5-Pick Parlays"))
     if highlighted:
         jump_targets.append(("bvp", "🔍 Batter vs Pitcher"))
     jump_targets += [("games", "📊 Games"), ("analytics", "📈 Analytics")]
@@ -1816,7 +2007,8 @@ def render_html(slate_data: dict) -> str:
                     </div>
                     <div class="split-block">
                         <div class="block-label">HRs by pitcher hand{
-                            f" &middot; bats {pick['bat_side']}" if pick.get('bat_side') else ''
+                            ' &middot; switch-hits' if pick.get('bat_side') == 'S'
+                            else f" &middot; bats {pick['bat_side']}" if pick.get('bat_side') else ''
                         }</div>
                         <div class="split-row{' split-facing' if pick.get('facing_hand') == 'R' else ''}">
                             <span>vs RHP</span>
@@ -1838,7 +2030,7 @@ def render_html(slate_data: dict) -> str:
                     </div>
                     <div class="split-block">
                         <div class="block-label">Context multipliers</div>
-                        <div class="ctx-row"><span>Park (vs {pick.get('bat_side', 'R')}HB)</span><strong>{pick.get('prob_park_side', 1):.2f}&times;</strong></div>
+                        <div class="ctx-row"><span>Park (vs {_side_vs_starter(pick)}HB)</span><strong>{pick.get('prob_park_side', 1):.2f}&times;</strong></div>
                         <div class="ctx-row"><span>Pull rate</span><strong>{pick.get('prob_pull_rate', 0):.0%}</strong></div>
                         <div class="ctx-row"><span>Park &times; pull</span><strong>{pick.get('prob_park_effective', 1):.2f}&times;</strong></div>
                         <div class="ctx-row"><span>Weather</span><strong>{pick.get('prob_weather_factor', 1):.2f}&times;</strong></div>
@@ -1877,6 +2069,7 @@ def render_html(slate_data: dict) -> str:
     # afternoon games are in the book, tonight's are the only actionable ones.
     html += _render_remaining_section(slate_data)
     html += _render_hits_section(hit_picks)
+    html += _render_parlays_section(slate_data)
     html += _render_matchups_section(highlighted)
 
     html += """
@@ -2064,6 +2257,8 @@ def render_html(slate_data: dict) -> str:
 # configured to serve, so it appears twice -- once under its own name and once
 # as the highlighted "served" column.
 _VARIANTS = [
+    ("served", "Served (full season)",
+     "KNN comparables refit on every PA to date, through the stacked model -- the published number."),
     ("empirical_bayes", "Flat league", "League HR rate as the prior for every hitter."),
     ("knn", "KNN comps", "Prior is the pooled rate of the nearest comparables."),
     ("svm", "SVR", "Support-vector regression on the same feature matrix."),
@@ -2082,8 +2277,17 @@ _VARIANTS = [
 # Which of the above the ensemble's serve_variant name corresponds to.
 _SERVED_KEY_FOR = {
     "league": "empirical_bayes", "knn": "knn", "svr": "svm",
-    "rf": "rf", "core": "core", "ensemble": "forest",
+    "rf": "rf", "core": "core", "ensemble": "forest", "served": "served",
 }
+
+
+def _side_vs_starter(pick: dict) -> str:
+    """The side a hitter bats from against today's starter (a switch hitter
+    turns around to face him)."""
+    side = pick.get("bat_side") or "R"
+    if side == "S":
+        return "R" if pick.get("facing_hand") == "L" else "L"
+    return side
 
 _METRIC_COLUMNS = [
     ("auc", "AUC", "{:.4f}"),

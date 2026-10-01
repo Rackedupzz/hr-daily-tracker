@@ -10,6 +10,14 @@ games. Using the same team on both sides is what removes the confound -- Yankee
 Stadium looks homer-friendly partly because the Yankees bat there 81 times, and
 a raw per-park rate cannot tell the ballpark apart from the lineup.
 
+Both sides of that ratio must hold the same people. The home figure is every
+plate appearance in the park -- the club's hitters *and* its pitchers -- so the
+road figure is every plate appearance in the club's road games, both lineups.
+It used to count only the club's own hitters on the road, which left the
+pitching staff out of the denominator: a slugging lineup with a soft staff read
+its park as a pitcher's park, and a weak lineup behind a stingy staff the
+reverse, by up to ~5% after regression.
+
 Handedness matters as much as the park: Yankee Stadium's short right field and
 Fenway's left field wall push in opposite directions depending on who is
 batting, and a single scalar per venue averages that away.
@@ -31,10 +39,12 @@ PARK_PRIOR_PA_SPLIT = 3500.0   # per-handedness samples are roughly half as big
 # Clamps. Real park factors live inside these; anything outside is noise.
 PARK_CLAMP = (0.72, 1.35)
 
+_HIT_EVENTS = {"single", "double", "triple", "home_run"}
+
 
 @dataclass
 class ParkFactor:
-    """Measured home-run factor for one venue."""
+    """Measured home-run (and hit) factor for one venue."""
     venue: str
     factor: float = 1.0
     factor_vs_lhb: float = 1.0
@@ -44,6 +54,11 @@ class ParkFactor:
     raw_factor: float = 1.0
     home_team: str = ""
     measured: bool = False
+    # Hits per plate appearance, same method. Coors and Fenway inflate singles
+    # and doubles as well as home runs; the hit projection used to ignore parks.
+    hit_factor: float = 1.0
+    hit_vs_lhb: float = 1.0
+    hit_vs_rhb: float = 1.0
 
     def for_batter(self, bat_side: str) -> float:
         """Factor for a batter of the given side. Switch hitters get the blend."""
@@ -52,6 +67,14 @@ class ParkFactor:
         if bat_side == "R":
             return self.factor_vs_rhb
         return self.factor
+
+    def hits_for_batter(self, bat_side: str) -> float:
+        """Hit factor for a batter of the given side."""
+        if bat_side == "L":
+            return self.hit_vs_lhb
+        if bat_side == "R":
+            return self.hit_vs_rhb
+        return self.hit_factor
 
 
 def _regress(rate_home: float, rate_road: float, pa: float, prior_pa: float) -> float:
@@ -65,16 +88,17 @@ def _regress(rate_home: float, rate_road: float, pa: float, prior_pa: float) -> 
 
 def build_park_factors(pa_jsonl_path: str) -> dict[str, ParkFactor]:
     """Measure per-venue home-run factors from the season's plate appearances."""
-    # game_pk -> home team, and the venue each game was played in.
+    # game_pk -> home and visiting team, and the venue each game was played in.
     game_home: dict[int, str] = {}
+    game_away: dict[int, str] = {}
     game_venue: dict[int, str] = {}
 
-    # venue -> [hr, pa] for all batters, and per batter side.
-    venue_totals: dict[str, list] = defaultdict(lambda: [0, 0])
-    venue_by_side: dict[tuple, list] = defaultdict(lambda: [0, 0])
-    # team -> [hr, pa] in games away from their own park.
-    road_totals: dict[str, list] = defaultdict(lambda: [0, 0])
-    road_by_side: dict[tuple, list] = defaultdict(lambda: [0, 0])
+    # venue -> [hr, pa, hits] for all batters, and per batter side.
+    venue_totals: dict[str, list] = defaultdict(lambda: [0, 0, 0])
+    venue_by_side: dict[tuple, list] = defaultdict(lambda: [0, 0, 0])
+    # team -> [hr, pa, hits] in games away from their own park.
+    road_totals: dict[str, list] = defaultdict(lambda: [0, 0, 0])
+    road_by_side: dict[tuple, list] = defaultdict(lambda: [0, 0, 0])
 
     rows: list[tuple] = []
 
@@ -95,13 +119,15 @@ def build_park_factors(pa_jsonl_path: str) -> dict[str, ParkFactor]:
             game_venue[game_pk] = venue
             if record.get("is_home"):
                 game_home[game_pk] = record.get("batting_team") or ""
+            else:
+                game_away[game_pk] = record.get("batting_team") or ""
 
             rows.append((
                 game_pk,
                 venue,
-                record.get("batting_team") or "",
                 record.get("bat_side") or "R",
                 int(record.get("is_hr", 0) or 0),
+                int((record.get("event_type") or "") in _HIT_EVENTS),
             ))
 
     # Each club's home park is where it bats as the home team.
@@ -113,28 +139,29 @@ def build_park_factors(pa_jsonl_path: str) -> dict[str, ParkFactor]:
     for (team, venue), count in sorted(park_counts.items(), key=lambda kv: -kv[1]):
         home_park.setdefault(team, venue)
 
-    for game_pk, venue, batting_team, bat_side, is_hr in rows:
+    for game_pk, venue, bat_side, is_hr, is_hit in rows:
         side = bat_side if bat_side in ("L", "R") else "R"
-        venue_totals[venue][0] += is_hr
-        venue_totals[venue][1] += 1
-        venue_by_side[(venue, side)][0] += is_hr
-        venue_by_side[(venue, side)][1] += 1
+        for bucket in (venue_totals[venue], venue_by_side[(venue, side)]):
+            bucket[0] += is_hr
+            bucket[1] += 1
+            bucket[2] += is_hit
 
         # Road exposure is judged from the perspective of the club that owns the
-        # park being measured, so accumulate every team's away production.
-        home_team = game_home.get(game_pk, "")
-        for team in (batting_team, home_team):
+        # park being measured: every plate appearance in a club's road games
+        # counts toward its road line, whichever side is batting, because its
+        # home line likewise holds both lineups. A game at a neutral site is a
+        # road game for both clubs.
+        for team in (game_away.get(game_pk, ""), game_home.get(game_pk, "")):
             if team and home_park.get(team) and home_park[team] != venue:
-                road_totals[team][0] += is_hr
-                road_totals[team][1] += 1
-                road_by_side[(team, side)][0] += is_hr
-                road_by_side[(team, side)][1] += 1
-                break
+                for bucket in (road_totals[team], road_by_side[(team, side)]):
+                    bucket[0] += is_hr
+                    bucket[1] += 1
+                    bucket[2] += is_hit
 
     factors: dict[str, ParkFactor] = {}
     venue_owner = {v: t for t, v in home_park.items()}
 
-    for venue, (hr, pa) in venue_totals.items():
+    for venue, (hr, pa, hits) in venue_totals.items():
         owner = venue_owner.get(venue, "")
         entry = ParkFactor(venue=venue, pa=pa, hr=hr, home_team=owner)
 
@@ -146,17 +173,25 @@ def build_park_factors(pa_jsonl_path: str) -> dict[str, ParkFactor]:
                 rate_home / rate_road if rate_road > 0 else 1.0
             )
             entry.factor = _regress(rate_home, rate_road, pa, PARK_PRIOR_PA)
+            entry.hit_factor = _regress(hits / pa, road[2] / road[1], pa, PARK_PRIOR_PA)
             entry.measured = True
 
-            for side, attr in (("L", "factor_vs_lhb"), ("R", "factor_vs_rhb")):
-                v_hr, v_pa = venue_by_side.get((venue, side), [0, 0])
-                r_hr, r_pa = road_by_side.get((owner, side), [0, 0])
+            for side, attr, hit_attr in (("L", "factor_vs_lhb", "hit_vs_lhb"),
+                                         ("R", "factor_vs_rhb", "hit_vs_rhb")):
+                v_hr, v_pa, v_hit = venue_by_side.get((venue, side), [0, 0, 0])
+                r_hr, r_pa, r_hit = road_by_side.get((owner, side), [0, 0, 0])
                 if v_pa > 300 and r_pa > 500 and r_hr > 0:
                     setattr(entry, attr, _regress(
                         v_hr / v_pa, r_hr / r_pa, v_pa, PARK_PRIOR_PA_SPLIT
                     ))
                 else:
                     setattr(entry, attr, entry.factor)
+                if v_pa > 300 and r_pa > 500 and r_hit > 0:
+                    setattr(entry, hit_attr, _regress(
+                        v_hit / v_pa, r_hit / r_pa, v_pa, PARK_PRIOR_PA_SPLIT
+                    ))
+                else:
+                    setattr(entry, hit_attr, entry.hit_factor)
         else:
             # Neutral-site or too-thin venues stay at 1.0 rather than inventing
             # a factor from a handful of games.

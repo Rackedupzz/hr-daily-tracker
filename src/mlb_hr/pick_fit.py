@@ -120,6 +120,18 @@ def build_rows(records: list[tuple], hr_rates: dict[int, float]) -> list[dict]:
         first = min(idx, key=lambda i: records[i][5])
         firsts_by_date[records[first][0]].append((key, idx, first))
 
+    # A slot's starter is the first hitter to bat in it. The feed hands a
+    # pinch hitter or defensive replacement the slot he entered, so a lineup
+    # slot alone let ~5,900 substitute appearances (1.4 PA, 3.7% HR) in as if
+    # they were starters projected for four trips to the plate.
+    slot_first: dict[tuple, tuple[int, int]] = {}
+    for r in records:
+        if r[8] and r[2]:
+            key = (r[1], r[4], r[8])
+            if key not in slot_first or r[5] < slot_first[key][0]:
+                slot_first[key] = (r[5], r[2])
+    starters = {(game_pk, batter) for (game_pk, _team, _slot), (_i, batter) in slot_first.items()}
+
     bat = defaultdict(lambda: [0, 0, 0, set()])  # pa, hits, hr, games
     pit = defaultdict(lambda: [0, 0, 0])         # bf, hits, hr
     park = defaultdict(lambda: [0, 0, 0])        # pa, hits, hr, per venue
@@ -133,7 +145,7 @@ def build_rows(records: list[tuple], hr_rates: dict[int, float]) -> list[dict]:
         for (game_pk, batter_id), idx, first in firsts_by_date.get(day, []):
             r = records[first]
             slot = r[8]
-            if not slot:
+            if not slot or (game_pk, batter_id) not in starters:
                 continue  # a pinch hitter or substitute, not a lineup pick
             sp_id = openers.get((game_pk, r[4]), (0, 0))[1]
             b_pa, b_h, b_hr, b_games = bat[batter_id]

@@ -8,6 +8,7 @@ from typing import Optional, TYPE_CHECKING
 
 import pandas as pd
 
+from mlb_hr import parlays as parlay_mod
 from mlb_hr.context import build_context_model
 from mlb_hr.fetch import (
     active_rosters,
@@ -20,7 +21,7 @@ from mlb_hr.fetch import (
 )
 from mlb_hr.parks import build_park_factors, summarize as summarize_parks
 from mlb_hr.game import project_game
-from mlb_hr.features import expected_pa_for_slot, recent_starts
+from mlb_hr.features import expected_pa_for_slot, recent_lineups
 from mlb_hr.model import HRModel, BatterStats
 from mlb_hr.pitching import (
     build_pitching_profiles,
@@ -36,6 +37,11 @@ if TYPE_CHECKING:
 # RECENT_TEAM_GAMES to be eligible for a pick.
 MIN_RECENT_STARTS = 4
 RECENT_TEAM_GAMES = 7
+
+# Recency half-life for the hitter model: 45 days beat 90, 21 and no decay on
+# held-out AUC (0.5800 vs 0.5780 with equal weighting). A modest gain, but
+# consistent across every value tried.
+HALF_LIFE_DAYS = 45.0
 
 
 def data_before(model_path: str, today: date) -> str:
@@ -97,6 +103,8 @@ class GameSlate:
         lineups: Optional[dict] = None,
         context=None,
         recent_starts: Optional[dict] = None,
+        usual_slots: Optional[dict] = None,
+        hr_level: float = 1.0,
     ):
         self.date = today
         self.model = model
@@ -113,6 +121,10 @@ class GameSlate:
         # None means "unknown" and disables the bench filter, rather than
         # treating every hitter as a non-starter.
         self.recent_starts = recent_starts
+        self.usual_slots = usual_slots or {}
+        # Odds multiplier from the tracker's recent actual-over-projected
+        # home runs (snapshot.hr_level); 1.0 when there is no record yet.
+        self.hr_level = hr_level
         self.excluded_bench: list[dict] = []
         self.game_context: dict = {}
         self.lineups_used = 0
@@ -250,22 +262,26 @@ class GameSlate:
                 lineup = self.lineups.get(g.game_pk, {})
                 lineup_ids = lineup.get(side) or []
                 slot_by_id = {pid: i + 1 for i, pid in enumerate(lineup_ids)}
+                # Hitters are matched to the PA feed by MLB person id, which the
+                # lineup and roster both carry. Matching by name picked the
+                # first hitter with that name and dropped anyone whose name was
+                # spelled differently between the two endpoints.
                 if lineup_ids:
                     id_to_name = {
                         r["id"]: r["name"] for r in rosters.get(team_id, [])
                     }
                     names = lineup.get(f"{side}_names") or []
                     team_roster = [
-                        id_to_name.get(pid) or name
+                        (pid, id_to_name.get(pid) or name)
                         for pid, name in zip(lineup_ids, names)
                     ]
                     self.lineups_used += 1
                 else:
                     team_roster = [
-                        r["name"] for r in rosters.get(team_id, [])
+                        (r["id"], r["name"]) for r in rosters.get(team_id, [])
                     ]
 
-                for hitter_name in team_roster:
+                for player_id, hitter_name in team_roster:
                     # ESPN injury report: players on an IL variant cannot appear
                     # today, so they must not be eligible for a pick.
                     if self.espn and self.espn.is_unavailable(hitter_name):
@@ -276,7 +292,9 @@ class GameSlate:
                         })
                         continue
 
-                    b = self.model.get_batter_by_name(hitter_name)
+                    b = self.model.get_batter(player_id) if player_id else None
+                    if b is None and not player_id:
+                        b = self.model.get_batter_by_name(hitter_name)
                     # No lineup yet: keep to hitters who have been starting.
                     # A bench bat can out-rate a regular and win a pick for a
                     # game he never plays in.
@@ -297,8 +315,15 @@ class GameSlate:
                         opp_sp_id = away_sp_id if side == "home" else home_sp_id
 
                         slot = slot_by_id.get(b.batter_id)
+                        # Until the lineup posts, his usual recent slot stands
+                        # in: the stacked model weights exposure heavily, and a
+                        # per-game average that counts pinch-hit appearances
+                        # would mark a regular down for hours.
+                        use_slot = slot or (
+                            None if lineup_ids else self.usual_slots.get(b.batter_id)
+                        )
                         slot_pa = (
-                            expected_pa_for_slot(slot, None) if slot else None
+                            expected_pa_for_slot(use_slot, None) if use_slot else None
                         )
                         opp_sp_profile = self.pitchers.get(opp_sp_id)
                         sp_hr_index = (
@@ -318,6 +343,7 @@ class GameSlate:
                                 weather_factor=weather_factor,
                                 tto_factors=tto_factors,
                                 sp_hr_index=sp_hr_index,
+                                level=self.hr_level,
                             )
                             prob = probs_dict.get("ensemble", probs_dict.get("empirical_bayes", 0))
                         else:
@@ -374,6 +400,13 @@ class GameSlate:
                                 bullpen=opp_pen,
                                 league=self.league,
                                 expected_pa=probs_dict.get("expected_pa", 4.1),
+                                batter_xhit=profile.xhit,
+                                batter_k=profile.strikeouts,
+                                park_hit=self.model.hit_park_factor_for(
+                                    g.venue, profile.side_vs(sp_hand)
+                                ),
+                                coef=self.ensemble.hit_coef,
+                                top_cal=self.ensemble.hit_top_cal,
                             )
                             note = matchup_note(
                                 self.matchups.get((b.batter_id, opp_sp_id)),
@@ -502,6 +535,13 @@ def lock_started_picks(previous: dict, fresh: dict, started: set) -> dict:
     for key, chooser in (("picks_6", choose_hr_picks), ("hit_picks", choose_hit_picks)):
         kept = [p for p in previous.get(key) or [] if p.get("game_pk") in started]
         fresh[key] = chooser(fresh.get("games", []), locked=kept, closed=started)
+    # A parlay is one ticket: once any leg's game is under way the whole
+    # ticket stands as posted (parlays.choose).
+    evidence = {p["key"]: p.get("evidence") for p in fresh.get("parlays") or []}
+    fresh["parlays"] = parlay_mod.choose(
+        fresh.get("games", []), previous=previous.get("parlays"), started=started,
+        evidence=evidence,
+    )
     fresh["locked_games"] = sorted(started)
     return fresh
 
@@ -511,6 +551,7 @@ def build_slate_for_date(
     model_path: str,
     use_ensemble: bool = True,
     use_espn: bool = True,
+    hr_level: float = 1.0,
 ) -> dict:
     """Full slate build: load model, fit ensemble, fetch games, pick six.
 
@@ -521,6 +562,8 @@ def build_slate_for_date(
             if False, use flat-prior empirical-Bayes only
         use_espn: If True, pull ESPN bio + injury data for features and for
             filtering unavailable players out of the pick pool
+        hr_level: odds multiplier on every HR probability, from the tracker's
+            own recent record (snapshot.hr_level)
     """
     data_dir = Path(model_path).parent
     # Nothing from `today` or later may inform today's projections.
@@ -555,11 +598,7 @@ def build_slate_for_date(
             from mlb_hr.ensemble import EnsembleHRModel
             print("[slate.py] Fitting comparables-prior ensemble (KNN + SVR)...")
             ensemble = EnsembleHRModel(
-                model, model_path, espn=espn,
-                # 45-day half-life beat 90, 21 and no decay on held-out AUC
-                # (0.5800 vs 0.5780 with equal weighting). A modest gain, but
-                # consistent across every value tried.
-                half_life_days=45,
+                model, model_path, espn=espn, half_life_days=HALF_LIFE_DAYS,
             )
         except ImportError:
             print("[slate.py] Warning: scikit-learn not installed, using empirical-Bayes only")
@@ -595,10 +634,10 @@ def build_slate_for_date(
         todays_lineups = {}
 
     try:
-        starts = recent_starts(model_path, str(today), RECENT_TEAM_GAMES)
+        starts, usual_slots = recent_lineups(model_path, str(today), RECENT_TEAM_GAMES)
     except Exception as e:  # noqa: BLE001 - the filter is a refinement
         print(f"[slate.py] Warning: recent starts unavailable ({e}); no bench filter")
-        starts = None
+        starts, usual_slots = None, {}
 
     slate = GameSlate(
         today, model, ensemble, espn,
@@ -611,6 +650,8 @@ def build_slate_for_date(
         lineups=todays_lineups,
         context=context,
         recent_starts=starts,
+        usual_slots=usual_slots,
+        hr_level=hr_level,
     )
     if slate.excluded_bench:
         print(f"[slate.py] {len(slate.excluded_bench)} hitters held out pending "
@@ -630,11 +671,20 @@ def build_slate_for_date(
             "bio_coverage": espn.coverage(rostered),
         }
 
+    from mlb_hr.ensemble import MODEL_VERSION, load_model_fit
+
+    # The two 5-pick parlays, with the season replay's record for each.
+    parlays = parlay_mod.choose(slate.games, evidence=load_model_fit().get("parlays"))
+
     return {
         "date": str(today),
         "games_count": len(slate.games),
         "picks_6": picks,
         "games": slate.games,
+        # Which model produced these numbers, and the level it applied: the
+        # tracker only learns its level from days the current model projected.
+        "model_version": MODEL_VERSION if ensemble else "empirical_bayes",
+        "hr_level": hr_level,
         "ensemble_metrics": ensemble.calibration if ensemble else None,
         "espn": espn_summary,
         "excluded_injured": slate.excluded_injured,
@@ -655,6 +705,7 @@ def build_slate_for_date(
             for v, p in park_factors.items()
         },
         "hit_picks": hit_picks,
+        "parlays": parlays,
         "highlighted_matchups": highlighted,
         "bullpens": {
             team: {

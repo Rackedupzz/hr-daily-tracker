@@ -32,6 +32,34 @@ FLY_BALL_LA_RANGE = (25.0, 50.0)
 # average +19.8 degrees in this feed, with 70% beyond this threshold.
 PULL_ANGLE_MIN = 15.0
 
+# The feed records the side a hitter batted from in each plate appearance, so a
+# switch hitter shows up as a left-handed hitter against right-handers and a
+# right-handed one against left-handers. Keeping whichever side he used last
+# (as the profile did) gave him the same-hand platoon penalty about half the
+# time -- the one matchup he never actually has. 57 hitters in 2026 batted 20+
+# times from each side; a hitter is treated as a switch hitter once his
+# minority side reaches both floors below.
+SWITCH_MIN_PA = 10
+SWITCH_MIN_SHARE = 0.10
+
+# Expected home runs (xHR): every ball in play with a tracked exit velocity and
+# launch angle is scored at the league's home-run rate for its bin, the same
+# 3 mph x 4 degree grid HOMER uses. It measures power without the luck of which
+# fly balls cleared the wall, and on the 2026 replay it carried more weight
+# than a hitter's actual home runs in the stacked model (ensemble.HR_STACK).
+XHR_EV_LO, XHR_EV_STEP, XHR_EV_BINS = 60.0, 3.0, 22
+XHR_LA_LO, XHR_LA_STEP, XHR_LA_BINS = -20.0, 4.0, 20
+HIT_EVENT_TYPES = frozenset({"single", "double", "triple", "home_run"})
+
+
+def contact_bin(ev: Optional[float], la: Optional[float]) -> Optional[int]:
+    """Exit velocity x launch angle cell for one batted ball, or None."""
+    if ev is None or la is None:
+        return None
+    e = min(max(int((float(ev) - XHR_EV_LO) // XHR_EV_STEP), 0), XHR_EV_BINS - 1)
+    a = min(max(int((float(la) - XHR_LA_LO) // XHR_LA_STEP), 0), XHR_LA_BINS - 1)
+    return e * XHR_LA_BINS + a
+
 FEATURE_NAMES = [
     "log_pa",
     "avg_ev",
@@ -102,6 +130,17 @@ class BatterProfile:
     fly_balls: int = 0
     pulled: int = 0        # batted balls hit to the batter's pull side
     spray_tracked: int = 0
+
+    # Plate appearances by the side he actually batted from (see SWITCH_MIN_PA).
+    pa_as_l: int = 0
+    pa_as_r: int = 0
+
+    # Expected home runs (raw and recency-weighted) and expected hits, from the
+    # league's rates per contact bin; set by build_profiles once those are known.
+    xhr: float = 0.0
+    xhr_w: float = 0.0
+    xhit: float = 0.0
+    _bins: dict = field(default_factory=dict, repr=False)   # bin -> [count, weight]
     _ev_values: list = field(default_factory=list, repr=False)
     _la_sum: float = 0.0
     _games: set = field(default_factory=set, repr=False)
@@ -109,6 +148,24 @@ class BatterProfile:
     @property
     def games_played(self) -> int:
         return len(self._games)
+
+    @property
+    def bats(self) -> str:
+        """'L', 'R', or 'S' for a switch hitter -- his batting hand, not the
+        side of whichever plate appearance happened to come last."""
+        low, high = sorted((self.pa_as_l, self.pa_as_r))
+        if low >= SWITCH_MIN_PA and low / (low + high) >= SWITCH_MIN_SHARE:
+            return "S"
+        if self.pa_as_l == self.pa_as_r:
+            return self.bat_side if self.bat_side in ("L", "R") else "R"
+        return "L" if self.pa_as_l > self.pa_as_r else "R"
+
+    def side_vs(self, pitcher_hand: str) -> str:
+        """The side he bats from against a pitcher of this hand."""
+        bats = self.bats
+        if bats == "S":
+            return "R" if pitcher_hand == "L" else "L"
+        return bats
 
     @property
     def pa_per_game(self) -> float:
@@ -168,6 +225,10 @@ class BatterProfile:
         side = record.get("bat_side")
         if side in ("L", "R", "S"):
             self.bat_side = side
+        if side == "L":
+            self.pa_as_l += 1
+        elif side == "R":
+            self.pa_as_r += 1
         self._games.add(record.get("game_pk"))
 
         is_hr = int(record.get("is_hr", 0) or 0)
@@ -199,6 +260,14 @@ class BatterProfile:
         la = record.get("launch_angle")
         if ev is None:
             return
+        cell = contact_bin(ev, la)
+        if cell is not None:
+            tally = self._bins.get(cell)
+            if tally is None:
+                self._bins[cell] = [1, weight]
+            else:
+                tally[0] += 1
+                tally[1] += weight
         self.bip += 1
         self._ev_values.append(float(ev))
         pull_angle = record.get("pull_angle")
@@ -281,6 +350,10 @@ def build_profiles(
     profiles: dict[int, BatterProfile] = {}
     anchor = _parse_date(ref_date) or _parse_date(end_date)
     pending: list = [] if (half_life_days and anchor is None) else None
+    # League home runs and hits per contact bin, for expected HR and hits.
+    bin_n: dict[int, int] = {}
+    bin_hr: dict[int, int] = {}
+    bin_hit: dict[int, int] = {}
     with open(pa_jsonl_path) as fh:
         for line in fh:
             if not line.strip():
@@ -299,6 +372,14 @@ def build_profiles(
                 continue
             if end_date and game_date >= end_date:
                 continue
+
+            cell = contact_bin(record.get("launch_speed"), record.get("launch_angle"))
+            if cell is not None:
+                bin_n[cell] = bin_n.get(cell, 0) + 1
+                bin_hr[cell] = bin_hr.get(cell, 0) + int(record.get("is_hr", 0) or 0)
+                bin_hit[cell] = bin_hit.get(cell, 0) + (
+                    (record.get("event_type") or "") in HIT_EVENT_TYPES
+                )
 
             if pending is not None:
                 # No anchor supplied: hold records so decay can be measured
@@ -322,7 +403,35 @@ def build_profiles(
                 profiles[batter_id] = profile
             profile.add_pa(record, _decay_weight(game_date, anchor, half_life_days))
 
+    settle_expected_contact(profiles, bin_n, bin_hr, bin_hit)
     return profiles
+
+
+def settle_expected_contact(
+    profiles: dict[int, BatterProfile], bin_n: dict[int, int],
+    bin_hr: dict[int, int], bin_hit: dict[int, int],
+) -> None:
+    """Score every profile's batted balls at the league's HR and hit rates per bin.
+
+    Each bin's rate is pulled lightly (two balls' worth) toward the league's
+    overall rate on contact, so a sparse corner of the grid cannot hand a
+    hitter a full home run for one ball.
+    """
+    total = sum(bin_n.values())
+    if not total:
+        return
+    lg_hr = sum(bin_hr.values()) / total
+    lg_hit = sum(bin_hit.values()) / total
+    hr_table = {k: (bin_hr.get(k, 0) + 2 * lg_hr) / (n + 2) for k, n in bin_n.items()}
+    hit_table = {k: (bin_hit.get(k, 0) + 2 * lg_hit) / (n + 2) for k, n in bin_n.items()}
+    for profile in profiles.values():
+        xhr = xhr_w = xhit = 0.0
+        for cell, (count, weight) in profile._bins.items():
+            rate = hr_table.get(cell, lg_hr)
+            xhr += count * rate
+            xhr_w += weight * rate
+            xhit += count * hit_table.get(cell, lg_hit)
+        profile.xhr, profile.xhr_w, profile.xhit = xhr, xhr_w, xhit
 
 
 def _parse_date(value: Optional[str]):
@@ -405,12 +514,23 @@ def platoon_factors(profiles: dict[int, BatterProfile]) -> dict[tuple[str, str],
     Returns a multiplier per (bat_side, pitcher_hand) giving that matchup's HR
     rate relative to the overall rate for batters of that side. Replaces the
     previous hardcoded 1.10 / 0.93 constants.
+
+    Hitters are grouped by batting hand (BatterProfile.bats), not by the side of
+    their last plate appearance: that used to drop each switch hitter into the
+    left- or right-handed bucket more or less at random, carrying his
+    opposite-hand plate appearances into the same-hand cell (LHB vs LHP read
+    0.81 instead of 0.76). Switch hitters themselves get 1.0 both ways -- they
+    always have the platoon advantage, and their own measured split (x1.15 vs
+    LHP, x0.93 vs RHP) rests on ~60 hitters and did not hold up forward: on the
+    2026 replay it overstated what they actually did (10.2% vs 9.5% HR games).
     """
     totals: dict[tuple[str, str], list[int]] = {}
     by_side: dict[str, list[int]] = {}
 
     for profile in profiles.values():
-        side = profile.bat_side if profile.bat_side in ("L", "R", "S") else "R"
+        side = profile.bats
+        if side == "S":
+            continue
         for hand, (hr, pa) in (("L", profile.observed("L")), ("R", profile.observed("R"))):
             bucket = totals.setdefault((side, hand), [0, 0])
             bucket[0] += hr
@@ -429,16 +549,26 @@ def platoon_factors(profiles: dict[int, BatterProfile]) -> dict[tuple[str, str],
         matchup_rate = hr / pa
         side_rate = side_hr / side_pa
         factors[key] = float(np.clip(matchup_rate / side_rate, 0.75, 1.35))
+    factors[("S", "L")] = factors[("S", "R")] = 1.0
     return factors
 
 
-# Plate appearances per game by lineup slot, measured from this season's feed
-# across 4,360 team-games. Exposure is the multiplier on every per-game
-# projection, and the spread from leadoff to ninth is 23.6% -- larger than most
-# of the rate effects the model works hard to estimate.
+# Plate appearances per game for the hitter who *starts* in each lineup slot,
+# measured across the 2026 season's 4,858 team-games. Exposure is the
+# multiplier on every per-game projection, and the spread from leadoff to ninth
+# is 30% -- larger than most of the rate effects the model works hard to
+# estimate.
+#
+# This used to count every plate appearance taken in the slot (4.637 ... 3.753),
+# which includes the pinch hitters and defensive replacements who bat in it
+# once the starter is gone. The starter himself gets 3% fewer at the top of the
+# order and 8% fewer at the bottom, where the late-game substitutions happen,
+# so every projection was high and the bottom of the order most of all: before
+# the fix, 9th hitters homered 18% less often than projected and the hit
+# projection ran 3.4% over the season total.
 SLOT_PA = {
-    1: 4.637, 2: 4.528, 3: 4.424, 4: 4.322, 5: 4.217,
-    6: 4.106, 7: 3.993, 8: 3.875, 9: 3.753,
+    1: 4.491, 2: 4.402, 3: 4.303, 4: 4.197, 5: 4.059,
+    6: 3.901, 7: 3.759, 8: 3.590, 9: 3.444,
 }
 
 
@@ -452,8 +582,26 @@ def recent_starts(
     often a hitter has actually started lately is the best morning evidence of
     whether he will start today.
     """
+    return recent_lineups(pa_jsonl_path, before_date, team_games)[0]
+
+
+def recent_lineups(
+    pa_jsonl_path: str, before_date: str, team_games: int = 7, slot_starts: int = 10
+) -> tuple[dict[int, int], dict[int, int]]:
+    """(starts in his team's last `team_games` games, usual lineup slot).
+
+    A start is the first hitter to bat in a lineup slot. The feed gives a
+    pinch hitter or defensive replacement the slot he entered, so counting
+    every hitter with a slot credited bench players with starts.
+
+    The usual slot is the most common one across his last `slot_starts` starts
+    (the most recent wins a tie). It stands in for the batting order until
+    lineups post, so a regular's exposure is his slot's, not a per-game average
+    dragged down by the odd pinch-hitting appearance.
+    """
     team_dates: dict[str, set] = {}
-    starts: dict[tuple, set] = {}   # (team, batter) -> game dates started
+    # (game, team, slot) -> (pa_index, batter, date) of its first hitter
+    first: dict[tuple, tuple] = {}
     with open(pa_jsonl_path) as fh:
         for line in fh:
             if not line.strip():
@@ -466,23 +614,42 @@ def recent_starts(
             if not day or day >= before_date or not team:
                 continue
             team_dates.setdefault(team, set()).add(day)
-            if r.get("lineup_slot") and r.get("batter_id"):
-                starts.setdefault((team, r["batter_id"]), set()).add(day)
+            slot, batter = r.get("lineup_slot"), r.get("batter_id")
+            if slot and batter:
+                key = (r.get("game_pk"), team, slot)
+                index = r.get("pa_index") or 0
+                if key not in first or index < first[key][0]:
+                    first[key] = (index, batter, day)
+
+    starts: dict[tuple, set] = {}   # (team, batter) -> game dates started
+    history: dict[int, list] = {}   # batter -> [(date, game, slot)]
+    for (game_pk, team, slot), (_index, batter, day) in first.items():
+        starts.setdefault((team, batter), set()).add(day)
+        history.setdefault(batter, []).append((day, game_pk, slot))
 
     recent = {t: set(sorted(d)[-team_games:]) for t, d in team_dates.items()}
-    out: dict[int, int] = {}
+    counts: dict[int, int] = {}
     for (team, batter), days in starts.items():
         n = len(days & recent[team])
-        out[batter] = max(out.get(batter, 0), n)
-    return out
+        counts[batter] = max(counts.get(batter, 0), n)
+
+    usual: dict[int, int] = {}
+    for batter, games in history.items():
+        games.sort()
+        last = [slot for _day, _game, slot in games[-slot_starts:]]
+        tally: dict[int, int] = {}
+        for slot in last:
+            tally[slot] = tally.get(slot, 0) + 1
+        top = max(tally.values())
+        usual[batter] = next(s for s in reversed(last) if tally[s] == top)
+    return counts, usual
 
 
 def expected_pa_for_slot(slot: Optional[int], fallback: float) -> float:
-    """Expected plate appearances for a lineup slot.
+    """Expected plate appearances for the starter in a lineup slot.
 
-    Falls back to the batter's own per-game average when the lineup has not
-    been posted, which is the situation for any slate built more than an hour
-    or two before first pitch.
+    Falls back to `fallback` when there is no slot at all -- no posted lineup
+    and no recent start to take a usual slot from.
     """
     if slot and slot in SLOT_PA:
         return SLOT_PA[slot]

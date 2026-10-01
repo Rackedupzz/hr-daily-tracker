@@ -37,6 +37,7 @@ env/
 # Project specific
 src/mlb_hr/data/**/*.jsonl
 src/mlb_hr/data/*.json
+src/mlb_hr/data/*.parquet
 src/mlb_hr/data/slate_cache/
 .pytest_cache/
 *.log

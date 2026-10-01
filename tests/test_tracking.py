@@ -124,13 +124,15 @@ def test_slate_data_excludes_its_own_date(tmp_path):
 
 
 def test_hr_calibration_softens_without_reordering():
-    """Backtest top decile: 22.2% projected, 17.7% actual; bottom 3.4% vs 5.6%."""
-    from mlb_hr.ensemble import calibrate_game_prob
+    """Replay's top 2%: 24.9% projected, 21.8% actual. The top calibration
+    pulls the very top down, leaves the middle alone, and never reorders."""
+    from mlb_hr.ensemble import HR_TOP_CAL, MAX_GAME_PROB, top_calibrate
 
-    raw = [0.034, 0.10, 0.176, 0.222, 0.31]
-    cal = [calibrate_game_prob(p) for p in raw]
+    raw = [0.02, 0.05, 0.10, 0.15, 0.20, 0.25, 0.30, 0.40, MAX_GAME_PROB, 0.9]
+    cal = [top_calibrate(p, HR_TOP_CAL) for p in raw]
     assert cal == sorted(cal), "calibration must never reorder hitters"
-    assert 0.16 < cal[3] < 0.20 and 0.045 < cal[0] < 0.065
+    assert 0.215 < top_calibrate(0.25, HR_TOP_CAL) < 0.24
+    assert abs(top_calibrate(0.12, HR_TOP_CAL) - 0.12) < 0.01
 
 
 if __name__ == "__main__":

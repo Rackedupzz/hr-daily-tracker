@@ -79,25 +79,144 @@ RELIABLE_PA = 100
 
 DEFAULT_PA_PER_GAME = 4.1
 
-# Per-game HR probabilities come out overconfident: across the rolling backtest
-# (~39,600 starter-games) the top decile projected ~22% and homered under 18%,
-# the bottom projected ~3.4% and homered ~5.6%. A logistic recalibration
-#     p' = expit(CAL_INTERCEPT + CAL_SLOPE * logit(p))
-# fitted on all prior months gave slopes of 0.586-0.632 and intercepts of
-# -0.788 to -0.898 for each of June-September (all weeks: -0.787 / 0.644), and
-# cut forward log loss 9265 -> 9221 (2026-09-13 backtest). It is monotone, so
-# it never reorders hitters or changes a pick;
-# it only makes the published percentages mean what they say. Refit it with
-# `python -m mlb_hr.calibration_fit` after model changes -- and check it
-# against tracked picks once ~100 have settled, since the live projection
-# carries park, weather and pitcher terms the backtest scoring does not.
-CAL_INTERCEPT = -0.79
-CAL_SLOPE = 0.64
+# Stamped on every slate. The tracker's level (snapshot.hr_level) learns only
+# from days this model projected, so bump it whenever the projection changes.
+MODEL_VERSION = "2026.09.30-stack"
+
+# Shrinkage toward the comparables prior, as a multiple of the method-of-moments
+# K. The moment estimate is almost never identified against the KNN prior --
+# its features (barrels, exit velocity) are measured on the same batted balls
+# that became home runs, so prior and observed rate share their luck and the
+# residual never clears binomial noise -- and it falls back to the flat-prior
+# K (~200-260). On the 2026 daily replay of the live projection, pulling
+# harder toward the prior was consistently better: x1.5-3 lifted held-out AUC
+# and log-likelihood over x1 (x0.5 was worse), and x1.5 is the setting the
+# stacked model below was fitted with.
+SHRINK_MULT = 1.5
+
+# Expected-HR rate per PA is shrunk toward league with this many PA of weight.
+XHR_PRIOR_PA = 120.0
+
+# The per-game probability.
+#
+# It used to be the product of every multiplier (batter rate, platoon, park,
+# weather, starter, bullpen, lineup exposure) pushed through
+# 1 - (1 - rate)^PA, then squeezed by one logistic recalibration (slope 0.64).
+# One slope for everything was the flaw. Replaying the live projection over the
+# whole 2026 season (39,078 starter-games, every input as of that morning), the
+# components are wrong by different amounts and in different directions: the
+# lineup slot matters ~1.6x more than its plate appearances alone (managers bat
+# their best hitters high), the park and bullpen multipliers overshoot, and a
+# hitter's own home runs deserve less weight than his expected home runs. A
+# single squash cannot fix a term that is too weak and one that is too strong
+# at the same time, so 9th hitters ended up projected 18% high and leadoff
+# hitters 10% low.
+#
+# So the components are combined by a logistic regression on their logs, with
+# the league rate as an offset so the level travels between seasons:
+#     logit(p) = logit(lg) + intercept + sum_i coef_i * log(component_i)
+# then the tracker's level and the top calibration below. Against the model it
+# replaces, on the same 33,874 starter-games (May 6 - Sep 27, walk-forward,
+# weekly refits): log-likelihood +32 (90% CI +11 to +55), AUC 0.6091 -> 0.6126,
+# top-6 picks that homered 164 -> 177 of 847, calibration by lineup slot within
+# a few percent (9th hitters excepted, 0.88), and every 30-day window of the
+# whole slate within 10% of the home runs it projected (was 65% of windows).
+# Refit with `python -m mlb_hr.replay`, which writes data/model_fit.json;
+# these defaults are that fit on the 2026 season.
+HR_STACK = {
+    "intercept": -0.7482,
+    "batter_rate": 0.3853,  # log(hitter's hand-agnostic per-PA rate / league)
+    "hand": 0.2080,         # log(rate vs today's starter hand / hand-agnostic rate)
+    "park": 0.6706,         # log(park factor, handed and pull-leveraged)
+    "weather": 1.0104,      # log(temperature x wind factor)
+    "starter": 0.5023,      # log(opposing starter's HR index)
+    "bullpen": 0.7745,      # log(opposing bullpen's HR index)
+    "exposure": 1.5862,     # log(expected plate appearances for his slot)
+    "xhr": 0.6064,          # log(expected-HR rate / league)
+}
+MAX_GAME_PROB = 0.6
+FIT_PATH = Path(__file__).parent / "data" / "model_fit.json"
+
+# The stack is calibrated from the bottom of the slate to its 98th percentile,
+# but the very top ran hot out of sample (the top 2% projected 24.9% and
+# homered 21.8%) -- the winner's curse: the day's highest estimates are the
+# ones whose noise ran high, and the six picks come from exactly there. A
+# second logistic layer on logit(p) with a squared term, fitted to the
+# replay's walk-forward predictions, bends only that top end: top-6 projected
+# vs actual went 0.904 -> 0.967 with overall log loss unchanged. Monotone by
+# construction (see top_calibrate; this curve turns at p = 0.78, above any
+# projection), so it never reorders hitters.
+HR_TOP_CAL = {"a": -0.6638, "b": 0.3760, "c": -0.1485}
 
 
-def calibrate_game_prob(p: float) -> float:
+def top_calibrate(p: float, cal: Optional[dict] = None) -> float:
+    """expit(a + b*z + c*z^2) with z = logit(p), held monotone.
+
+    A concave quadratic turns over at z = -b / 2c; past that point the curve
+    would start handing lower probabilities to better hitters, so z is capped
+    at the turn (which the fitted curve places above any real projection).
+    """
+    c = cal or HR_TOP_CAL
     p = float(np.clip(p, 1e-6, 1 - 1e-6))
-    return float(1.0 / (1.0 + np.exp(-(CAL_INTERCEPT + CAL_SLOPE * np.log(p / (1 - p))))))
+    z = np.log(p / (1 - p))
+    if c["c"] < 0:
+        z = min(z, -c["b"] / (2 * c["c"]))
+    return float(1.0 / (1.0 + np.exp(-(c["a"] + c["b"] * z + c["c"] * z * z))))
+
+
+def load_model_fit(path: Path = FIT_PATH) -> dict:
+    """Stack coefficients written by the replay (mlb_hr.replay), else the 2026 fit.
+
+    Each stack falls back to its code default on its own, so a file missing or
+    predating one of them never leaves the model without coefficients.
+    """
+    from mlb_hr.pitching import HIT_STACK, HIT_TOP_CAL
+
+    try:
+        fit = json.loads(Path(path).read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        fit = {}
+    if not isinstance(fit, dict):
+        fit = {}
+    for key, default in (("hr_stack", HR_STACK), ("hit_stack", HIT_STACK),
+                         ("hr_top_cal", HR_TOP_CAL), ("hit_top_cal", HIT_TOP_CAL)):
+        entry = fit.get(key)
+        coef = (entry.get("coef") if isinstance(entry, dict) else None) or {}
+        if not isinstance(coef, dict) or not set(default) <= set(coef):
+            fit[key] = {"coef": dict(default), "source": "code default (2026 replay)"}
+    return fit
+
+
+def stacked_game_prob(
+    r_hand: float, r_all: float, park: float, weather: float, sp_index: float,
+    pen_index: float, expected_pa: float, xhr_rate: float, league_rate: float,
+    coef: Optional[dict] = None, level: float = 1.0, top_cal: Optional[dict] = None,
+) -> float:
+    """P(at least one HR tonight) from the model's components (see HR_STACK).
+
+    `level` is an odds multiplier from the tracker's own recent record
+    (snapshot.hr_level); it moves every hitter on a slate together, so it can
+    never reorder them. `top_cal` (HR_TOP_CAL form) is applied last, when
+    given; the served number always passes one.
+    """
+    c = coef or HR_STACK
+    lg = float(np.clip(league_rate, 1e-4, 0.2))
+    z = (
+        np.log(lg / (1 - lg)) + c["intercept"]
+        + c["batter_rate"] * np.log(max(r_all, 1e-6) / lg)
+        + c["hand"] * np.log(max(r_hand, 1e-6) / max(r_all, 1e-6))
+        + c["park"] * np.log(max(park, 1e-3))
+        + c["weather"] * np.log(max(weather, 1e-3))
+        + c["starter"] * np.log(max(sp_index, 1e-3))
+        + c["bullpen"] * np.log(max(pen_index, 1e-3))
+        + c["exposure"] * np.log(float(np.clip(expected_pa, 1.5, 5.2)))
+        + c["xhr"] * np.log(max(xhr_rate, 1e-6) / lg)
+        + np.log(max(level, 1e-3))
+    )
+    p = 1.0 / (1.0 + np.exp(-z))
+    if top_cal is not None:
+        p = top_calibrate(p, top_cal)
+    return float(np.clip(p, 1e-4, MAX_GAME_PROB))
 
 
 class ComparablesKNN:
@@ -149,6 +268,92 @@ class ComparablesKNN:
         return hr_sum / pa_sum
 
 
+def _feature_weights(X: np.ndarray, hr: np.ndarray, pa: np.ndarray) -> np.ndarray:
+    """Weight standardized features by |correlation| with HR rate.
+
+    Plain Euclidean distance treats age and barrel rate as equally important.
+    Weighting by |correlation| makes "nearest" mean nearest in the directions
+    that actually track home-run production.
+    """
+    rates = np.divide(hr, np.maximum(pa, 1))
+    reliable = pa >= RELIABLE_PA
+    if reliable.sum() < 30:
+        reliable = np.ones(len(pa), dtype=bool)
+    weights = np.ones(X.shape[1])
+    for j in range(X.shape[1]):
+        col = X[reliable, j]
+        if np.std(col) < 1e-9:
+            weights[j] = 0.0
+            continue
+        corr = np.corrcoef(col, rates[reliable])[0, 1]
+        weights[j] = abs(corr) if np.isfinite(corr) else 0.0
+    if weights.sum() <= 0:
+        weights = np.ones(X.shape[1])
+    return weights / weights.sum() * len(weights)
+
+
+def _choose_knn(
+    X: np.ndarray, hr: np.ndarray, pa: np.ndarray, ids: list[int], default_k: int = 40
+) -> ComparablesKNN:
+    """Pick k by leave-one-out error, then fit the comparables index.
+
+    Self-exclusion makes the KNN prior inherently leave-one-out, so k can be
+    tuned honestly using only the fitting window.
+    """
+    rates = np.divide(hr, np.maximum(pa, 1))
+    mask = pa >= RELIABLE_PA
+    if mask.sum() < 30:
+        return ComparablesKNN(n_neighbors=default_k).fit(X, hr, pa, ids)
+    best_k, best_mse = default_k, float("inf")
+    for candidate in (10, 15, 20, 30, 40, 60):
+        if candidate >= len(X):
+            continue
+        trial = ComparablesKNN(n_neighbors=candidate).fit(X, hr, pa, ids)
+        prior = np.array([trial.prior(X[i], ids[i]) for i in range(len(X))])
+        mse = float(np.average((prior[mask] - rates[mask]) ** 2, weights=pa[mask]))
+        if mse < best_mse:
+            best_k, best_mse = candidate, mse
+    return ComparablesKNN(n_neighbors=best_k).fit(X, hr, pa, ids)
+
+
+class ServingPrior:
+    """The comparables prior the slate is served from, fit on every PA to date.
+
+    The validation fit (EnsembleHRModel._train) holds the last 20% of the
+    season out so its scores are honest, and the served prior used to come from
+    that same fit -- so by September its neighbour pool was five weeks stale.
+    This refits the same KNN, the same way, on the whole window once
+    validation is done. Only the data changes.
+
+    KNN alone rather than the KNN+SVR core blend: across the rolling backtest
+    KNN alone ranked hitters better (AUC +0.0010, 90% CI +0.0004 to +0.0017).
+    """
+
+    def __init__(self, profiles: dict[int, BatterProfile], espn=None, n_neighbors: int = 40):
+        self.espn = espn
+        self.knn: Optional[ComparablesKNN] = None
+        self.k = 300.0
+        X_raw, hr, pa, ids = build_matrix(profiles, espn, min_pa=1)
+        if len(X_raw) < 50:
+            return
+        self.scaler = StandardScaler().fit(X_raw)
+        X = self.scaler.transform(X_raw)
+        self.weights = _feature_weights(X, hr, pa)
+        X = X * self.weights
+        self.knn = _choose_knn(X, hr, pa, ids, n_neighbors)
+        oof = np.array([self.knn.prior(X[i], ids[i]) for i in range(len(X))])
+        league = float(hr.sum() / pa.sum())
+        k_league = _estimate_k(hr, pa, np.full(len(hr), league)) or 300.0
+        self.k = _estimate_k(hr, pa, np.clip(oof, 0.002, 0.15)) or k_league
+
+    def prior(self, profile: BatterProfile) -> Optional[float]:
+        if self.knn is None:
+            return None
+        bio = self.espn.bio_for(profile.name) if self.espn else None
+        x = self.scaler.transform(profile.feature_vector(bio).reshape(1, -1))[0]
+        return self.knn.prior(x * self.weights, profile.batter_id)
+
+
 class EnsembleHRModel:
     """Empirical-Bayes home-run model with a KNN/SVR comparables prior."""
 
@@ -159,7 +364,7 @@ class EnsembleHRModel:
         espn=None,
         n_neighbors: int = 40,
         half_life_days: Optional[float] = None,
-        serve_variant: str = "core",
+        serve_variant: str = "served",
         cutoff: Optional[str] = None,
         holdout_end: Optional[str] = None,
     ):
@@ -192,9 +397,16 @@ class EnsembleHRModel:
         self.league_rate = 0.03
         self.prior_weights = {"knn": 0.5, "svr": 0.25, "rf": 0.25}
         self.core_weights = {"knn": 1.0, "svr": 0.0}
-        # Which blend the slate is served from. The core model is the default
-        # because the forest variant is unproven on held-out data.
+        # Which prior the slate is served from: "served" is the KNN refit on
+        # the whole season (ServingPrior); any validation variant can be named
+        # instead.
         self.serve_variant = serve_variant
+        self.serving: Optional[ServingPrior] = None
+        fit = load_model_fit()
+        self.stack_coef = fit["hr_stack"]["coef"]
+        self.top_cal = fit["hr_top_cal"]["coef"]
+        self.hit_coef = fit["hit_stack"]["coef"]
+        self.hit_top_cal = fit["hit_top_cal"]["coef"]
         self.k_shrink = {
             "league": 300.0, "knn": 300.0, "svr": 300.0,
             "rf": 300.0, "core": 300.0, "ensemble": 300.0,
@@ -283,6 +495,15 @@ class EnsembleHRModel:
 
         self._validate(cutoff, train_profiles, X, ids)
 
+        # Validation is done; serve from a prior that has seen the whole
+        # season. Backtest windows (an explicit cutoff) only score, never serve.
+        if self.cutoff is None:
+            self.serving = ServingPrior(self.profiles, self.espn, self.knn.n_neighbors)
+            if self.serving.knn is not None:
+                print(f"[ensemble.py] serving prior: KNN k={self.serving.knn.n_neighbors} "
+                      f"on the full season, shrinkage K={self.serving.k:.0f} "
+                      f"(x{SHRINK_MULT} applied)")
+
     def _fit_league_only(self) -> None:
         self.knn.nn = None
         self.svm = None
@@ -302,30 +523,10 @@ class EnsembleHRModel:
             return hi
 
     def _scale_fit(self, X_raw: np.ndarray, hr: np.ndarray, pa: np.ndarray) -> np.ndarray:
-        """Standardize, then weight each feature by its correlation with HR rate.
-
-        Plain Euclidean distance treats age and barrel rate as equally
-        important. Weighting by |correlation| makes "nearest" mean nearest in
-        the directions that actually track home-run production.
-        """
+        """Standardize, then weight each feature by its correlation with HR rate
+        (see _feature_weights)."""
         X = self.scaler.fit_transform(X_raw)
-        rates = np.divide(hr, np.maximum(pa, 1))
-        reliable = pa >= RELIABLE_PA
-        if reliable.sum() < 30:
-            reliable = np.ones(len(pa), dtype=bool)
-
-        weights = np.ones(X.shape[1])
-        for j in range(X.shape[1]):
-            col = X[reliable, j]
-            if np.std(col) < 1e-9:
-                weights[j] = 0.0
-                continue
-            corr = np.corrcoef(col, rates[reliable])[0, 1]
-            weights[j] = abs(corr) if np.isfinite(corr) else 0.0
-
-        if weights.sum() <= 0:
-            weights = np.ones(X.shape[1])
-        weights = weights / weights.sum() * len(weights)
+        weights = _feature_weights(X, hr, pa)
         self.feature_weights = weights
 
         top = sorted(zip(FEATURE_NAMES, weights), key=lambda t: -t[1])[:5]
@@ -493,29 +694,10 @@ class EnsembleHRModel:
     def _select_neighbors(
         self, X: np.ndarray, hr: np.ndarray, pa: np.ndarray, ids: list[int]
     ) -> None:
-        """Choose k by leave-one-out error, then fit the comparables index.
-
-        Self-exclusion makes the KNN prior inherently leave-one-out, so k can be
-        tuned honestly using only the fitting window.
-        """
-        rates = np.divide(hr, np.maximum(pa, 1))
-        mask = pa >= RELIABLE_PA
-        if mask.sum() < 30:
-            self.knn.fit(X, hr, pa, ids)
-            return
-
-        best_k, best_mse = self.knn.n_neighbors, float("inf")
-        for candidate in (10, 15, 20, 30, 40, 60):
-            if candidate >= len(X):
-                continue
-            trial = ComparablesKNN(n_neighbors=candidate).fit(X, hr, pa, ids)
-            prior = np.array([trial.prior(X[i], ids[i]) for i in range(len(X))])
-            mse = float(np.average((prior[mask] - rates[mask]) ** 2, weights=pa[mask]))
-            if mse < best_mse:
-                best_k, best_mse = candidate, mse
-
-        print(f"[ensemble.py] comparables k={best_k} (LOO weighted MSE {best_mse:.3e})")
-        self.knn = ComparablesKNN(n_neighbors=best_k).fit(X, hr, pa, ids)
+        """Choose k by leave-one-out error, then fit the comparables index
+        (see _choose_knn)."""
+        self.knn = _choose_knn(X, hr, pa, ids, self.knn.n_neighbors)
+        print(f"[ensemble.py] comparables k={self.knn.n_neighbors}")
 
     def _out_of_fold_priors(
         self, X: np.ndarray, hr: np.ndarray, pa: np.ndarray, ids: list[int]
@@ -721,11 +903,18 @@ class EnsembleHRModel:
             x = x * self.feature_weights
         return x
 
+    def _serving_ready(self) -> bool:
+        return self.serving is not None and self.serving.knn is not None
+
     def prior_for(self, profile: BatterProfile, which: str = "ensemble") -> float:
         cache_key = (profile.batter_id, which)
         if cache_key in self._prior_cache:
             return self._prior_cache[cache_key]
-        if self.knn.nn is None:
+        if which == "served" and not self._serving_ready():
+            which = "knn"   # no full-season refit (backtest window): validation KNN
+        if which == "served":
+            value = self.serving.prior(profile)
+        elif self.knn.nn is None:
             value = self.league_rate
         else:
             value = self._prior_for_row(
@@ -733,6 +922,14 @@ class EnsembleHRModel:
             )
         self._prior_cache[cache_key] = value
         return value
+
+    def shrinkage_k(self, which: str) -> float:
+        """Empirical-Bayes K for a prior variant, SHRINK_MULT applied."""
+        if which == "served":
+            base = self.serving.k if self._serving_ready() else self.k_shrink.get("knn", 300.0)
+        else:
+            base = self.k_shrink.get(which, 300.0)
+        return base * SHRINK_MULT
 
     # ---------------------------------------------------------------- inference
 
@@ -745,10 +942,12 @@ class EnsembleHRModel:
         """Empirical-Bayes posterior HR rate per plate appearance."""
         prior = self.prior_for(profile, which)
         # "ALL" means a hand-agnostic rate, used for bullpen exposure where the
-        # relievers are not known in advance.
+        # relievers are not known in advance. Platoon factors are looked up by
+        # batting hand, so a switch hitter (always with the platoon edge) gets
+        # the neutral 1.0 both ways -- see features.platoon_factors.
         factor = (
             1.0 if pitcher_hand == "ALL"
-            else self.platoon.get((profile.bat_side, pitcher_hand), 1.0)
+            else self.platoon.get((profile.bats, pitcher_hand), 1.0)
         )
         prior_split = prior * factor
 
@@ -756,9 +955,16 @@ class EnsembleHRModel:
         if pa <= 0:
             hr, pa = profile.observed_weighted("ALL")
 
-        k = self.k_shrink.get(which if which != "svr" else "svr", 300.0)
+        k = self.shrinkage_k(which)
         posterior = (hr + k * prior_split) / (pa + k)
         return float(np.clip(posterior, 0.0005, 0.15))
+
+    def xhr_rate(self, profile: BatterProfile, league_hr_rate: float) -> float:
+        """Recency-weighted expected-HR rate per PA, shrunk toward league."""
+        return float(
+            (profile.xhr_w + XHR_PRIOR_PA * league_hr_rate)
+            / (profile.w_pa + XHR_PRIOR_PA)
+        )
 
     def pr_hr_ensemble(
         self,
@@ -772,34 +978,34 @@ class EnsembleHRModel:
         weather_factor: float = 1.0,
         tto_factors: Optional[tuple] = None,
         sp_hr_index: float = 1.0,
+        level: float = 1.0,
     ) -> dict[str, float]:
         """Per-game HR probability from each prior variant.
 
-        Returned probabilities are per *game*: a per-PA rate converted through
-        the batter's own plate appearances per game. The old code reported a
-        per-PA rate under a "HR Probability" label, which understated the daily
-        question the slate is actually asking.
+        Returned probabilities are per *game*. Each variant's per-PA rates (vs
+        the starter's hand, and hand-agnostic for the bullpen) are combined
+        with the park, weather, starter, bullpen, exposure and expected-HR
+        terms by the stacked model (stacked_game_prob / HR_STACK), and `level`
+        -- the tracker's own recent actual-over-projected, as odds -- is
+        applied to every variant alike.
 
-        Exposure is split between the starter and the bullpen. A starter turns
-        over about 2.4 times through the order, so a regular's last one or two
-        trips come against relief -- charging every plate appearance to the
-        starter's handedness misattributes roughly 40% of the exposure, and
-        bullpens allow home runs at rates well away from league average.
-
-        `sp_hr_index` is the opposing starter's shrunk HR rate over league
-        (PitcherProfile.hr_index), applied to the starter share only, the same
-        way the bullpen index is applied to the relief share.
+        The older product of multipliers is still computed and returned as
+        `<variant>_uncalibrated`, with its starter-share and bullpen-share
+        per-PA rates, so the page can show the chain of factors. A starter
+        turns over about 2.4 times through the order, so a regular's last one
+        or two trips come against relief; `sp_hr_index` (PitcherProfile.hr_index)
+        applies to the starter share, the bullpen index to the relief share.
         """
         profile = self.profiles.get(batter.batter_id)
         if profile is None:
             base = self.model.pr_hr_today(batter, pitcher_id, venue, pitcher_hand)
             return {"empirical_bayes": base, "ensemble": base}
 
-        # Handedness-split park factor, leveraged by how much this hitter pulls.
-        # A short porch is worth more to a pull-heavy hitter than to a spray
-        # hitter of the same power, so the park's departure from neutral is
-        # scaled by pull tendency relative to league.
-        park_side = self.model.park_factor_for(venue, profile.bat_side)
+        # Handedness-split park factor for the side he bats from against the
+        # starter (a switch hitter's changes with the starter's hand), leveraged
+        # by how much this hitter pulls: a short porch is worth more to a
+        # pull-heavy hitter than to a spray hitter of the same power.
+        park_side = self.model.park_factor_for(venue, profile.side_vs(pitcher_hand))
         pull_leverage = float(np.clip(profile.pull_rate / 0.40, 0.7, 1.3))
         park = 1.0 + (park_side - 1.0) * pull_leverage
 
@@ -818,6 +1024,9 @@ class EnsembleHRModel:
         if bullpen is not None and league_hr_rate:
             pen_index = bullpen.hr_index(league_hr_rate)
 
+        league = league_hr_rate or self.league_rate
+        xhr_rate = self.xhr_rate(profile, league)
+
         result: dict[str, float] = {}
         for label, which in (
             ("empirical_bayes", "league"),
@@ -830,30 +1039,42 @@ class EnsembleHRModel:
             ("logistic", "logistic"),
             ("neural", "nn"),
             ("xgboost", "xgb"),
-            # The served number, from whichever variant is configured.
+            ("served", "served"),
+            # The published number, from whichever variant is configured.
             ("ensemble", self.serve_variant),
         ):
+            r_hand = self.per_pa_rate(profile, pitcher_hand, which)
+            r_all = self.per_pa_rate(profile, "ALL", which)
             rate_sp = float(np.clip(
-                self.per_pa_rate(profile, pitcher_hand, which)
-                * park * weather_factor * tto_sp * sp_hr_index,
-                0.0005, 0.15,
+                r_hand * park * weather_factor * tto_sp * sp_hr_index, 0.0005, 0.15,
             ))
             rate_pen = float(np.clip(
-                self.per_pa_rate(profile, "ALL", which)
-                * park * weather_factor * pen_index * tto_pen,
-                0.0005, 0.15,
+                r_all * park * weather_factor * pen_index * tto_pen, 0.0005, 0.15,
             ))
             raw = (
                 1.0
                 - (1.0 - rate_sp) ** pa_vs_sp
                 * (1.0 - rate_pen) ** pa_vs_pen
             )
-            result[label] = calibrate_game_prob(raw)
+            result[label] = stacked_game_prob(
+                r_hand, r_all, park, weather_factor, sp_hr_index, pen_index,
+                expected_pa, xhr_rate, league, self.stack_coef, level, self.top_cal,
+            )
+            if label == "ensemble":
+                # Before the tracker's level: what the level itself learns from,
+                # so it corrects the model rather than chasing its own output.
+                result["ensemble_base"] = stacked_game_prob(
+                    r_hand, r_all, park, weather_factor, sp_hr_index, pen_index,
+                    expected_pa, xhr_rate, league, self.stack_coef, 1.0,
+                )
             result[f"{label}_uncalibrated"] = float(raw)
             result[f"{label}_per_pa"] = rate_sp
             result[f"{label}_per_pa_pen"] = rate_pen
 
         result["served_variant"] = self.serve_variant
+        result["xhr_rate"] = round(xhr_rate, 5)
+        result["level"] = round(level, 3)
+        result["bats"] = profile.bats
         result["expected_pa"] = expected_pa
         result["pa_vs_sp"] = round(pa_vs_sp, 1)
         result["pa_vs_pen"] = round(pa_vs_pen, 1)
@@ -905,9 +1126,9 @@ class EnsembleHRModel:
             x = X[row_of[batter_id]]
             for variant in variants:
                 prior = self._prior_for_row(x, batter_id, variant)
-                k = self.k_shrink.get(variant, 300.0)
+                k = self.shrinkage_k(variant)
                 for hand in ("L", "R"):
-                    factor = platoon.get((profile.bat_side, hand), 1.0)
+                    factor = platoon.get((profile.bats, hand), 1.0)
                     hr, pa = profile.observed_weighted(hand)
                     if pa <= 0:
                         hr, pa = profile.observed_weighted("ALL")

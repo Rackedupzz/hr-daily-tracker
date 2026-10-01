@@ -20,7 +20,7 @@ from mlb_hr.results import attach_results, fetch_results
 from mlb_hr.fetch import live_games
 from mlb_hr.slate import build_slate_for_date, lock_started_picks
 from mlb_hr.snapshot import (
-    finalize_pending, is_complete, load_slate, published_picks, write_snapshot,
+    finalize_pending, hr_level, is_complete, load_slate, published_picks, write_snapshot,
 )
 
 
@@ -118,7 +118,13 @@ def create_app(pa_data_path: str = None) -> Flask:
 
     def build_slate(day: date) -> dict:
         """Fit the model for a date and stamp when it was built."""
-        data = build_slate_for_date(day, pa_data_path, use_ensemble=True)
+        from mlb_hr.ensemble import MODEL_VERSION
+
+        # The HR level learns from this model's own settled days; before any
+        # exist it is 1.0 and changes nothing.
+        level = hr_level(SNAPSHOT_DIR, day, MODEL_VERSION)
+        print(f"[app.py] HR level for {day}: x{level:.3f} (odds)")
+        data = build_slate_for_date(day, pa_data_path, use_ensemble=True, hr_level=level)
         data["built_at"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         return data
 
@@ -390,6 +396,10 @@ def create_app(pa_data_path: str = None) -> Flask:
     def homer_stale(card, slate) -> bool:
         """Rebuild when there is no card, or the slate was refit after it."""
         if card is None:
+            return True
+        # A card from before the 5-pick parlays existed is rebuilt once to add
+        # them; its published picks are locked, so nothing else moves.
+        if "five_picks" not in card:
             return True
         if card.get("record", {}).get("complete"):
             return False
