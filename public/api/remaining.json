@@ -1,7 +1,7 @@
 {
   "date": "2026-10-06",
-  "built_at": "2026-10-06 17:22:13",
-  "fetched_at": "2026-10-06 17:22:13",
+  "built_at": "2026-10-06 20:14:37",
+  "fetched_at": "2026-10-06 20:14:37",
   "games": [
     {
       "game_pk": 849819,
@@ -13,16 +13,16 @@
       "away_sp_hand": "R",
       "home_sp_hand": "L",
       "state": "Preview",
-      "detailed": "Scheduled",
-      "inning": null,
-      "away_score": null,
-      "home_score": null,
+      "detailed": "Pre-Game",
+      "inning": "1st",
+      "away_score": 0,
+      "home_score": 0,
       "hr": [
         {
           "batter": "Matt Olson",
           "batter_id": 621566,
           "team": "Atlanta Braves",
-          "prob_hr": 0.17034255195278733,
+          "prob_hr": 0.1609071875624196,
           "facing_hand": "R",
           "season": "42 HR / 720 PA",
           "result": null
@@ -31,18 +31,18 @@
           "batter": "Ronald Acu\u00f1a Jr.",
           "batter_id": 660670,
           "team": "Atlanta Braves",
-          "prob_hr": 0.16390468108989148,
+          "prob_hr": 0.15458524069846752,
           "facing_hand": "R",
           "season": "20 HR / 491 PA",
           "result": null
         },
         {
-          "batter": "Shohei Ohtani",
-          "batter_id": 660271,
-          "team": "Los Angeles Dodgers",
-          "prob_hr": 0.14909456584446917,
-          "facing_hand": "L",
-          "season": "30 HR / 626 PA",
+          "batter": "Drake Baldwin",
+          "batter_id": 686948,
+          "team": "Atlanta Braves",
+          "prob_hr": 0.13885185017878765,
+          "facing_hand": "R",
+          "season": "25 HR / 637 PA",
           "result": null
         }
       ],
@@ -57,20 +57,20 @@
           "matchup": null
         },
         {
+          "batter": "Freddie Freeman",
+          "batter_id": 518692,
+          "team": "Los Angeles Dodgers",
+          "projected_hits": 1.0,
+          "prob_at_least_one": 0.6789564373768325,
+          "result": null,
+          "matchup": null
+        },
+        {
           "batter": "Drake Baldwin",
           "batter_id": 686948,
           "team": "Atlanta Braves",
           "projected_hits": 0.96,
           "prob_at_least_one": 0.661210809340689,
-          "result": null,
-          "matchup": null
-        },
-        {
-          "batter": "Freddie Freeman",
-          "batter_id": 518692,
-          "team": "Los Angeles Dodgers",
-          "projected_hits": 0.95,
-          "prob_at_least_one": 0.661387057086112,
           "result": null,
           "matchup": null
         }

@@ -4,7 +4,7 @@
   "card": {
     "bot": "HOMER",
     "date": "2026-10-06",
-    "built_at": "2026-10-06 17:22:21",
+    "built_at": "2026-10-06 20:14:44",
     "book_through": "2026-10-06",
     "league": {
       "pa": 183772,
@@ -732,7 +732,7 @@
         "edge": 0.033920946910243804
       },
       {
-        "rules_prob": 0.17181349576235339,
+        "rules_prob": 0.17229185076677,
         "xhr_rate": 0.05378899226763991,
         "hr_rate": 0.051433263948715904,
         "recent_rate": 0.052082554062304054,
@@ -752,10 +752,10 @@
         "pen_index": 0.8837525126626765,
         "platoon": 1.0604372194892515,
         "park": 1.015,
-        "weather": 1.0,
-        "weather_note": "",
+        "weather": 1.003,
+        "weather_note": "wind 8 mph blowing in from LF",
         "exp_pa": 4.45,
-        "slot": null,
+        "slot": 3,
         "usual_slot": 3,
         "pa_vs_sp": 2.89,
         "pa_vs_pen": 1.56,
@@ -769,11 +769,11 @@
         "matchup": "Los Angeles Dodgers @ Atlanta Braves",
         "venue": "Truist Park",
         "sp_name": "Yoshinobu Yamamoto",
-        "model_prob": 0.17034255195278733,
+        "model_prob": 0.1609071875624196,
         "injury_note": null,
-        "lineup_posted": false,
-        "lineup_confirmed": false,
-        "prob": 0.16961012469243017,
+        "lineup_posted": true,
+        "lineup_confirmed": true,
+        "prob": 0.16976186294531115,
         "method": "learned",
         "contrib": {
           "xhr": 0.5129,
@@ -783,20 +783,20 @@
           "sp_hr": -0.0202,
           "sp_fly": -0.1116,
           "park": 0.0082,
-          "weather": -0.0474,
+          "weather": -0.0444,
           "exp_pa": 0.1025,
           "sample": 0.0821
         },
         "take": [
           "Contact quality: 41.2 xHR in 715 PA (1.76&times; league) <span class='muted'>(+67% odds)</span>",
           "Proven power: 42 HR in 715 PA <span class='muted'>(+14% odds)</span>",
-          "Lineup not posted; usually bats 3 (4.5 trips) <span class='muted'>(+11% odds)</span>",
+          "Batting 3: 4.5 projected trips <span class='muted'>(+11% odds)</span>",
           "Knock: Yoshinobu Yamamoto lives in the air: 24% fly balls <span class='muted'>(-11% odds)</span>"
         ],
         "market_prob": 0.1877145744268202,
         "book_implied": 0.22901178080072065,
         "book_price": "+337",
-        "book_edge": -0.25938253438577497,
+        "book_edge": -0.25871995601382203,
         "grade": "C",
         "evidence": {
           "grade": "C",
@@ -808,7 +808,7 @@
           "avg_prob": 0.1562
         },
         "tag": "LIKE IT",
-        "edge": -0.0007324272603571602
+        "edge": 0.008854675382891558
       }
     ],
     "hit_picks": [
@@ -833,7 +833,7 @@
         "pen_hit_index": 0.9533777783539804,
         "park": 1.049,
         "exp_pa": 4.65,
-        "slot": null,
+        "slot": 1,
         "usual_slot": 1,
         "sp_hand": "L",
         "lg_hit": 0.21808545371438523,
@@ -847,12 +847,12 @@
         "sp_name": "Chris Sale",
         "model_prob": 0.6923192088013301,
         "injury_note": null,
-        "lineup_posted": false,
-        "lineup_confirmed": false,
+        "lineup_posted": true,
+        "lineup_confirmed": true,
         "prob": 0.6736065483162114,
         "method": "learned",
         "take": [
-          "Usually bats 1: 4.7 trips <span class='muted'>(+28% odds)</span>",
+          "Batting 1: 4.7 trips to the plate <span class='muted'>(+28% odds)</span>",
           "Strikeout rate 14% (league 22%) <span class='muted'>(+15% odds)</span>",
           "Truist Park plays 1.05&times; for hits <span class='muted'>(+9% odds)</span>",
           "Knock: Chris Sale strikes out 29% (league 22%) <span class='muted'>(-12% odds)</span>"
@@ -1027,6 +1027,20 @@
         "weather": 1.0
       },
       {
+        "batter": "Freddie Freeman",
+        "batter_id": 518692,
+        "team": "Los Angeles Dodgers",
+        "game_pk": 849819,
+        "matchup": "Los Angeles Dodgers @ Atlanta Braves",
+        "prob": 0.12546833680328762,
+        "model_prob": 0.09539164867153224,
+        "edge": 0.030076688131755375,
+        "barrel_rate": 0.05498909707019495,
+        "sp_name": "Chris Sale",
+        "park": 1.015,
+        "weather": 1.003
+      },
+      {
         "batter": "Christian Yelich",
         "batter_id": 592885,
         "team": "Milwaukee Brewers",
@@ -1041,32 +1055,18 @@
         "weather": 1.0
       },
       {
-        "batter": "Jake Cronenworth",
-        "batter_id": 630105,
-        "team": "San Diego Padres",
-        "game_pk": 849826,
-        "matchup": "Milwaukee Brewers @ San Diego Padres",
-        "prob": 0.0700998865708267,
-        "model_prob": 0.04711080583880167,
-        "edge": 0.022989080732025033,
-        "barrel_rate": 0.03485040373092081,
-        "sp_name": "Dustin May",
-        "park": 0.958,
-        "weather": 1.0
-      },
-      {
-        "batter": "Freddie Freeman",
-        "batter_id": 518692,
-        "team": "Los Angeles Dodgers",
+        "batter": "Michael Harris II",
+        "batter_id": 671739,
+        "team": "Atlanta Braves",
         "game_pk": 849819,
         "matchup": "Los Angeles Dodgers @ Atlanta Braves",
-        "prob": 0.11843353112350752,
-        "model_prob": 0.09589003453333005,
-        "edge": 0.022543496590177473,
-        "barrel_rate": 0.05498909707019495,
-        "sp_name": "Chris Sale",
+        "prob": 0.1262577976979634,
+        "model_prob": 0.10297114711928584,
+        "edge": 0.023286650578677542,
+        "barrel_rate": 0.051412729879449455,
+        "sp_name": "Yoshinobu Yamamoto",
         "park": 1.015,
-        "weather": 1.0
+        "weather": 1.003
       }
     ],
     "fades": [
@@ -1076,13 +1076,13 @@
         "team": "Atlanta Braves",
         "game_pk": 849819,
         "matchup": "Los Angeles Dodgers @ Atlanta Braves",
-        "prob": 0.031708439500685595,
-        "model_prob": 0.05729072117949208,
-        "edge": -0.02558228167880648,
+        "prob": 0.02843,
+        "model_prob": 0.05225149061306062,
+        "edge": -0.02382149061306062,
         "barrel_rate": 0.034387763319872526,
         "sp_name": "Yoshinobu Yamamoto",
         "park": 1.015,
-        "weather": 1.0
+        "weather": 0.928
       },
       {
         "batter": "Sean Murphy",
@@ -1090,27 +1090,13 @@
         "team": "Atlanta Braves",
         "game_pk": 849819,
         "matchup": "Los Angeles Dodgers @ Atlanta Braves",
-        "prob": 0.08290439444055533,
-        "model_prob": 0.09853748092576532,
-        "edge": -0.015633086485209988,
+        "prob": 0.08057271814294784,
+        "model_prob": 0.1038947932058252,
+        "edge": -0.023322075062877368,
         "barrel_rate": 0.07667411613111058,
         "sp_name": "Yoshinobu Yamamoto",
         "park": 1.015,
-        "weather": 1.0
-      },
-      {
-        "batter": "Mike Yastrzemski",
-        "batter_id": 573262,
-        "team": "Atlanta Braves",
-        "game_pk": 849819,
-        "matchup": "Los Angeles Dodgers @ Atlanta Braves",
-        "prob": 0.08491553372695258,
-        "model_prob": 0.09718804990100119,
-        "edge": -0.012272516174048606,
-        "barrel_rate": 0.04926569116754565,
-        "sp_name": "Yoshinobu Yamamoto",
-        "park": 1.015,
-        "weather": 1.0
+        "weather": 0.928
       },
       {
         "batter": "Austin Riley",
@@ -1118,13 +1104,13 @@
         "team": "Atlanta Braves",
         "game_pk": 849819,
         "matchup": "Los Angeles Dodgers @ Atlanta Braves",
-        "prob": 0.10768920982224027,
-        "model_prob": 0.1198451123220225,
-        "edge": -0.012155902499782226,
+        "prob": 0.10066089220133105,
+        "model_prob": 0.11172626242985577,
+        "edge": -0.011065370228524718,
         "barrel_rate": 0.0736441825573661,
         "sp_name": "Yoshinobu Yamamoto",
         "park": 1.015,
-        "weather": 1.0
+        "weather": 0.928
       },
       {
         "batter": "Jackson Merrill",
@@ -1139,6 +1125,20 @@
         "sp_name": "Dustin May",
         "park": 0.958,
         "weather": 1.0
+      },
+      {
+        "batter": "Teoscar Hern\u00e1ndez",
+        "batter_id": 606192,
+        "team": "Los Angeles Dodgers",
+        "game_pk": 849819,
+        "matchup": "Los Angeles Dodgers @ Atlanta Braves",
+        "prob": 0.12726191143483137,
+        "model_prob": 0.1332968892077238,
+        "edge": -0.006034977772892441,
+        "barrel_rate": 0.07937820072942742,
+        "sp_name": "Chris Sale",
+        "park": 1.015,
+        "weather": 0.928
       }
     ],
     "locked": [],
@@ -1172,7 +1172,7 @@
         "void": 0,
         "pending": 0
       },
-      "graded_at": "2026-10-06 17:22:13",
+      "graded_at": "2026-10-06 20:14:37",
       "complete": false
     }
   },
