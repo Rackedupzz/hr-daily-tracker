@@ -50,7 +50,7 @@ Results and past HOMER cards are static. `requirements.txt` is deliberately
 empty so Vercel installs nothing into the function; the pipeline's
 dependencies are in `requirements-ml.txt` and `requirements-app.txt`.
 
-Needs repo secrets `HF_TOKEN`, `HF_DATA_REPO` and `VERCEL_TOKEN` (a token from
+Needs repo secrets `HF_TOKEN`, `HF_DATA_REPO` and `MLB` (a Vercel token from
 vercel.com/account/tokens; without it the deploy step is skipped with a warning). Run it by hand from the
 Actions tab (tick *force fit* to refit regardless of age). To render locally
 from saved snapshots without fitting: `python -m mlb_hr.publish --render-only`.

@@ -3,7 +3,7 @@
 # deploys it to the hr-daily-tracker Vercel project -- the NFL tracker's way:
 # the heavy work runs here, Vercel serves the pages and api/live.py alone.
 #
-# Needs a VERCEL_TOKEN repository secret (vercel.com/account/tokens); without
+# Needs the MLB repository secret, a Vercel token (vercel.com/account/tokens); without
 # it the site is still committed, and the deploy step says what is missing.
 name: Publish site
 
@@ -96,11 +96,11 @@ jobs:
       - name: Deploy to Vercel
         working-directory: site
         env:
-          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_TOKEN: ${{ secrets.MLB }}
           VERCEL_ORG_ID: team_b9Ang4tfUOFZfL5RCz3UOl29
           VERCEL_PROJECT_ID: prj_d65zPfscnREEHTzuBrqIdZZT7BBv
         run: |
           if [ -z "$VERCEL_TOKEN" ]; then
-            echo "::warning::Add the VERCEL_TOKEN repository secret (vercel.com/account/tokens) to deploy"; exit 0
+            echo "::warning::Add the MLB repository secret, a Vercel token (vercel.com/account/tokens), to deploy"; exit 0
           fi
           npx --yes vercel@latest deploy --prod --yes --token "$VERCEL_TOKEN"
