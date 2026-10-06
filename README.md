@@ -33,7 +33,7 @@ Open http://localhost:5000 in your browser.
 ## Live site (GitHub Actions + Vercel)
 
 The fit runs on a schedule; scores are live. `.github/workflows/publish.yml`
-runs four times a day: it pulls `data/` from Hugging Face, runs
+runs hourly through game hours: it pulls `data/` from Hugging Face, runs
 `python -m mlb_hr.publish` (one pass of the server's warm-up loop: feed top-up,
 refit when stale, snapshots, HOMER), pushes the data back to the Hub and
 commits `public/` and `snapshots/`. Vercel deploys on each push.
