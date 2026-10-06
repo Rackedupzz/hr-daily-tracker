@@ -32,11 +32,19 @@ Open http://localhost:5000 in your browser.
 
 ## Live site (GitHub Actions + Vercel)
 
-The hosted site is static. `.github/workflows/publish.yml` runs four times a
-day: it pulls `data/` from Hugging Face, runs `python -m mlb_hr.publish` (one
-pass of the server's warm-up loop: feed top-up, refit when stale, live scores,
-snapshots, HOMER), pushes the data back to the Hub and commits `public/` and
-`snapshots/`. Vercel deploys `public/` on each push (`vercel.json`).
+The fit runs on a schedule; scores are live. `.github/workflows/publish.yml`
+runs four times a day: it pulls `data/` from Hugging Face, runs
+`python -m mlb_hr.publish` (one pass of the server's warm-up loop: feed top-up,
+refit when stale, snapshots, HOMER), pushes the data back to the Hub and
+commits `public/` and `snapshots/`. Vercel deploys on each push.
+
+`/`, `/models` and `/homer` are served by `api/live.py`, a standard-library-only
+Vercel function that loads the published slate and pulls live scores and box
+scores from MLB on each request (CDN-cached 30s; pages self-refresh every 60s).
+If MLB is unreachable it serves the prerendered copy in `public/fallback/`.
+Results and past HOMER cards are static. `requirements.txt` is deliberately
+empty so Vercel installs nothing into the function; the pipeline's
+dependencies are in `requirements-ml.txt` and `requirements-app.txt`.
 
 Needs repo secrets `HF_TOKEN` and `HF_DATA_REPO`. Run it by hand from the
 Actions tab (tick *force fit* to refit regardless of age). To render locally
@@ -73,7 +81,7 @@ docker compose exec hr-tracker python -m mlb_hr.hf_data push
 
 ### Install
 ```bash
-pip install -r requirements.txt
+pip install -r requirements-ml.txt -r requirements-app.txt
 ```
 
 ### Run
@@ -105,7 +113,7 @@ mlb-hr-model/
 │       └── season_pa.jsonl  # Full 2026 season PA data (~165K records)
 ├── Dockerfile               # Container definition
 ├── docker-compose.yml       # Compose configuration
-├── requirements.txt         # Python dependencies
+├── requirements-app.txt     # Python dependencies (requirements.txt stays empty for Vercel)
 └── README.md               # This file
 ```
 

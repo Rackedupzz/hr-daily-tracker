@@ -5,15 +5,26 @@
   "buildCommand": "",
   "outputDirectory": "public",
   "trailingSlash": true,
-  "ignoreCommand": "git diff --quiet HEAD^ HEAD -- public/ vercel.json",
+  "functions": {
+    "api/live.py": {
+      "maxDuration": 30,
+      "includeFiles": "{src/mlb_hr/**/*.py,snapshots/current.json,snapshots/*-slate.json.gz,snapshots/homer/*.json,public/fallback/*.html}",
+      "excludeFiles": "{tests/**,k8s/**,examples/**,snapshots/*.pdf,snapshots/*.xlsx,snapshots/*.csv,public/results/**,public/homer/**}"
+    }
+  },
   "rewrites": [
+    { "source": "/", "destination": "/api/live?page=slate" },
+    { "source": "/models", "destination": "/api/live?page=models" },
+    { "source": "/models/", "destination": "/api/live?page=models" },
+    { "source": "/homer", "destination": "/api/live?page=homer" },
+    { "source": "/homer/", "destination": "/api/live?page=homer" },
     { "source": "/api/remaining", "destination": "/api/remaining.json" },
     { "source": "/api/homer", "destination": "/api/homer.json" },
     { "source": "/health", "destination": "/health.json" }
   ],
   "headers": [
     {
-      "source": "/(.*)",
+      "source": "/(results|homer)/(.*)",
       "headers": [{ "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }]
     }
   ]

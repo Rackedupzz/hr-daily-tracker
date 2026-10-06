@@ -17,7 +17,6 @@ from __future__ import annotations
 import argparse
 import json
 import os
-import re
 import shutil
 import sys
 from datetime import date, datetime, timedelta
@@ -26,6 +25,7 @@ from pathlib import Path
 from mlb_hr import homer
 from mlb_hr.app import SNAPSHOT_DIR, baseball_day
 from mlb_hr.fetch import fetch_season, live_games, schedule
+from mlb_hr.publish_links import staticize
 from mlb_hr.render import remaining_projections, render_html, render_models_html
 from mlb_hr.render_review import render_homer_html, render_results_html
 from mlb_hr.results import attach_results, fetch_results
@@ -140,15 +140,17 @@ def maybe_refit_homer() -> None:
 
 # ── static output ───────────────────────────────────────────────────────────
 
-_QUERY_LINK = re.compile(r"/(results|homer)\?date=(\d{4}-\d{2}-\d{2})")
-
-
-def staticize(html: str) -> str:
-    return _QUERY_LINK.sub(r"/\1/\2/", html)
-
-
 def write_page(out: Path, route: str, html: str) -> None:
     path = out / route.strip("/") / "index.html" if route.strip("/") else out / "index.html"
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(staticize(html), encoding="utf-8")
+
+
+def write_fallback(out: Path, page: str, html: str) -> None:
+    """`/`, `/models` and `/homer` are served live by api/live.py. A file at
+    those paths would shadow the rewrite, so the prerendered copy lives under
+    fallback/ for the function to serve when the MLB API is unreachable."""
+    path = out / "fallback" / f"{page}.html"
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(staticize(html), encoding="utf-8")
 
@@ -179,8 +181,8 @@ def render_site(out: Path, slate: dict | None, target: date | None) -> None:
     out.mkdir(parents=True)
 
     if slate is not None:
-        write_page(out, "/", render_html(slate))
-        write_page(out, "/models", render_models_html(slate))
+        write_fallback(out, "slate", render_html(slate))
+        write_fallback(out, "models", render_models_html(slate))
         write_json(out, "/api/remaining.json", {
             "date": slate["date"], "built_at": slate.get("built_at"),
             "fetched_at": (slate.get("results") or {}).get("fetched_at"),
@@ -210,7 +212,7 @@ def render_site(out: Path, slate: dict | None, target: date | None) -> None:
                    render_homer_html(homer.load_card(day, SNAPSHOT_DIR), record, card_days, day, ""))
     current = str(slate["date"]) if slate else (card_days[-1] if card_days else str(cutoff))
     card = homer.load_card(current, SNAPSHOT_DIR)
-    write_page(out, "/homer", render_homer_html(card, record, card_days, current, ""))
+    write_fallback(out, "homer", render_homer_html(card, record, card_days, current, ""))
     write_json(out, "/api/homer.json",
                {"date": current, "status": "", "card": card, "record": record})
     write_json(out, "/health.json", {"status": "ok",
@@ -221,7 +223,7 @@ def render_site(out: Path, slate: dict | None, target: date | None) -> None:
         body = ui.hero("Off day", "No games on the schedule",
                        'Nothing is scheduled in the next few days. Past slates are under '
                        '<a href="/results">Results</a>.')
-        write_page(out, "/", ui.page("HR Daily Tracker", "slate", body))
+        write_fallback(out, "slate", ui.page("HR Daily Tracker", "slate", body))
     log(f"site written to {out}")
 
 
@@ -259,6 +261,9 @@ def main(argv=None) -> None:
         settle_past(target)
         maybe_refit_homer()
 
+    # The live function (api/live.py) re-scores this day on every request.
+    (SNAPSHOT_DIR / "current.json").write_text(
+        json.dumps({"date": str(slate["date"]) if slate else None}), encoding="utf-8")
     render_site(Path(args.out), slate, target)
 
 

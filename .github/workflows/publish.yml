@@ -45,12 +45,12 @@ jobs:
           cache: pip
           cache-dependency-path: |
             requirements-ml.txt
-            requirements.txt
+            requirements-app.txt
 
       - name: Install dependencies
         run: |
           pip install -r requirements-ml.txt
-          pip install -r requirements.txt
+          pip install -r requirements-app.txt
 
       - name: Pull model data from Hugging Face
         run: python -m mlb_hr.hf_data pull

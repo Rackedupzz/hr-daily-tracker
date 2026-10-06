@@ -1,7 +1,7 @@
 {
   "date": "2026-10-05",
   "built_at": "2026-10-06 01:42:52",
-  "fetched_at": "2026-10-06 02:08:20",
+  "fetched_at": "2026-10-06 02:10:10",
   "games": [
     {
       "game_pk": 849839,
@@ -16,7 +16,7 @@
       "detailed": "In Progress",
       "inning": "5th",
       "away_score": 1,
-      "home_score": 3,
+      "home_score": 5,
       "hr": [
         {
           "batter": "Ben Rice",
