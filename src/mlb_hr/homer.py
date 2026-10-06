@@ -1137,143 +1137,65 @@ def price_leg(c: dict, kind: str, season_prob: float, fit: Optional[dict] = None
     return c
 
 
-# Each play: total legs, how many are home-run legs, and how HOMER picks them.
-# "prob" takes his most likely legs (built to cash). "value" takes his biggest
-# edges over the book's price among real contenders (built to pay). Every leg
-# comes from a different game, so legs don't rise and fall together -- which is
-# what lets the chance be the product of the legs, and what keeps the book from
-# repricing it as a correlated same-game parlay.
-# Every play has to cash on at least three days in ten, which decides the whole
-# board. A parlay can never beat its weakest leg, and HOMER's best home run leg
-# cashed 21% in the replay, so no ticket carrying one can clear that bar: these
-# are all hit legs. Two legs is too short to fall under 46% and five is too long
-# to reach 30%, so every play is three or four legs, and what separates them is
-# how many of those legs are taken for price instead of for likelihood.
+# HOMER's parlays follow the house rules (mlb_hr.parlays, the NFL tracker's):
+# core tickets of five legs, one per game -- each game's single likeliest leg,
+# then the best of those -- offered only if the rule cashed
+# parlays.CORE_MIN_CASHED or more times when rebuilt on every day of HOMER's own
+# walk-forward replay (homer_fit), plus the Early and Late Ten long shots. Every
+# leg is a line DraftKings posts (as ESPN carries it) for a hitter HOMER clears
+# (homer.eligible: established, no injury note, in the lineup once it posts),
+# with DraftKings' price where ESPN shows one. The legs are HOMER's own
+# selections: his home run and hit probabilities and his winners, built through
+# the same engine as the house tickets. They replaced HOMER'S PLAYS (3-4 hit
+# legs held to a 30-41% cash band) and the 5-pick parlays on 2026-10-06 at the
+# user's request; tickets posted under those rules settle as "retired".
 #
-# `key` is what the replay record is filed under, so a key means one exact shape:
-# leg count, home-run legs and value legs. Give a play a different shape and it
-# needs a new key, or the page would quote the old play's record under new legs.
-# The keys spell out the shape for that reason.
-PARLAY_PLAYS = [
-    {"key": "hit3", "name": "Parlay of the Day", "legs": 3, "hr": 0, "value": 0,
-     "featured": True,
-     "blurb": "Three legs, three different games, straight off the top of HOMER's hit board. "
-              "Nothing here is taken for the price &mdash; it is the shortest ticket on the "
-              "board and the one that cashes most often."},
-    {"key": "hit3e1", "name": "The Lock", "legs": 3, "hr": 0, "value": 1,
-     "blurb": "Two of HOMER's most likely hits, plus one bat the book has underpriced. A "
-              "longer number than the Parlay of the Day for about the same cash rate."},
-    {"key": "hit3e2", "name": "The Edge", "legs": 3, "hr": 0, "value": 2,
-     "blurb": "Flips the mix: one anchor and two legs where HOMER's matchup read beats the "
-              "season line the book prices off. More price, a little less certainty."},
-    {"key": "hit4e1", "name": "The Stretch", "legs": 4, "hr": 0, "value": 1,
-     "blurb": "A fourth leg for a bigger number &mdash; three likely hits and one value bat. "
-              "The longest price that still clears the cash bar."},
-    {"key": "hit3e3", "name": "Full Value", "legs": 3, "hr": 0, "value": 3,
-     "blurb": "Every leg chosen for what the book is paying rather than for how likely it is. "
-              "The purest read on whether HOMER beats the price."},
-]
-
-LEG_KEYS = ("batter", "batter_id", "team", "game_pk", "matchup", "sp_name", "prob",
-            "grade", "y", "market_prob", "book_implied", "book_price", "book_edge")
-
-# HOMER's two 5-pick parlays, posted beside the slate's (mlb_hr.parlays) at the
-# user's request on 2026-09-30: five home runs, and five hitters with a hit, each
-# his five likeliest legs from five different games. They sit outside HOMER'S
-# PLAYS on purpose. That board is held to cashing three days in ten, which no
-# five-leg ticket can do -- the five-hit ticket lands about one day in five,
-# the five-homer ticket about one day in a few thousand -- so these carry their
-# own section, their own record, and their real odds. Same builder, locking and
-# grading as the plays; "hr_build": "prob" takes the likeliest home run bats
-# rather than the value-first ones the plays would use.
-FIVE_PICK_PLAYS = [
-    {"key": "hr5", "name": "Five-Homer Parlay", "legs": 5, "hr": 5, "value": 0,
-     "hr_build": "prob",
-     "blurb": "HOMER's five likeliest home run bats, one per game. Every one of them has to go deep, "
-              "so this is a moonshot priced like one &mdash; a ticket for the story, not the bankroll."},
-    {"key": "hit5", "name": "Five-Hit Parlay", "legs": 5, "hr": 0, "value": 0,
-     "blurb": "HOMER's five likeliest bats to get a hit, one per game. His steadiest five-leg ticket, "
-              "and still a long way from a sure thing."},
-]
+# A card built under older rules is rebuilt once (app.homer_stale,
+# publish.update_homer): its started picks and tickets stay locked.
+PARLAY_RULES = "house-2026-10-06"
 
 
-def fair_odds(prob: float) -> str:
-    """American odds at which a play of this probability breaks even."""
-    if prob <= 0 or prob >= 1:
-        return "&mdash;"
-    if prob >= 0.5:
-        return f"-{round(100 * prob / (1 - prob))}"
-    return f"+{round(100 * (1 - prob) / prob)}"
-
-
-def _leg_rank(build: str, kind: str):
-    if build != "value":
-        return lambda c: c["prob"]
-    floor = VALUE_FLOOR[kind]
-    # Contenders first, then the biggest edge over the book's price.
-    return lambda c: (c["prob"] >= floor, c.get("book_edge", 0.0), c["prob"])
-
-
-def build_parlays(hr_cands: list[dict], hit_cands: list[dict],
-                  plays: list[dict] = PARLAY_PLAYS, skip_games: Iterable = ()) -> list[dict]:
-    """HOMER's plays, no two legs from the same game. Used live and in the replay.
-
-    Home-run legs are taken first, then hit legs fill in from other games, in
-    the order the play's build calls for. Each play carries its chance, the
-    fair odds, and the book's estimated price with HOMER's expected return at it.
-    """
-    hr_ok = [c for c in hr_cands if eligible(c)]
-    hit_ok = [c for c in hit_cands if eligible(c)]
+def parlay_games(slate: dict, hr_all: list[dict], hit_all: list[dict],
+                 game_picks: list[dict]) -> list[dict]:
+    """HOMER's slate in the shape mlb_hr.parlays builds from: each game with
+    DraftKings' book (from the slate), his winner as the favourite, and every
+    hitter he clears with his own home run and hit chances."""
+    picks = {g["game_pk"]: g for g in game_picks}
+    hr_by = {(c["game_pk"], c["batter_id"]): c for c in hr_all if eligible(c)}
+    hit_by = {(c["game_pk"], c["batter_id"]): c for c in hit_all if eligible(c)}
     out = []
-    for play in plays:
-        used = set(skip_games)
-        legs = []
-        n_value = play.get("value", 0)
-        n_likely = play["legs"] - play["hr"] - n_value
-        # Home run legs are the scarcest, so they pick first when a play wants
-        # one. The likely hit legs then claim their games, and the value legs
-        # fill what is left -- which is what the replay measured.
-        for kind, fit_kind, pool, build, want in (
-                ("hr", "hr", hr_ok, play.get("hr_build", "value"), play["hr"]),
-                ("hit", "hits", hit_ok, "prob", n_likely),
-                ("hit", "hits", hit_ok, "value", n_value)):
-            taken = 0
-            for c in sorted(pool, key=_leg_rank(build, fit_kind), reverse=True):
-                if taken >= want:
-                    break
-                if c["game_pk"] in used:
-                    continue
-                used.add(c["game_pk"])
-                legs.append(dict({k: c[k] for k in LEG_KEYS if k in c}, type=kind))
-                taken += 1
-        if len(legs) < play["legs"]:
-            continue
-        prob = math.prod(leg["prob"] for leg in legs)
-        entry = {k: play[k] for k in ("key", "name", "legs", "hr", "blurb")} | {
-            "value": n_value, "featured": play.get("featured", False), "leg_list": legs,
-            "prob": prob, "fair_odds": fair_odds(prob)}
-        if all(leg.get("book_implied") for leg in legs):
-            decimal = math.prod(1 / leg["book_implied"] for leg in legs)
-            entry |= {"book_decimal": decimal, "book_odds": american(decimal),
-                      "ev": prob * decimal - 1}
-        out.append(entry)
+    for game in slate.get("games", []):
+        pk = game.get("game_pk")
+        g = {k: game.get(k) for k in ("game_pk", "start", "home", "away", "home_sp", "away_sp", "book")}
+        pick = picks.get(pk)
+        if pick:
+            g["projection"] = {"favorite": pick["pick"], "favorite_prob": pick["win_prob"],
+                               "home_team": game.get("home"),
+                               "underdog": game.get("away") if pick["pick"] == game.get("home") else game.get("home")}
+        hitters = []
+        for h in game.get("hitters", []):
+            key = (pk, h.get("batter_id"))
+            hr, hit = hr_by.get(key), hit_by.get(key)
+            if not hr and not hit:
+                continue
+            hitters.append({
+                "batter": h.get("batter"), "batter_id": h.get("batter_id"), "team": h.get("team"),
+                "side": h.get("side"), "facing_hand": h.get("facing_hand"), "lineup_slot": h.get("lineup_slot"),
+                "prob_hr": hr["prob"] if hr else None,
+                "hits_proj": {"prob_at_least_one": hit["prob"], "expected_pa": hit.get("exp_pa")} if hit else None,
+            })
+        g["hitters"] = hitters
+        out.append(g)
     return out
 
 
-def play_evidence(records: dict, play: dict) -> Optional[dict]:
-    """This play's replay record, but only if the replay built it the same way.
-
-    Records are filed by `key`, so a key rebuilt with different legs would quote
-    the previous play's track record. A record written before the shape was
-    stored carries none and is taken at its word.
-    """
-    rec = records.get(play["key"])
-    if not rec:
-        return None
-    shape = {k: rec[k] for k in ("legs", "hr", "value") if k in rec}
-    if any((play.get(k) or 0) != v for k, v in shape.items()):
-        return None
-    return rec
+def _leg_rank(build: str, kind: str):
+    """How the replay's leg-by-leg book check orders legs (homer_fit.book_check):
+    by HOMER's chance, or contenders first by their edge over the book."""
+    if build != "value":
+        return lambda c: c["prob"]
+    floor = VALUE_FLOOR[kind]
+    return lambda c: (c["prob"] >= floor, c.get("book_edge", 0.0), c["prob"])
 
 
 def _records_from_projection(proj: dict) -> tuple[Optional[dict], Optional[dict]]:
@@ -1419,39 +1341,6 @@ def build_card(slate: dict, book: dict, previous: Optional[dict] = None,
     hr_picks = locked_and_fresh("hr_picks", hr_all, HR_PICKS)
     hit_picks = locked_and_fresh("hit_picks", hit_all, HIT_PICKS)
 
-    # A play is locked as soon as any of its legs is under way; otherwise it is
-    # rebuilt from whatever has not started.
-    evidence = (fit or {}).get("parlays") or {}
-
-    def locked_plays(key: str, specs: list, backfill: bool = False) -> list:
-        prev_plays = {p["key"]: p for p in (previous or {}).get(key, [])}
-        open_hr = [c for c in hr_all if c["game_pk"] not in started]
-        open_hit = [c for c in hit_all if c["game_pk"] not in started]
-        fresh = {p["key"]: p for p in build_parlays(open_hr, open_hit, plays=specs)}
-        slate_games = {g.get("game_pk") for g in slate.get("games", [])}
-        # A card first built after every game started (the five-pick plays
-        # arriving at season's end) gets them from the morning's numbers,
-        # flagged as built after the fact.
-        late = {}
-        if backfill and slate_games and slate_games <= started:
-            late = {p["key"]: dict(p, backfilled=True)
-                    for p in build_parlays(hr_all, hit_all, plays=specs)}
-        out = []
-        for play in specs:
-            old = prev_plays.get(play["key"])
-            if old and any(leg["game_pk"] in started for leg in old["leg_list"]):
-                out.append(old)
-            elif play["key"] in fresh:
-                out.append(fresh[play["key"]])
-            elif play["key"] in late:
-                out.append(late[play["key"]])
-        for p in out:
-            p["evidence"] = play_evidence(evidence, p)
-        return out
-
-    parlays = locked_plays("parlays", PARLAY_PLAYS)
-    five_picks = locked_plays("five_picks", FIVE_PICK_PLAYS, backfill=True)
-
     prev_games = {g["game_pk"]: g for g in (previous or {}).get("game_picks", [])}
     game_picks = [
         prev_games[g["game_pk"]] if g["game_pk"] in started and g["game_pk"] in prev_games else g
@@ -1460,6 +1349,14 @@ def build_card(slate: dict, book: dict, previous: Optional[dict] = None,
     game_picks.sort(key=lambda g: g["win_prob"], reverse=True)
     for g in game_picks:
         g["tag"] = GAME_TAGS.get(g["confidence"], "")
+
+    # The parlays: the house rules on HOMER's numbers, locked once under way.
+    # Tickets from the old HOMER'S PLAYS and 5-pick parlays ride in `previous`
+    # until they settle.
+    from mlb_hr import parlays as parlay_mod
+    prior = list((previous or {}).get("parlays") or []) + list((previous or {}).get("five_picks") or [])
+    parlays = parlay_mod.choose(parlay_games(slate, hr_all, hit_all, games), previous=prior,
+                                started=started, evidence=(fit or {}).get("parlays") or {})
 
     # Where HOMER and the house model part ways the most.
     compared = [c for c in hr_all if c.get("model_prob") and c["season_pa"] >= MIN_SEASON_PA]
@@ -1484,7 +1381,7 @@ def build_card(slate: dict, book: dict, previous: Optional[dict] = None,
         "hr_picks": hr_picks,
         "hit_picks": hit_picks,
         "parlays": parlays,
-        "five_picks": five_picks,
+        "parlay_rules": PARLAY_RULES,
         "game_picks": game_picks,
         "likes": [slim(c) for c in likes],
         "fades": [slim(c) for c in fades],
@@ -1583,29 +1480,30 @@ def grade_card(card: dict, results: Optional[dict]) -> dict:
         else:
             hit_tally["dnp" if status == "void" else "pending"] += 1
 
+    from mlb_hr import parlays as parlay_mod
+
+    def line_for(leg):
+        line = batter_line(batters, leg.get("batter_id"), leg["game_pk"])
+        if not line:
+            return None
+        final = (games.get(leg["game_pk"]) or {}).get("state") == "Final"
+        return {"hits": line.get("hits", 0), "hr": line.get("hr", 0), "pa": line.get("pa"),
+                "summary": line.get("summary", ""), "final": final}
+
+    def did_not_play(leg):
+        if (games.get(leg["game_pk"]) or {}).get("state") == "Final":
+            return {"dnp": True, "final": True, "summary": "Did not play"}
+        return None
+
     def grade_plays(plays: list) -> dict:
+        parlay_mod.grade(plays, line_for, did_not_play, lambda leg: games.get(leg["game_pk"]))
         tally = {"won": 0, "lost": 0, "void": 0, "pending": 0}
         for play in plays:
-            statuses = []
-            for leg in play["leg_list"]:
-                leg["status"] = leg_status(leg["type"], leg["game_pk"], leg.get("batter_id"))
-                statuses.append(leg["status"])
-            # Sportsbook rules: a leg whose player never batted is voided and
-            # the parlay rides on the rest.
-            if "lost" in statuses:
-                outcome = "lost"
-            elif "pending" in statuses:
-                outcome = "pending"
-            elif "won" in statuses:
-                outcome = "won"
-            else:
-                outcome = "void"
-            play["status"] = outcome
-            tally[outcome] += 1
+            tally[play["status"]] += 1
         return tally
 
     parlay_tally = grade_plays(card.get("parlays", []))
-    # The 5-pick parlays keep their own tally, apart from HOMER'S PLAYS.
+    # Cards from before 2026-10-06 also carry the old 5-pick parlays.
     five_tally = grade_plays(card.get("five_picks", []))
 
     card["record"] = {

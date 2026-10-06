@@ -854,23 +854,14 @@ def game_lines(pa_path: str, log=print) -> dict:
     return out
 
 
-def _leg_landed(leg: dict, y: dict) -> bool:
-    if leg["type"] == "win":
-        return bool(y["fav_won"])
-    if leg["type"] == "hr":
-        return y["hr"] > 0
-    return y["hits"] >= int(leg.get("line") or 1)
-
-
 def parlay_records(rows: pd.DataFrame, p_hr: np.ndarray, p_hit: np.ndarray,
                    games: Optional[dict] = None) -> dict:
     """Every house parlay (mlb_hr.parlays.PARLAYS), rebuilt by the live rule
-    (parlays.build) on every replayed day from the served numbers, and graded
-    against what happened. The replay knows lineups but not injury notes, so
-    it can take a leg the live page would have passed over for one -- a minor
-    gap. Without `games` (no win projections or first pitches) the winner and
-    window tickets are skipped."""
-    from mlb_hr.parlays import PARLAYS, build
+    on every replayed day from the served numbers and graded against what
+    happened (parlays.replay_record). The replay knows lineups but not injury
+    notes or DraftKings' lines. Without `games` (no win projections or first
+    pitches) the winner, chalk and window tickets are skipped."""
+    from mlb_hr.parlays import replay_record
 
     games = games or {}
     days: dict = {}
@@ -887,48 +878,14 @@ def parlay_records(rows: pd.DataFrame, p_hr: np.ndarray, p_hit: np.ndarray,
             "prob_hr": float(ph),
             "hits_proj": {"prob_at_least_one": float(p1), "expected_pa": float(r.exposure)}})
         outcomes[(r.game_pk, int(r.batter_id))] = {"hr": int(r.y_hr), "hits": int(r.y_hits)}
-    fav_won = {pk: g["fav_won"] for pk, g in games.items()}
 
-    out = {}
-    for spec in PARLAYS:
-        if spec["kind"] in ("win", "mix", "ladder") and not games:
-            continue
-        n = won = 0
-        products, wins_on, leg_p, leg_y = [], [], [], []
-        by_kind: dict = {}
-        for day in sorted(days):
-            play = build(list(days[day].values()), spec)
-            if not play:
-                continue
-            n += 1
-            products.append(play["prob"])
-            landed = []
-            for leg in play["leg_list"]:
-                y = (fav_won.get(leg["game_pk"]) if leg["type"] == "win"
-                     else outcomes[(leg["game_pk"], leg["batter_id"])])
-                ok = _leg_landed(leg, {"fav_won": y} if leg["type"] == "win" else y)
-                landed.append(ok)
-                leg_p.append(leg["prob"])
-                leg_y.append(float(ok))
-                kind = leg["type"] if leg["type"] != "hits" else f"hits{leg.get('line') or 1}"
-                k = by_kind.setdefault(kind, [0, 0.0, 0])
-                k[0] += 1
-                k[1] += leg["prob"]
-                k[2] += int(ok)
-            if all(landed):
-                won += 1
-                wins_on.append(str(day))
-        rec = {"legs": spec["legs"], "days": n, "won": won,
-               "rate": round(won / n, 4) if n else None,
-               "predicted": round(float(np.mean(products)), 6) if products else None,
-               "expected_wins": round(float(np.sum(products)), 3), "wins_on": wins_on,
-               "leg_rate": round(float(np.mean(leg_y)), 4) if leg_y else None,
-               "leg_projected": round(float(np.mean(leg_p)), 4) if leg_p else None}
-        if spec.get("longshot"):
-            rec["by_kind"] = {k: {"n": c, "projected": round(sp / c, 4), "hit": round(h / c, 4)}
-                              for k, (c, sp, h) in sorted(by_kind.items())}
-        out[spec["key"]] = rec
-    return out
+    def landed(leg):
+        if leg["type"] == "win":
+            return games[leg["game_pk"]]["fav_won"]
+        y = outcomes[(leg["game_pk"], leg["batter_id"])]
+        return y["hr"] > 0 if leg["type"] == "hr" else y["hits"] >= int(leg.get("line") or 1)
+
+    return replay_record({d: list(gs.values()) for d, gs in days.items()}, landed)
 
 
 def log5_hits(rows: pd.DataFrame) -> np.ndarray:

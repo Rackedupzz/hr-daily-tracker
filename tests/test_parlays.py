@@ -13,7 +13,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 from mlb_hr import homer, parlays  # noqa: E402
 
 SPEC = {s["key"]: s for s in parlays.PARLAYS}
-QUALIFIED = {k: {"days": 140, "won": 25, "expected_wins": 29.0, "rate": 0.18, "predicted": 0.2}
+QUALIFIED = {k: {"days": 140, "won": parlays.CORE_MIN_CASHED, "expected_wins": 29.0, "rate": 0.21, "predicted": 0.2}
              for k in SPEC}
 
 
@@ -241,54 +241,43 @@ def test_slate_page_shows_the_parlays_and_the_replay():
     html = _render_parlays_section({"parlays": plays, "parlay_replay": replay})
     assert "Five Hits" in html and "Early Ten" in html and "Long shots" in html
     assert "Five Homers" in html and f"below {parlays.CORE_MIN_CASHED}" in html   # in the replay table
-    assert "cashed <b>25</b> of 140 days" in html
+    assert f"cashed <b>{parlays.CORE_MIN_CASHED}</b> of 140 days" in html
     assert "2+ HITS" in html or "1+ HIT" in html
     assert _render_parlays_section({"parlays": []}) == ""
 
-def _cand(pk, bid, prob, pa=400):
-    return {"game_pk": pk, "batter_id": bid, "batter": f"B{bid}", "prob": prob, "season_pa": pa}
+def test_homer_card_settles_old_tickets_and_shows_his_parlays():
+    from mlb_hr.render_review import _parlays
 
-
-def test_homer_five_pick_tickets_take_his_likeliest_legs():
-    hr = [_cand(g, 100 + g, 0.10 + g / 100) for g in range(1, 8)] + [_cand(7, 999, 0.30, pa=20)]
-    hits = [_cand(g, 200 + g, 0.60 + g / 100) for g in range(1, 8)]
-    plays = {p["key"]: p for p in homer.build_parlays(hr, hits, plays=homer.FIVE_PICK_PLAYS)}
-    assert set(plays) == {"hr5", "hit5"}
-    assert [l["batter_id"] for l in plays["hr5"]["leg_list"]] == [107, 106, 105, 104, 103]
-    assert all(l["type"] == "hr" for l in plays["hr5"]["leg_list"])   # 999 is under the PA floor
-    assert [l["batter_id"] for l in plays["hit5"]["leg_list"]] == [207, 206, 205, 204, 203]
-    # HOMER'S PLAYS stay what they were: no home runs, three or four legs.
-    assert all(p["hr"] == 0 and 3 <= p["legs"] <= 4 for p in homer.PARLAY_PLAYS)
-    keys = [p["key"] for p in homer.PARLAY_PLAYS + homer.FIVE_PICK_PLAYS]
-    assert len(keys) == len(set(keys))
-
-
-def test_homer_grades_the_five_picks_on_their_own_tally():
-    hr = [_cand(g, 100 + g, 0.2) for g in range(1, 6)]
-    hits = [_cand(g, 200 + g, 0.7) for g in range(1, 6)]
-    five = homer.build_parlays(hr, hits, plays=homer.FIVE_PICK_PLAYS)
-    card = {"hr_picks": [], "hit_picks": [], "game_picks": [], "parlays": [], "five_picks": five}
-    final = {"state": "Final", "detailed": "Final"}
-    results = {"games": {g: final for g in range(1, 6)}, "fetched_at": "t",
-               "batters": {**{100 + g: {"hr": 1, "hits": 1, "game_pk": g} for g in range(1, 6)},
-                           **{200 + g: {"hr": 0, "hits": 1 if g < 5 else 0, "game_pk": g}
-                              for g in range(1, 6)}}}
+    old_five = {"key": "hit5", "name": "Five-Hit Parlay", "blurb": "", "legs": 5, "prob": 0.2,
+                "fair_odds": "+400", "leg_list": [{"type": "hit", "game_pk": 100, "batter_id": 1001,
+                                                   "batter": "B", "prob": 0.7}]}
+    card = {"hr_picks": [], "hit_picks": [], "game_picks": [], "parlays": [], "five_picks": [old_five]}
+    results = {"fetched_at": "t", "games": {100: {"state": "Final"}},
+               "batters": {1001: {"hits": 1, "hr": 0, "game_pk": 100}}}
     homer.grade_card(card, results)
-    status = {p["key"]: p["status"] for p in card["five_picks"]}
-    assert status == {"hr5": "won", "hit5": "lost"}
-    assert card["record"]["five_picks"] == {"won": 1, "lost": 1, "void": 0, "pending": 0}
-    assert card["record"]["parlays"]["won"] == 0 and card["record"]["complete"]
+    assert card["five_picks"][0]["status"] == "won"
+    assert card["record"]["five_picks"] == {"won": 1, "lost": 0, "void": 0, "pending": 0}
+    replay = {"hit5": {"legs": 5, "days": 130, "won": 24, "rate": 0.18, "predicted": 0.2,
+                       "expected_wins": 26.0}}
+    html = _parlays({"parlays": [], "evidence": {"parlays": replay}})
+    assert "HOMER&rsquo;s Parlays" in html and "House parlays in the replay" in html
+    assert f"below {parlays.CORE_MIN_CASHED}" in html
 
 
-def test_homer_page_shows_his_five_picks():
-    from mlb_hr.render_review import _five_picks
-
-    hr = [_cand(g, 100 + g, 0.2) for g in range(1, 6)]
-    hits = [_cand(g, 200 + g, 0.7) for g in range(1, 6)]
-    five = homer.build_parlays(hr, hits, plays=homer.FIVE_PICK_PLAYS)
-    five[0]["evidence"] = {"days": 120, "won": 0, "expected_wins": 0.04}
-    html = _five_picks({"five_picks": five})
-    assert "HOMER's 5-Pick Parlays" in html and "Five-Homer Parlay" in html
-    assert "1 in 3,125" in html                          # 0.2 ** 5
-    assert "cashed 0 of 120 days" in html
-    assert _five_picks({}) == ""
+def test_a_ten_on_draftkings_lines_pays_the_books_own_price():
+    games = _window_slate()[:6]                                   # the six early games
+    for g in games:
+        g["book"] = {"home_ml": -160, "away_ml": 140,
+                     "props": {str(h["batter_id"]): {"hits": [[1.0, -250], [2.0, 200]], "hr": [[1.0, 450]]}
+                               for h in g["hitters"]}}
+    games[0]["book"].update(home_ml=150, away_ml=-170)            # the book likes the model's underdog
+    play = parlays.build(games, SPEC["early10"])
+    legs = play["leg_list"]
+    assert play["book_odds"] and play["book_priced"] == 10 and "note" not in play
+    assert parlays.pays_enough([(l["prob"], l) for l in legs])
+    assert play["book_decimal"] >= 11 - 1e-9                      # +1000 at DraftKings' prices
+    # A priced hit leg counts at the more cautious of the model and the price.
+    for l in legs:
+        if l["type"] == "hits":
+            assert l["prob"] <= parlays.implied(l["book_price"]) + 1e-12
+    assert not any(l["type"] == "win" and l["game_pk"] == games[0]["game_pk"] for l in legs)

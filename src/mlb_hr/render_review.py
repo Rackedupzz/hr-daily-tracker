@@ -12,7 +12,7 @@ from mlb_hr.homer import EXPECTED_SIGN
 from mlb_hr.render import _result_badge, _verdict
 from mlb_hr.ui import (
     abbr, alert, avatar, calib_chart, chance, color, day_pills, fair_odds, hand, head, hero, logo,
-    mini, more, page, pct, person, ring, short, status_chip, subnav, tile, tiles, winbar,
+    mini, page, pct, person, ring, short, status_chip, subnav, tile, tiles, winbar,
 )
 
 
@@ -220,7 +220,7 @@ def render_results_html(day: str, slate: dict | None, days: list,
                      f"<td class='n'><b>{p['prob']:.1%}</b></td><td class='n'>{_pct(p.get('model_prob'))}</td>"
                      f"<td>{mark}</td><td class='muted'>{escape(str(r.get('summary', '')))}</td></tr>")
         extra = (f", {rec['hits']['hit']}-for-{rec['hits']['scored']} on hit picks" if rec.get("hits") else "") + \
-                (f" and {rec['parlays']['won']}-{rec['parlays']['lost']} on his plays" if rec.get("parlays") else "")
+                (f" and {rec['parlays']['won']}-{rec['parlays']['lost']} on his parlays" if rec.get("parlays") else "")
         note = (f"HOMER went {rec['hr']['hit']}-for-{rec['hr']['scored']} on home runs, "
                 f"{rec['games']['won']}-{rec['games']['lost']} picking winners{extra}. "
                 f"<a href=\"/homer?date={day}\">Full card &rarr;</a>")
@@ -305,9 +305,9 @@ differential, weighted the same learned way.</li>
 <li><strong>Hit picks.</strong> Hit rate, expected hits from contact quality, strikeout and walk rates, and his own
 split, against the starter's hits allowed and strikeout rate, the bullpen and the park &mdash; learned and tested the
 same way.</li>
-<li><strong>HOMER'S PLAYS.</strong> 3- and 4-leg hit combos, one leg per game, each held to cashing three days in ten
-&mdash; plus two 5-pick parlays (five homers, five hits) that carry their own record. Every ticket is rebuilt on every
-replayed day to check that its quoted odds hold up.</li>
+<li><strong>Parlays.</strong> The house rules on HOMER's own numbers: five-leg core tickets, one leg per game, posted
+only if the rule cashed 30+ times when rebuilt on every replayed day, plus the Early and Late Ten long shots. Every leg
+is a line DraftKings posts, with its price.</li>
 <li><strong>Grows every day.</strong> His book refreshes with each data pull, and the whole season replay reruns
 daily, so new results reshape his weights and grades.</li>
 <li><strong>Selection rules.</strong> Six HR picks and six hit picks, one per game, 80+ PA, no injury notes, and only
@@ -395,124 +395,17 @@ def _chance(prob: float) -> str:
     return chance(prob)
 
 
-def _odds_with_commas(odds: str) -> str:
-    """'+476090' -> '+476,090' (fair odds on a long ticket run to six figures)."""
-    if odds and odds[0] in "+-" and odds[1:].isdigit():
-        return f"{odds[0]}{int(odds[1:]):,}"
-    return odds
-
-
-def _play_card(play: dict) -> str:
-    """One of HOMER's tickets: legs, chance, fair odds, book price, replay record."""
-    badges = {"won": ("&#10003; CASHED", "hit"), "lost": ("&#10007; LOST", "miss"), "void": ("VOID", "void")}
-    legs = ""
-    for leg in play["leg_list"]:
-        st = leg.get("status", "pending")
-        mark = {"won": "&#10003;", "lost": "&#10007;"}.get(st, "")
-        what = "HR" if leg["type"] == "hr" else "1+ HIT"
-        book = ""
-        if leg.get("book_implied"):
-            book = (f' &middot; book ~{escape(str(leg["book_price"]))} ({leg["book_implied"]:.0%})'
-                    f' &middot; edge {leg["book_edge"]:+.0%}')
-        legs += (f'<li class="leg {st}"><span class="st">{mark}</span>{avatar(leg.get("batter_id"), leg["batter"], leg.get("team"), "xs")}'
-                 f'<span class="lp"><b><span class="ltype{" hit" if leg["type"] != "hr" else ""}">{what}</span>{escape(leg["batter"])}'
-                 f'{" (void)" if st == "void" else ""}</b><small>{abbr(leg.get("team", ""))} vs {escape(str(leg.get("sp_name", "")))}{book}</small></span>'
-                 f'<span class="lpct">{leg["prob"]:.0%}</span></li>')
-    ev = play.get("evidence")
-    record = ""
-    if ev and ev.get("days") and not ev.get("won") and ev.get("expected_wins") is not None:
-        record = (f'<div><b>Replay:</b> built this way every day, this ticket cashed 0 of {ev["days"]} days '
-                  f'&mdash; HOMER expected {ev["expected_wins"]:.2f} wins in all that time.</div>')
-    elif ev and ev.get("days"):
-        # A play that lands every 2.4 days must not read as every 2, so keep a
-        # decimal while the cadence is short enough for one to matter.
-        cadence = ev.get("days_per_win")
-        every = (f', about once every {cadence:.1f} days' if cadence and cadence < 10
-                 else f', about once every {cadence:.0f} days' if cadence else "")
-        price = f'; typical ticket ~{ev["typical_odds"]}' if ev.get("typical_odds") else ""
-        record = (f'<div><b>Replay:</b> this play cashed {ev["won"]} of {ev["days"]} days '
-                  f'({ev["rate"]:.1%}{every}) vs {ev["predicted"]:.1%} predicted{price}</div>')
-    book = ""
-    if play.get("book_odds"):
-        verdict = ("HOMER's number beats the price" if play["ev"] > 0
-                   else "the book's margin eats this one &mdash; shop for a boost")
-        book = (f"<span class='chip'>est. book <b>{_odds_with_commas(play['book_odds'])}</b></span>"
-                f"<span class='chip{' up' if play['ev'] > 0 else ' down'}'>EV per $1 <b>{play['ev']:+.0%}</b></span>")
-        record = f"<div>Est. book price: {verdict}.</div>" + record
-    n_val = play.get("value")
-    if n_val is None:
-        # Cards saved before the value mix was recorded carry the old
-        # all-or-nothing build instead.
-        build = "Built to pay" if play.get("build") == "value" else "Built to cash"
-    elif not n_val:
-        build = "Built to cash"
-    elif n_val == play["legs"]:
-        build = "Built to pay"
-    else:
-        build = f"{play['legs'] - n_val} likely &middot; {n_val} value"
-    late = "<div>Built after the fact from that morning's numbers.</div>" if play.get("backfilled") else ""
-    status = play.get("status", "pending")
-    badge = f'<span class="badge {badges[status][1]}">{badges[status][0]}</span>' if status in badges else ""
-    long = " long" if play["prob"] < 0.10 else ""
-    featured = " featured" if play.get("featured") else ""
-    return f"""<article class="card ticket{long}{featured} st-{status}">
-<div class="thead"><div><div class="tname">{'&#129506; ' if play.get('featured') else ''}{play['name']}</div><div class="blurb">{play['blurb']}</div></div>
-<div class="tchance"><b>{_chance(play['prob'])}</b><small>to cash</small></div></div>
-<div class="tstats"><span class="chip"><b>{play['legs']}</b> legs</span><span class="chip">{build}</span>
-<span class="chip">fair <b>{_odds_with_commas(play['fair_odds'])}</b></span>{book}</div>
-<ol class="legs">{legs}</ol><div class="tfoot">{record}{late}{badge}</div></article>"""
-
-
-def _five_picks(card: dict) -> str:
-    """HOMER's two 5-pick parlays: five homers, five hits, his likeliest legs."""
-    plays = card.get("five_picks") or []
-    if not plays:
-        return ""
-    cards = "".join(_play_card(p) for p in plays)
-    late = any(p.get("backfilled") for p in plays)
-    note = ("HOMER's best judgment in two tickets: his five likeliest home run bats and his five likeliest hit bats, "
-            "one leg per game. These are not HOMER'S PLAYS &mdash; that board only holds tickets that cash three days "
-            "in ten, and no five-leg ticket can. The five-hit ticket lands about one day in five; the five-homer "
-            "ticket is a moonshot. Both show their real chance, their fair odds and how often they cashed in the "
-            "season replay, and they keep their own record. Stake accordingly."
-            + (" This card was finished before the parlays existed, so they were built from that morning&rsquo;s "
-               "numbers and graded against what happened." if late else ""))
-    title = head("HOMER's 5-Pick Parlays", "&#127920;", note)
-    return f'<section class="section" id="five">{title}<div class="grid wide">{cards}</div></section>'
-
-
-_BOOK_NOTES = """<ul class="take">
-<li><strong>The juice compounds.</strong> Every leg carries the book's margin, and a parlay multiplies them. Four hit
-legs at a normal hold pay about 22% less than their true odds, which is why none of these tickets runs long.</li>
-<li><strong>No home run legs.</strong> HOMER's best home run bat cashes about one start in five, and a parlay can never
-beat its weakest leg &mdash; so a ticket carrying one cannot clear the cash bar these plays are held to. His home run
-board is below; play those straight.</li>
-<li><strong>The book leans on the season line.</strong> Props are priced mostly off a hitter's rate and name. HOMER
-prices the matchup: the starter, bullpen, park, weather, lineup slot and contact quality. "Built to pay" plays only take
-legs where that read clearly beats the season line.</li>
-<li><strong>One leg per game.</strong> Legs from the same game move together, and books reprice same-game parlays to
-take that edge back. Spreading legs keeps the math honest.</li>
-<li><strong>A scratched player voids his leg;</strong> the ticket rides on the rest at a smaller payout.</li>
-<li><strong>Price is estimated</strong> until live odds are wired in. If your book is shorter than the fair odds, pass
-or hunt a boost.</li>
-<li><strong>Size by how often it cashes, not by what it pays.</strong> These plays land between three and four days in
-ten, so flat stakes suit all of them &mdash; but even a 41% ticket goes quiet for a week or more, and the replay line on
-each card shows its worst run. Read that before you stake it.</li></ul>"""
-
-
-def _plays(card: dict) -> str:
-    """HOMER'S PLAYS: his 3- and 4-leg combos, with honest odds."""
-    plays = card.get("parlays") or []
-    if not plays:
-        return ""
-    cards = "".join(_play_card(p) for p in sorted(plays, key=lambda p: not p.get("featured")))
-    note = ("Built leg by leg from HOMER's hit board, one leg per game so no single rainout or pitcher sinks the "
-            "ticket. Every play here cleared the same bar in the replay &mdash; it had to cash on at least three days "
-            "in ten &mdash; so what separates them is price, not whether they land. Parlays are still high-variance: "
-            "stake accordingly and never bet more than you can afford to lose.")
-    return (f'<section class="section" id="plays">{head("HOMER&rsquo;S PLAYS", "&#128176;", note)}'
-            f'<div style="margin:-4px 0 14px">{more("&#127922; How the book works &mdash; and how HOMER counters", _BOOK_NOTES, "book-notes")}</div>'
-            f'<div class="grid wide">{cards}</div></section>')
+def _parlays(card: dict) -> str:
+    """HOMER's parlays: the house rules (mlb_hr.parlays) on his own numbers,
+    with his replay record for every rule."""
+    from mlb_hr.render import _render_parlays_section
+    replay = {k: {f: v for f, v in r.items() if f != "wins_on"}
+              for k, r in ((card.get("evidence") or {}).get("parlays") or {}).items()
+              if isinstance(r, dict) and "rate" in r and "kind" not in r}
+    lead = ("HOMER&rsquo;s own reads &mdash; his home run and hit chances and his winners &mdash; run through the "
+            "house parlay rules, with his own replay record. ")
+    return _render_parlays_section({"parlays": card.get("parlays") or [], "parlay_replay": replay},
+                                   title="HOMER&rsquo;s Parlays", sid="plays", lead=lead, icon="&#128176;")
 
 
 def _homer_game_cards(card: dict) -> str:
@@ -668,31 +561,20 @@ def _homework(card: dict) -> str:
         for c in ev.get("confidence") or [] if c.get("rate") is not None)
 
     cards = []
-    if ev.get("parlays"):
-        rows = "".join(
-            f'<tr><td>{p["name"]}</td><td class="n">{p["won"]}/{p["days"]}</td>'
-            f'<td class="n"><b>{p["rate"]:.1%}</b></td><td class="n">{p["predicted"]:.1%}</td>'
-            f'<td class="n">{p.get("typical_odds") or "&mdash;"}</td>'
-            f'<td class="n">{"%+.0f%%" % (100 * p["est_roi"]) if p.get("est_roi") is not None else "&mdash;"}</td></tr>'
-            for p in sorted(ev["parlays"].values(), key=lambda p: -p.get("rate", 0)) if p.get("days"))
-        legs = (ev.get("book") or {}).get("legs") or {}
-        names = {"hit_prob": "Top 5 hits", "hit_value": "Value hits", "hr_prob": "Top 5 HR", "hr_value": "Value HR"}
-        leg_rows = "".join(
-            f'<tr><td>{names[k]}</td><td class="n"><b>{v["actual"]:.1%}</b></td>'
-            f'<td class="n">{v["market"]:.1%}</td><td class="n">{v["break_even"]:.1%}</td><td class="n">{v["roi"]:+.1%}</td></tr>'
-            for k, v in legs.items() if k in names)
-        leg_table = (f'<div class="label" style="margin-top:14px">Leg by leg vs the book</div>'
-                     + _tbl('<th>Legs</th><th class="n">Cashed</th><th class="n">Season line</th><th class="n">Book needs</th>'
-                            '<th class="n">Straight ROI</th>', leg_rows)) if leg_rows else ""
+    legs = (ev.get("book") or {}).get("legs") or {}
+    names = {"hit_prob": "Top 5 hits", "hit_value": "Value hits", "hr_prob": "Top 5 HR", "hr_value": "Value HR"}
+    leg_rows = "".join(
+        f'<tr><td>{names[k]}</td><td class="n"><b>{v["actual"]:.1%}</b></td>'
+        f'<td class="n">{v["market"]:.1%}</td><td class="n">{v["break_even"]:.1%}</td><td class="n">{v["roi"]:+.1%}</td></tr>'
+        for k, v in legs.items() if k in names)
+    if leg_rows:
         cards.append(
-            f'<div class="card" style="grid-column:1/-1"><div class="label">HOMER&rsquo;s plays, replayed every day</div>'
-            + _tbl('<th>Play</th><th class="n">Cashed</th><th class="n">Rate</th><th class="n">Predicted</th>'
-                   '<th class="n">Typical price</th><th class="n">Est. ROI</th>', rows)
-            + leg_table
-            + '<p class="note" style="margin:10px 0 0">Same construction rules as today\'s plays. When the actual rate '
-              "tracks the predicted one, the odds HOMER quotes can be trusted. Prices and ROI use a modeled season-rate "
-              "book (no live odds feed yet), so treat them as estimates; a sharper book pays less. With only a handful "
-              "of wins per play, ROI swings widely.</p></div>")
+            '<div class="card" style="grid-column:1/-1"><div class="label">Leg by leg vs a season-rate book</div>'
+            + _tbl('<th>Legs</th><th class="n">Cashed</th><th class="n">Season line</th><th class="n">Book needs</th>'
+                   '<th class="n">Straight ROI</th>', leg_rows)
+            + '<p class="note" style="margin:10px 0 0">HOMER&rsquo;s daily five legs of each kind bet straight at a '
+              "modeled season-rate book, every replayed day. A diagnostic only: the parlays price their legs at "
+              "DraftKings&rsquo; own lines, and their replay record is in the Parlays section.</p></div>")
     cards.append(f'<div class="card"><div class="label">Daily 6 HR picks, replayed</div>'
                  + _tbl('<th>Method</th><th class="n">Hit</th><th class="n">Rate</th><th class="n">Expected</th>', pick_table)
                  + '<p class="note" style="margin:10px 0 0">Same selection rules as today\'s card, every replayed day.</p></div>')
@@ -751,9 +633,9 @@ def _record_tiles(record: dict) -> str:
                   record["hr_hit"] / hr_n if hr_n else None, "gold"),
              tile(f"{record.get('hits_hit', 0)}/{record.get('hits_scored', 0)}", "hit picks",
                   record.get("hits_hit", 0) / record["hits_scored"] if record.get("hits_scored") else None),
-             tile(f"{record.get('parlays_won', 0)}-{record.get('parlays_lost', 0)}", "HOMER'S PLAYS W-L")]
+             tile(f"{record.get('parlays_won', 0)}-{record.get('parlays_lost', 0)}", "parlays W-L")]
     if record.get("five_won") or record.get("five_lost"):
-        cells.append(tile(f"{record['five_won']}-{record['five_lost']}", "5-pick parlays W-L"))
+        cells.append(tile(f"{record['five_won']}-{record['five_lost']}", "old 5-pick parlays W-L"))
     gw, gl = record["games_won"], record["games_lost"]
     cells.append(tile(f"{gw}-{gl}", "winners W-L", gw / (gw + gl) if gw + gl else None))
     return tiles(cells)
@@ -805,8 +687,7 @@ def render_homer_html(card: dict | None, record: dict, days: list, day: str,
         gnote = ", ".join(f"{b['grade']} cashed {b['rate']:.0%}" for b in bands)
         hit_section = (f'<section class="section" id="hits">{head("HOMER&rsquo;s 6 Hit Picks", "&#129358;", "At least one hit, one per game, ranked by HOMER&rsquo;s own probability." + (f" Grades earned in the replay: {gnote}." if gnote else ""))}'
                        f'<div class="grid">{_homer_hit_cards(card)}</div></section>')
-    nav = (([("plays", "HOMER'S PLAYS")] if card.get("parlays") else [])
-           + ([("five", "5-Pick Parlays")] if card.get("five_picks") else [])
+    nav = (([("plays", "Parlays")] if card.get("parlays") or (card.get("evidence") or {}).get("parlays") else [])
            + [("hr", "HR Picks")])
     if hit_section:
         nav.append(("hits", "Hit Picks"))
@@ -818,7 +699,7 @@ def render_homer_html(card: dict | None, record: dict, days: list, day: str,
                and not (g.get("result") or {}).get("no_decision"))
     body = (hero(f"HOMER &middot; {_long_date(card.get('date'))}", "HOMER&rsquo;s Card", subtitle, pills)
             + alerts + _homer_intro(record, card.get("evidence")) + subnav(nav) + _record_tiles(record)
-            + _plays(card) + _five_picks(card)
+            + _parlays(card)
             + f'<section class="section" id="hr">{head("HOMER&rsquo;s 6 Home Run Picks", "&#128163;", "One per game, ranked by HOMER&rsquo;s own per-game probability. " + _grade_note(card))}'
               f'<div class="grid">{_homer_hr_cards(card)}</div></section>'
             + hit_section

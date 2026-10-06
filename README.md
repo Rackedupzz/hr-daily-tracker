@@ -207,37 +207,36 @@ The NFL tracker's parlay rules, market for market. Core tickets are five legs,
 one per game (each game's likeliest leg, then the best five): Five Hits, Five
 Multi-Hit (2+), Five Homers, Five Winners and Chalk Five (any market; skipped on
 a day it is Five Hits leg for leg). A core ticket posts only if its rule cashed
-`CORE_MIN_CASHED` (20) or more times when the season replay rebuilt it on every
-day; the NFL bar is 30, which no baseball five-leg rule reached (Five Hits
-cashed 25 of 140). The long shots, Early Ten (first pitch before 7 PM ET) and
-Late Ten (7 PM ET and later), take ten legs from one window -- one home run,
-hits at the highest rung the model trusts, favourites to win, at most two legs
-a game -- the most probable ten that pays +1000 or more at fair odds, loosened
-to three a game when the window is short. There is no odds feed, so every
-ticket is at fair odds. The slate's Parlays section ends with every rule's
-replay record; refit it with `python -m mlb_hr.replay`, which writes the
-records to `data/model_fit.json` (committed, unlike the other fits).
+`CORE_MIN_CASHED` (30, the NFL bar) or more times when the season replay rebuilt
+it on every day. No baseball five-leg rule has reached it yet (Five Hits cashed
+25 of 140), so for now the core board is usually empty. The long shots, Early
+Ten (first pitch before 7 PM ET) and Late Ten (7 PM ET and later), take ten legs
+from one window -- one home run, hits at the highest rung the model trusts,
+favourites to win, at most two legs a game -- the most probable ten that pays
++1000 or more, loosened step by step when the book or the window falls short.
+
+Every leg is a line DraftKings posts, as ESPN carries it (`draftkings.py`: the
+moneyline and every hitter's Home Run and Hits milestones, matched to the slate
+by name within each game), for a hitter cleared by the injury report, with
+DraftKings' price. A Ten's legs and winners count at the more cautious of the
+model and the price, and a fully priced Ten pays the book's own payout. The
+replay has no past prop prices, so it scores the model's legs unpriced. The
+Parlays section ends with every rule's replay record; refit it with
+`python -m mlb_hr.replay`, which writes the records to `data/model_fit.json`
+(committed, unlike the other fits).
 
 ### HOMER (`homer.py`)
 
 HOMER is the tracker's top-tier MLB expert and professional capper persona: six
-HR picks, six hit picks, a winner for every game, and **HOMER'S PLAYS** — five
-parlays that every one had to clear the same bar in the season replay: cash on
-at least three days in ten. That bar decides the board. A parlay can never beat
-its weakest leg and HOMER's best HR bat cashes ~21%, so no play carries a home
-run leg; two legs cannot fall below 46% and five cannot reach 30%, so every play
-is three or four hit legs. What separates them is how many legs are taken for
-price rather than for likelihood: Parlay of the Day (3 legs, none for value),
-The Lock (3, one for value), The Edge (3, two), The Stretch (4, one) and Full
-Value (3, all three).
-
-Legs always come from different games; each play shows its combined probability
-and fair American odds, and a leg whose player never bats is voided. Every play
-type is rebuilt on every day of the season replay, so the page shows how often
-it actually cashed against what was predicted. A play's key in the replay record
-pins its shape — leg count, HR legs and value legs — so a reshaped play needs a
-new key rather than inheriting the old one's track record. His swagger (HAMMER IT / LOVE IT / ...) follows the grade,
-and the grade follows the replay.
+HR picks, six hit picks, a winner for every game, and his parlays. Since
+2026-10-06 those follow the house rules above (`parlays.py`) on HOMER's own
+numbers: his home run and hit chances for every hitter he clears (established,
+no injury note, in the lineup once it posts) and his winners, at DraftKings'
+lines and prices, each core ticket posted only if it cashed 30+ times in his own
+walk-forward replay (`homer_fit.parlay_record`), plus his Early and Late Ten. The
+earlier HOMER'S PLAYS (3-4 hit legs held to a 30-41% cash band) and his 5-pick
+parlays are retired; tickets posted under them settled as they stood. His swagger
+(HAMMER IT / LOVE IT / ...) follows the grade, and the grade follows the replay.
 
 HOMER is an independent handicapper — none of the ensemble's probabilities feed
 him. From the slate he takes only facts (lineups, starters, venue, weather) and

@@ -95,7 +95,7 @@ def fit(day: date, saved: dict | None) -> dict:
 def update_homer(day: date, slate: dict, results: dict) -> None:
     card = homer.load_card(str(day), SNAPSHOT_DIR)
     fitted = (homer.load_fit() or {}).get("fitted_at")
-    stale = (card is None or "five_picks" not in card
+    stale = (card is None or card.get("parlay_rules") != homer.PARLAY_RULES
              or (not card.get("record", {}).get("complete")
                  and ((fitted and fitted != (card.get("evidence") or {}).get("fitted_at"))
                       or str(slate.get("built_at") or "") > str(card.get("built_at") or ""))))

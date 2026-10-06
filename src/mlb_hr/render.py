@@ -207,18 +207,24 @@ def _leg_kind(leg: dict) -> str:
     return f"{n}+ HIT{'S' if n != 1 else ''}"
 
 
+def _dk(price) -> str:
+    """' &middot; DK +450' for a DraftKings price (an int); HOMER's older
+    tickets carry a modeled estimate as text, which is not shown as the book's."""
+    return f" &middot; DK {price:+d}" if isinstance(price, int) else ""
+
+
 def _ticket_leg(leg: dict, extra: str = "") -> str:
     st = leg.get("status", "pending")
     mark = {"won": "&#10003;", "lost": "&#10007;"}.get(st, "")
     line = (leg.get("result") or {}).get("summary") or ""
     void = " (void)" if st == "void" else ""
     if leg["type"] == "win":
-        sub = f"over {escape(leg.get('opp') or '')}{' &middot; ' + escape(line) if line else ''}{extra}"
+        sub = f"over {escape(leg.get('opp') or '')}{_dk(leg.get('book_price'))}{' &middot; ' + escape(line) if line else ''}{extra}"
         face = logo(leg.get("team"), "sm")
     else:
         sp = leg.get("opp_sp") or leg.get("sp_name")
         vs = f"vs {escape(sp)} {hand(leg.get('facing_hand'))}" if sp else f"vs {hand(leg.get('facing_hand'))}"
-        sub = f"{abbr(leg.get('team', ''))} &middot; {vs}{' &middot; ' + escape(line) if line else ''}{extra}"
+        sub = f"{abbr(leg.get('team', ''))} &middot; {vs}{_dk(leg.get('book_price'))}{' &middot; ' + escape(line) if line else ''}{extra}"
         face = avatar(leg.get("batter_id"), leg["batter"], leg.get("team"), "xs")
     tone = "" if leg["type"] == "hr" else " hit"
     return (f'<li class="leg {st}"><span class="st">{mark}</span>{face}'
@@ -237,18 +243,31 @@ def _ticket_card(play: dict) -> str:
     ev = play.get("evidence") or {}
     record = ""
     if ev.get("days"):
-        record = (f"Season replay: built this way every day, cashed <b>{ev['won']}</b> of {ev['days']} days "
-                  f"(model expected {ev['expected_wins']:.1f}).")
+        expected = (f" (model expected {ev['expected_wins']:.1f})"
+                    if ev.get("expected_wins") is not None else "")
+        record = (f"Season replay: built this way every day, cashed <b>{ev['won']}</b> of {ev['days']} days"
+                  f"{expected}.")
     late = "<div>Built after the fact from that morning's projections.</div>" if play.get("backfilled") else ""
     if play.get("note"):
         late += f"<div>{escape(play['note'])}</div>"
     long = " long" if play["prob"] < 0.10 else ""
-    payout = f"${10 / play['prob']:,.0f}" if play["prob"] > 0 else "&mdash;"
+    if play.get("book_decimal"):
+        payout = f"<b>${10 * play['book_decimal']:,.0f}</b> at DK"
+    elif play["prob"] > 0:
+        payout = f"<b>${10 / play['prob']:,.0f}</b> fair"
+    else:
+        payout = "<b>&mdash;</b> fair"
+    if play.get("book_odds"):
+        book = f"<span class='chip'>DraftKings <b>{play['book_odds']}</b></span>"
+    elif play.get("book_priced"):
+        book = f"<span class='chip'>DK priced <b>{play['book_priced']}</b> of {len(play['leg_list'])} legs</span>"
+    else:
+        book = ""
     return f"""<article class="card ticket{long} st-{status}">
 <div class="thead"><div><div class="tname">{play['name']}</div><div class="blurb">{play['blurb']}</div></div>
 <div class="tchance"><b>{_chance(play['prob'])}</b><small>chance</small></div></div>
-<div class="tstats"><span class="chip"><b>{len(play['leg_list'])}</b> legs</span><span class="chip">fair <b>{play['fair_odds']}</b></span>
-<span class="chip">$10 pays <b>{payout}</b> fair</span></div>
+<div class="tstats"><span class="chip"><b>{len(play['leg_list'])}</b> legs</span><span class="chip">fair <b>{play['fair_odds']}</b></span>{book}
+<span class="chip">$10 pays {payout}</span></div>
 <ol class="legs">{legs}</ol><div class="tfoot">{f'<div>{record}</div>' if record else ''}{late}<span class="badge {cls}">{text}</span></div></article>"""
 
 
@@ -272,7 +291,8 @@ def _parlay_replay_table(replay: dict) -> str:
         return ""
     note = ("Every ticket rebuilt by the live rules on every day of the walk-forward 2026 replay, from projections "
             f"that had only seen earlier days. A core ticket is offered only if it cashed {CORE_MIN_CASHED}+ times. "
-            "The replay knows lineups but not injury notes, and prices winners without the park factor.")
+            "The replay has no past prop prices (ESPN keeps none), so it scores the model's legs without "
+            "DraftKings' lines and prices or the injury report, and prices winners without the park factor.")
     return (head("House parlays in the replay", "", note, tag="h3")
             + "<div class='card scroll'><table class='t'><tr><th>Ticket</th><th class='n'>Legs</th><th class='n'>Days</th>"
               "<th class='n'>Cashed</th><th class='n'>Model expected</th><th class='n'>Actual rate</th>"
@@ -280,9 +300,11 @@ def _parlay_replay_table(replay: dict) -> str:
             + rows + "</table></div>")
 
 
-def _render_parlays_section(slate_data: dict) -> str:
+def _render_parlays_section(slate_data: dict, title: str = "House Parlays", sid: str = "parlays",
+                            lead: str = "", icon: str = "&#127903;") -> str:
     """The house parlays (mlb_hr.parlays): core tickets, the long shots, and
-    tickets posted under earlier rules, graded as games finish."""
+    tickets posted under earlier rules, graded as games finish. HOMER's page
+    shows his own (same rules, his numbers) through this with its own title."""
     from mlb_hr.parlays import CORE_MIN_CASHED, CORE_MIN_LEGS
     plays = slate_data.get("parlays") or []
     replay = slate_data.get("parlay_replay") or {}
@@ -292,20 +314,26 @@ def _render_parlays_section(slate_data: dict) -> str:
     longshots = [p for p in plays if p.get("longshot") and not p.get("retired")]
     retired = [p for p in plays if p.get("retired")]
     backfilled = any(p.get("backfilled") for p in plays)
-    note = (f"Core tickets: at least {CORE_MIN_LEGS} legs, one per game, and only rules that cashed "
+    note = (lead + f"Core tickets: at least {CORE_MIN_LEGS} legs, one per game, and only rules that cashed "
             f"{CORE_MIN_CASHED} or more times when rebuilt on every day of the walk-forward season replay. Each "
             "game's single likeliest leg, then the best of those, so the legs are independent and the ticket's "
-            "chance is the product of its legs. A hitter with an injury note is passed over; a scratched leg is "
+            "chance is the product of its legs. Every leg is a line DraftKings posts (as ESPN carries it) for a "
+            "hitter cleared by the injury report, with DraftKings' price where ESPN shows one; a scratched leg is "
             "void and the rest ride. Tickets lock the moment any of their games starts. Fair odds are the price a "
             "ticket needs to break even; parlays carry a steep house edge &mdash; never stake what you cannot "
             "afford to lose."
             + (" This day was over before the parlays existed, so they were built from that "
                "morning&rsquo;s projections and graded against what happened." if backfilled else ""))
-    empty = "<div class='card'>No core ticket can be built from the games still to start.</div>"
-    parts = [f'<section class="section" id="parlays">{head("House Parlays", "&#127903;", note)}'
+    from mlb_hr.parlays import PARLAYS, qualifies
+    earned = [spec for spec in PARLAYS if not spec.get("longshot") and qualifies(spec, replay.get(spec["key"]))]
+    empty = ("<div class='card'>No core ticket can be built from the games still to start.</div>" if earned else
+             f"<div class='card'>No core ticket today: no core rule has cashed {CORE_MIN_CASHED} or more times in the "
+             "season replay yet (see the replay table below). The long shots still post.</div>")
+    parts = [f'<section class="section" id="{sid}">{head(title, icon, note)}'
              f'<div class="grid wide">{"".join(_ticket_card(p) for p in core) or empty}</div>']
     if longshots:
-        parts.append(head("Long shots: +1000 or more", "", "Ten legs from one first-pitch window at fair odds. "
+        parts.append(head("Long shots: +1000 or more", "", "Ten legs from one first-pitch window at DraftKings' "
+                          "lines and prices. "
                           f"These pay +1000 or more and do <b>not</b> meet the {CORE_MIN_CASHED}-cash bar "
                           "&mdash; their replay record is on each card.", tag="h3")
                      + f'<div class="grid wide">{"".join(_ticket_card(p) for p in longshots)}</div>')

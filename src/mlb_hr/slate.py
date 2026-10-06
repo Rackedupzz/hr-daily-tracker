@@ -696,6 +696,14 @@ def build_slate_for_date(
     # The house parlays, with the season replay's record for each; the record
     # of every rule, offered or not, goes to the page's replay table.
     replay = load_model_fit().get("parlays") or {}
+    # DraftKings' lines and prices as ESPN carries them: every parlay leg is a
+    # line the book posts (parlays.offered). Without them the legs go unpriced.
+    try:
+        from mlb_hr import draftkings
+        n_books = draftkings.attach(slate.games, today)
+        print(f"[slate.py] DraftKings lines for {n_books} of {len(slate.games)} games")
+    except Exception as e:  # noqa: BLE001 - the book is a refinement
+        print(f"[slate.py] Warning: DraftKings lines unavailable ({e})")
     parlays = parlay_mod.choose(slate.games, evidence=replay)
     parlay_replay = {k: {f: v for f, v in r.items() if f != "wins_on"} for k, r in replay.items()}
 

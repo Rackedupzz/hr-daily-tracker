@@ -206,98 +206,68 @@ def test_walk_forward_never_trains_on_the_week_it_predicts(monkeypatch):
     assert seen == [120, 160]
 
 
-def _cand(pk, bid, prob, pa=400):
-    return {"game_pk": pk, "batter_id": bid, "batter": f"B{bid}", "prob": prob, "season_pa": pa}
+def _cand(pk, bid, prob, pa=400, **kw):
+    return {"game_pk": pk, "batter_id": bid, "batter": f"B{bid}", "prob": prob, "season_pa": pa,
+            "exp_pa": 4.3, **kw}
 
 
-def test_parlays_use_one_leg_per_game_and_quote_honest_odds():
-    hr = [_cand(1, 10, 0.25), _cand(2, 20, 0.22), _cand(3, 30, 0.10)]
-    hits = [_cand(1, 11, 0.80), _cand(2, 21, 0.78), _cand(4, 41, 0.75), _cand(5, 51, 0.74),
-            _cand(6, 61, 0.73), _cand(7, 71, 0.72), _cand(8, 81, 0.60, pa=20)]
-    plays = {p["key"]: p for p in homer.build_parlays(hr, hits)}
-    assert set(plays) == {"hit3", "hit3e1", "hit3e2", "hit4e1", "hit3e3"}
-    for play in plays.values():
-        games = [leg["game_pk"] for leg in play["leg_list"]]
-        assert len(games) == len(set(games)) == play["legs"]
-        assert sum(leg["type"] == "hr" for leg in play["leg_list"]) == play["hr"]
-        assert all(leg["batter_id"] != 81 for leg in play["leg_list"])  # below PA floor
-        expected = 1.0
-        for leg in play["leg_list"]:
-            expected *= leg["prob"]
-        assert abs(play["prob"] - expected) < 1e-12
-    # Built to cash takes the likeliest hits in order, one game each.
-    assert [l["batter_id"] for l in plays["hit3"]["leg_list"]] == [11, 21, 41]
-    assert homer.fair_odds(0.5) == "-100" and homer.fair_odds(0.2) == "+400"
-    assert homer.fair_odds(0.75) == "-300"
+def _homer_slate(n=6, book=None):
+    games = []
+    for i in range(n):
+        pk = i + 1
+        games.append({"game_pk": pk, "start": "2026-09-24T23:05:00Z", "home": f"H{i}", "away": f"A{i}",
+                      "home_sp": "S", "away_sp": "T", "book": (book or {}).get(pk),
+                      "hitters": [{"batter": f"B{pk * 10 + j}", "batter_id": pk * 10 + j, "team": f"H{i}",
+                                   "side": "home", "lineup_slot": j + 1} for j in range(3)]})
+    return {"games": games}
 
 
-def test_every_play_can_clear_the_cash_bar():
-    """No home run legs: a parlay cannot beat its weakest leg, and HOMER's best
-    home run bat cashes about 21%, well under the three-days-in-ten bar."""
-    assert all(p["hr"] == 0 for p in homer.PARLAY_PLAYS)
-    assert all(3 <= p["legs"] <= 4 for p in homer.PARLAY_PLAYS)
-    assert all(0 <= p["value"] <= p["legs"] for p in homer.PARLAY_PLAYS)
-    featured = [p for p in homer.PARLAY_PLAYS if p.get("featured")]
-    assert len(featured) == 1 and featured[0]["key"] == "hit3"
-    assert featured[0]["legs"] == 3 and featured[0]["value"] == 0
-    # A key names one exact shape, so no two plays may share one.
-    shapes = {(p["legs"], p["hr"], p["value"]) for p in homer.PARLAY_PLAYS}
-    assert len(shapes) == len(homer.PARLAY_PLAYS)
-    assert len({p["key"] for p in homer.PARLAY_PLAYS}) == len(homer.PARLAY_PLAYS)
+def test_homer_parlays_use_the_house_rules_on_his_own_numbers():
+    from mlb_hr import parlays
+
+    slate = _homer_slate(6)
+    hr = [_cand(pk, pk * 10, 0.15 + pk / 100) for pk in range(1, 7)]
+    hits = [_cand(pk, pk * 10 + 1, 0.70 + pk / 100) for pk in range(1, 7)]
+    hits.append(_cand(6, 62, 0.95, pa=20))                     # below HOMER's PA floor
+    hits.append(_cand(5, 52, 0.94, injury_note="Day-To-Day"))  # on the injury report
+    picks = [{"game_pk": pk, "pick": f"H{pk - 1}", "win_prob": 0.55} for pk in range(1, 7)]
+    games = homer.parlay_games(slate, hr, hits, picks)
+    bar = {k: {"days": 130, "won": parlays.CORE_MIN_CASHED} for k in ("hit5", "hr5", "win5")}
+    out = {p["key"]: p for p in parlays.choose(games, evidence=bar)}
+    # HOMER's own likeliest legs, one per game, the cleared hitters only.
+    assert [l["batter_id"] for l in out["hit5"]["leg_list"]] == [61, 51, 41, 31, 21]
+    assert [l["batter_id"] for l in out["hr5"]["leg_list"]] == [60, 50, 40, 30, 20]
+    assert all(l["team"].startswith("H") for l in out["win5"]["leg_list"])
+    # A rule below the bar is not posted.
+    assert "multi5" not in out
+    below = parlays.choose(games, evidence={"hit5": {"days": 130, "won": parlays.CORE_MIN_CASHED - 1}})
+    assert not [p for p in below if not p["longshot"]]
 
 
-def test_a_mixed_play_takes_its_likely_legs_before_its_value_legs():
-    hits = [homer.price_leg(_cand(pk, 100 + pk, 0.78, 400), "hits", 0.77, None)
-            for pk in range(1, 4)]                       # likely, no edge
-    hits += [homer.price_leg(_cand(pk, 100 + pk, 0.70, 400), "hits", 0.50, None)
-             for pk in range(4, 7)]                      # big edge, still contenders
-    spec = [{"key": "mix", "name": "Mix", "legs": 3, "hr": 0, "value": 1, "blurb": ""}]
-    legs = homer.build_parlays([], hits, spec)[0]["leg_list"]
-    # Two likeliest first, then the biggest edge from a game they did not claim.
-    assert [l["batter_id"] for l in legs] == [101, 102, 104]
+def test_homer_legs_are_draftkings_lines_with_their_prices():
+    from mlb_hr import parlays
+
+    # DraftKings posts nothing for game 1's best hit bat, and prices the rest.
+    book = {pk: {"home_ml": -150, "away_ml": 130,
+                 "props": {str(pk * 10 + j): {"hits": [[1.0, -200], [2.0, 250]], "hr": [[1.0, 400]]}
+                           for j in range(3) if (pk, j) != (1, 1)}} for pk in range(1, 7)}
+    slate = _homer_slate(6, book)
+    hits = [_cand(pk, pk * 10 + 1, 0.70 + pk / 100) for pk in range(1, 7)]
+    hits += [_cand(pk, pk * 10 + 2, 0.60) for pk in range(1, 7)]
+    games = homer.parlay_games(slate, [], hits, [])
+    play = parlays.build(games, next(s for s in parlays.PARLAYS if s["key"] == "hit5"))
+    legs = {l["game_pk"]: l for l in play["leg_list"]}
+    assert 1 not in legs or legs[1]["batter_id"] == 12      # his unposted bat is passed over
+    assert all(l["book_price"] == -200 for l in play["leg_list"])
+    assert play["book_odds"] and play["book_priced"] == 5
 
 
-def test_book_price_compounds_margin_and_value_plays_chase_edge():
+def test_book_price_compounds_margin():
     fit = {"hits": {"market": {"x": [0.5, 0.8], "y": [0.5, 0.8]}}}
     leg = homer.price_leg({"prob": 0.70}, "hits", 0.60, fit)
     assert abs(leg["book_implied"] - 0.60 * homer.BOOK_MARGIN["hits"]) < 1e-9
     assert leg["book_edge"] > 0 and leg["book_price"].startswith("-")
     assert homer.american(3.0) == "+200" and homer.american(1.5) == "-200"
-
-    def priced(pk, bid, prob, season, kind="hits"):
-        return homer.price_leg(_cand(pk, bid, prob), kind, season, None)
-
-    hr = [priced(1, 10, 0.24, 0.23, "hr"), priced(2, 20, 0.20, 0.12, "hr"),
-          priced(3, 30, 0.12, 0.04, "hr")]
-    hits = [priced(pk, 100 + pk, 0.78, 0.76) for pk in range(4, 9)]
-    hits += [priced(pk, 100 + pk, 0.70, 0.58) for pk in range(9, 14)]
-    hits += [priced(14, 114, 0.55, 0.30)]  # huge edge, but below the value floor
-    plays = {p["key"]: p for p in homer.build_parlays(hr, hits)}
-    cash, value = plays["hit3"], plays["hit3e3"]
-    # Built to cash: the three most likely hits, one game each.
-    assert {l["game_pk"] for l in cash["leg_list"]} == set(range(4, 7))
-    # Full value: every leg the book underrates most, among real contenders.
-    assert {l["game_pk"] for l in value["leg_list"]} <= set(range(9, 14))
-    for play in plays.values():
-        decimal = 1.0
-        for l in play["leg_list"]:
-            decimal /= l["book_implied"]
-        assert abs(play["book_decimal"] - decimal) < 1e-9
-        assert abs(play["ev"] - (play["prob"] * decimal - 1)) < 1e-9
-
-
-def test_a_reshaped_play_cannot_inherit_the_old_shape_s_track_record():
-    """The replay files records by key, so the key has to mean one exact shape."""
-    play = {"key": "hit3", "legs": 3, "hr": 0, "value": 0}
-    measured = {"hit3": {"legs": 3, "hr": 0, "value": 0, "days": 122, "won": 51}}
-    assert homer.play_evidence(measured, play)["won"] == 51
-    # Same key, four legs now: the three-leg record is no longer this play's.
-    assert homer.play_evidence(measured, {**play, "legs": 4}) is None
-    assert homer.play_evidence(measured, {**play, "hr": 1}) is None
-    assert homer.play_evidence(measured, {**play, "value": 1}) is None
-    assert homer.play_evidence({}, play) is None
-    # A record written before the shape was stored is taken at its word.
-    assert homer.play_evidence({"hit3": {"days": 122, "won": 51}}, play)["won"] == 51
 
 
 def test_parlay_grading_voids_a_leg_who_never_batted():

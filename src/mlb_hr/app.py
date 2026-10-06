@@ -416,9 +416,9 @@ def create_app(pa_data_path: str = None) -> Flask:
         """Rebuild when there is no card, or the slate was refit after it."""
         if card is None:
             return True
-        # A card from before the 5-pick parlays existed is rebuilt once to add
-        # them; its published picks are locked, so nothing else moves.
-        if "five_picks" not in card:
+        # A card built under older parlay rules is rebuilt once to post the
+        # current ones; its published picks and tickets are locked.
+        if card.get("parlay_rules") != homer.PARLAY_RULES:
             return True
         if card.get("record", {}).get("complete"):
             return False

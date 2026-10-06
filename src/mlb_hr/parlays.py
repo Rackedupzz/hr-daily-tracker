@@ -5,8 +5,10 @@ carried over market for market.
 
 One leg per game keeps the legs independent (players in the same game rise and
 fall together, and books reprice same-game parlays to take that back), which is
-also what makes the ticket's chance the product of its legs. A hitter carrying
-an injury note is passed over: a scratched leg voids.
+also what makes the ticket's chance the product of its legs. Every leg is a line
+DraftKings posts (as ESPN carries it, mlb_hr.draftkings) for a hitter cleared by
+the injury report, with DraftKings' price where ESPN shows one. A scratched leg
+voids.
 
 The core tickets have five legs each, one per game: Five Hits (1+ hit), Five
 Multi-Hit (2+ hits), Five Homers, Five Winners and Chalk Five (the five
@@ -22,14 +24,19 @@ window only -- games starting before 7 PM Eastern, or at 7 PM and after -- so a
 leg in one window can never sink a ticket in the other: one home run, one hits
 leg, then the likeliest of the rest (hits at the highest rung the model trusts,
 and favourites to win), at most two legs a game, the most probable ten that
-pays +1000 or more at fair odds. When that rule cannot be met (a window short
-of games or of strong legs) the ticket falls back to a looser shape (see
-ten_ticket) and says so on its card.
+pays +1000 or more. When that rule cannot be met (DraftKings' board only
+partly posted, a window short of games or of strong legs) the ticket falls back
+step by step (see ten_ticket) and says so on its card.
 
-There is no odds feed for baseball props, so every leg counts at the model's
-own number and every ticket at fair odds. The season replay (mlb_hr.replay,
-data/model_fit.json "parlays") rebuilds each ticket with these rules on every
-replayed day and records how often it actually cashed. Like the picks, a
+Where ESPN carries the game's book (game["book"]), a Ten's legs and every
+winner count at the more cautious of the model and DraftKings' price -- where
+they disagree the book is usually the better judge -- and a Ten is priced at the
+book's own payout once every leg is priced. Without the book (the replay, or ESPN
+unreachable) every line counts as offered, at the model's number and fair odds.
+The season replay (mlb_hr.replay, data/model_fit.json "parlays"; HOMER's in
+homer_fit) rebuilds each ticket with these rules on every replayed day, without
+the book (ESPN keeps no past prop prices), and records how often it cashed. The
+same rules build HOMER's tickets from his own numbers (homer.build_card). Like the picks, a
 parlay is locked once any of its games is under way and is rebuilt from the
 games still to start until then. A day whose games had all started before a
 parlay was ever posted is built from that morning's projections, flagged as
@@ -58,8 +65,9 @@ PARLAYS = [
     {"key": "early10", "kind": "ladder", "window": "early", "legs": 10, "name": "Early Ten (before 7 PM ET)",
      "longshot": True,
      "blurb": "Ten legs from the games starting before 7 PM Eastern only: a home run, hits at the "
-              "highest rung the model trusts, and favourites to win. The most probable ten that pays "
-              "+1000 or more at fair odds; no player with an injury note."},
+              "highest rung the model trusts, and favourites to win, at DraftKings' lines and prices as "
+              "ESPN carries them. The most probable ten that pays +1000 or more; no player with an "
+              "injury note."},
     {"key": "late10", "kind": "ladder", "window": "late", "legs": 10, "name": "Late Ten (7 PM ET & later)",
      "longshot": True,
      "blurb": "Ten legs from the games starting at 7 PM Eastern or later, built the same way. "
@@ -68,10 +76,10 @@ PARLAYS = [
 # A core ticket is offered only with at least CORE_MIN_LEGS legs and a rule that
 # cashed at least CORE_MIN_CASHED times in the walk-forward season replay. The
 # long shots (the Tens) are shown apart, with their own record, and are exempt.
-# The NFL bar is 30 cashes; baseball legs are longer odds (no MLB five-leg rule
-# reached 30 in the 140-day 2026 replay, Five Hits 25), so the bar is 20.
+# The NFL bar, held firm at the user's direction (2026-10-06) even though no
+# baseball five-leg rule reached it in the 140-day 2026 replay (Five Hits 25).
 CORE_MIN_LEGS = 5
-CORE_MIN_CASHED = 20
+CORE_MIN_CASHED = 30
 MIX_KINDS = ("hit", "hit2", "hr", "win")
 # Core player markets: (leg type, line).
 CORE_MARKETS = {"hit": ("hits", 1), "hit2": ("hits", 2), "hr": ("hr", None)}
@@ -102,6 +110,24 @@ def fair_odds(prob: float) -> str:
     if prob >= 0.5:
         return f"-{round(100 * prob / (1 - prob)):,}"
     return f"+{round(100 * (1 - prob) / prob):,}"
+
+
+def implied(price: Optional[int]) -> Optional[float]:
+    """The chance an American price implies (the book's margin included)."""
+    if price is None:
+        return None
+    return 100.0 / (price + 100.0) if price > 0 else -price / (-price + 100.0)
+
+
+def decimal_odds(price: int) -> float:
+    return 1.0 + price / 100.0 if price > 0 else 1.0 + 100.0 / -price
+
+
+def american_text(dec: float) -> str:
+    """Decimal odds as American text, e.g. 11.0 -> '+1,000'."""
+    if dec >= 2.0:
+        return f"+{round((dec - 1.0) * 100):,}"
+    return f"-{round(100.0 / (dec - 1.0)):,}"
 
 
 def leg_label(leg_type: str, line=None) -> str:
@@ -187,25 +213,64 @@ def _pid(leg: dict):
     return leg.get("batter_id") if leg["type"] != "win" else f"team:{leg['team']}"
 
 
-def _hitter_leg(game: dict, h: dict, leg_type: str, line=None) -> dict:
+def _hitter_leg(game: dict, h: dict, leg_type: str, line=None, price=None) -> dict:
     return {"type": leg_type, "line": line, "label": leg_label(leg_type, line),
             "batter": h["batter"], "batter_id": h.get("batter_id"),
             "team": h.get("team", ""), "game_pk": game.get("game_pk"),
             "opp_sp": _opposing_starter(game, h), "facing_hand": h.get("facing_hand"),
-            "lineup_slot": h.get("lineup_slot")}
+            "lineup_slot": h.get("lineup_slot"), "book_price": price}
 
 
-def _win_leg(game: dict) -> Optional[tuple]:
-    """(prob, leg) for the game's favourite to win, or None without a projection."""
+def _props(game: dict) -> dict:
+    return (game.get("book") or {}).get("props") or {}
+
+
+def book_lines(game: dict, h: dict, leg_type: str) -> Optional[list]:
+    """DraftKings' [[line, price], ...] for this hitter in this market, [] when
+    the book posts none for him, or None when the game has no book at all."""
+    props = _props(game)
+    if not props:
+        return None
+    return (props.get(str(h.get("batter_id"))) or {}).get(leg_type) or []
+
+
+def offered(game: dict, h: dict, leg_type: str, line) -> tuple:
+    """(offered, price) for one hitter line at DraftKings. Without the game's
+    book every line counts as offered, unpriced."""
+    lines = book_lines(game, h, leg_type)
+    if lines is None:
+        return True, None
+    want = float(line or 1)
+    for got, price in lines:
+        if float(got) == want:
+            return True, price
+    return False, None
+
+
+def _win_leg(game: dict, cautious: bool = False) -> Optional[tuple]:
+    """(prob, leg) for the game's favourite to win, priced at DraftKings'
+    moneyline where ESPN carries it. `cautious` (the Tens) counts it at the
+    more cautious of the model and the book's no-vig chance, and drops it when
+    the book favours the other side."""
     proj = game.get("projection") or {}
     fav, p = proj.get("favorite"), proj.get("favorite_prob")
     if not fav or p is None:
         return None
     home = fav == (proj.get("home_team") or game.get("home"))
     opp = proj.get("underdog") or (game.get("away") if home else game.get("home"))
-    return float(p), {"type": "win", "line": None, "label": "to win", "batter": fav,
-                      "batter_id": None, "team": fav, "side": "home" if home else "away",
-                      "opp": opp or "", "game_pk": game.get("game_pk")}
+    book = game.get("book") or {}
+    ml_fav = book.get("home_ml" if home else "away_ml")
+    ml_dog = book.get("away_ml" if home else "home_ml")
+    p = float(p)
+    if cautious and ml_fav is not None and ml_dog is not None:
+        pf, pd_ = implied(ml_fav), implied(ml_dog)
+        market = pf / (pf + pd_)
+        if market <= 0.5:
+            return None
+        p = min(p, market)
+    return p, {"type": "win", "line": None, "label": "to win", "batter": fav,
+               "batter_id": None, "team": fav, "side": "home" if home else "away",
+               "opp": opp or "", "game_pk": game.get("game_pk"), "book_price": ml_fav}
 
 
 def _eligible(h: dict) -> bool:
@@ -214,7 +279,9 @@ def _eligible(h: dict) -> bool:
 
 # -------------------------------------------------------------- core tickets
 def best_legs(games: list[dict], kind: str, closed: Iterable = ()) -> list:
-    """Each open game's single likeliest leg of this kind, as (prob, leg)."""
+    """Each open game's single likeliest leg of this kind, as (prob, leg): a
+    hitter cleared by the injury report, at a line DraftKings actually posts,
+    with its price."""
     closed = set(closed)
     best = []
     for game in games:
@@ -233,29 +300,40 @@ def best_legs(games: list[dict], kind: str, closed: Iterable = ()) -> list:
             p = leg_prob(h, kind)
             if p is None or (top is not None and p <= top[0]):
                 continue
-            top = (float(p), _hitter_leg(game, h, leg_type, line))
+            ok, price = offered(game, h, leg_type, line)
+            if not ok:
+                continue
+            top = (float(p), _hitter_leg(game, h, leg_type, line, price))
         if top:
             best.append(top)
     return best
 
 
 # ----------------------------------------------------------------- the Tens
-def rung_table(hitter: dict) -> list:
-    """Every hits line a hitter can be set at, as (prob, line)."""
+def rung_table(hitter: dict, lines: Optional[list] = None) -> list:
+    """Every hits line a hitter can be set at, as (prob, line, price). `lines`
+    is the book's own [[line, price], ...]; without it, the standard ladder,
+    unpriced. A priced line counts at the more cautious of the model and the
+    price."""
+    offered_lines = lines if lines is not None else [(line, None) for line in LADDERS["hits"]]
     out = []
-    for line in LADDERS["hits"]:
+    for line, price in offered_lines:
+        line = int(line)
         p = hit_prob(hitter, line)
-        if p is not None:
-            out.append((p, line))
+        if p is None or line < 1:
+            continue
+        if price is not None:
+            p = min(p, implied(price))
+        out.append((p, line, price))
     return out
 
 
 def pick_rung(table: list, floor: float = LEG_FLOOR):
-    """(prob, line) at the highest line with prob >= floor, or None."""
+    """(prob, line, price) at the highest line with prob >= floor, or None."""
     best = None
-    for p, line in table:
+    for p, line, price in table:
         if p >= floor and (best is None or line > best[1]):
-            best = (p, line)
+            best = (p, line, price)
     return best
 
 
@@ -263,18 +341,26 @@ def ladder_table(games: list[dict]) -> tuple:
     """Everything a Ten can be built from, priced once: (fixed legs, rung
     tables). Fixed legs are every home run and every favourite, as (prob, leg);
     rung tables hold each hitter's hits lines, so a floor only has to pick from
-    them (ladder_pick)."""
+    them (ladder_pick). Where the game has DraftKings' book, a leg is only ever
+    a line the book posts for that hitter, counted at the more cautious of the
+    model and its price; without it, the standard ladder, unpriced."""
     fixed, rungs = [], []
     for game in games:
-        w = _win_leg(game)
+        w = _win_leg(game, cautious=True)
         if w:
             fixed.append(w)
         for h in game.get("hitters", []):
             if not _eligible(h):
                 continue
             if h.get("prob_hr") is not None:
-                fixed.append((float(h["prob_hr"]), _hitter_leg(game, h, "hr")))
-            table = rung_table(h)
+                ok, price = offered(game, h, "hr", 1)
+                if ok:
+                    p = float(h["prob_hr"]) if price is None else min(float(h["prob_hr"]), implied(price))
+                    fixed.append((p, _hitter_leg(game, h, "hr", None, price)))
+            lines = book_lines(game, h, "hits")
+            if lines == []:
+                continue
+            table = rung_table(h, lines)
             if table:
                 rungs.append((_hitter_leg(game, h, "hits"), table))
     return fixed, rungs
@@ -288,8 +374,9 @@ def ladder_pick(tables: tuple, floor: float = LEG_FLOOR) -> list:
     for base, table in rungs:
         rung = pick_rung(table, floor)
         if rung:
-            p, line = rung
-            out.append((p, {**base, "line": line, "label": leg_label("hits", line)}))
+            p, line, price = rung
+            out.append((p, {**base, "line": line, "label": leg_label("hits", line),
+                            "book_price": price}))
     return out
 
 
@@ -328,8 +415,17 @@ def ten_legs(cands: list, legs: int = 10, required: tuple = TEN_REQUIRED,
     return out if len(out) >= legs else []
 
 
+def pays_enough(chosen: list, target: float = TEN_TARGET_PROB) -> bool:
+    """Whether a ticket reaches the price: at the book's own prices when every
+    leg is priced (decimal payout >= 1 / target, i.e. +1000), else at fair odds."""
+    prices = [leg.get("book_price") for _, leg in chosen]
+    if prices and all(pr is not None for pr in prices):
+        return math.prod(decimal_odds(pr) for pr in prices) >= 1.0 / target - 1e-9
+    return math.prod(p for p, _ in chosen) <= target + 1e-12
+
+
 def ten_at_odds(candidates, legs: int = 10, target: float = TEN_TARGET_PROB, **shape) -> list:
-    """The most probable ten that pays +1000 or more at fair odds:
+    """The most probable ten that pays +1000 or more (see pays_enough):
     `candidates(floor)` gives the legs at that rung floor, and the floor is
     lowered -- every line raised a rung where it costs least -- until the
     ticket reaches the price. `shape` goes to ten_legs."""
@@ -337,21 +433,39 @@ def ten_at_odds(candidates, legs: int = 10, target: float = TEN_TARGET_PROB, **s
     for floor in TEN_FLOORS:
         chosen = ten_legs(candidates(floor), legs, **shape)
         p = math.prod(q for q, _ in chosen) if chosen else 0.0
-        if chosen and p <= target + 1e-12 and p > best_p:
+        if chosen and pays_enough(chosen, target) and p > best_p:
             best, best_p = chosen, p
     return best
 
 
 def ten_ticket(games: list[dict], legs: int = 10) -> tuple:
-    """(legs, note) for a Ten from these games: the full rule, else the shape
-    loosened (TEN_RELAXED: only the required markets the window offers, up to
-    three legs a game, fill legs from 60%). The note says when it was loosened."""
-    tables = ladder_table(games)
-    tries = [({}, ""),
-             (TEN_RELAXED, "Built with up to three legs a game: the window is short of legs that "
-                           "meet the full rule.")]
-    for shape, note in tries:
-        chosen = ten_at_odds(lambda f: ladder_pick(tables, f), legs, **shape)
+    """(legs, note) for a Ten from these games, trying in turn until one builds:
+    1. DraftKings' lines, every leg priced (the ticket pays the book's own price);
+    2. DraftKings' lines, priced or not (fair odds where a leg has no price);
+    3. the standard ladder without the props (as the replay builds it), for
+       hitters and markets the book has not posted yet;
+    4. 2 and 3 again with the shape loosened (TEN_RELAXED): only the required
+       markets the window offers, up to three legs a game, fill legs from 60%.
+    The note says which fallback was used ("" for the first)."""
+    no_props = [{**g, "book": {**(g.get("book") or {}), "props": {}}} for g in games]
+    book_tables, ladder_tables = ladder_table(games), ladder_table(no_props)
+
+    def priced(floor):
+        return [(p, leg) for p, leg in ladder_pick(book_tables, floor) if leg.get("book_price") is not None]
+
+    has_props = any(_props(g) for g in games)
+    tries = [(priced, {}, "")] if has_props else []
+    if has_props:
+        tries.append((lambda f: ladder_pick(book_tables, f), {},
+                      "Some legs have no DraftKings price yet; the odds are fair odds."))
+    tries.append((lambda f: ladder_pick(ladder_tables, f), {},
+                  "DraftKings has not posted every line yet; built on the standard ladder." if has_props else ""))
+    loose = "Built with up to three legs a game: the window is short of legs that meet the full rule."
+    if has_props:
+        tries.append((lambda f: ladder_pick(book_tables, f), TEN_RELAXED, loose))
+    tries.append((lambda f: ladder_pick(ladder_tables, f), TEN_RELAXED, loose))
+    for candidates, shape, note in tries:
+        chosen = ten_at_odds(candidates, legs, **shape)
         if chosen:
             return chosen, note
     return [], ""
@@ -389,9 +503,13 @@ def build(games: list[dict], spec: dict, closed: Iterable = ()) -> Optional[dict
 def _ticket(spec: dict, chosen: list) -> dict:
     leg_list = [{**leg, "prob": float(p)} for p, leg in chosen]
     prob = math.prod(leg["prob"] for leg in leg_list)
+    priced = [leg["book_price"] for leg in leg_list if leg.get("book_price") is not None]
+    dec = math.prod(decimal_odds(pr) for pr in priced) if priced and len(priced) == len(leg_list) else None
     return {"key": spec["key"], "kind": spec["kind"], "name": spec["name"], "blurb": spec["blurb"],
             "legs": spec["legs"], "leg_list": leg_list, "prob": prob, "fair_odds": fair_odds(prob),
-            "one_in": round(1 / prob) if prob > 0 else None}
+            "one_in": round(1 / prob) if prob > 0 else None,
+            "book_odds": american_text(dec) if dec else None,
+            "book_decimal": round(dec, 4) if dec else None, "book_priced": len(priced)}
 
 
 def _legs_of(play: dict) -> frozenset:
@@ -447,6 +565,54 @@ def choose(games: list[dict], previous: Optional[list] = None, started: Iterable
     for key, old in prior.items():
         if key not in keys and any(leg["game_pk"] in started for leg in old["leg_list"]):
             out.append({**old, "retired": True})
+    return out
+
+
+# -------------------------------------------------------------------- replay
+def replay_record(days: dict, landed) -> dict:
+    """Every rule in PARLAYS rebuilt by the live builder on every replayed day
+    and graded: `days` is {day: [game, ...]} in the live shape (no book: past
+    prop prices are not kept), `landed(leg)` whether a leg came in. Used by the
+    house replay (mlb_hr.replay) and HOMER's (mlb_hr.homer_fit) alike."""
+    has_wins = any((g.get("projection") or {}).get("favorite") for gs in days.values() for g in gs)
+    has_windows = any(_window(g) for gs in days.values() for g in gs)
+    out = {}
+    for spec in PARLAYS:
+        if (spec["kind"] in ("win", "mix") and not has_wins) or (spec["kind"] == "ladder" and not has_windows):
+            continue
+        n = won = 0
+        products, wins_on, leg_p, leg_y = [], [], [], []
+        by_kind: dict = {}
+        for day in sorted(days):
+            play = build(days[day], spec)
+            if not play:
+                continue
+            n += 1
+            products.append(play["prob"])
+            hits = []
+            for leg in play["leg_list"]:
+                ok = bool(landed(leg))
+                hits.append(ok)
+                leg_p.append(leg["prob"])
+                leg_y.append(float(ok))
+                kind = leg["type"] if leg["type"] != "hits" else f"hits{leg.get('line') or 1}"
+                k = by_kind.setdefault(kind, [0, 0.0, 0])
+                k[0] += 1
+                k[1] += leg["prob"]
+                k[2] += int(ok)
+            if all(hits):
+                won += 1
+                wins_on.append(str(day))
+        rec = {"legs": spec["legs"], "days": n, "won": won,
+               "rate": round(won / n, 4) if n else None,
+               "predicted": round(sum(products) / n, 6) if n else None,
+               "expected_wins": round(sum(products), 3), "wins_on": wins_on,
+               "leg_rate": round(sum(leg_y) / len(leg_y), 4) if leg_y else None,
+               "leg_projected": round(sum(leg_p) / len(leg_p), 4) if leg_p else None}
+        if spec.get("longshot"):
+            rec["by_kind"] = {k: {"n": c, "projected": round(sp / c, 4), "hit": round(h / c, 4)}
+                              for k, (c, sp, h) in sorted(by_kind.items())}
+        out[spec["key"]] = rec
     return out
 
 

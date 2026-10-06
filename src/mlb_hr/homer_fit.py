@@ -55,6 +55,10 @@ def game_results(through: date) -> list[dict]:
     cached = []
     if RESULTS_PATH.exists():
         cached = json.loads(RESULTS_PATH.read_text(encoding="utf-8"))
+    # A cache from before first pitches were kept (the parlays' windows) is
+    # refetched once in full.
+    if cached and "start" not in cached[0]:
+        cached = []
     last = cached[-1]["date"] if cached else "2026-03-01"
     if last < through.isoformat():
         try:
@@ -170,6 +174,8 @@ def replay(rows: list, results: list[dict], through: date) -> tuple[list, list]:
                         "hrules": h["rules_prob"],
                         "hbase": 1 - (1 - h["hit_rate"]) ** h["exp_pa"],
                         "yh": int(s["hits"][bid] > 0),
+                        # Hits and trips, for the parlays' 2+ and 3+ hit rungs.
+                        "nh": int(s["hits"][bid]), "hpa": float(h["exp_pa"]),
                     })
 
             final = finals.get(s["game_pk"])
@@ -380,46 +386,46 @@ def book_check(samples: list[dict]) -> dict:
     return {"margins": homer.BOOK_MARGIN, "legs": out}
 
 
-def parlay_record(samples: list[dict]) -> dict:
-    """Every play type, built with the live rules on every held-out day.
+def parlay_record(samples: list[dict], game_samples: list[dict], results: list[dict]) -> dict:
+    """HOMER's parlays (the house rules, mlb_hr.parlays), rebuilt by the live
+    builder on every held-out day from his own numbers: his served home run and
+    hit chances for every hitter he clears, and his winner in every game, with
+    first pitches for the Early and Late Ten. The replay has no DraftKings
+    lines (ESPN keeps no past prop prices), so legs count at HOMER's number."""
+    from mlb_hr.parlays import replay_record
 
-    A play cashes when every leg does. Its predicted rate is the average of the
-    legs' product, so the page can say whether the combined probabilities HOMER
-    quotes are honest. Returns at the modeled book price are an estimate: the
-    record says how often it cashed, the price says what that would have paid.
-    """
-    by_day = defaultdict(list)
+    start = {g["game_pk"]: g.get("start", "") for g in results}
+    names = {g["game_pk"]: (g["home"], g["away"]) for g in results}
+    picks = {s["game_pk"]: s for s in game_samples if "pick_prob" in s}
+    days: dict = {}
+    outcomes: dict = {}
     for s in samples:
-        by_day[s["date"]].append(s)
-    plays = homer.PARLAY_PLAYS + homer.FIVE_PICK_PLAYS
-    out = {p["key"]: {"name": p["name"], "legs": p["legs"], "hr": p["hr"],
-                      "value": p.get("value", 0), "days": 0, "won": 0,
-                      "predicted": 0.0, "prices": [], "profit": 0.0, "wins_on": []}
-           for p in plays}
-    for day, rows in sorted(by_day.items()):
-        for play in homer.build_parlays([s["hr_leg"] for s in rows], [s["hit_leg"] for s in rows],
-                                        plays=plays):
-            rec = out[play["key"]]
-            won = all(leg["y"] for leg in play["leg_list"])
-            rec["days"] += 1
-            rec["won"] += won
-            rec["predicted"] += play["prob"]
-            rec["prices"].append(play["book_decimal"])
-            rec["profit"] += play["book_decimal"] - 1 if won else -1
-            if won:
-                rec["wins_on"].append(day)
-    for rec in out.values():
-        n = max(rec["days"], 1)
-        prices = sorted(rec.pop("prices"))
-        rec["rate"] = round(rec["won"] / n, 4)
-        rec["rate_se"] = round(math.sqrt(rec["rate"] * (1 - rec["rate"]) / n), 4)
-        # Summed chance: a five-homer ticket's daily ~0.02% rounds to nothing.
-        rec["expected_wins"] = round(rec["predicted"], 3)
-        rec["predicted"] = round(rec["predicted"] / n, 6)
-        rec["typical_odds"] = homer.american(prices[len(prices) // 2]) if prices else None
-        rec["est_roi"] = round(rec.pop("profit") / n, 4)
-        rec["days_per_win"] = round(n / rec["won"], 1) if rec["won"] else None
-    return out
+        hr, hit = s["hr_leg"], s["hit_leg"]
+        if not homer.eligible(hr):
+            continue
+        g = days.setdefault(s["date"], {}).setdefault(s["game_pk"], {
+            "game_pk": s["game_pk"], "start": start.get(s["game_pk"], ""), "hitters": []})
+        g["hitters"].append({
+            "batter_id": s["batter_id"], "batter": str(s["batter_id"]),
+            "prob_hr": hr["prob"],
+            "hits_proj": {"prob_at_least_one": hit["prob"], "expected_pa": s.get("hpa")}})
+        outcomes[(s["game_pk"], s["batter_id"])] = (s["y"], s.get("nh", s["yh"]))
+    for gs in days.values():
+        for pk, g in gs.items():
+            pick, teams = picks.get(pk), names.get(pk)
+            if pick and teams:
+                home, away = teams
+                fav = home if pick["home_p"] >= 0.5 else away
+                g["projection"] = {"favorite": fav, "favorite_prob": pick["pick_prob"], "home_team": home,
+                                   "underdog": away if fav == home else home}
+
+    def landed(leg):
+        if leg["type"] == "win":
+            return picks[leg["game_pk"]]["pick_won"]
+        y_hr, n_hits = outcomes[(leg["game_pk"], leg["batter_id"])]
+        return y_hr > 0 if leg["type"] == "hr" else n_hits >= int(leg.get("line") or 1)
+
+    return replay_record({d: list(gs.values()) for d, gs in days.items()}, landed)
 
 
 def fit_target(samples: list[dict], xkey: str, ykey: str, rules_key: str, base_key: str,
@@ -550,8 +556,6 @@ def run(pa_path: Path = PA_PATH, out_path: Path = homer.FIT_PATH,
     fit["hr"]["market"], fit["hits"]["market"] = curves["hr"], curves["hits"]
     fit["book"] = book_check(test)
     print(f"[homer_fit] book: {json.dumps(fit['book'])}")
-    fit["parlays"] = parlay_record(test)
-    print(f"[homer_fit] parlays: {json.dumps(fit['parlays'])}")
 
     # ── winners
     gnames = homer.GAME_FEATURES
@@ -573,6 +577,7 @@ def run(pa_path: Path = PA_PATH, out_path: Path = homer.FIT_PATH,
     key = "learned" if gserve == "learned" else "rules"
     for s in gtest:
         home_p = s[key]
+        s["home_p"] = home_p
         s["pick_prob"] = max(home_p, 1 - home_p)
         s["pick_won"] = int((home_p >= 0.5) == (s["y"] == 1))
     gmodel = final_model(GX, gy, gnames, gkept)
@@ -589,6 +594,12 @@ def run(pa_path: Path = PA_PATH, out_path: Path = homer.FIT_PATH,
         "house_walk_forward": house,
     }
     print(f"[homer_fit] games: serving {gserve}; {json.dumps(game_scores)}")
+
+    # ── HOMER's parlays, built with the live house rules on his held-out numbers
+    fit["parlays"] = parlay_record(test, gtest, results)
+    for k, rec in fit["parlays"].items():
+        print(f"[homer_fit] parlay {k}: cashed {rec['won']} of {rec['days']} days "
+              f"(expected {rec['expected_wins']:.2f}); legs {rec['leg_rate']} vs {rec['leg_projected']}")
 
     out_path.write_text(json.dumps(fit, indent=1), encoding="utf-8")
     print(f"[homer_fit] wrote {out_path}")
