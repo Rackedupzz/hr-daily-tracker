@@ -9,9 +9,11 @@ from zoneinfo import ZoneInfo
 from pathlib import Path
 from threading import Event, Lock, Thread
 
+from html import escape
+
 from flask import Flask, render_template_string, request
 
-from mlb_hr import homer
+from mlb_hr import homer, ui
 from mlb_hr.fetch import fetch_season, probable_pitchers, schedule
 from mlb_hr.model import HRModel
 from mlb_hr.render import remaining_projections, render_html, render_models_html
@@ -113,6 +115,8 @@ def create_app(pa_data_path: str = None) -> Flask:
     # Live scores and box scores are two cheap calls, so they are pulled fresh
     # on every page load, with just enough caching to survive a reload storm.
     results_ttl = timedelta(seconds=int(os.environ.get("RESULTS_TTL_SECONDS", "45")))
+    # How often the season PA feed is topped up with newly final games.
+    feed_ttl = timedelta(hours=float(os.environ.get("FEED_REFRESH_HOURS", "3")))
     results_cache: dict = {}
     results_lock = Lock()
 
@@ -194,9 +198,13 @@ def create_app(pa_data_path: str = None) -> Flask:
 
         today = baseball_day()
         found = None
-        for days_back in range(14):
-            check_date = today - timedelta(days=days_back)
-            games = schedule(check_date, check_date, game_type="R")
+        # On an off day (the postseason has several) the next slate is what a
+        # reader wants, not the one already settled: look a few days ahead
+        # before falling back to the most recent day with games.
+        offsets = [0, 1, 2, 3] + [-d for d in range(1, 14)]
+        for offset in offsets:
+            check_date = today + timedelta(days=offset)
+            games = schedule(check_date, check_date)
             if any(g.state in ("Preview", "Live", "Final") for g in games):
                 found = check_date
                 break
@@ -261,6 +269,17 @@ def create_app(pa_data_path: str = None) -> Flask:
         def work():
             while True:
                 try:
+                    # Top the feed up through the day, not just when a new
+                    # slate appears: on an off day the target never changes,
+                    # so last night's games were never pulled and HOMER's
+                    # daily replay ran without them. Never during a fit, which
+                    # is reading the same file.
+                    with build_lock:
+                        busy = bool(building)
+                    if (not busy and not homer_fitting.is_set()
+                            and datetime.now() - last_refresh[0] > feed_ttl):
+                        refresh_season_data()
+
                     target = slate_target()
                     with slate_lock:
                         have = target in slate_cache
@@ -511,51 +530,28 @@ def create_app(pa_data_path: str = None) -> Flask:
         with build_lock:
             pending = sorted(str(d) for d in building)
         target = ", ".join(pending) or "today"
-        return f"""
-            <html>
-                <head>
-                    <title>HR Daily Tracker — warming up</title>
-                    <meta http-equiv="refresh" content="20">
-                </head>
-                <body style="font-family: system-ui; padding: 40px; max-width: 640px;">
-                    <h1>🏟️ HR Daily Tracker</h1>
-                    <p>Fitting the model for <strong>{target}</strong>.</p>
-                    <p style="color: #666;">
-                        This runs the comparables ensemble over the full season and
-                        takes roughly ten minutes on a cold start. The page refreshes
-                        itself every 20 seconds and will load as soon as the slate is
-                        ready — no need to wait on this tab.
-                    </p>
-                </body>
-            </html>
-            """, 503
+        body = ui.hero("Cold start", '<span class="spinner"></span>Warming up',
+                       f"Fitting the model for <strong>{target}</strong>.") + ui.alert(
+            "This runs the comparables ensemble over the full season and takes roughly ten "
+            "minutes on a cold start. The page refreshes itself every 20 seconds and will load "
+            "as soon as the slate is ready &mdash; no need to wait on this tab.", info=True)
+        return ui.page("HR Daily Tracker — warming up", "slate", body,
+                       status=ui.status_chip(text="Fitting", busy=True), meta_refresh=20), 503
 
     def no_games_page():
-        return """
-            <html>
-                <head><title>HR Daily Tracker</title></head>
-                <body style="font-family: system-ui; padding: 40px;">
-                    <h1>🏟️ HR Daily Tracker</h1>
-                    <p>No games scheduled in the next 14 days.</p>
-                    <p><a href="/">Refresh</a></p>
-                </body>
-            </html>
-            """
+        body = ui.hero("Off day", "No games on the schedule",
+                       "Nothing is scheduled in the next few days. Past slates are under "
+                       '<a href="/results">Results</a>.')
+        return ui.page("HR Daily Tracker", "slate", body)
 
     def error_page(exc: Exception):
         import traceback
         print(f"[app.py] Error rendering page: {exc}")
         traceback.print_exc()
-        return f"""
-            <html>
-                <head><title>HR Daily Tracker — Error</title></head>
-                <body style="font-family: system-ui; padding: 40px;">
-                    <h1>Error</h1>
-                    <p><code>{str(exc)}</code></p>
-                    <p><a href="/">Retry</a></p>
-                </body>
-            </html>
-            """, 500
+        body = ui.hero("Error", "Something broke rendering this page",
+                       '<a href="">Retry</a> &middot; the details are in the server log.') + ui.alert(
+            f"<code>{escape(str(exc))}</code>")
+        return ui.page("HR Daily Tracker — Error", "", body), 500
 
     # Start fitting immediately so the first visitor does not pay for it.
     warm_slates()

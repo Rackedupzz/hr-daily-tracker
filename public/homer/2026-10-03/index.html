@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#060a12"><title>HOMER — 2026-10-03</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>&#9918;</text></svg>"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"><style>
+:root{--bg:#060a12;--glow:rgba(255,122,69,.07);--glow2:rgba(56,132,255,.06);--panel:#0c131e;--panel2:#111a27;--raise:#152030;
+--line:#1b2738;--line2:#27374d;--text:#e9eef6;--mute:#8a9ab0;--faint:#5a6b82;
+--accent:#ff7a45;--accent2:#ffb03a;--accent-ink:#1a0800;--accent-soft:rgba(255,122,69,.12);--gold:#fbbf24;--gold-soft:rgba(251,191,36,.12);
+--good:#34d399;--good-soft:rgba(52,211,153,.13);--bad:#f87171;--bad-soft:rgba(248,113,113,.13);
+--warn:#fbbf24;--warn-soft:rgba(251,191,36,.13);--live:#fb7185;--s1:#3987e5;--s2:#ff7a45;
+--rhp:#60a5fa;--lhp:#c084fc;
+--shadow:0 1px 0 rgba(255,255,255,.03) inset,0 10px 30px -12px rgba(0,0,0,.6);--glass:rgba(6,10,18,.74);
+--r:16px;--r-sm:10px}
+html[data-theme="light"]{--bg:#f3f5f9;--glow:rgba(232,89,12,.06);--glow2:rgba(37,99,235,.05);--panel:#ffffff;--panel2:#f3f6fa;--raise:#ffffff;
+--line:#e2e8f0;--line2:#cbd5e1;--text:#0c1524;--mute:#526075;--faint:#8592a5;
+--accent:#e8590c;--accent2:#d97706;--accent-ink:#ffffff;--accent-soft:rgba(232,89,12,.09);--gold:#b45309;--gold-soft:rgba(180,83,9,.10);
+--good:#059669;--good-soft:rgba(5,150,105,.10);--bad:#dc2626;--bad-soft:rgba(220,38,38,.09);
+--warn:#b45309;--warn-soft:rgba(180,83,9,.10);--live:#e11d48;--s1:#2a78d6;--s2:#e8590c;
+--rhp:#2563eb;--lhp:#9333ea;
+--shadow:0 1px 2px rgba(15,23,42,.05),0 8px 24px -14px rgba(15,23,42,.18);--glass:rgba(243,245,249,.8)}
+html{color-scheme:dark;scroll-behavior:smooth;scroll-padding-top:120px}html[data-theme="light"]{color-scheme:light}
+*{box-sizing:border-box}
+body{margin:0;color:var(--text);background:var(--bg);
+background-image:radial-gradient(1100px 480px at 12% -10%,var(--glow),transparent 60%),radial-gradient(900px 420px at 100% 0,var(--glow2),transparent 55%);
+background-attachment:fixed;font:15px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+-webkit-font-smoothing:antialiased;font-feature-settings:"cv11","ss01"}
+.num,.big,.ring b,.tile b,.t td.n,.tchance,.score{font-variant-numeric:tabular-nums}
+a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+code{font:12.5px ui-monospace,"JetBrains Mono",Consolas,monospace;background:var(--panel2);border:1px solid var(--line);border-radius:6px;padding:1px 5px}
+.wrap{max-width:1280px;margin:0 auto;padding:0 20px 56px}
+@media (max-width:600px){.wrap{padding:0 16px 48px}}
+
+/* header */
+.top{position:sticky;top:0;z-index:30;background:var(--glass);backdrop-filter:saturate(1.6) blur(14px);
+-webkit-backdrop-filter:saturate(1.6) blur(14px);border-bottom:1px solid var(--line)}
+.top-in{max-width:1280px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:18px}
+@media (max-width:640px){.top-in{padding:10px 16px;gap:10px;flex-wrap:wrap}}
+.brand{display:flex;align-items:center;gap:10px;color:var(--text);font-weight:800;letter-spacing:-.3px;font-size:17px;white-space:nowrap}
+.brand:hover{text-decoration:none}
+.mark{width:32px;height:32px;border-radius:9px;display:grid;place-items:center;font-size:17px;
+background:linear-gradient(135deg,var(--accent),var(--accent2));box-shadow:0 6px 18px -6px var(--accent)}
+.brand span{color:var(--mute);font-weight:600}
+nav.tabs{display:flex;gap:4px;padding:4px;border-radius:12px;background:var(--panel2);border:1px solid var(--line);overflow-x:auto;scrollbar-width:none}
+nav.tabs::-webkit-scrollbar{display:none}
+.tab{padding:6px 13px;border-radius:9px;color:var(--mute);font-weight:600;font-size:13.5px;white-space:nowrap;transition:background .15s,color .15s}
+.tab:hover{color:var(--text);text-decoration:none;background:var(--raise)}
+.tab.on{background:var(--raise);color:var(--text);box-shadow:var(--shadow)}
+.top-right{margin-left:auto;display:flex;align-items:center;gap:10px}
+@media (max-width:640px){nav.tabs{order:3;width:100%}}
+.status{display:flex;align-items:center;gap:7px;font-size:12.5px;color:var(--mute);white-space:nowrap}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--faint)}
+.status.live .dot{background:var(--live);animation:pulse 1.8s infinite}
+.status.live{color:var(--text);font-weight:600}
+.status.busy .dot{background:var(--warn)}
+@keyframes pulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--live) 60%,transparent)}70%{box-shadow:0 0 0 8px transparent}100%{box-shadow:0 0 0 0 transparent}}
+.theme{border:1px solid var(--line);background:var(--panel2);color:var(--text);border-radius:10px;
+width:36px;height:34px;font-size:15px;cursor:pointer;display:grid;place-items:center}
+.theme:hover{border-color:var(--line2)}
+.theme .to-dark{display:none}html[data-theme="light"] .theme .to-dark{display:inline}
+html[data-theme="light"] .theme .to-light{display:none}
+
+/* hero + sub nav */
+.hero{padding:30px 0 10px}
+.eyebrow{font-size:12px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--accent)}
+.hero h1{margin:6px 0 6px;font-size:clamp(26px,4vw,38px);letter-spacing:-1px;line-height:1.1}
+.hero p{margin:0;color:var(--mute);max-width:820px}
+.subnav{position:sticky;top:55px;z-index:20;margin:16px -4px 0;padding:8px 4px;display:flex;gap:6px;overflow-x:auto;
+scrollbar-width:none;background:linear-gradient(var(--bg) 70%,transparent)}
+.subnav::-webkit-scrollbar{display:none}
+@media (max-width:640px){.subnav{top:100px}}
+.subnav a{flex:none;font-size:13px;font-weight:600;padding:6px 12px;border-radius:999px;color:var(--mute);
+border:1px solid var(--line);background:var(--panel)}
+.subnav a:hover{text-decoration:none;color:var(--text);border-color:var(--line2)}
+.subnav a.on{color:var(--accent-ink);background:var(--accent);border-color:var(--accent)}
+.days{display:flex;gap:6px;flex-wrap:wrap;margin-top:14px}
+.days a{font-size:12.5px;font-weight:600;padding:4px 10px;border-radius:8px;background:var(--panel);border:1px solid var(--line);color:var(--mute);font-variant-numeric:tabular-nums}
+.days a:hover{color:var(--text);text-decoration:none}.days a.on{color:var(--accent);border-color:var(--accent)}
+
+/* sections */
+.section{margin:34px 0}
+.sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:6px}
+.section-title{font-size:21px;margin:0;letter-spacing:-.4px;display:flex;align-items:center;gap:10px}
+.section-title .ico{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;font-size:15px;background:var(--panel2);border:1px solid var(--line)}
+h3.section-title{font-size:17px;margin-top:26px}
+.note{color:var(--mute);font-size:13.5px;margin:4px 0 14px;max-width:920px}
+.note b,.note strong{color:var(--text)}
+details.more>summary{cursor:pointer;color:var(--mute);font-size:13px;list-style:none;display:inline-flex;gap:6px;align-items:center}
+details.more>summary::-webkit-details-marker{display:none}
+details.more>summary::before{content:"\25B8";transition:transform .15s}details.more[open]>summary::before{transform:rotate(90deg)}
+details.more[open]>summary{margin-bottom:8px}
+details.more .body{color:var(--mute);font-size:13px;max-width:920px}
+
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr))}
+.grid.wide{grid-template-columns:repeat(auto-fill,minmax(min(360px,100%),1fr))}
+.grid.lab{grid-template-columns:repeat(auto-fit,minmax(min(440px,100%),1fr))}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:16px;position:relative;min-width:0;box-shadow:var(--shadow)}
+.card.scroll{overflow-x:auto}
+.label{font-size:11.5px;text-transform:uppercase;letter-spacing:1px;color:var(--mute);margin:0 0 8px;font-weight:700}
+.muted,.sub{color:var(--mute)}.sub{font-size:13px}
+.ok{color:var(--good);font-weight:700}.bad{color:var(--bad);font-weight:700}
+.alert{display:flex;gap:10px;background:var(--warn-soft);border:1px solid var(--warn);
+border-radius:12px;padding:12px 16px;font-size:14px;margin:12px 0}
+.alert::before{content:"\26A0";color:var(--warn)}
+.alert.info{background:var(--accent-soft);border-color:var(--accent)}
+.alert.info::before{content:"\2699";color:var(--accent)}
+
+/* stat tiles */
+.tiles{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));margin:18px 0}
+.tile{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 16px;box-shadow:var(--shadow);min-width:0}
+.tile b{display:block;font-size:26px;font-weight:800;letter-spacing:-.6px;line-height:1.1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tile b.sm{font-size:18px;line-height:1.45}
+.tile.good b{color:var(--good)}.tile.accent b{color:var(--accent)}.tile.gold b{color:var(--gold)}
+.tile .lab{display:block;color:var(--mute);font-size:12.5px;margin-top:4px}
+.tile .meter{height:4px;border-radius:99px;background:var(--line);margin-top:10px;overflow:hidden}
+.tile .meter>i{display:block;height:100%;background:var(--accent);border-radius:99px}
+.tile.good .meter>i{background:var(--good)}
+
+/* badges + chips */
+.badge{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:999px;font-size:12.5px;font-weight:700;max-width:100%}
+.badge.hit{background:var(--good-soft);color:var(--good)}.badge.miss{background:var(--bad-soft);color:var(--bad)}
+.badge.live{background:var(--warn-soft);color:var(--warn)}.badge.void{background:var(--panel2);color:var(--mute)}
+.badge.final{background:var(--panel2);color:var(--text)}
+.badge small{font-weight:600;opacity:.85}
+.inj{font-size:10.5px;font-weight:800;letter-spacing:.4px;padding:2px 6px;border-radius:6px;background:var(--warn-soft);color:var(--warn);margin-left:6px;vertical-align:2px;text-transform:uppercase}
+.pill{font-size:11px;font-weight:700;padding:2px 8px;border-radius:999px;border:1px solid var(--line2);color:var(--mute);margin-left:8px;white-space:nowrap;vertical-align:1px}
+.pill.strong{border-color:var(--good);color:var(--good);background:var(--good-soft)}
+.pill.lean{border-color:var(--accent);color:var(--accent)}
+.pill.slot{margin-left:0;margin-right:6px}
+.chip{display:inline-flex;gap:4px;align-items:center;font-size:12px;padding:3px 9px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);color:var(--mute);white-space:nowrap}
+.chip b{color:var(--text)}
+.chip.up b{color:var(--good)}.chip.down b{color:var(--bad)}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.hand{display:inline-block;font-size:10px;font-weight:800;letter-spacing:.5px;padding:1px 5px;border-radius:5px;vertical-align:1px;border:1px solid}
+.hand.r{color:var(--rhp);border-color:var(--rhp)}.hand.l{color:var(--lhp);border-color:var(--lhp)}
+.grade{display:inline-grid;place-items:center;min-width:26px;height:22px;padding:0 6px;border-radius:7px;font-weight:900;font-size:12px;
+background:var(--panel2);border:1px solid var(--line2);color:var(--mute);vertical-align:2px;margin-left:6px}
+.grade.g-A{background:var(--good-soft);border-color:var(--good);color:var(--good)}
+.grade.g-B{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
+.tag{font-size:10.5px;font-weight:800;letter-spacing:.6px;color:var(--gold);margin-left:6px;white-space:nowrap;text-transform:uppercase;vertical-align:2px}
+
+/* logos + avatars */
+.logo{width:22px;height:22px;object-fit:contain;vertical-align:middle;flex:none}
+.logo.lg{width:40px;height:40px}.logo.sm{width:16px;height:16px;vertical-align:-3px}
+.logo.on-light{display:none}html[data-theme="light"] .logo.on-light{display:inline}html[data-theme="light"] .logo.on-dark{display:none}
+.avatar{--tc:var(--accent);width:54px;height:54px;border-radius:50%;flex:none;position:relative;overflow:hidden;background:var(--panel2);
+box-shadow:0 0 0 2px var(--panel),0 0 0 4px var(--tc);display:grid;place-items:center;font-weight:800;color:var(--mute);font-size:16px}
+.avatar img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 10%}
+.avatar.sm{width:30px;height:30px;font-size:11px;box-shadow:0 0 0 1.5px var(--panel),0 0 0 3px var(--tc)}
+.avatar.xs{width:24px;height:24px;font-size:10px;box-shadow:0 0 0 1px var(--panel),0 0 0 2.5px var(--tc)}
+.person{display:flex;align-items:center;gap:10px;min-width:0}
+.person .nm{font-weight:700;line-height:1.2}.person .sub{font-size:12px;line-height:1.3}
+
+/* pick cards */
+.pick{display:flex;flex-direction:column;gap:12px;overflow:hidden}
+.pick::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:linear-gradient(90deg,var(--tc,var(--accent)),transparent)}
+.pick.hit{border-color:var(--good);box-shadow:0 0 0 1px var(--good-soft),var(--shadow)}
+.pick.miss{opacity:.8}.pick.void{opacity:.55}
+.pick-top{display:flex;gap:12px;align-items:center}
+.who{min-width:0;flex:1}.name{font-weight:750;font-size:16px;line-height:1.25;letter-spacing:-.2px}
+.who .sub{display:flex;align-items:center;gap:6px;margin-top:3px;flex-wrap:wrap}
+.rank{flex:none;align-self:flex-start;font-size:12px;font-weight:800;color:var(--mute);background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:2px 8px}
+.pick-main{display:flex;align-items:center;gap:14px}
+.ring{--p:0;--c:var(--accent);width:74px;height:74px;border-radius:50%;flex:none;display:grid;place-items:center;
+background:var(--line)}
+.ring::before{content:"";grid-area:1/1;width:62px;height:62px;border-radius:50%;background:var(--panel)}
+.ring b{grid-area:1/1;font-size:17px;font-weight:800;letter-spacing:-.4px}
+.big{font-size:28px;font-weight:800;letter-spacing:-.8px;line-height:1.05}
+.unit{font-size:13.5px;color:var(--mute);font-weight:600}
+.kv{display:grid;grid-template-columns:1fr auto;gap:5px 12px;font-size:13px;margin:0;padding:12px 0 0;border-top:1px solid var(--line)}
+.kv dt{color:var(--mute)}.kv dd{margin:0;text-align:right;font-variant-numeric:tabular-nums}
+.kv .full{grid-column:1/-1;text-align:left;color:var(--mute);font-size:12.5px}
+.kv dt.on,.kv dd.on{color:var(--text);font-weight:700}
+.kv dt.on::after{content:" \2190 today";color:var(--accent);font-weight:700;font-size:11px}
+.pick-foot{display:flex;flex-direction:column;gap:6px;align-items:flex-start}
+
+details.why{border-top:1px dashed var(--line2);padding-top:10px}
+details.why>summary{cursor:pointer;list-style:none;font-weight:700;font-size:13px;color:var(--gold);display:flex;gap:8px;align-items:flex-start}
+details.why>summary::-webkit-details-marker{display:none}
+details.why>summary::before{content:"\25B8";transition:transform .15s;margin-top:1px}
+details.why[open]>summary::before{transform:rotate(90deg)}
+details.why[open]>summary{margin-bottom:8px}
+.why ul,ul.take{margin:8px 0 0;padding-left:18px}.why li,ul.take li{font-size:12.8px;margin:3px 0;color:var(--text)}
+.why li::marker,ul.take li::marker{color:var(--faint)}
+.mults{display:grid;grid-template-columns:repeat(auto-fill,minmax(118px,1fr));gap:6px}
+.mult{background:var(--panel2);border:1px solid var(--line);border-radius:9px;padding:6px 9px;font-size:12px;color:var(--mute);line-height:1.3}
+.mult b{display:block;color:var(--text);font-size:14px;font-variant-numeric:tabular-nums}
+.mult.up b{color:var(--good)}.mult.down b{color:var(--bad)}
+
+/* win bar */
+.wbar{display:flex;flex-direction:column;gap:5px}
+.wbar .ends{display:flex;justify-content:space-between;font-size:12.5px;font-weight:700;font-variant-numeric:tabular-nums}
+.wbar .track{height:8px;border-radius:99px;display:flex;overflow:hidden;gap:2px}
+.wbar .track i{display:block;height:100%;border-radius:99px}
+.wbar .ends .fav{color:var(--text)}.wbar .ends span{color:var(--mute)}
+
+/* tickets */
+.ticket{display:flex;flex-direction:column;padding:0;overflow:hidden}
+.ticket .thead{padding:16px 16px 12px;display:flex;gap:14px;justify-content:space-between;align-items:flex-start;
+background:linear-gradient(180deg,var(--accent-soft),transparent)}
+.ticket.long .thead{background:linear-gradient(180deg,var(--gold-soft),transparent)}
+.ticket.featured{border-color:var(--gold);grid-column:1/-1}
+.tname{font-weight:800;font-size:16.5px;letter-spacing:-.3px}.ticket .blurb{font-size:12.8px;color:var(--mute);margin-top:4px}
+.tchance{text-align:right;flex:none}.tchance b{display:block;font-size:24px;font-weight:800;letter-spacing:-.6px;color:var(--accent);line-height:1.05}
+.ticket.long .tchance b{color:var(--gold)}
+.tchance small{font-size:11px;color:var(--mute);text-transform:uppercase;letter-spacing:.8px;font-weight:700}
+.tstats{display:flex;gap:6px;flex-wrap:wrap;padding:0 16px 12px}
+.legs{list-style:none;margin:0;padding:0 16px;border-top:1px solid var(--line)}
+.leg{display:grid;grid-template-columns:20px auto 1fr auto;gap:10px;align-items:center;padding:9px 0;border-bottom:1px dashed var(--line)}
+.leg:last-child{border-bottom:0}
+.leg .st{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;font-size:11px;font-weight:900;border:1.5px solid var(--line2);color:var(--faint)}
+.leg.won .st{background:var(--good);border-color:var(--good);color:#04140c}
+.leg.lost .st{background:var(--bad);border-color:var(--bad);color:#fff}
+.leg.void{opacity:.5}.leg.void .lp b{text-decoration:line-through}
+.leg .lp{min-width:0;display:flex;flex-direction:column;font-size:13.5px}
+.leg .lp small{color:var(--mute);font-size:12px;line-height:1.35}
+.leg .lpct{font-weight:800;font-size:13.5px;font-variant-numeric:tabular-nums}
+.leg.lost .lpct{color:var(--bad)}.leg.won .lpct{color:var(--good)}
+.ltype{font-size:9.5px;font-weight:900;letter-spacing:.5px;padding:2px 5px;border-radius:5px;background:var(--accent-soft);color:var(--accent);margin-right:6px;vertical-align:1px}
+.ltype.hit{color:var(--s1)}
+.tfoot{padding:12px 16px 16px;margin-top:auto;border-top:1px solid var(--line);font-size:12.5px;color:var(--mute);display:flex;flex-direction:column;gap:6px}
+.tfoot b{color:var(--text)}
+.tfoot .badge{align-self:flex-start}
+.ticket.st-won{border-color:var(--good)}
+.ticket.st-lost{opacity:.8}
+
+/* games */
+details.game{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);margin-bottom:12px;box-shadow:var(--shadow);overflow:hidden}
+details.game[open]{border-color:var(--line2)}
+details.game>summary{list-style:none;cursor:pointer;padding:14px 18px;display:grid;
+grid-template-columns:minmax(0,1fr) auto minmax(0,1fr) 28px;gap:16px;align-items:center}
+details.game>summary::-webkit-details-marker{display:none}
+details.game>summary:hover{background:var(--panel2)}
+.side{display:flex;align-items:center;gap:12px;min-width:0}.side.home{flex-direction:row-reverse;text-align:right}
+.side .tn{font-weight:750;font-size:15.5px;line-height:1.2;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.side .tp{font-size:12.5px;color:var(--mute);font-variant-numeric:tabular-nums;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.side.fav .wp{color:var(--accent);font-weight:700}
+.side>div{min-width:0}
+.mid{text-align:center;min-width:120px}
+.score{font-weight:800;font-size:22px;letter-spacing:-.4px}
+.score.live{color:var(--live)}
+.mid .meta{font-size:12px;color:var(--mute)}
+.mid .when{font-weight:700;font-size:13px}
+.chev{width:28px;height:28px;border-radius:8px;border:1px solid var(--line);display:grid;place-items:center;color:var(--mute);transition:transform .2s}
+details.game[open] .chev{transform:rotate(180deg)}
+@media (max-width:640px){details.game>summary{grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:10px;padding:14px}
+.chev{display:none}.logo.lg{width:30px;height:30px}.side,.side.home{gap:6px;flex-direction:column;text-align:center}.mid{min-width:0}}
+.gbody{padding:4px 18px 18px;border-top:1px solid var(--line)}
+.meta{color:var(--mute);font-size:13px}
+.cols{display:grid;gap:20px;grid-template-columns:minmax(280px,1fr) minmax(0,1.5fr);margin-top:14px}
+@media (max-width:900px){.cols{grid-template-columns:1fr}}
+.stack{display:flex;flex-direction:column;gap:16px;min-width:0}
+.cond{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;font-size:13px;color:var(--mute);
+padding:8px 12px;border-radius:10px;background:var(--panel2);border:1px solid var(--line)}
+.prow{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 12px;align-items:baseline;padding:8px 0;border-bottom:1px dashed var(--line)}
+.prow:last-child{border-bottom:0}
+.prow .v{font-weight:800;font-variant-numeric:tabular-nums;text-align:right}
+.prow .d{grid-column:1/-1;font-size:12px;color:var(--mute)}
+
+/* mini game cards (still to play, finals, HOMER winners) */
+.gcard{display:flex;flex-direction:column;gap:12px}
+.gcard.hit{border-color:var(--good)}.gcard.miss{opacity:.85}
+.ghead{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:10px;align-items:center}
+.ghead .tm{display:flex;align-items:center;gap:8px;min-width:0;font-weight:750}
+.ghead .tm.h{flex-direction:row-reverse;text-align:right}
+.ghead .tm span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ghead .tm.lose{color:var(--mute);font-weight:600}
+.ghead .c{text-align:center;font-size:12px;color:var(--mute)}
+.ghead .c b{display:block;font-size:20px;color:var(--text);letter-spacing:-.3px;font-variant-numeric:tabular-nums}
+.ghead .c b.live{color:var(--live)}
+.sps{display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:12.5px;color:var(--mute)}
+.sps>div:last-child{text-align:right}
+.rows{display:flex;flex-direction:column}
+.rowx{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:7px 0;border-top:1px solid var(--line);font-size:13px}
+.rowx:first-child{border-top:0}
+.rowx .r{text-align:right;font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap;display:flex;gap:6px;align-items:center;justify-content:flex-end}
+.rowx .badge{padding:2px 8px;font-size:11.5px}
+
+/* tables */
+table{border-collapse:collapse;width:100%}
+.scroll{overflow-x:auto}
+.t{font-size:13px}
+.t th{text-align:left;color:var(--faint);font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.7px;padding:8px;border-bottom:1px solid var(--line);white-space:nowrap}
+.t td{padding:8px;border-bottom:1px solid var(--line);white-space:nowrap;vertical-align:middle}
+.t tr:last-child td{border-bottom:0}
+.t tbody tr:hover td{background:var(--panel2)}
+.t td.n,.t th.n{text-align:right;font-variant-numeric:tabular-nums}
+.t td.c,.t th.c{text-align:center}
+.t .hot{color:var(--accent);font-weight:700}
+.t tr.served td{background:var(--accent-soft);font-weight:700}
+.t tr.served td:first-child{box-shadow:inset 3px 0 0 var(--accent)}
+.t tr.hitrow td{background:var(--good-soft)}
+.t tr.hitrow td:first-child{box-shadow:inset 3px 0 0 var(--good)}
+.t tr.dim td{color:var(--mute)}
+.t td.wrap{white-space:normal;min-width:240px}
+.t th.sv,.t td.sv{background:var(--accent-soft);color:var(--text);font-weight:700}
+.mini{display:inline-block;width:44px;height:5px;border-radius:99px;background:var(--line);vertical-align:middle;margin-left:6px;overflow:hidden}
+.mini>i{display:block;height:100%;background:var(--accent);border-radius:99px}
+.mini.good>i{background:var(--good)}.mini.bad>i{background:var(--bad)}
+
+/* HOMER */
+.persona{display:flex;gap:18px;align-items:flex-start;padding:20px;margin-top:18px;
+background:linear-gradient(135deg,var(--gold-soft),transparent 60%),var(--panel)}
+.persona .face{flex:none;width:68px;height:68px;border-radius:20px;display:grid;place-items:center;font-size:36px;
+background:linear-gradient(135deg,var(--gold),var(--accent));box-shadow:0 10px 26px -10px var(--accent)}
+.persona .q{font-size:14.5px;line-height:1.6}
+.persona .q strong:first-child{color:var(--gold)}
+.persona .rcpt{margin-top:8px;color:var(--mute);font-size:13.5px}
+@media (max-width:600px){.persona{flex-direction:column}}
+.edge{font-size:12px;color:var(--mute)}
+.edge b{color:var(--text)}
+.evid{font-size:12.5px;color:var(--mute);padding:8px 10px;border-radius:9px;background:var(--panel2);border:1px solid var(--line)}
+.evid b{color:var(--text)}
+
+/* charts */
+.chart{position:relative;margin:4px 0 10px}
+.chart svg{width:100%;height:auto;display:block;overflow:visible}
+.chart .grid-l{stroke:var(--line);stroke-width:1}
+.chart .axis-t{fill:var(--faint);font-size:11px;font-variant-numeric:tabular-nums}
+.chart .lbl-t{fill:var(--mute);font-size:11.5px;font-weight:700}
+.chart .s1{stroke:var(--s1)}.chart .s2{stroke:var(--s2)}
+.chart .f1{fill:var(--s1)}.chart .f2{fill:var(--s2)}
+.chart circle{stroke:var(--panel);stroke-width:2}
+.chart .hit{fill:transparent;cursor:crosshair;outline:none}
+.chart .xh{stroke:var(--line2);stroke-width:1;opacity:0;pointer-events:none}
+.chart.on .xh{opacity:1}
+.legend{display:flex;gap:14px;font-size:12.5px;color:var(--mute);margin-bottom:6px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{display:inline-block;width:14px;height:2px;border-radius:2px}
+.tip{position:fixed;z-index:50;pointer-events:none;background:var(--raise);border:1px solid var(--line2);border-radius:10px;
+padding:8px 10px;font-size:12.5px;box-shadow:0 12px 30px -10px rgba(0,0,0,.45);min-width:150px;opacity:0;transition:opacity .1s}
+.tip.on{opacity:1}.tip .tt{color:var(--mute);font-weight:700;margin-bottom:4px}
+.tip .row{display:flex;align-items:center;gap:8px;justify-content:space-between}
+.tip .row span{display:inline-flex;align-items:center;gap:6px;color:var(--mute)}
+.tip .row i{display:inline-block;width:12px;height:2px;border-radius:2px}
+.tip .row b{font-variant-numeric:tabular-nums}
+
+/* warming */
+.spinner{width:18px;height:18px;border-radius:50%;border:2px solid var(--line2);border-top-color:var(--accent);animation:spin 1s linear infinite;display:inline-block;vertical-align:-2px;margin-right:10px}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+footer{color:var(--faint);font-size:12.5px;border-top:1px solid var(--line);margin-top:40px;padding-top:16px;display:flex;flex-direction:column;gap:4px}
+/* Effects WeasyPrint cannot resolve (a variable that points at a variable, inside
+   a gradient or color-mix, recurses forever), so they are kept off print media. */
+@media screen{
+.hand.r{background:color-mix(in srgb,var(--rhp) 12%,transparent)}.hand.l{background:color-mix(in srgb,var(--lhp) 12%,transparent)}
+.avatar{background:radial-gradient(circle at 50% 120%,color-mix(in srgb,var(--tc) 55%,transparent),var(--panel2) 70%)}
+.ring{background:conic-gradient(var(--c) calc(var(--p)*1%),var(--line) 0)}
+.ltype.hit{background:color-mix(in srgb,var(--s1) 14%,transparent)}
+.t td.heat{background:color-mix(in srgb,var(--accent) calc(var(--h,0)*42%),transparent)}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+</style><script>try{var t=localStorage.getItem("hr-theme");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}</script></head>
+<body data-live="60">
+<header class="top"><div class="top-in">
+<a class="brand" href="/"><span class="mark">&#9918;</span>HR <span>Daily Tracker</span></a>
+<nav class="tabs"><a class="tab" href="/">Today</a><a class="tab" href="/results">Results</a><a class="tab on" href="/homer">HOMER</a><a class="tab" href="/models">Model Lab</a></nav>
+<div class="top-right"><div class="status"><i class="dot"></i><span class="when">Card posted</span></div><button class="theme" type="button" aria-label="Switch theme" title="Switch theme"><span class="to-light">&#9728;</span><span class="to-dark">&#9790;</span></button></div>
+</div></header>
+<div class="wrap"><main><section class="hero"><div class="eyebrow">HOMER &middot; Saturday, October 3</div><h1>HOMER&rsquo;s Card</h1><p>Top-tier MLB expert &middot; professional capper &middot; plays built to win</p><div class="days"><a class="" href="/homer/2026-10-05/">10-05</a><a class="" href="/homer/2026-10-04/">10-04</a><a class="on" href="/homer/2026-10-03/">10-03</a><a class="" href="/homer/2026-10-01/">10-01</a><a class="" href="/homer/2026-09-30/">09-30</a><a class="" href="/homer/2026-09-29/">09-29</a><a class="" href="/homer/2026-09-27/">09-27</a><a class="" href="/homer/2026-09-25/">09-25</a><a class="" href="/homer/2026-09-24/">09-24</a><a class="" href="/homer/2026-09-23/">09-23</a><a class="" href="/homer/2026-09-22/">09-22</a><a class="" href="/homer/2026-09-21/">09-21</a><a class="" href="/homer/2026-09-19/">09-19</a><a class="" href="/homer/2026-09-18/">09-18</a><a class="" href="/homer/2026-09-17/">09-17</a><a class="" href="/homer/2026-09-16/">09-16</a><a class="" href="/homer/2026-09-15/">09-15</a><a class="" href="/homer/2026-09-14/">09-14</a><a class="" href="/homer/2026-09-13/">09-13</a><a class="" href="/homer/2026-09-12/">09-12</a></div></section><div class="card persona"><div class="face">&#129506;</div><div style="min-width:0">
+<div class="q"><strong>HOMER</strong> &mdash; top-tier MLB expert and professional capper.
+I look at <em>everything</em>: the arm on the mound, the bat in the box, the wind and the heat, and every player's
+full body of work &mdash; what he's capable of and <em>when</em> he's capable of doing it. I don't guess and I don't
+chase. I play to win, because every win is another follower cashing with me. I get sharper with every data pull: my
+whole season gets re-studied every day. Over 138 replayed days my daily six homered 21% of the time, against 12% for the average bat in the lineup.</div>
+<div class="rcpt">Live record: 21-for-89 on home runs, 127-75 on winners, 49-for-73 on hit picks, 27-39 on parlays. I'm running HOT.</div><div style="margin-top:10px"><details class="why" id="homer-method"><summary>How HOMER does his homework</summary><ul>
+<li><strong>Expected home runs.</strong> Every batted ball this season is binned by exit velocity and launch angle;
+the league's HR rate per bin turns a hitter's contact into the home runs it deserved.</li>
+<li><strong>Form &amp; splits.</strong> Last-21-day xHR, the hitter's own record against today's pitcher hand, barrel
+rate, and the league platoon effect.</li>
+<li><strong>Pitchers.</strong> HR and xHR allowed per batter faced, fly-ball rate and recent form for the starter,
+and the bullpen he hands off to.</li>
+<li><strong>Park</strong> factor from HR/PA at the venue vs the home team's road games; <strong>weather</strong> from
+temperature and wind toward the hitter's pull field.</li>
+<li><strong>He learns what wins.</strong> The season is replayed week by week with his book frozen at each week's
+start. Weights are fitted only on earlier weeks and graded on the next one. Factors that don't improve those
+unseen-week predictions are dropped, and the learned weights are used only if they beat his original rule-of-thumb
+formula.</li>
+<li><strong>Grades are earned.</strong> A / B+ / B / C bands come from where a pick sits on the replayed board, and
+each shows how often picks in that band actually homered.</li>
+<li><strong>Games.</strong> A wOBA runs model (lineup vs the starter and bullpen it faces) and season run
+differential, weighted the same learned way.</li>
+<li><strong>Hit picks.</strong> Hit rate, expected hits from contact quality, strikeout and walk rates, and his own
+split, against the starter's hits allowed and strikeout rate, the bullpen and the park &mdash; learned and tested the
+same way.</li>
+<li><strong>HOMER'S PLAYS.</strong> 3- and 4-leg hit combos, one leg per game, each held to cashing three days in ten
+&mdash; plus two 5-pick parlays (five homers, five hits) that carry their own record. Every ticket is rebuilt on every
+replayed day to check that its quoted odds hold up.</li>
+<li><strong>Grows every day.</strong> His book refreshes with each data pull, and the whole season replay reruns
+daily, so new results reshape his weights and grades.</li>
+<li><strong>Selection rules.</strong> Six HR picks and six hit picks, one per game, 80+ PA, no injury notes, and only
+hitters in the posted lineup. Picks and plays in started games are locked.</li></ul></details></div></div></div><nav class="subnav"><a href="#plays">HOMER'S PLAYS</a><a href="#hr">HR Picks</a><a href="#hits">Hit Picks</a><a href="#games">Winners</a><a href="#vs">vs the Model</a><a href="#homework">Homework</a><a href="#record">Record</a></nav><div class="tiles"><div class="tile gold"><b>21/89</b><span class="lab">season HR picks</span><div class="meter"><i style="width:24%"></i></div></div><div class="tile"><b>49/73</b><span class="lab">hit picks</span><div class="meter"><i style="width:67%"></i></div></div><div class="tile"><b>27-39</b><span class="lab">HOMER'S PLAYS W-L</span></div><div class="tile"><b>0-2</b><span class="lab">5-pick parlays W-L</span></div><div class="tile"><b>127-75</b><span class="lab">winners W-L</span><div class="meter"><i style="width:63%"></i></div></div></div><section class="section" id="plays"><div class="sec-head"><h2 class="section-title"><span class="ico">&#128176;</span>HOMER&rsquo;S PLAYS</h2></div><p class="note">Built leg by leg from HOMER's hit board, one leg per game so no single rainout or pitcher sinks the ticket. Every play here cleared the same bar in the replay &mdash; it had to cash on at least three days in ten &mdash; so what separates them is price, not whether they land. Parlays are still high-variance: stake accordingly and never bet more than you can afford to lose.</p><div style="margin:-4px 0 14px"><details class="more" id="book-notes"><summary>&#127922; How the book works &mdash; and how HOMER counters</summary><div class="body"><ul class="take">
+<li><strong>The juice compounds.</strong> Every leg carries the book's margin, and a parlay multiplies them. Four hit
+legs at a normal hold pay about 22% less than their true odds, which is why none of these tickets runs long.</li>
+<li><strong>No home run legs.</strong> HOMER's best home run bat cashes about one start in five, and a parlay can never
+beat its weakest leg &mdash; so a ticket carrying one cannot clear the cash bar these plays are held to. His home run
+board is below; play those straight.</li>
+<li><strong>The book leans on the season line.</strong> Props are priced mostly off a hitter's rate and name. HOMER
+prices the matchup: the starter, bullpen, park, weather, lineup slot and contact quality. "Built to pay" plays only take
+legs where that read clearly beats the season line.</li>
+<li><strong>One leg per game.</strong> Legs from the same game move together, and books reprice same-game parlays to
+take that edge back. Spreading legs keeps the math honest.</li>
+<li><strong>A scratched player voids his leg;</strong> the ticket rides on the rest at a smaller payout.</li>
+<li><strong>Price is estimated</strong> until live odds are wired in. If your book is shorter than the fair odds, pass
+or hunt a boost.</li>
+<li><strong>Size by how often it cashes, not by what it pays.</strong> These plays land between three and four days in
+ten, so flat stakes suit all of them &mdash; but even a 41% ticket goes quiet for a week or more, and the replay line on
+each card shows its worst run. Read that before you stake it.</li></ul></div></details></div><div class="grid wide"><article class="card ticket featured st-won">
+<div class="thead"><div><div class="tname">&#129506; Parlay of the Day</div><div class="blurb">Three legs, three different games, straight off the top of HOMER's hit board. Nothing here is taken for the price &mdash; it is the shortest ticket on the board and the one that cashes most often.</div></div>
+<div class="tchance"><b>31.8%</b><small>to cash</small></div></div>
+<div class="tstats"><span class="chip"><b>3</b> legs</span><span class="chip">Built to cash</span>
+<span class="chip">fair <b>+214</b></span><span class='chip'>est. book <b>+163</b></span><span class='chip down'>EV per $1 <b>-16%</b></span></div>
+<ol class="legs"><li class="leg won"><span class="st">&#10003;</span><div class="avatar xs" style="--tc:#5E9BD6">YD<img src="https://img.mlbstatic.com/mlb-photos/image/upload/d_people:generic:headshot:67:current.png/w_180,q_auto:best/v1/people/650490/headshot/67/current" alt="" loading="lazy" onerror="this.remove()"></div><span class="lp"><b><span class="ltype hit">1+ HIT</span>Yandy Díaz</b><small>TB vs Gerrit Cole &middot; book ~-272 (73%) &middot; edge -3%</small></span><span class="lpct">71%</span></li><li class="leg won"><span class="st">&#10003;</span><div class="avatar xs" style="--tc:#1E6FD9">MB<img src="https://img.mlbstatic.com/mlb-photos/image/upload/d_people:generic:headshot:67:current.png/w_180,q_auto:best/v1/people/605141/headshot/67/current" alt="" loading="lazy" onerror="this.remove()"></div><span class="lp"><b><span class="ltype hit">1+ HIT</span>Mookie Betts</b><small>LAD vs Dylan Dodd &middot; book ~-244 (71%) &middot; edge -6%</small></span><span class="lpct">67%</span></li><li class="leg won"><span class="st">&#10003;</span><div class="avatar xs" style="--tc:#E3A600">JC<img src="https://img.mlbstatic.com/mlb-photos/image/upload/d_people:generic:headshot:67:current.png/w_180,q_auto:best/v1/people/694192/headshot/67/current" alt="" loading="lazy" onerror="this.remove()"></div><span class="lp"><b><span class="ltype hit">1+ HIT</span>Jackson Chourio</b><small>MIL vs Robbie Ray &middot; book ~-272 (73%) &middot; edge -9%</small></span><span class="lpct">67%</span></li></ol><div class="tfoot"><div>Est. book price: the book's margin eats this one &mdash; shop for a boost.</div><div><b>Replay:</b> this play cashed 51 of 136 days (37.5%, about once every 2.7 days) vs 39.8% predicted; typical ticket ~+169</div><span class="badge hit">&#10003; CASHED</span></div></article><article class="card ticket st-won">
+<div class="thead"><div><div class="tname">The Lock</div><div class="blurb">Two of HOMER's most likely hits, plus one bat the book has underpriced. A longer number than the Parlay of the Day for about the same cash rate.</div></div>
+<div class="tchance"><b>29.1%</b><small>to cash</small></div></div>
+<div class="tstats"><span class="chip"><b>3</b> legs</span><span class="chip">2 likely &middot; 1 value</span>
+<span class="chip">fair <b>+244</b></span><span class='chip'>est. book <b>+226</b></span><span class='chip down'>EV per $1 <b>-5%</b></span></div>
+<ol class="legs"><li class="leg won"><span class="st">&#10003;</span><div class="avatar xs" style="--tc:#5E9BD6">YD<img src="https://img.mlbstatic.com/mlb-photos/image/upload/d_people:generic:headshot:67:current.png/w_180,q_auto:best/v1/people/650490/headshot/67/current" alt="" loading="lazy" onerror="this.remove()"></div><span class="lp"><b><span class="ltype hit">1+ HIT</span>Yandy Díaz</b><small>TB vs Gerrit Cole &middot; book ~-272 (73%) &middot; edge -3%</small></span><span class="lpct">71%</span></li><li class="leg won"><span class="st">&#10003;</span><div class="avatar xs" style="--tc:#1E6FD9">MB<img src="https://img.mlbstatic.com/mlb-photos/image/upload/d_people:generic:headshot:67:current.png/w_180,q_auto:best/v1/people/605141/headshot/67/current" alt="" loading="lazy" onerror="this.remove()"></div><span class="lp"><b><span class="ltype hit">1+ HIT</span>Mookie Betts</b><small>LAD vs Dylan Dodd &middot; book ~-244 (71%) &middot; edge -6%</small></span><span class="lpct">67%</span></li><li class="leg void"><span class="st"></span><div class="avatar xs" style="--tc:#E3A600">SF<img src="https://img.mlbstatic.com/mlb-photos/image/upload/d_people:generic:headshot:67:current.png/w_180,q_auto:best/v1/people/686217/headshot/67/current" alt="" loading="lazy" onerror="this.remove()"></div><span class="lp"><b><span class="ltype hit">1+ HIT</span>Sal Frelick (void)</b><small>MIL vs Robbie Ray &middot; book ~-144 (59%) &middot; edge +4%</small></span><span class="lpct">61%</span></li></ol><div class="tfoot"><div>Est. book price: the book's margin eats this one &mdash; shop for a boost.</div><div><b>Replay:</b> this play cashed 49 of 136 days (36.0%, about once every 2.8 days) vs 38.6% predicted; typical ticket ~+191</div><span class="badge hit">&#10003; CASHED</span></div></article><article class="card ticket st-won">
+<div class="thead"><div><div class="tname">The Edge</div><div class="blurb">Flips the mix: one anchor and two legs where HOMER's matchup read beats the season line the book prices off. More price, a little less certainty.</div></div>
+<div class="tchance"><b>25.1%</b><small>to cash</small></div></div>
+<div class="tstats"><span class="chip"><b>3</b> legs</span><span class="chip">1 likely &middot; 2 value</span>
+<span class="chip">fair <b>+298</b></span><span class='chip'>est. book <b>+286</b></span><span class='chip down'>EV per $1 <b>-3%</b></span></div>
+<ol class="legs"><li class="leg won"><span class="st">&#10003;</span><div class="avatar xs" style="--tc:#5E9BD6">YD<img src="https://img.mlbstatic.com/mlb-photos/image/upload/d_people:generic:headshot:67:current.png/w_180,q_auto:best/v1/people/650490/headshot/67/current" alt="" loading="lazy" onerror="this.remove()"></div><span class="lp"><b><span class="ltype hit">1+ HIT</span>Yandy Díaz</b><small>TB vs Gerrit Cole &middot; book ~-272 (73%) &middot; edge -3%</small></span><span class="lpct">71%</span></li><li class="leg void"><span class="st"></span><div class="avatar xs" style="--tc:#E3A600">SF<img src="https://img.mlbstatic.com/mlb-photos/image/upload/d_people:generic:headshot:67:current.png/w_180,q_auto:best/v1/people/686217/headshot/67/current" alt="" loading="lazy" onerror="this.remove()"></div><span class="lp"><b><span class="ltype hit">1+ HIT</span>Sal Frelick (void)</b><small>MIL vs Robbie Ray &middot; book ~-144 (59%) &middot; edge +4%</small></span><span class="lpct">61%</span></li><li class="leg won"><span class="st">&#10003;</span><div class="avatar xs" style="--tc:#1E6FD9">KT<img src="https://img.mlbstatic.com/mlb-photos/image/upload/d_people:generic:headshot:67:current.png/w_180,q_auto:best/v1/people/663656/headshot/67/current" alt="" loading="lazy" onerror="this.remove()"></div><span class="lp"><b><span class="ltype hit">1+ HIT</span>Kyle Tucker</b><small>LAD vs Dylan Dodd &middot; book ~-150 (60%) &middot; edge -4%</small></span><span class="lpct">58%</span></li></ol><div class="tfoot"><div>Est. book price: the book's margin eats this one &mdash; shop for a boost.</div><div><b>Replay:</b> this play cashed 54 of 136 days (39.7%, about once every 2.5 days) vs 37.3% predicted; typical ticket ~+214</div><span class="badge hit">&#10003; CASHED</span></div></article><article class="card ticket st-lost">
+<div class="thead"><div><div class="tname">The Stretch</div><div class="blurb">A fourth leg for a bigger number &mdash; three likely hits and one value bat. The longest price that still clears the cash bar.</div></div>
+<div class="tchance"><b>21.7%</b><small>to cash</small></div></div>
+<div class="tstats"><span class="chip"><b>4</b> legs</span><span class="chip">3 likely &middot; 1 value</span>
+<span class="chip">fair <b>+361</b></span><span class='chip'>est. book <b>+296</b></span><span class='chip down'>EV per $1 <b>-14%</b></span></div>
+<ol class="legs"><li class="leg won"><span class="st">&#10003;</span><div class="avatar xs" style="--tc:#5E9BD6">YD<img src="https://img.mlbstatic.com/mlb-photos/image/upload/d_people:generic:headshot:67:current.png/w_180,q_auto:best/v1/people/650490/headshot/67/current" alt="" loading="lazy" onerror="this.remove()"></div><span class="lp"><b><span class="ltype hit">1+ HIT</span>Yandy Díaz</b><small>TB vs Gerrit Cole &middot; book ~-272 (73%) &middot; edge -3%</small></span><span class="lpct">71%</span></li><li class="leg won"><span class="st">&#10003;</span><div class="avatar xs" style="--tc:#1E6FD9">MB<img src="https://img.mlbstatic.com/mlb-photos/image/upload/d_people:generic:headshot:67:current.png/w_180,q_auto:best/v1/people/605141/headshot/67/current" alt="" loading="lazy" onerror="this.remove()"></div><span class="lp"><b><span class="ltype hit">1+ HIT</span>Mookie Betts</b><small>LAD vs TBD &middot; book ~-244 (71%) &middot; edge -0%</small></span><span class="lpct">71%</span></li><li class="leg won"><span class="st">&#10003;</span><div class="avatar xs" style="--tc:#E3A600">JC<img src="https://img.mlbstatic.com/mlb-photos/image/upload/d_people:generic:headshot:67:current.png/w_180,q_auto:best/v1/people/694192/headshot/67/current" alt="" loading="lazy" onerror="this.remove()"></div><span class="lp"><b><span class="ltype hit">1+ HIT</span>Jackson Chourio</b><small>MIL vs TBD &middot; book ~-272 (73%) &middot; edge -8%</small></span><span class="lpct">67%</span></li><li class="leg lost"><span class="st">&#10007;</span><div class="avatar xs" style="--tc:#E31937">JR<img src="https://img.mlbstatic.com/mlb-photos/image/upload/d_people:generic:headshot:67:current.png/w_180,q_auto:best/v1/people/608070/headshot/67/current" alt="" loading="lazy" onerror="this.remove()"></div><span class="lp"><b><span class="ltype hit">1+ HIT</span>José Ramírez</b><small>CLE vs Hagen Smith &middot; book ~-198 (66%) &middot; edge -3%</small></span><span class="lpct">64%</span></li></ol><div class="tfoot"><div>Est. book price: the book's margin eats this one &mdash; shop for a boost.</div><div><b>Replay:</b> this play cashed 36 of 135 days (26.7%, about once every 3.8 days) vs 27.8% predicted; typical ticket ~+304</div><span class="badge miss">&#10007; LOST</span></div></article><article class="card ticket st-won">
+<div class="thead"><div><div class="tname">Full Value</div><div class="blurb">Every leg chosen for what the book is paying rather than for how likely it is. The purest read on whether HOMER beats the price.</div></div>
+<div class="tchance"><b>25.1%</b><small>to cash</small></div></div>
+<div class="tstats"><span class="chip"><b>3</b> legs</span><span class="chip">Built to pay</span>
+<span class="chip">fair <b>+298</b></span><span class='chip'>est. book <b>+286</b></span><span class='chip down'>EV per $1 <b>-3%</b></span></div>
+<ol class="legs"><li class="leg won"><span class="st">&#10003;</span><div class="avatar xs" style="--tc:#5E9BD6">YD<img src="https://img.mlbstatic.com/mlb-photos/image/upload/d_people:generic:headshot:67:current.png/w_180,q_auto:best/v1/people/650490/headshot/67/current" alt="" loading="lazy" onerror="this.remove()"></div><span class="lp"><b><span class="ltype hit">1+ HIT</span>Yandy Díaz</b><small>TB vs Gerrit Cole &middot; book ~-272 (73%) &middot; edge -3%</small></span><span class="lpct">71%</span></li><li class="leg void"><span class="st"></span><div class="avatar xs" style="--tc:#E3A600">SF<img src="https://img.mlbstatic.com/mlb-photos/image/upload/d_people:generic:headshot:67:current.png/w_180,q_auto:best/v1/people/686217/headshot/67/current" alt="" loading="lazy" onerror="this.remove()"></div><span class="lp"><b><span class="ltype hit">1+ HIT</span>Sal Frelick (void)</b><small>MIL vs Robbie Ray &middot; book ~-144 (59%) &middot; edge +4%</small></span><span class="lpct">61%</span></li><li class="leg won"><span class="st">&#10003;</span><div class="avatar xs" style="--tc:#1E6FD9">KT<img src="https://img.mlbstatic.com/mlb-photos/image/upload/d_people:generic:headshot:67:current.png/w_180,q_auto:best/v1/people/663656/headshot/67/current" alt="" loading="lazy" onerror="this.remove()"></div><span class="lp"><b><span class="ltype hit">1+ HIT</span>Kyle Tucker</b><small>LAD vs Dylan Dodd &middot; book ~-150 (60%) &middot; edge -4%</small></span><span class="lpct">58%</span></li></ol><div class="tfoot"><div>Est. book price: the book's margin eats this one &mdash; shop for a boost.</div><div><b>Replay:</b> this play cashed 44 of 136 days (32.4%, about once every 3.1 days) vs 36.0% predicted; typical ticket ~+233</div><span class="badge hit">&#10003; CASHED</span></div></article></div></section><section class="section" id="hr"><div class="sec-head"><h2 class="section-title"><span class="ico">&#128163;</span>HOMER&rsquo;s 6 Home Run Picks</h2></div><p class="note">One per game, ranked by HOMER&rsquo;s own per-game probability. Grades are earned in the season replay: A homered 21.6%, B homered 18.2%, C homered 15.6%, D homered 10.1%. Bands that didn't outperform the band below were merged.</p><div class="grid"><article class="card pick miss" style="--tc:#1E6FD9">
+<div class="pick-top"><div class="avatar" style="--tc:#1E6FD9">SO<img src="https://img.mlbstatic.com/mlb-photos/image/upload/d_people:generic:headshot:67:current.png/w_180,q_auto:best/v1/people/660271/headshot/67/current" alt="" loading="lazy" onerror="this.remove()"></div><div class="who">
+<div class="name">Shohei Ohtani<span class="grade g-A">A</span><span class="tag">HAMMER IT &#128296;</span></div>
+<div class="sub"><img class="logo sm on-dark" src="https://www.mlbstatic.com/team-logos/team-cap-on-dark/119.svg" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><img class="logo sm on-light" src="https://www.mlbstatic.com/team-logos/team-cap-on-light/119.svg" alt="" loading="lazy" onerror="this.style.visibility='hidden'">LAD &middot; vs Dylan Dodd <span class="hand l">LHP</span></div></div>
+<div class="rank">#1</div></div>
+<div class="pick-main"><div class="ring" style="--p:21.4;--c:var(--gold)"><b>21%</b></div><div><div class="big">21.4%</div><div class="unit">HOMER's HR probability</div>
+<div class="chips"><span class="chip">fair <b>+368</b></span><span class='chip'>bats <b>#2</b></span><span class="chip up">vs model <b>+2.2 pts</b></span><span class="chip">model <b>19.2%</b></span></div></div></div>
+<div class="evid"><b>Track record:</b> grade-A picks homered <b>21.6%</b> of the time in the season replay (309 of 1,428)</div><ul class="take"><li>Contact quality: 34.9 xHR in 600 PA (1.75&times; league) <span class='muted'>(+67% odds)</span></li><li>Batting 2: 4.5 projected trips <span class='muted'>(+16% odds)</span></li><li>Dylan Dodd lives in the air: 31% fly balls <span class='muted'>(+14% odds)</span></li></ul>
+<details class="why" id="hw-660271"><summary>HOMER's worksheet</summary><div class="mults"><div class="mult"><b>5.35%</b>xHR / PA season</div><div class="mult"><b>5.32%</b>xHR / PA last 21d</div><div class="mult"><b>8.0%</b>Barrel rate</div><div class="mult"><b>1.04&times;</b>Starter HR idx</div><div class="mult"><b>1.01&times;</b>Bullpen HR idx</div><div class="mult"><b>0.77&times;</b>Platoon</div><div class="mult"><b>1.03 &middot; 1.15</b>Park &middot; weather</div><div class="mult"><b>2.5 / 2.0</b>Trips vs SP / pen</div></div></details>
+<span class="badge miss">&#10007; MISS <small>&middot; 1-4</small></span></article><article class="card pick hit" style="--tc:#E3A600">
+<div class="pick-top"><div class="avatar" style="--tc:#E3A600">JC<img src="https://img.mlbstatic.com/mlb-photos/image/upload/d_people:generic:headshot:67:current.png/w_180,q_auto:best/v1/people/694192/headshot/67/current" alt="" loading="lazy" onerror="this.remove()"></div><div class="who">
+<div class="name">Jackson Chourio<span class="grade g-A">A</span><span class="tag">HAMMER IT &#128296;</span></div>
+<div class="sub"><img class="logo sm on-dark" src="https://www.mlbstatic.com/team-logos/team-cap-on-dark/158.svg" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><img class="logo sm on-light" src="https://www.mlbstatic.com/team-logos/team-cap-on-light/158.svg" alt="" loading="lazy" onerror="this.style.visibility='hidden'">MIL &middot; vs Robbie Ray <span class="hand l">LHP</span></div></div>
+<div class="rank">#2</div></div>
+<div class="pick-main"><div class="ring" style="--p:19.9;--c:var(--gold)"><b>20%</b></div><div><div class="big">19.9%</div><div class="unit">HOMER's HR probability</div>
+<div class="chips"><span class="chip">fair <b>+402</b></span><span class="chip up">vs model <b>+4.1 pts</b></span><span class="chip">model <b>15.8%</b></span></div></div></div>
+<div class="evid"><b>Track record:</b> grade-A picks homered <b>21.6%</b> of the time in the season replay (309 of 1,428)</div><ul class="take"><li>Contact quality: 27.1 xHR in 568 PA (1.46&times; league) <span class='muted'>(+43% odds)</span></li><li>Lineup not posted; usually bats 1 (4.7 trips) <span class='muted'>(+22% odds)</span></li><li>Robbie Ray lives in the air: 32% fly balls <span class='muted'>(+20% odds)</span></li></ul>
+<details class="why" id="hw-694192"><summary>HOMER's worksheet</summary><div class="mults"><div class="mult"><b>4.48%</b>xHR / PA season</div><div class="mult"><b>4.10%</b>xHR / PA last 21d</div><div class="mult"><b>7.7%</b>Barrel rate</div><div class="mult"><b>1.05&times;</b>Starter HR idx</div><div class="mult"><b>0.84&times;</b>Bullpen HR idx</div><div class="mult"><b>1.02&times;</b>Platoon</div><div class="mult"><b>1.08 &middot; 1.00</b>Park &middot; weather</div><div class="mult"><b>2.7 / 1.9</b>Trips vs SP / pen</div></div></details>
+<span class="badge hit">&#10003; HIT &middot; 1 HR <small>&middot; 1-4 | HR, 2 RBI, R</small></span></article><article class="card pick miss" style="--tc:#5E9BD6">
+<div class="pick-top"><div class="avatar" style="--tc:#5E9BD6">JC<img src="https://img.mlbstatic.com/mlb-photos/image/upload/d_people:generic:headshot:67:current.png/w_180,q_auto:best/v1/people/691406/headshot/67/current" alt="" loading="lazy" onerror="this.remove()"></div><div class="who">
+<div class="name">Junior Caminero<span class="grade g-B">B</span><span class="tag">LOVE IT</span></div>
+<div class="sub"><img class="logo sm on-dark" src="https://www.mlbstatic.com/team-logos/team-cap-on-dark/139.svg" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><img class="logo sm on-light" src="https://www.mlbstatic.com/team-logos/team-cap-on-light/139.svg" alt="" loading="lazy" onerror="this.style.visibility='hidden'">TB &middot; vs Gerrit Cole <span class="hand r">RHP</span></div></div>
+<div class="rank">#3</div></div>
+<div class="pick-main"><div class="ring" style="--p:19.2;--c:var(--gold)"><b>19%</b></div><div><div class="big">19.2%</div><div class="unit">HOMER's HR probability</div>
+<div class="chips"><span class="chip">fair <b>+422</b></span><span class="chip down">vs model <b>-0.3 pts</b></span><span class="chip">model <b>19.5%</b></span></div></div></div>
+<div class="evid"><b>Track record:</b> grade-B picks homered <b>18.2%</b> of the time in the season replay (417 of 2,287)</div><ul class="take"><li>Contact quality: 33.6 xHR in 688 PA (1.51&times; league) <span class='muted'>(+47% odds)</span></li><li>Proven power: 42 HR in 688 PA <span class='muted'>(+15% odds)</span></li><li>Lineup not posted; usually bats 3 (4.5 trips) <span class='muted'>(+11% odds)</span></li></ul>
+<details class="why" id="hw-691406"><summary>HOMER's worksheet</summary><div class="mults"><div class="mult"><b>4.61%</b>xHR / PA season</div><div class="mult"><b>5.15%</b>xHR / PA last 21d</div><div class="mult"><b>5.7%</b>Barrel rate</div><div class="mult"><b>1.10&times;</b>Starter HR idx</div><div class="mult"><b>0.90&times;</b>Bullpen HR idx</div><div class="mult"><b>0.99&times;</b>Platoon</div><div class="mult"><b>1.08 &middot; 1.00</b>Park &middot; weather</div><div class="mult"><b>2.7 / 1.8</b>Trips vs SP / pen</div></div></details>
+<span class="badge miss">&#10007; MISS <small>&middot; 0-2 | 2 BB, K</small></span></article><article class="card pick hit" style="--tc:#8E959B">
+<div class="pick-top"><div class="avatar" style="--tc:#8E959B">MM<img src="https://img.mlbstatic.com/mlb-photos/image/upload/d_people:generic:headshot:67:current.png/w_180,q_auto:best/v1/people/808959/headshot/67/current" alt="" loading="lazy" onerror="this.remove()"></div><div class="who">
+<div class="name">Munetaka Murakami<span class="grade g-C">C</span><span class="tag">LIKE IT</span></div>
+<div class="sub"><img class="logo sm on-dark" src="https://www.mlbstatic.com/team-logos/team-cap-on-dark/145.svg" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><img class="logo sm on-light" src="https://www.mlbstatic.com/team-logos/team-cap-on-light/145.svg" alt="" loading="lazy" onerror="this.style.visibility='hidden'">CWS &middot; vs Parker Messick <span class="hand l">LHP</span></div></div>
+<div class="rank">#4</div></div>
+<div class="pick-main"><div class="ring" style="--p:14.6;--c:var(--gold)"><b>15%</b></div><div><div class="big">14.6%</div><div class="unit">HOMER's HR probability</div>
+<div class="chips"><span class="chip">fair <b>+586</b></span><span class="chip down">vs model <b>-0.8 pts</b></span><span class="chip">model <b>15.3%</b></span></div></div></div>
+<div class="evid"><b>Track record:</b> grade-C picks homered <b>15.6%</b> of the time in the season replay (759 of 4,858)</div><ul class="take"><li>Contact quality: 34.3 xHR in 555 PA (1.84&times; league) <span class='muted'>(+74% odds)</span></li><li>Proven power: 35 HR in 555 PA <span class='muted'>(+15% odds)</span></li><li>Established: 555 PA of track record <span class='muted'>(+7% odds)</span></li><li>Knock: Parker Messick lives in the air: 23% fly balls <span class='muted'>(-13% odds)</span></li></ul>
+<details class="why" id="hw-808959"><summary>HOMER's worksheet</summary><div class="mults"><div class="mult"><b>5.62%</b>xHR / PA season</div><div class="mult"><b>6.78%</b>xHR / PA last 21d</div><div class="mult"><b>11.5%</b>Barrel rate</div><div class="mult"><b>0.84&times;</b>Starter HR idx</div><div class="mult"><b>0.89&times;</b>Bullpen HR idx</div><div class="mult"><b>0.77&times;</b>Platoon</div><div class="mult"><b>0.94 &middot; 1.00</b>Park &middot; weather</div><div class="mult"><b>2.6 / 1.7</b>Trips vs SP / pen</div></div></details>
+<span class="badge hit">&#10003; HIT &middot; 1 HR <small>&middot; 2-4 | HR, 2 K, 2 RBI</small></span></article></div></section><section class="section" id="hits"><div class="sec-head"><h2 class="section-title"><span class="ico">&#129358;</span>HOMER&rsquo;s 6 Hit Picks</h2></div><p class="note">At least one hit, one per game, ranked by HOMER&rsquo;s own probability. Grades earned in the replay: A cashed 73%, B cashed 73%, C cashed 68%, D cashed 67%, E cashed 59%.</p><div class="grid"><article class="card pick hit" style="--tc:#5E9BD6">
+<div class="pick-top"><div class="avatar" style="--tc:#5E9BD6">YD<img src="https://img.mlbstatic.com/mlb-photos/image/upload/d_people:generic:headshot:67:current.png/w_180,q_auto:best/v1/people/650490/headshot/67/current" alt="" loading="lazy" onerror="this.remove()"></div><div class="who">
+<div class="name">Yandy Díaz<span class="grade g-B">B</span><span class="tag">LOVE IT</span></div>
+<div class="sub"><img class="logo sm on-dark" src="https://www.mlbstatic.com/team-logos/team-cap-on-dark/139.svg" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><img class="logo sm on-light" src="https://www.mlbstatic.com/team-logos/team-cap-on-light/139.svg" alt="" loading="lazy" onerror="this.style.visibility='hidden'">TB &middot; vs Gerrit Cole <span class="hand r">RHP</span></div></div>
+<div class="rank">#1</div></div>
+<div class="pick-main"><div class="ring" style="--p:71.0;--c:var(--s1)"><b>71%</b></div><div><div class="big">71%</div><div class="unit">chance of 1+ hit</div>
+<div class="chips"><span class="chip">fair <b>&minus;245</b></span><span class='chip'>model <b>71%</b></span></div></div></div>
+<div class="evid"><b>Track record:</b> grade-B hit picks cashed <b>72.6%</b> in the replay (622 of 857)</div><ul class="take"><li>Usually bats 1: 4.7 trips <span class='muted'>(+27% odds)</span></li><li>Strikeout rate 16% (league 22%) <span class='muted'>(+10% odds)</span></li><li>Contact quality says 1.16&times; league hits <span class='muted'>(+10% odds)</span></li></ul><span class="badge hit">&#10003; CASHED &middot; 1 H <small>&middot; 1-4</small></span></article><article class="card pick miss" style="--tc:#E31937">
+<div class="pick-top"><div class="avatar" style="--tc:#E31937">SK<img src="https://img.mlbstatic.com/mlb-photos/image/upload/d_people:generic:headshot:67:current.png/w_180,q_auto:best/v1/people/680757/headshot/67/current" alt="" loading="lazy" onerror="this.remove()"></div><div class="who">
+<div class="name">Steven Kwan<span class="grade g-D">D</span><span class="tag">SOLID</span></div>
+<div class="sub"><img class="logo sm on-dark" src="https://www.mlbstatic.com/team-logos/team-cap-on-dark/114.svg" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><img class="logo sm on-light" src="https://www.mlbstatic.com/team-logos/team-cap-on-light/114.svg" alt="" loading="lazy" onerror="this.style.visibility='hidden'">CLE &middot; vs Hagen Smith <span class="hand l">LHP</span></div></div>
+<div class="rank">#2</div></div>
+<div class="pick-main"><div class="ring" style="--p:67.2;--c:var(--s1)"><b>67%</b></div><div><div class="big">67%</div><div class="unit">chance of 1+ hit</div>
+<div class="chips"><span class="chip">fair <b>&minus;205</b></span><span class='chip'>model <b>68%</b></span></div></div></div>
+<div class="evid"><b>Track record:</b> grade-D hit picks cashed <b>66.7%</b> in the replay (3,241 of 4,858)</div><ul class="take"><li>Usually bats 1: 4.7 trips <span class='muted'>(+27% odds)</span></li><li>Strikeout rate 12% (league 22%) <span class='muted'>(+19% odds)</span></li><li>Established: 631 PA of track record <span class='muted'>(+7% odds)</span></li><li>Knock: Hagen Smith strikes out 27% (league 22%) <span class='muted'>(-9% odds)</span></li></ul><span class="badge miss">&#10007; MISS <small>&middot; 0-3 | BB</small></span></article><article class="card pick hit" style="--tc:#1E6FD9">
+<div class="pick-top"><div class="avatar" style="--tc:#1E6FD9">MB<img src="https://img.mlbstatic.com/mlb-photos/image/upload/d_people:generic:headshot:67:current.png/w_180,q_auto:best/v1/people/605141/headshot/67/current" alt="" loading="lazy" onerror="this.remove()"></div><div class="who">
+<div class="name">Mookie Betts<span class="grade g-D">D</span><span class="tag">SOLID</span></div>
+<div class="sub"><img class="logo sm on-dark" src="https://www.mlbstatic.com/team-logos/team-cap-on-dark/119.svg" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><img class="logo sm on-light" src="https://www.mlbstatic.com/team-logos/team-cap-on-light/119.svg" alt="" loading="lazy" onerror="this.style.visibility='hidden'">LAD &middot; vs Dylan Dodd <span class="hand l">LHP</span></div></div>
+<div class="rank">#3</div></div>
+<div class="pick-main"><div class="ring" style="--p:66.9;--c:var(--s1)"><b>67%</b></div><div><div class="big">67%</div><div class="unit">chance of 1+ hit</div>
+<div class="chips"><span class="chip">fair <b>&minus;202</b></span><span class='chip'>model <b>70%</b></span></div></div></div>
+<div class="evid"><b>Track record:</b> grade-D hit picks cashed <b>66.7%</b> in the replay (3,241 of 4,858)</div><ul class="take"><li>Batting 1: 4.7 trips to the plate <span class='muted'>(+27% odds)</span></li><li>Strikeout rate 14% (league 22%) <span class='muted'>(+15% odds)</span></li><li>Contact quality says 1.12&times; league hits <span class='muted'>(+8% odds)</span></li><li>Knock: Dylan Dodd allows hits at 0.92&times; league <span class='muted'>(-5% odds)</span></li></ul><span class="badge hit">&#10003; CASHED &middot; 1 H <small>&middot; 1-3 | BB, K</small></span></article><article class="card pick hit" style="--tc:#E3A600">
+<div class="pick-top"><div class="avatar" style="--tc:#E3A600">JC<img src="https://img.mlbstatic.com/mlb-photos/image/upload/d_people:generic:headshot:67:current.png/w_180,q_auto:best/v1/people/694192/headshot/67/current" alt="" loading="lazy" onerror="this.remove()"></div><div class="who">
+<div class="name">Jackson Chourio<span class="grade g-D">D</span><span class="tag">SOLID</span></div>
+<div class="sub"><img class="logo sm on-dark" src="https://www.mlbstatic.com/team-logos/team-cap-on-dark/158.svg" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><img class="logo sm on-light" src="https://www.mlbstatic.com/team-logos/team-cap-on-light/158.svg" alt="" loading="lazy" onerror="this.style.visibility='hidden'">MIL &middot; vs Robbie Ray <span class="hand l">LHP</span></div></div>
+<div class="rank">#4</div></div>
+<div class="pick-main"><div class="ring" style="--p:66.9;--c:var(--s1)"><b>67%</b></div><div><div class="big">67%</div><div class="unit">chance of 1+ hit</div>
+<div class="chips"><span class="chip">fair <b>&minus;202</b></span><span class='chip'>model <b>68%</b></span></div></div></div>
+<div class="evid"><b>Track record:</b> grade-D hit picks cashed <b>66.7%</b> in the replay (3,241 of 4,858)</div><ul class="take"><li>Usually bats 1: 4.7 trips <span class='muted'>(+27% odds)</span></li><li>Established: 568 PA of track record <span class='muted'>(+6% odds)</span></li><li>Contact quality says 1.07&times; league hits <span class='muted'>(+4% odds)</span></li></ul><span class="badge hit">&#10003; CASHED &middot; 1 H <small>&middot; 1-4 | HR, 2 RBI, R</small></span></article></div></section><section class="section" id="games"><div class="sec-head"><h2 class="section-title"><span class="ico">&#9918;</span>HOMER&rsquo;s Winners</h2></div><p class="note">Every game, strongest opinion first.</p><div class="grid wide"><article class="card gcard hit">
+<div class="ghead"><div class="tm"><img class="logo  on-dark" src="https://www.mlbstatic.com/team-logos/team-cap-on-dark/135.svg" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><img class="logo  on-light" src="https://www.mlbstatic.com/team-logos/team-cap-on-light/135.svg" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><span>Padres</span></div><div class="c"><b>2&ndash;3</b>Final</div>
+<div class="tm h"><img class="logo  on-dark" src="https://www.mlbstatic.com/team-logos/team-cap-on-dark/158.svg" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><img class="logo  on-light" src="https://www.mlbstatic.com/team-logos/team-cap-on-light/158.svg" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><span>Brewers</span></div></div>
+<div class="wbar"><div class="ends"><span class="">SD 34%</span><span class="fav">66% MIL</span></div><div class="track"><i style="width:34.2%;background:#C9A227"></i><i style="flex:1;background:#E3A600"></i></div></div>
+<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap"><span class="person"><img class="logo  on-dark" src="https://www.mlbstatic.com/team-logos/team-cap-on-dark/158.svg" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><img class="logo  on-light" src="https://www.mlbstatic.com/team-logos/team-cap-on-light/158.svg" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><span class="nm">HOMER takes Brewers</span></span>
+<span class="pill strong">HAMMER</span><span class="badge hit">&#10003; WON</span></div>
+<div class="chips" style="margin:0"><span class='chip up'>house model agrees <b>69%</b></span><span class='chip'>total <b>7.9</b></span></div><div class="evid"><b>Track record:</b> Strong calls won <b>63.3%</b> in the replay (171 of 270)</div><ul class="take" style="margin:0"><li>Pitching edge: Jacob Misiorowski allows 0.241 wOBA, Robbie Ray 0.312</li><li>Milwaukee Brewers lineup 0.322 wOBA vs 0.313</li></ul></article><article class="card gcard hit">
+<div class="ghead"><div class="tm"><img class="logo  on-dark" src="https://www.mlbstatic.com/team-logos/team-cap-on-dark/144.svg" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><img class="logo  on-light" src="https://www.mlbstatic.com/team-logos/team-cap-on-light/144.svg" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><span>Braves</span></div><div class="c"><b>3&ndash;5</b>Final</div>
+<div class="tm h"><img class="logo  on-dark" src="https://www.mlbstatic.com/team-logos/team-cap-on-dark/119.svg" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><img class="logo  on-light" src="https://www.mlbstatic.com/team-logos/team-cap-on-light/119.svg" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><span>Dodgers</span></div></div>
+<div class="wbar"><div class="ends"><span class="">ATL 41%</span><span class="fav">59% LAD</span></div><div class="track"><i style="width:41.0%;background:#CE1141"></i><i style="flex:1;background:#1E6FD9"></i></div></div>
+<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap"><span class="person"><img class="logo  on-dark" src="https://www.mlbstatic.com/team-logos/team-cap-on-dark/119.svg" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><img class="logo  on-light" src="https://www.mlbstatic.com/team-logos/team-cap-on-light/119.svg" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><span class="nm">HOMER takes Dodgers</span></span>
+<span class="pill lean">LEAN</span><span class="badge hit">&#10003; WON</span></div>
+<div class="chips" style="margin:0"><span class='chip up'>house model agrees <b>60%</b></span><span class='chip'>total <b>7.7</b></span></div><div class="evid"><b>Track record:</b> Lean calls won <b>57.9%</b> in the replay (342 of 591)</div><ul class="take" style="margin:0"><li>Pitching edge: Tarik Skubal allows 0.276 wOBA, Dylan Dodd 0.290</li><li>Los Angeles Dodgers lineup 0.327 wOBA vs 0.312</li></ul></article><article class="card gcard hit">
+<div class="ghead"><div class="tm"><img class="logo  on-dark" src="https://www.mlbstatic.com/team-logos/team-cap-on-dark/147.svg" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><img class="logo  on-light" src="https://www.mlbstatic.com/team-logos/team-cap-on-light/147.svg" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><span>Yankees</span></div><div class="c"><b>0&ndash;1</b>Final</div>
+<div class="tm h"><img class="logo  on-dark" src="https://www.mlbstatic.com/team-logos/team-cap-on-dark/139.svg" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><img class="logo  on-light" src="https://www.mlbstatic.com/team-logos/team-cap-on-light/139.svg" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><span>Rays</span></div></div>
+<div class="wbar"><div class="ends"><span class="">NYY 44%</span><span class="fav">56% TB</span></div><div class="track"><i style="width:43.9%;background:#3A63B8"></i><i style="flex:1;background:#5E9BD6"></i></div></div>
+<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap"><span class="person"><img class="logo  on-dark" src="https://www.mlbstatic.com/team-logos/team-cap-on-dark/139.svg" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><img class="logo  on-light" src="https://www.mlbstatic.com/team-logos/team-cap-on-light/139.svg" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><span class="nm">HOMER takes Rays</span></span>
+<span class="pill lean">LEAN</span><span class="badge hit">&#10003; WON</span></div>
+<div class="chips" style="margin:0"><span class='chip up'>house model agrees <b>58%</b></span><span class='chip'>total <b>8.1</b></span></div><div class="evid"><b>Track record:</b> Lean calls won <b>57.9%</b> in the replay (342 of 591)</div><ul class="take" style="margin:0"><li>Pitching edge: Drew Rasmussen allows 0.260 wOBA, Gerrit Cole 0.304</li><li>Tampa Bay Rays lineup 0.316 wOBA vs 0.314</li></ul></article><article class="card gcard miss">
+<div class="ghead"><div class="tm"><img class="logo  on-dark" src="https://www.mlbstatic.com/team-logos/team-cap-on-dark/145.svg" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><img class="logo  on-light" src="https://www.mlbstatic.com/team-logos/team-cap-on-light/145.svg" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><span>White Sox</span></div><div class="c"><b>3&ndash;0</b>Final</div>
+<div class="tm h"><img class="logo  on-dark" src="https://www.mlbstatic.com/team-logos/team-cap-on-dark/114.svg" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><img class="logo  on-light" src="https://www.mlbstatic.com/team-logos/team-cap-on-light/114.svg" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><span>Guardians</span></div></div>
+<div class="wbar"><div class="ends"><span class="">CWS 50%</span><span class="fav">50% CLE</span></div><div class="track"><i style="width:49.6%;background:#8E959B"></i><i style="flex:1;background:#E31937"></i></div></div>
+<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap"><span class="person"><img class="logo  on-dark" src="https://www.mlbstatic.com/team-logos/team-cap-on-dark/114.svg" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><img class="logo  on-light" src="https://www.mlbstatic.com/team-logos/team-cap-on-light/114.svg" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><span class="nm">HOMER takes Guardians</span></span>
+<span class="pill lean">SMALL PLAY</span><span class="badge miss">&#10007; LOST</span></div>
+<div class="chips" style="margin:0"><span class='chip up'>house model agrees <b>51%</b></span><span class='chip'>total <b>7.7</b></span></div><div class="evid"><b>Track record:</b> Coin flip calls won <b>52.9%</b> in the replay (497 of 940)</div><ul class="take" style="margin:0"><li>Pitching edge: Parker Messick allows 0.282 wOBA, Hagen Smith 0.278</li><li>Cleveland Guardians lineup 0.307 wOBA vs 0.316</li></ul></article></div></section><section class="section" id="vs"><div class="sec-head"><h2 class="section-title"><span class="ico">&#129354;</span>HOMER vs the Model</h2></div><p class="note">Same hitters, same day &mdash; where HOMER&rsquo;s numbers and the house ensemble part ways the most.</p><div class="grid lab"><div class='card scroll'><div class='label'>HOMER likes more than the model</div><table class='t'><thead><tr><th>Hitter</th><th class='n'>HOMER</th><th class='n'>Model</th><th class='n'>Edge (pts)</th><th class='n'>Barrel%</th></tr></thead><tbody><tr><td><div class="person"><div class="avatar xs" style="--tc:#E3A600">BT<img src="https://img.mlbstatic.com/mlb-photos/image/upload/d_people:generic:headshot:67:current.png/w_180,q_auto:best/v1/people/668930/headshot/67/current" alt="" loading="lazy" onerror="this.remove()"></div><div style="min-width:0"><div class="nm">Brice Turang</div><div class="sub">MIL &middot; vs Robbie Ray</div></div></div></td><td class='n'><b>16.7%</b></td><td class='n'>12.5%</td><td class='n ok'>+4.3</td><td class='n'>5.8%</td></tr><tr><td><div class="person"><div class="avatar xs" style="--tc:#E3A600">JC<img src="https://img.mlbstatic.com/mlb-photos/image/upload/d_people:generic:headshot:67:current.png/w_180,q_auto:best/v1/people/694192/headshot/67/current" alt="" loading="lazy" onerror="this.remove()"></div><div style="min-width:0"><div class="nm">Jackson Chourio</div><div class="sub">MIL &middot; vs Robbie Ray</div></div></div></td><td class='n'><b>19.9%</b></td><td class='n'>15.8%</td><td class='n ok'>+4.1</td><td class='n'>7.7%</td></tr><tr><td><div class="person"><div class="avatar xs" style="--tc:#E3A600">GM<img src="https://img.mlbstatic.com/mlb-photos/image/upload/d_people:generic:headshot:67:current.png/w_180,q_auto:best/v1/people/669003/headshot/67/current" alt="" loading="lazy" onerror="this.remove()"></div><div style="min-width:0"><div class="nm">Garrett Mitchell</div><div class="sub">MIL &middot; vs Robbie Ray</div></div></div></td><td class='n'><b>16.5%</b></td><td class='n'>13.6%</td><td class='n ok'>+2.9</td><td class='n'>6.6%</td></tr><tr><td><div class="person"><div class="avatar xs" style="--tc:#CE1141">DB<img src="https://img.mlbstatic.com/mlb-photos/image/upload/d_people:generic:headshot:67:current.png/w_180,q_auto:best/v1/people/686948/headshot/67/current" alt="" loading="lazy" onerror="this.remove()"></div><div style="min-width:0"><div class="nm">Drake Baldwin</div><div class="sub">ATL &middot; vs Tarik Skubal</div></div></div></td><td class='n'><b>17.6%</b></td><td class='n'>14.8%</td><td class='n ok'>+2.8</td><td class='n'>8.1%</td></tr><tr><td><div class="person"><div class="avatar xs" style="--tc:#E3A600">JB<img src="https://img.mlbstatic.com/mlb-photos/image/upload/d_people:generic:headshot:67:current.png/w_180,q_auto:best/v1/people/641343/headshot/67/current" alt="" loading="lazy" onerror="this.remove()"></div><div style="min-width:0"><div class="nm">Jake Bauers</div><div class="sub">MIL &middot; vs Robbie Ray</div></div></div></td><td class='n'><b>16.5%</b></td><td class='n'>14.1%</td><td class='n ok'>+2.4</td><td class='n'>8.3%</td></tr></tbody></table></div><div class='card scroll'><div class='label'>HOMER is fading</div><table class='t'><thead><tr><th>Hitter</th><th class='n'>HOMER</th><th class='n'>Model</th><th class='n'>Edge (pts)</th><th class='n'>Barrel%</th></tr></thead><tbody><tr><td><div class="person"><div class="avatar xs" style="--tc:#5E9BD6">VJ<img src="https://img.mlbstatic.com/mlb-photos/image/upload/d_people:generic:headshot:67:current.png/w_180,q_auto:best/v1/people/683748/headshot/67/current" alt="" loading="lazy" onerror="this.remove()"></div><div style="min-width:0"><div class="nm">Victor Mesa Jr.</div><div class="sub">TB &middot; vs Gerrit Cole</div></div></div></td><td class='n'><b>13.3%</b></td><td class='n'>16.0%</td><td class='n bad'>-2.7</td><td class='n'>6.4%</td></tr><tr><td><div class="person"><div class="avatar xs" style="--tc:#5E9BD6">RV<img src="https://img.mlbstatic.com/mlb-photos/image/upload/d_people:generic:headshot:67:current.png/w_180,q_auto:best/v1/people/668723/headshot/67/current" alt="" loading="lazy" onerror="this.remove()"></div><div style="min-width:0"><div class="nm">Ryan Vilade</div><div class="sub">TB &middot; vs Gerrit Cole</div></div></div></td><td class='n'><b>13.7%</b></td><td class='n'>16.4%</td><td class='n bad'>-2.6</td><td class='n'>5.5%</td></tr><tr><td><div class="person"><div class="avatar xs" style="--tc:#3A63B8">AV<img src="https://img.mlbstatic.com/mlb-photos/image/upload/d_people:generic:headshot:67:current.png/w_180,q_auto:best/v1/people/683011/headshot/67/current" alt="" loading="lazy" onerror="this.remove()"></div><div style="min-width:0"><div class="nm">Anthony Volpe</div><div class="sub">NYY &middot; vs Drew Rasmussen</div></div></div></td><td class='n'><b>6.4%</b></td><td class='n'>8.9%</td><td class='n bad'>-2.6</td><td class='n'>3.6%</td></tr><tr><td><div class="person"><div class="avatar xs" style="--tc:#C9A227">JM<img src="https://img.mlbstatic.com/mlb-photos/image/upload/d_people:generic:headshot:67:current.png/w_180,q_auto:best/v1/people/701538/headshot/67/current" alt="" loading="lazy" onerror="this.remove()"></div><div style="min-width:0"><div class="nm">Jackson Merrill</div><div class="sub">SD &middot; vs Jacob Misiorowski</div></div></div></td><td class='n'><b>13.1%</b></td><td class='n'>15.6%</td><td class='n bad'>-2.5</td><td class='n'>9.8%</td></tr><tr><td><div class="person"><div class="avatar xs" style="--tc:#3A63B8">HR<img src="https://img.mlbstatic.com/mlb-photos/image/upload/d_people:generic:headshot:67:current.png/w_180,q_auto:best/v1/people/671218/headshot/67/current" alt="" loading="lazy" onerror="this.remove()"></div><div style="min-width:0"><div class="nm">Heliot Ramos</div><div class="sub">NYY &middot; vs Drew Rasmussen</div></div></div></td><td class='n'><b>12.5%</b></td><td class='n'>14.9%</td><td class='n bad'>-2.4</td><td class='n'>7.5%</td></tr></tbody></table></div></div></section><section class="section" id="homework"><div class="sec-head"><h2 class="section-title"><span class="ico">&#128218;</span>HOMER&rsquo;s Homework</h2></div><p class="note">Season replay through 2026-10-02 (refit 2026-10-03 15:57:17). Every number below is from weeks HOMER had not seen when he made the call. He is currently using <b>learned weights</b> for home runs and <b>his rule-of-thumb formula</b> for winners &mdash; whichever tested better. Highlighted rows are the ones in use.</p><div class="grid lab"><div class="card" style="grid-column:1/-1"><div class="label">HOMER&rsquo;s plays, replayed every day</div><div class='scroll'><table class='t'><thead><tr><th>Play</th><th class="n">Cashed</th><th class="n">Rate</th><th class="n">Predicted</th><th class="n">Typical price</th><th class="n">Est. ROI</th></tr></thead><tbody><tr><td>The Edge</td><td class="n">54/136</td><td class="n"><b>39.7%</b></td><td class="n">37.3%</td><td class="n">+214</td><td class="n">+27%</td></tr><tr><td>Parlay of the Day</td><td class="n">51/136</td><td class="n"><b>37.5%</b></td><td class="n">39.8%</td><td class="n">+169</td><td class="n">+2%</td></tr><tr><td>The Lock</td><td class="n">49/136</td><td class="n"><b>36.0%</b></td><td class="n">38.6%</td><td class="n">+191</td><td class="n">+7%</td></tr><tr><td>Full Value</td><td class="n">44/136</td><td class="n"><b>32.4%</b></td><td class="n">36.0%</td><td class="n">+233</td><td class="n">+10%</td></tr><tr><td>The Stretch</td><td class="n">36/135</td><td class="n"><b>26.7%</b></td><td class="n">27.8%</td><td class="n">+304</td><td class="n">+11%</td></tr><tr><td>Five-Hit Parlay</td><td class="n">22/133</td><td class="n"><b>16.5%</b></td><td class="n">20.5%</td><td class="n">+431</td><td class="n">-9%</td></tr><tr><td>Five-Homer Parlay</td><td class="n">2/133</td><td class="n"><b>1.5%</b></td><td class="n">0.0%</td><td class="n">+183301</td><td class="n">+2228%</td></tr></tbody></table></div><div class="label" style="margin-top:14px">Leg by leg vs the book</div><div class='scroll'><table class='t'><thead><tr><th>Legs</th><th class="n">Cashed</th><th class="n">Season line</th><th class="n">Book needs</th><th class="n">Straight ROI</th></tr></thead><tbody><tr><td>Top 5 HR</td><td class="n"><b>21.8%</b></td><td class="n">18.2%</td><td class="n">22.2%</td><td class="n">-1.4%</td></tr><tr><td>Value HR</td><td class="n"><b>18.9%</b></td><td class="n">14.0%</td><td class="n">17.1%</td><td class="n">+13.4%</td></tr><tr><td>Top 5 hits</td><td class="n"><b>70.8%</b></td><td class="n">67.2%</td><td class="n">71.5%</td><td class="n">-0.9%</td></tr><tr><td>Value hits</td><td class="n"><b>68.7%</b></td><td class="n">63.8%</td><td class="n">68.0%</td><td class="n">+1.4%</td></tr></tbody></table></div><p class="note" style="margin:10px 0 0">Same construction rules as today's plays. When the actual rate tracks the predicted one, the odds HOMER quotes can be trusted. Prices and ROI use a modeled season-rate book (no live odds feed yet), so treat them as estimates; a sharper book pays less. With only a handful of wins per play, ROI swings widely.</p></div><div class="card"><div class="label">Daily 6 HR picks, replayed</div><div class='scroll'><table class='t'><thead><tr><th>Method</th><th class="n">Hit</th><th class="n">Rate</th><th class="n">Expected</th></tr></thead><tbody><tr><td>HOMER, learned</td><td class="n">169/809</td><td class="n"><b>20.9%</b> <span class="muted">&plusmn;2.8%</span></td><td class="n">168</td></tr><tr><td>HOMER, rule-of-thumb</td><td class="n">155/809</td><td class="n"><b>19.2%</b> <span class="muted">&plusmn;2.7%</span></td><td class="n">169</td></tr><tr><td>Season HR rate only</td><td class="n">159/809</td><td class="n"><b>19.7%</b> <span class="muted">&plusmn;2.7%</span></td><td class="n">177</td></tr><tr class="dim"><td>Any hitter in the lineup</td><td class="n">&mdash;</td><td class="n"><b>12.3%</b></td><td class="n">&mdash;</td></tr></tbody></table></div><p class="note" style="margin:10px 0 0">Same selection rules as today's card, every replayed day.</p></div><div class="card"><div class="label">Ranking every hitter-game</div><div class='scroll'><table class='t'><thead><tr><th>Method</th><th class="n">AUC</th><th class="n">Log loss</th><th class="n">Games</th></tr></thead><tbody><tr class=served><td>HOMER, learned weights</td><td class="n">0.613</td><td class="n">0.3554</td><td class="n">32,238</td></tr><tr><td>HOMER, rule-of-thumb formula</td><td class="n">0.607</td><td class="n">0.3560</td><td class="n">32,238</td></tr><tr><td>Season HR rate only (baseline)</td><td class="n">0.592</td><td class="n">0.3581</td><td class="n">32,238</td></tr></tbody></table></div><p class="note" style="margin:10px 0 0">AUC: how often a hitter who homered was ranked above one who didn't (0.5 = coin flip). Lower log loss = better-calibrated probabilities.</p></div><div class="card"><div class="label">What each grade has earned</div><div class="legend"><span><i style="background:var(--s1)"></i>Avg prob</span><span><i style="background:var(--s2)"></i>Homered</span></div><div class="chart"><svg viewBox="0 0 560 220" role="img" aria-label="Avg prob against homered"><line class="xh" x1="0" x2="0" y1="12" y2="190"/><line class="grid-l" x1="46" x2="480" y1="190.0" y2="190.0"/><text class="axis-t" x="38" y="194.0" text-anchor="end">0%</text><line class="grid-l" x1="46" x2="480" y1="130.7" y2="130.7"/><text class="axis-t" x="38" y="134.7" text-anchor="end">10%</text><line class="grid-l" x1="46" x2="480" y1="71.3" y2="71.3"/><text class="axis-t" x="38" y="75.3" text-anchor="end">20%</text><line class="grid-l" x1="46" x2="480" y1="12.0" y2="12.0"/><text class="axis-t" x="38" y="16.0" text-anchor="end">30%</text><text class="axis-t" x="46.0" y="210" text-anchor="middle">A</text><text class="axis-t" x="190.7" y="210" text-anchor="middle">B</text><text class="axis-t" x="335.3" y="210" text-anchor="middle">C</text><text class="axis-t" x="480.0" y="210" text-anchor="middle">D</text><polyline class="s1" fill="none" stroke-width="2" stroke-linejoin="round" points="46.0,66.5 190.7,82.8 335.3,97.7 480.0,130.6"/><polyline class="s2" fill="none" stroke-width="2" stroke-linejoin="round" points="46.0,61.6 190.7,81.8 335.3,97.3 480.0,130.0"/><circle class="f1" cx="46.0" cy="66.5" r="4"/><circle class="f1" cx="190.7" cy="82.8" r="4"/><circle class="f1" cx="335.3" cy="97.7" r="4"/><circle class="f1" cx="480.0" cy="130.6" r="4"/><circle class="f2" cx="46.0" cy="61.6" r="4"/><circle class="f2" cx="190.7" cy="81.8" r="4"/><circle class="f2" cx="335.3" cy="97.3" r="4"/><circle class="f2" cx="480.0" cy="130.0" r="4"/><text class="lbl-t" x="490" y="141.3">Avg prob</text><text class="lbl-t" x="490" y="127.3">Homered</text><rect class="hit" tabindex="0" x="36.0" y="12" width="82.3" height="178" data-x="46.0" data-tip="{&quot;t&quot;: &quot;A&quot;, &quot;rows&quot;: [{&quot;k&quot;: &quot;s1&quot;, &quot;l&quot;: &quot;Avg prob&quot;, &quot;v&quot;: &quot;20.8%&quot;}, {&quot;k&quot;: &quot;s2&quot;, &quot;l&quot;: &quot;Homered&quot;, &quot;v&quot;: &quot;21.6%&quot;}]}"><title>A: avg prob 20.8%, homered 21.6%</title></rect><rect class="hit" tabindex="0" x="118.3" y="12" width="144.7" height="178" data-x="190.7" data-tip="{&quot;t&quot;: &quot;B&quot;, &quot;rows&quot;: [{&quot;k&quot;: &quot;s1&quot;, &quot;l&quot;: &quot;Avg prob&quot;, &quot;v&quot;: &quot;18.1%&quot;}, {&quot;k&quot;: &quot;s2&quot;, &quot;l&quot;: &quot;Homered&quot;, &quot;v&quot;: &quot;18.2%&quot;}]}"><title>B: avg prob 18.1%, homered 18.2%</title></rect><rect class="hit" tabindex="0" x="263.0" y="12" width="144.7" height="178" data-x="335.3" data-tip="{&quot;t&quot;: &quot;C&quot;, &quot;rows&quot;: [{&quot;k&quot;: &quot;s1&quot;, &quot;l&quot;: &quot;Avg prob&quot;, &quot;v&quot;: &quot;15.6%&quot;}, {&quot;k&quot;: &quot;s2&quot;, &quot;l&quot;: &quot;Homered&quot;, &quot;v&quot;: &quot;15.6%&quot;}]}"><title>C: avg prob 15.6%, homered 15.6%</title></rect><rect class="hit" tabindex="0" x="407.7" y="12" width="82.3" height="178" data-x="480.0" data-tip="{&quot;t&quot;: &quot;D&quot;, &quot;rows&quot;: [{&quot;k&quot;: &quot;s1&quot;, &quot;l&quot;: &quot;Avg prob&quot;, &quot;v&quot;: &quot;10.0%&quot;}, {&quot;k&quot;: &quot;s2&quot;, &quot;l&quot;: &quot;Homered&quot;, &quot;v&quot;: &quot;10.1%&quot;}]}"><title>D: avg prob 10.0%, homered 10.1%</title></rect></svg></div><div class='scroll'><table class='t'><thead><tr><th>Grade</th><th class="n">Board</th><th class="n">Avg prob</th><th class="n">Homered</th><th class="n">n</th></tr></thead><tbody><tr><td><span class="grade g-A">A</span></td><td class="n">top 5%</td><td class="n">20.8%</td><td class="n"><b>21.6%</b></td><td class="n">1,428</td></tr><tr><td><span class="grade g-B">B</span></td><td class="n">top 13%</td><td class="n">18.1%</td><td class="n"><b>18.2%</b></td><td class="n">2,287</td></tr><tr><td><span class="grade g-C">C</span></td><td class="n">rest</td><td class="n">15.6%</td><td class="n"><b>15.6%</b></td><td class="n">4,858</td></tr><tr><td><span class="grade g-D">D</span></td><td class="n">top 100%</td><td class="n">10.0%</td><td class="n"><b>10.1%</b></td><td class="n">20,005</td></tr></tbody></table></div></div><div class="card"><div class="label">What moves HOMER&rsquo;s needle</div><div class='scroll'><table class='t'><thead><tr><th>Factor</th><th class="n">Odds per 1 SD</th></tr></thead><tbody><tr><td class="wrap">Expected HR rate (contact quality)</td><td class="n ok">+31.5%<span class="mini good"><i style="width:100%"></i></span></td></tr><tr><td class="wrap">Lineup spot (trips to the plate)</td><td class="n ok">+14.1%<span class="mini good"><i style="width:45%"></i></span></td></tr><tr><td class="wrap">Temperature & wind</td><td class="n ok">+10.7%<span class="mini good"><i style="width:34%"></i></span></td></tr><tr><td class="wrap">Starter's fly-ball rate</td><td class="n ok">+9.2%<span class="mini good"><i style="width:29%"></i></span></td></tr><tr><td class="wrap">Actual HR rate</td><td class="n ok">+6.3%<span class="mini good"><i style="width:20%"></i></span></td></tr><tr><td class="wrap">Barrel rate<div class=sub>overlap correction: already counted in expected HR</div></td><td class="n bad">-6.1%<span class="mini bad"><i style="width:19%"></i></span></td></tr><tr><td class="wrap">Ballpark</td><td class="n ok">+5.9%<span class="mini good"><i style="width:19%"></i></span></td></tr><tr><td class="wrap">Size of track record</td><td class="n ok">+5.9%<span class="mini good"><i style="width:19%"></i></span></td></tr><tr><td class="wrap">Last 21 days vs season</td><td class="n ok">+5.2%<span class="mini good"><i style="width:16%"></i></span></td></tr><tr><td class="wrap">Starter's HR allowed</td><td class="n ok">+4.1%<span class="mini good"><i style="width:13%"></i></span></td></tr></tbody></table></div><p class="note" style="margin:10px 0 0">Tested and dropped (didn't help on unseen weeks): sp_form, split, platoon, pen</p></div><div class="card"><div class="label">Daily 6 hit picks, replayed (learned)</div><div class='scroll'><table class='t'><thead><tr><th>Method</th><th class="n">Cashed</th><th class="n">Rate</th><th class="n">Expected</th></tr></thead><tbody><tr><td>HOMER</td><td class="n">575/809</td><td class="n"><b>71.1%</b> <span class="muted">&plusmn;3.1%</span></td><td class="n">586</td></tr><tr><td>HOMER, rule-of-thumb</td><td class="n">556/809</td><td class="n"><b>68.7%</b> <span class="muted">&plusmn;3.2%</span></td><td class="n">602</td></tr><tr><td>Season hit rate only</td><td class="n">555/809</td><td class="n"><b>68.6%</b> <span class="muted">&plusmn;3.2%</span></td><td class="n">601</td></tr><tr class="dim"><td>Any hitter in the lineup</td><td class="n">&mdash;</td><td class="n"><b>61.7%</b></td><td class="n">&mdash;</td></tr></tbody></table></div><div style="margin-top:12px"></div><div class="legend"><span><i style="background:var(--s1)"></i>Avg prob</span><span><i style="background:var(--s2)"></i>Got a hit</span></div><div class="chart"><svg viewBox="0 0 560 220" role="img" aria-label="Avg prob against got a hit"><line class="xh" x1="0" x2="0" y1="12" y2="190"/><line class="grid-l" x1="46" x2="480" y1="190.0" y2="190.0"/><text class="axis-t" x="38" y="194.0" text-anchor="end">0%</text><line class="grid-l" x1="46" x2="480" y1="145.5" y2="145.5"/><text class="axis-t" x="38" y="149.5" text-anchor="end">20%</text><line class="grid-l" x1="46" x2="480" y1="101.0" y2="101.0"/><text class="axis-t" x="38" y="105.0" text-anchor="end">40%</text><line class="grid-l" x1="46" x2="480" y1="56.5" y2="56.5"/><text class="axis-t" x="38" y="60.5" text-anchor="end">60%</text><line class="grid-l" x1="46" x2="480" y1="12.0" y2="12.0"/><text class="axis-t" x="38" y="16.0" text-anchor="end">80%</text><text class="axis-t" x="46.0" y="210" text-anchor="middle">A</text><text class="axis-t" x="154.5" y="210" text-anchor="middle">B</text><text class="axis-t" x="263.0" y="210" text-anchor="middle">C</text><text class="axis-t" x="371.5" y="210" text-anchor="middle">D</text><text class="axis-t" x="480.0" y="210" text-anchor="middle">E</text><polyline class="s1" fill="none" stroke-width="2" stroke-linejoin="round" points="46.0,25.4 154.5,30.7 263.0,37.0 371.5,42.2 480.0,58.8"/><polyline class="s2" fill="none" stroke-width="2" stroke-linejoin="round" points="46.0,28.3 154.5,28.5 263.0,37.7 371.5,41.6 480.0,58.9"/><circle class="f1" cx="46.0" cy="25.4" r="4"/><circle class="f1" cx="154.5" cy="30.7" r="4"/><circle class="f1" cx="263.0" cy="37.0" r="4"/><circle class="f1" cx="371.5" cy="42.2" r="4"/><circle class="f1" cx="480.0" cy="58.8" r="4"/><circle class="f2" cx="46.0" cy="28.3" r="4"/><circle class="f2" cx="154.5" cy="28.5" r="4"/><circle class="f2" cx="263.0" cy="37.7" r="4"/><circle class="f2" cx="371.5" cy="41.6" r="4"/><circle class="f2" cx="480.0" cy="58.9" r="4"/><text class="lbl-t" x="490" y="55.8">Avg prob</text><text class="lbl-t" x="490" y="69.8">Got a hit</text><rect class="hit" tabindex="0" x="36.0" y="12" width="64.2" height="178" data-x="46.0" data-tip="{&quot;t&quot;: &quot;A&quot;, &quot;rows&quot;: [{&quot;k&quot;: &quot;s1&quot;, &quot;l&quot;: &quot;Avg prob&quot;, &quot;v&quot;: &quot;74.0%&quot;}, {&quot;k&quot;: &quot;s2&quot;, &quot;l&quot;: &quot;Got a hit&quot;, &quot;v&quot;: &quot;72.7%&quot;}]}"><title>A: avg prob 74.0%, got a hit 72.7%</title></rect><rect class="hit" tabindex="0" x="100.2" y="12" width="108.5" height="178" data-x="154.5" data-tip="{&quot;t&quot;: &quot;B&quot;, &quot;rows&quot;: [{&quot;k&quot;: &quot;s1&quot;, &quot;l&quot;: &quot;Avg prob&quot;, &quot;v&quot;: &quot;71.6%&quot;}, {&quot;k&quot;: &quot;s2&quot;, &quot;l&quot;: &quot;Got a hit&quot;, &quot;v&quot;: &quot;72.6%&quot;}]}"><title>B: avg prob 71.6%, got a hit 72.6%</title></rect><rect class="hit" tabindex="0" x="208.8" y="12" width="108.5" height="178" data-x="263.0" data-tip="{&quot;t&quot;: &quot;C&quot;, &quot;rows&quot;: [{&quot;k&quot;: &quot;s1&quot;, &quot;l&quot;: &quot;Avg prob&quot;, &quot;v&quot;: &quot;68.8%&quot;}, {&quot;k&quot;: &quot;s2&quot;, &quot;l&quot;: &quot;Got a hit&quot;, &quot;v&quot;: &quot;68.4%&quot;}]}"><title>C: avg prob 68.8%, got a hit 68.4%</title></rect><rect class="hit" tabindex="0" x="317.2" y="12" width="108.5" height="178" data-x="371.5" data-tip="{&quot;t&quot;: &quot;D&quot;, &quot;rows&quot;: [{&quot;k&quot;: &quot;s1&quot;, &quot;l&quot;: &quot;Avg prob&quot;, &quot;v&quot;: &quot;66.4%&quot;}, {&quot;k&quot;: &quot;s2&quot;, &quot;l&quot;: &quot;Got a hit&quot;, &quot;v&quot;: &quot;66.7%&quot;}]}"><title>D: avg prob 66.4%, got a hit 66.7%</title></rect><rect class="hit" tabindex="0" x="425.8" y="12" width="64.2" height="178" data-x="480.0" data-tip="{&quot;t&quot;: &quot;E&quot;, &quot;rows&quot;: [{&quot;k&quot;: &quot;s1&quot;, &quot;l&quot;: &quot;Avg prob&quot;, &quot;v&quot;: &quot;59.0%&quot;}, {&quot;k&quot;: &quot;s2&quot;, &quot;l&quot;: &quot;Got a hit&quot;, &quot;v&quot;: &quot;58.9%&quot;}]}"><title>E: avg prob 59.0%, got a hit 58.9%</title></rect></svg></div><div class='scroll'><table class='t'><thead><tr><th>Grade</th><th class="n">Avg prob</th><th class="n">Got a hit</th><th class="n">n</th></tr></thead><tbody><tr><td><span class="grade g-A">A</span></td><td class="n">74.0%</td><td class="n"><b>72.7%</b></td><td class="n">571</td></tr><tr><td><span class="grade g-B">B</span></td><td class="n">71.6%</td><td class="n"><b>72.6%</b></td><td class="n">857</td></tr><tr><td><span class="grade g-C">C</span></td><td class="n">68.8%</td><td class="n"><b>68.4%</b></td><td class="n">2,287</td></tr><tr><td><span class="grade g-D">D</span></td><td class="n">66.4%</td><td class="n"><b>66.7%</b></td><td class="n">4,858</td></tr><tr><td><span class="grade g-E">E</span></td><td class="n">59.0%</td><td class="n"><b>58.9%</b></td><td class="n">20,005</td></tr></tbody></table></div></div><div class="card"><div class="label">What moves HOMER&rsquo;s hit needle</div><div class='scroll'><table class='t'><thead><tr><th>Factor</th><th class="n">Odds per 1 SD</th></tr></thead><tbody><tr><td class="wrap">Lineup spot (trips to the plate)</td><td class="n ok">+17.7%<span class="mini good"><i style="width:100%"></i></span></td></tr><tr><td class="wrap">Starter's strikeout rate</td><td class="n bad">-5.5%<span class="mini bad"><i style="width:31%"></i></span></td></tr><tr><td class="wrap">Strikeout rate</td><td class="n bad">-5.2%<span class="mini bad"><i style="width:30%"></i></span></td></tr><tr><td class="wrap">Ballpark (hits)</td><td class="n ok">+5.2%<span class="mini good"><i style="width:30%"></i></span></td></tr><tr><td class="wrap">Size of track record</td><td class="n ok">+4.9%<span class="mini good"><i style="width:28%"></i></span></td></tr><tr><td class="wrap">Expected hits (contact quality)</td><td class="n ok">+4.7%<span class="mini good"><i style="width:26%"></i></span></td></tr><tr><td class="wrap">League platoon edge (hits)<div class=sub>overlap correction</div></td><td class="n bad">-3.8%<span class="mini bad"><i style="width:21%"></i></span></td></tr><tr><td class="wrap">Opposing bullpen hits allowed</td><td class="n ok">+3.8%<span class="mini good"><i style="width:21%"></i></span></td></tr><tr><td class="wrap">Walk rate</td><td class="n bad">-3.6%<span class="mini bad"><i style="width:20%"></i></span></td></tr><tr><td class="wrap">Starter's hits allowed</td><td class="n ok">+3.6%<span class="mini good"><i style="width:20%"></i></span></td></tr></tbody></table></div><p class="note" style="margin:10px 0 0">Tested and dropped: hit_form, hit_split, hit_rate</p></div><div class="card"><div class="label">Picking winners, replayed</div><div class='scroll'><table class='t'><thead><tr><th>Method</th><th class="n">Correct</th><th class="n">Log loss</th><th class="n">Games</th></tr></thead><tbody><tr><td>HOMER, learned weights</td><td class="n"><b>55.5%</b> <span class="muted">&plusmn;2.3%</span></td><td class="n">0.6814</td><td class="n">1,801</td></tr><tr class=served><td>HOMER, rule-of-thumb formula</td><td class="n"><b>56.1%</b> <span class="muted">&plusmn;2.3%</span></td><td class="n">0.6812</td><td class="n">1,801</td></tr><tr><td>House model (its own walk-forward)</td><td class="n"><b>54.7%</b> <span class="muted">&plusmn;2.2%</span></td><td class="n">0.6871</td><td class="n">1,937</td></tr><tr><td>Always take the home team</td><td class="n"><b>52.6%</b> <span class="muted">&plusmn;2.3%</span></td><td class="n">0.6918</td><td class="n">1,801</td></tr></tbody></table></div><div style="margin-top:12px"></div><div class='scroll'><table class='t'><thead><tr><th>Confidence</th><th class="n">Games</th><th class="n">Won</th></tr></thead><tbody><tr><td>Strong</td><td class="n">270</td><td class="n"><b>63.3%</b><span class="mini"><i style="width:63%"></i></span></td></tr><tr><td>Lean</td><td class="n">591</td><td class="n"><b>57.9%</b><span class="mini"><i style="width:58%"></i></span></td></tr><tr><td>Coin flip</td><td class="n">940</td><td class="n"><b>52.9%</b><span class="mini"><i style="width:53%"></i></span></td></tr></tbody></table></div></div></div></section><section class="section" id="record"><div class="sec-head"><h2 class="section-title"><span class="ico">&#128210;</span>HOMER&rsquo;s Record</h2></div><div class='card scroll'><table class='t'><thead><tr><th>Date</th><th class='n'>HR hit</th><th class='n'>Expected</th><th class='n'>Hit picks</th><th class='n'>Parlays</th><th class='n'>Winners</th><th></th></tr></thead><tbody><tr><td><a href="/homer/2026-10-05/">2026-10-05</a></td><td class='n'><b>1</b>/1</td><td class='n'>0.21</td><td class='n'>0/0</td><td class='n'>0-0</td><td class='n'>0-1</td><td class='muted'>in progress</td></tr><tr><td><a href="/homer/2026-10-04/">2026-10-04</a></td><td class='n'><b>0</b>/2</td><td class='n'>0.37</td><td class='n'>0/2</td><td class='n'>0-0</td><td class='n'>1-1</td><td class='muted'>final</td></tr><tr><td><a href="/homer/2026-10-03/">2026-10-03</a></td><td class='n'><b>2</b>/4</td><td class='n'>0.75</td><td class='n'>3/4</td><td class='n'>4-1</td><td class='n'>3-1</td><td class='muted'>final</td></tr><tr><td><a href="/homer/2026-10-01/">2026-10-01</a></td><td class='n'><b>1</b>/1</td><td class='n'>0.21</td><td class='n'>1/1</td><td class='n'>0-0</td><td class='n'>1-0</td><td class='muted'>final</td></tr><tr><td><a href="/homer/2026-09-30/">2026-09-30</a></td><td class='n'><b>1</b>/4</td><td class='n'>0.79</td><td class='n'>3/4</td><td class='n'>3-2</td><td class='n'>2-2</td><td class='muted'>final <span class=inj>backfilled</span></td></tr><tr><td><a href="/homer/2026-09-29/">2026-09-29</a></td><td class='n'><b>1</b>/4</td><td class='n'>0.75</td><td class='n'>3/4</td><td class='n'>2-3</td><td class='n'>3-1</td><td class='muted'>final <span class=inj>backfilled</span></td></tr><tr><td><a href="/homer/2026-09-27/">2026-09-27</a></td><td class='n'><b>0</b>/0</td><td class='n'>0.00</td><td class='n'>0/0</td><td class='n'>0-0</td><td class='n'>11-3</td><td class='muted'>final</td></tr><tr><td><a href="/homer/2026-09-25/">2026-09-25</a></td><td class='n'><b>2</b>/6</td><td class='n'>1.20</td><td class='n'>4/6</td><td class='n'>0-5</td><td class='n'>9-8</td><td class='muted'>final</td></tr><tr><td><a href="/homer/2026-09-24/">2026-09-24</a></td><td class='n'><b>0</b>/6</td><td class='n'>1.20</td><td class='n'>4/6</td><td class='n'>2-3</td><td class='n'>8-4</td><td class='muted'>final</td></tr><tr><td><a href="/homer/2026-09-23/">2026-09-23</a></td><td class='n'><b>2</b>/6</td><td class='n'>1.18</td><td class='n'>6/6</td><td class='n'>5-0</td><td class='n'>8-8</td><td class='muted'>final</td></tr><tr><td><a href="/homer/2026-09-22/">2026-09-22</a></td><td class='n'><b>1</b>/5</td><td class='n'>1.00</td><td class='n'>4/6</td><td class='n'>1-4</td><td class='n'>6-9</td><td class='muted'>final</td></tr><tr><td><a href="/homer/2026-09-21/">2026-09-21</a></td><td class='n'><b>1</b>/3</td><td class='n'>0.53</td><td class='n'>2/3</td><td class='n'>2-2</td><td class='n'>3-0</td><td class='muted'>final</td></tr><tr><td><a href="/homer/2026-09-19/">2026-09-19</a></td><td class='n'><b>0</b>/6</td><td class='n'>1.17</td><td class='n'>3/4</td><td class='n'>2-3</td><td class='n'>13-2</td><td class='muted'>final</td></tr><tr><td><a href="/homer/2026-09-18/">2026-09-18</a></td><td class='n'><b>1</b>/6</td><td class='n'>1.14</td><td class='n'>3/6</td><td class='n'>1-4</td><td class='n'>10-5</td><td class='muted'>final</td></tr><tr><td><a href="/homer/2026-09-17/">2026-09-17</a></td><td class='n'><b>1</b>/6</td><td class='n'>1.24</td><td class='n'>4/6</td><td class='n'>0-5</td><td class='n'>7-2</td><td class='muted'>final</td></tr><tr><td><a href="/homer/2026-09-16/">2026-09-16</a></td><td class='n'><b>2</b>/5</td><td class='n'>1.03</td><td class='n'>2/6</td><td class='n'>3-2</td><td class='n'>7-8</td><td class='muted'>final</td></tr><tr><td><a href="/homer/2026-09-15/">2026-09-15</a></td><td class='n'><b>3</b>/6</td><td class='n'>1.21</td><td class='n'>4/6</td><td class='n'>1-4</td><td class='n'>7-8</td><td class='muted'>final</td></tr><tr><td><a href="/homer/2026-09-14/">2026-09-14</a></td><td class='n'><b>1</b>/6</td><td class='n'>1.18</td><td class='n'>3/3</td><td class='n'>1-1</td><td class='n'>8-2</td><td class='muted'>final</td></tr><tr><td><a href="/homer/2026-09-13/">2026-09-13</a></td><td class='n'><b>1</b>/6</td><td class='n'>1.27</td><td class='n'>0/0</td><td class='n'>0-0</td><td class='n'>8-7</td><td class='muted'>final <span class=inj>backfilled</span></td></tr><tr><td><a href="/homer/2026-09-12/">2026-09-12</a></td><td class='n'><b>0</b>/6</td><td class='n'>1.34</td><td class='n'>0/0</td><td class='n'>0-0</td><td class='n'>12-3</td><td class='muted'>final <span class=inj>backfilled</span></td></tr></tbody></table></div></section></main>
+<footer><div>HOMER's card for 2026-10-03 &middot; built 2026-10-03 17:38:06 &middot; book through 2026-10-03 (183,207 PA, league 3.06% HR/PA) &middot; graded 2026-10-04 04:13:44</div><div>Built for research and entertainment. Probabilities are estimates, not guarantees; never stake what you cannot afford to lose. Data: MLB Stats API play-by-play, lineups and live scores; ESPN injuries and bios.</div></footer>
+</div><script>
+(function(){
+var root=document.documentElement;
+document.addEventListener('click',function(e){
+  var b=e.target.closest('.theme');if(!b)return;
+  var t=root.getAttribute('data-theme')==='light'?'dark':'light';root.setAttribute('data-theme',t);
+  try{localStorage.setItem('hr-theme',t)}catch(err){}
+});
+function spy(){
+  var links=[].slice.call(document.querySelectorAll('.subnav a[href^="#"]'));if(!links.length||!('IntersectionObserver' in window))return;
+  var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+  var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){
+    links.forEach(function(a){a.classList.remove('on')});var a=map[en.target.id];if(a){a.classList.add('on');
+    a.scrollIntoView({block:'nearest',inline:'nearest'})}}})},{rootMargin:'-130px 0px -65% 0px'});
+  Object.keys(map).forEach(function(id){var el=document.getElementById(id);if(el)io.observe(el)});
+}
+spy();
+var tip=document.createElement('div');tip.className='tip';document.body.appendChild(tip);
+function show(el,x,y){
+  var d;try{d=JSON.parse(el.getAttribute('data-tip'))}catch(err){return}
+  tip.textContent='';var h=document.createElement('div');h.className='tt';h.textContent=d.t;tip.appendChild(h);
+  d.rows.forEach(function(r){var row=document.createElement('div');row.className='row';var s=document.createElement('span');
+    var k=document.createElement('i');k.style.background='var(--'+r.k+')';s.appendChild(k);s.appendChild(document.createTextNode(r.l));
+    var b=document.createElement('b');b.textContent=r.v;row.appendChild(s);row.appendChild(b);tip.appendChild(row)});
+  var w=tip.offsetWidth,hh=tip.offsetHeight;var px=Math.min(x+14,window.innerWidth-w-8),py=y-hh-12<8?y+16:y-hh-12;
+  tip.style.left=px+'px';tip.style.top=py+'px';tip.classList.add('on');
+  var c=el.closest('.chart');if(c){c.classList.add('on');var xh=c.querySelector('.xh');if(xh){var cx=el.getAttribute('data-x');xh.setAttribute('x1',cx);xh.setAttribute('x2',cx)}}
+}
+function hide(el){tip.classList.remove('on');var c=el&&el.closest&&el.closest('.chart');if(c)c.classList.remove('on')}
+document.addEventListener('pointermove',function(e){var el=e.target.closest&&e.target.closest('[data-tip]');if(el)show(el,e.clientX,e.clientY)});
+document.addEventListener('pointerout',function(e){var el=e.target.closest&&e.target.closest('[data-tip]');if(el)hide(el)});
+document.addEventListener('focusin',function(e){var el=e.target.closest&&e.target.closest('[data-tip]');if(el){var r=el.getBoundingClientRect();show(el,r.left+r.width/2,r.top)}});
+document.addEventListener('focusout',function(e){hide(e.target)});
+var every=parseInt(document.body.getAttribute('data-live')||'0',10);
+if(every>0){
+  var busy=false;
+  function stamp(){var s=document.querySelector('.status .when');if(s&&!s.hasAttribute('data-fixed')){var d=new Date();s.textContent='Updated '+d.toLocaleTimeString([], {hour:'numeric',minute:'2-digit'})}}
+  function tick(){
+    if(busy||document.hidden)return;busy=true;
+    fetch(location.href,{cache:'no-store'}).then(function(r){return r.ok?r.text():null}).then(function(html){
+      if(!html)return;var doc=new DOMParser().parseFromString(html,'text/html');
+      var nm=doc.querySelector('main'),om=document.querySelector('main');if(!nm||!om)return;
+      var open={};document.querySelectorAll('details[id]').forEach(function(d){open[d.id]=d.open});
+      om.replaceWith(nm);
+      Object.keys(open).forEach(function(id){var d=document.getElementById(id);if(d)d.open=open[id]});
+      var ns=doc.querySelector('.status'),os=document.querySelector('.status');if(ns&&os)os.replaceWith(ns);
+      var nf=doc.querySelector('footer'),of=document.querySelector('footer');if(nf&&of)of.replaceWith(nf);
+      spy();stamp();
+    }).catch(function(){}).then(function(){busy=false});
+  }
+  setInterval(tick,every*1000);
+  document.addEventListener('visibilitychange',function(){if(!document.hidden)tick()});
+}
+})();
+</script></body></html>

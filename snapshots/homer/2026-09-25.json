@@ -3164,6 +3164,12 @@
    "void": 0,
    "pending": 0
   },
+  "five_picks": {
+   "won": 0,
+   "lost": 0,
+   "void": 0,
+   "pending": 0
+  },
   "graded_at": "2026-09-30 11:05:42",
   "complete": true
  }

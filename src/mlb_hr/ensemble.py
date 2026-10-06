@@ -81,7 +81,7 @@ DEFAULT_PA_PER_GAME = 4.1
 
 # Stamped on every slate. The tracker's level (snapshot.hr_level) learns only
 # from days this model projected, so bump it whenever the projection changes.
-MODEL_VERSION = "2026.09.30-stack"
+MODEL_VERSION = "2026.10.01-stack"
 
 # Shrinkage toward the comparables prior, as a multiple of the method-of-moments
 # K. The moment estimate is almost never identified against the KNN prior --

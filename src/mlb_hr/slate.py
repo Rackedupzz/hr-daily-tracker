@@ -71,7 +71,12 @@ def data_before(model_path: str, today: date) -> str:
     out.parent.mkdir(parents=True, exist_ok=True)
     for old in out.parent.glob("season_pa_before_*.jsonl"):
         if old != out:
-            old.unlink(missing_ok=True)
+            # Housekeeping only: on a Windows bind mount a stale file can be
+            # briefly locked, and that must not fail the day's build.
+            try:
+                old.unlink(missing_ok=True)
+            except OSError as exc:
+                print(f"[slate.py] could not remove {old.name} ({exc}); leaving it")
     tmp = out.with_suffix(".tmp")
     kept = 0
     with open(src) as fh, open(tmp, "w") as dst:
@@ -139,7 +144,7 @@ class GameSlate:
         # is no "Scheduled". Filtering on that name dropped every game that had
         # not finished, so an evening slate showed only the afternoon results
         # and no night games at all.
-        games = schedule(self.date, self.date, game_type="R")
+        games = schedule(self.date, self.date)
         games = [g for g in games if g.state in ("Preview", "Live", "Final")]
 
         if not games:
@@ -252,9 +257,13 @@ class GameSlate:
             }
 
             # Add eligible hitters: in active roster + has PA data in model
+            # A hitter faces the *other* club's starter, so the home lineup
+            # takes the away starter's hand. This used to hand each lineup its
+            # own starter's hand: in any game with a lefty against a righty,
+            # both lineups got the wrong platoon split and park side.
             for side, team_id, sp_hand in [
-                ("home", g.home_id, home_sp_hand),
-                ("away", g.away_id, away_sp_hand),
+                ("home", g.home_id, away_sp_hand),
+                ("away", g.away_id, home_sp_hand),
             ]:
                 # A posted lineup replaces the roster: those nine are the only
                 # hitters who will bat, and their slot sets their exposure.
@@ -491,6 +500,16 @@ def choose_hr_picks(
         elif team not in teams_used and len(picks) >= 3:
             picks.append(h)
             teams_used.add(team)
+    # A slate of one or two games never reaches three picks, so the other
+    # club's best bat was never allowed in: a one-game playoff day posted a
+    # single pick. Once every game has its pick, the remaining teams fill in.
+    for h in hitters:
+        if len(picks) >= n:
+            break
+        if h.get("game_pk") in closed or h["batter"] in names or h["team"] in teams_used:
+            continue
+        picks.append(h)
+        teams_used.add(h["team"])
     return picks
 
 

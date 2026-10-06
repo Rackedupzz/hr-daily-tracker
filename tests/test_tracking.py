@@ -149,3 +149,78 @@ if __name__ == "__main__":
         with tempfile.TemporaryDirectory() as d:
             fn(Path(d))
             print(f"PASS {fn.__name__}")
+
+
+def test_schedule_follows_the_postseason(monkeypatch):
+    """The page froze on 2026-09-27: the schedule was asked for regular-season
+    games only, so the wild card round read as "no games"."""
+    from mlb_hr import fetch
+
+    asked = []
+    game = {"gamePk": 849844, "officialDate": "2026-10-01", "gameType": "F",
+            "venue": {"name": "Truist Park"}, "status": {"abstractGameState": "Preview"},
+            "teams": {"home": {"team": {"name": "Atlanta Braves", "id": 144}},
+                      "away": {"team": {"name": "Philadelphia Phillies", "id": 143}}}}
+
+    def fake_get(url, *a, **k):
+        asked.append(url)
+        return {"dates": [{"date": "2026-10-01", "games": [game]}]}
+
+    monkeypatch.setattr(fetch, "_get", fake_get)
+    games = fetch.schedule(date(2026, 10, 1), date(2026, 10, 1))
+    types = asked[0].split("gameType=")[1].split("&")[0].split(",")
+    assert {"R", "F", "D", "L", "W"} <= set(types)
+    assert "S" not in types and "A" not in types       # no spring training, no All-Star Game
+    assert [g.game_pk for g in games] == [849844] and games[0].state == "Preview"
+
+
+def test_a_hitter_faces_the_other_club_s_starter(monkeypatch):
+    """Each lineup used to be handed its own starter's hand, so a righty-vs-lefty
+    game gave both lineups the wrong platoon split."""
+    from types import SimpleNamespace
+
+    from mlb_hr import slate as slate_mod
+
+    game = SimpleNamespace(game_pk=7, date="2026-10-01", venue="Truist Park", state="Preview",
+                           home="Atlanta Braves", away="Philadelphia Phillies",
+                           home_id=144, away_id=143)
+    monkeypatch.setattr(slate_mod, "schedule", lambda start, end: [game])
+    monkeypatch.setattr(slate_mod, "probable_pitchers", lambda day: [{
+        "game_pk": 7, "home_sp_id": 1, "home_sp": "Lefty Home", "away_sp_id": 2,
+        "away_sp": "Righty Away"}])
+    monkeypatch.setattr(slate_mod, "pitcher_hands", lambda ids: {1: "L", 2: "R"})
+    monkeypatch.setattr(slate_mod, "active_rosters", lambda ids, season: {
+        144: [{"id": 10, "name": "Home Bat", "pos": "RF"}],
+        143: [{"id": 20, "name": "Away Bat", "pos": "1B"}]})
+
+    def batter(bid, name):
+        return SimpleNamespace(batter_id=bid, batter=name, pa_total=400, hr_total=20, hand="R",
+                               hr_vs_r=14, pa_vs_r=280, hr_vs_l=6, pa_vs_l=120)
+
+    seen = {}
+
+    class Model:
+        park_factors = {}
+
+        def get_batter(self, bid):
+            return {10: batter(10, "Home Bat"), 20: batter(20, "Away Bat")}.get(bid)
+
+        def pr_hr_today(self, b, _pa, venue, sp_hand):
+            seen[b.batter] = sp_hand
+            return 0.1
+
+    built = slate_mod.GameSlate(date(2026, 10, 1), Model())
+    facing = {h["batter"]: h["facing_hand"] for h in built.games[0]["hitters"]}
+    assert facing == seen == {"Home Bat": "R", "Away Bat": "L"}
+    home_bat = next(h for h in built.games[0]["hitters"] if h["batter"] == "Home Bat")
+    assert (home_bat["hr_vs_facing"], home_bat["pa_vs_facing"]) == (14, 280)
+
+
+def test_a_one_game_slate_picks_one_bat_per_team():
+    games = _slate({
+        1: [_hitter("A", "ATL", 1, 0.3, 1), _hitter("B", "ATL", 1, 0.29, 2),
+            _hitter("C", "PHI", 1, 0.2, 3), _hitter("D", "PHI", 1, 0.1, 4)],
+    })["games"]
+    assert [p["batter"] for p in choose_hr_picks(games)] == ["A", "C"]
+    # A started game still cannot gain a pick.
+    assert choose_hr_picks(games, closed={1}) == []

@@ -1,8 +1,8 @@
 {
   "date": "2026-09-27",
-  "built_at": "2026-09-30 21:23:29",
+  "built_at": "2026-10-01 14:13:26",
   "results": {
-    "fetched_at": "2026-09-30 21:27:32",
+    "fetched_at": "2026-10-01 14:17:39",
     "final_games": 15,
     "live_games": 0,
     "upcoming_games": 0,
@@ -17,6 +17,10 @@
       "scored": 6,
       "dnp": 0,
       "pending": 0
+    },
+    "parlays": {
+      "hr5": "lost",
+      "hit5": "lost"
     },
     "any": true
   },
@@ -34,15 +38,19 @@
     "avg_projected_hr": 0.182,
     "picks_dnp": 1,
     "settled": true,
-    "built_at": "2026-09-30 21:23:29",
+    "built_at": "2026-10-01 14:13:26",
     "slate_starters": 248,
-    "slate_hr_expected": 26.669,
-    "slate_hr_base": 27.393,
+    "slate_hr_expected": 26.668,
+    "slate_hr_base": 27.391,
     "slate_hr_actual": 30,
     "slate_hits_expected": 213.68,
     "slate_hits_actual": 206,
     "hr_level": 1.0,
-    "model_version": "2026.09.30-stack"
+    "model_version": "2026.09.30-stack",
+    "hr_parlay": "lost (backfilled)",
+    "hr_parlay_prob": 0.000313,
+    "hit_parlay": "lost (backfilled)",
+    "hit_parlay_prob": 0.204512
   },
   "picks": [
     {
@@ -416,6 +424,270 @@
       "game_state": "Final",
       "final": true,
       "won": false
+    }
+  ],
+  "parlays": [
+    {
+      "key": "hr5",
+      "kind": "hr",
+      "name": "Five-Homer Parlay",
+      "blurb": "The five likeliest home run bats on the slate, one per game. A true long shot: every leg has to leave the yard, so this one is priced like the lottery ticket it is.",
+      "legs": 5,
+      "leg_list": [
+        {
+          "type": "hr",
+          "batter": "Willson Contreras",
+          "batter_id": 575929,
+          "team": "Boston Red Sox",
+          "game_pk": 824705,
+          "opp_sp": "Shota Imanaga",
+          "facing_hand": "R",
+          "lineup_slot": 3,
+          "prob": 0.20615731959224093,
+          "status": "lost",
+          "result": {
+            "pa": 2,
+            "hits": 0,
+            "hr": 0,
+            "summary": "0-2 | K",
+            "final": true
+          }
+        },
+        {
+          "type": "hr",
+          "batter": "Pete Alonso",
+          "batter_id": 624413,
+          "team": "Baltimore Orioles",
+          "game_pk": 823490,
+          "opp_sp": "Elmer Rodr\u00edguez",
+          "facing_hand": "R",
+          "lineup_slot": null,
+          "prob": 0.20460883181467984,
+          "status": "void",
+          "result": {
+            "pa": 0,
+            "hits": 0,
+            "hr": 0,
+            "summary": "Did not play",
+            "final": true
+          }
+        },
+        {
+          "type": "hr",
+          "batter": "Yordan Alvarez",
+          "batter_id": 670541,
+          "team": "Houston Astros",
+          "game_pk": 824948,
+          "opp_sp": "Seth Johnson",
+          "facing_hand": "R",
+          "lineup_slot": 2,
+          "prob": 0.20379439467311794,
+          "status": "lost",
+          "result": {
+            "pa": 5,
+            "hits": 1,
+            "hr": 0,
+            "summary": "1-4 | HBP, K, RBI",
+            "final": true
+          }
+        },
+        {
+          "type": "hr",
+          "batter": "Rafael Flores Jr.",
+          "batter_id": 804668,
+          "team": "Pittsburgh Pirates",
+          "game_pk": 824217,
+          "opp_sp": "River Ryan",
+          "facing_hand": "R",
+          "lineup_slot": 4,
+          "prob": 0.19107059608044044,
+          "status": "lost",
+          "result": {
+            "pa": 4,
+            "hits": 0,
+            "hr": 0,
+            "summary": "0-4 | K",
+            "final": true
+          }
+        },
+        {
+          "type": "hr",
+          "batter": "Munetaka Murakami",
+          "batter_id": 808959,
+          "team": "Chicago White Sox",
+          "game_pk": 824542,
+          "opp_sp": "Kyle Freeland",
+          "facing_hand": "L",
+          "lineup_slot": 3,
+          "prob": 0.19073073333400048,
+          "status": "lost",
+          "result": {
+            "pa": 4,
+            "hits": 1,
+            "hr": 0,
+            "summary": "1-4 | 2B, K, R",
+            "final": true
+          }
+        }
+      ],
+      "prob": 0.00031327800647228604,
+      "fair_odds": "+319,105",
+      "one_in": 3192,
+      "backfilled": true,
+      "evidence": {
+        "legs": 5,
+        "days": 140,
+        "won": 0,
+        "rate": 0.0,
+        "predicted": 0.000543,
+        "expected_wins": 0.076,
+        "wins_on": []
+      },
+      "status": "lost"
+    },
+    {
+      "key": "hit5",
+      "kind": "hit",
+      "name": "Five-Hit Parlay",
+      "blurb": "The five likeliest bats to get a hit, one per game. The model's steadiest five-leg ticket &mdash; and still one that misses most days.",
+      "legs": 5,
+      "leg_list": [
+        {
+          "type": "hit",
+          "batter": "Randal Grichuk",
+          "batter_id": 545341,
+          "team": "Chicago White Sox",
+          "game_pk": 824542,
+          "opp_sp": "Kyle Freeland",
+          "facing_hand": "L",
+          "lineup_slot": 1,
+          "prob": 0.750054632813678,
+          "status": "won",
+          "result": {
+            "pa": 3,
+            "hits": 1,
+            "hr": 1,
+            "summary": "1-3 | HR, 2 RBI, R",
+            "final": true
+          }
+        },
+        {
+          "type": "hit",
+          "batter": "Yordan Alvarez",
+          "batter_id": 670541,
+          "team": "Houston Astros",
+          "game_pk": 824948,
+          "opp_sp": "Seth Johnson",
+          "facing_hand": "R",
+          "lineup_slot": 2,
+          "prob": 0.7270774598397776,
+          "status": "won",
+          "result": {
+            "pa": 5,
+            "hits": 1,
+            "hr": 0,
+            "summary": "1-4 | HBP, K, RBI",
+            "final": true
+          }
+        },
+        {
+          "type": "hit",
+          "batter": "Mauricio Dub\u00f3n",
+          "batter_id": 643289,
+          "team": "Atlanta Braves",
+          "game_pk": 823814,
+          "opp_sp": "Janson Junk",
+          "facing_hand": "R",
+          "lineup_slot": 1,
+          "prob": 0.7219918313725331,
+          "status": "won",
+          "result": {
+            "pa": 4,
+            "hits": 2,
+            "hr": 1,
+            "summary": "2-4 | HR, 2 RBI, R",
+            "final": true
+          }
+        },
+        {
+          "type": "hit",
+          "batter": "Angel Mart\u00ednez",
+          "batter_id": 682657,
+          "team": "Cleveland Guardians",
+          "game_pk": 824055,
+          "opp_sp": "Daniel Lynch IV",
+          "facing_hand": "L",
+          "lineup_slot": 1,
+          "prob": 0.7214335529134688,
+          "status": "lost",
+          "result": {
+            "pa": 4,
+            "hits": 0,
+            "hr": 0,
+            "summary": "0-4 | K",
+            "final": true
+          }
+        },
+        {
+          "type": "hit",
+          "batter": "Cody Bellinger",
+          "batter_id": 641355,
+          "team": "New York Yankees",
+          "game_pk": 823490,
+          "opp_sp": "Shane Baz",
+          "facing_hand": "R",
+          "lineup_slot": null,
+          "prob": 0.719973035543263,
+          "status": "void",
+          "result": {
+            "pa": 0,
+            "hits": 0,
+            "hr": 0,
+            "summary": "Did not play",
+            "final": true
+          }
+        }
+      ],
+      "prob": 0.20451182844698934,
+      "fair_odds": "+389",
+      "one_in": 5,
+      "backfilled": true,
+      "evidence": {
+        "legs": 5,
+        "days": 140,
+        "won": 25,
+        "rate": 0.1786,
+        "predicted": 0.207067,
+        "expected_wins": 28.989,
+        "wins_on": [
+          "2026-05-07",
+          "2026-05-16",
+          "2026-05-21",
+          "2026-05-25",
+          "2026-05-26",
+          "2026-06-13",
+          "2026-06-14",
+          "2026-06-16",
+          "2026-06-18",
+          "2026-06-19",
+          "2026-06-30",
+          "2026-07-03",
+          "2026-07-07",
+          "2026-07-17",
+          "2026-07-18",
+          "2026-07-19",
+          "2026-07-26",
+          "2026-08-01",
+          "2026-08-12",
+          "2026-08-18",
+          "2026-08-19",
+          "2026-08-23",
+          "2026-09-01",
+          "2026-09-14",
+          "2026-09-23"
+        ]
+      },
+      "status": "lost"
     }
   ]
 }

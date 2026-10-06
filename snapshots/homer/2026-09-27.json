@@ -1,7 +1,7 @@
 {
  "bot": "HOMER",
  "date": "2026-09-27",
- "built_at": "2026-09-30 09:06:42",
+ "built_at": "2026-10-01 14:19:42",
  "book_through": "2026-09-27",
  "league": {
   "pa": 181541,
@@ -11,188 +11,197 @@
  },
  "method": "learned",
  "evidence": {
-  "fitted_at": "2026-09-25 12:36:12",
-  "through": "2026-09-24",
+  "fitted_at": "2026-10-01 13:19:18",
+  "through": "2026-09-30",
   "hits_serve": "learned",
   "hit_scores": {
    "learned": {
-    "n": 31068,
-    "log_loss": 0.66182,
-    "brier": 0.23462,
+    "n": 32076,
+    "log_loss": 0.66188,
+    "brier": 0.23464,
     "auc": 0.5715,
     "accuracy": 0.6114,
-    "accuracy_se": 0.0028
+    "accuracy_se": 0.0027
    },
    "rules": {
-    "n": 31068,
-    "log_loss": 0.66586,
-    "brier": 0.23651,
-    "auc": 0.566,
-    "accuracy": 0.6088,
-    "accuracy_se": 0.0028
+    "n": 32076,
+    "log_loss": 0.66582,
+    "brier": 0.2365,
+    "auc": 0.5664,
+    "accuracy": 0.6087,
+    "accuracy_se": 0.0027
    },
    "baseline": {
-    "n": 31068,
-    "log_loss": 0.66802,
-    "brier": 0.23749,
+    "n": 32076,
+    "log_loss": 0.66805,
+    "brier": 0.23751,
     "auc": 0.5571,
-    "accuracy": 0.6087,
-    "accuracy_se": 0.0028
+    "accuracy": 0.6086,
+    "accuracy_se": 0.0027
    }
   },
   "hit_picks": {
    "calibrated": {
-    "days": 131,
-    "picks": 776,
-    "hit": 552,
-    "rate": 0.7113,
-    "rate_se": 0.0163,
-    "expected": 561.6
+    "days": 135,
+    "picks": 800,
+    "hit": 568,
+    "rate": 0.71,
+    "rate_se": 0.016,
+    "expected": 578.0
    },
    "rules": {
-    "days": 131,
-    "picks": 776,
-    "hit": 534,
-    "rate": 0.6881,
-    "rate_se": 0.0166,
-    "expected": 577.4
+    "days": 135,
+    "picks": 800,
+    "hit": 551,
+    "rate": 0.6887,
+    "rate_se": 0.0164,
+    "expected": 595.5
    },
    "base": {
-    "days": 131,
-    "picks": 776,
-    "hit": 533,
-    "rate": 0.6869,
-    "rate_se": 0.0166,
-    "expected": 576.9
+    "days": 135,
+    "picks": 800,
+    "hit": 551,
+    "rate": 0.6887,
+    "rate_se": 0.0164,
+    "expected": 594.8
    }
   },
   "hit_grades": [
    {
     "grade": "A",
-    "min_prob": 0.7101,
-    "top_share": 0.05,
-    "n": 1374,
-    "hit": 1005,
-    "rate": 0.7314,
-    "avg_prob": 0.7252
+    "min_prob": 0.726,
+    "top_share": 0.02,
+    "n": 568,
+    "hit": 414,
+    "rate": 0.7289,
+    "avg_prob": 0.7358
    },
    {
     "grade": "B",
-    "min_prob": 0.6715,
-    "top_share": 0.13,
-    "n": 2199,
-    "hit": 1506,
-    "rate": 0.6849,
-    "avg_prob": 0.6901
+    "min_prob": 0.7073,
+    "top_share": 0.05,
+    "n": 853,
+    "hit": 618,
+    "rate": 0.7245,
+    "avg_prob": 0.7156
    },
    {
     "grade": "C",
-    "min_prob": 0.6494,
-    "top_share": 0.3,
-    "n": 4673,
-    "hit": 3109,
-    "rate": 0.6653,
-    "avg_prob": 0.6636
+    "min_prob": 0.6726,
+    "top_share": 0.13,
+    "n": 2273,
+    "hit": 1559,
+    "rate": 0.6859,
+    "avg_prob": 0.6881
    },
    {
     "grade": "D",
+    "min_prob": 0.6525,
+    "top_share": 0.3,
+    "n": 4832,
+    "hit": 3221,
+    "rate": 0.6666,
+    "avg_prob": 0.6644
+   },
+   {
+    "grade": "E",
     "min_prob": 0.0,
     "top_share": 1.0,
-    "n": 19243,
-    "hit": 11357,
-    "rate": 0.5902,
-    "avg_prob": 0.59
+    "n": 19895,
+    "hit": 11731,
+    "rate": 0.5896,
+    "avg_prob": 0.5903
    }
   ],
   "hit_weights": [
    {
     "feature": "exp_pa",
     "label": "Lineup spot (trips to the plate)",
-    "odds_per_sd": 0.178,
-    "overlap": false
-   },
-   {
-    "feature": "k_rate",
-    "label": "Strikeout rate",
-    "odds_per_sd": -0.0594,
-    "overlap": false
-   },
-   {
-    "feature": "hit_park",
-    "label": "Ballpark (hits)",
-    "odds_per_sd": 0.0537,
-    "overlap": false
-   },
-   {
-    "feature": "sample",
-    "label": "Size of track record",
-    "odds_per_sd": 0.0531,
+    "odds_per_sd": 0.1798,
     "overlap": false
    },
    {
     "feature": "sp_k",
     "label": "Starter's strikeout rate",
-    "odds_per_sd": -0.0519,
+    "odds_per_sd": -0.0552,
+    "overlap": false
+   },
+   {
+    "feature": "k_rate",
+    "label": "Strikeout rate",
+    "odds_per_sd": -0.0532,
+    "overlap": false
+   },
+   {
+    "feature": "hit_park",
+    "label": "Ballpark (hits)",
+    "odds_per_sd": 0.0507,
+    "overlap": false
+   },
+   {
+    "feature": "sample",
+    "label": "Size of track record",
+    "odds_per_sd": 0.0483,
     "overlap": false
    },
    {
     "feature": "xhit",
     "label": "Expected hits (contact quality)",
-    "odds_per_sd": 0.0413,
-    "overlap": false
-   },
-   {
-    "feature": "hit_platoon",
-    "label": "League platoon edge (hits)",
-    "odds_per_sd": -0.0375,
-    "overlap": true
-   },
-   {
-    "feature": "bb_rate",
-    "label": "Walk rate",
-    "odds_per_sd": -0.0362,
-    "overlap": false
-   },
-   {
-    "feature": "sp_hit",
-    "label": "Starter's hits allowed",
-    "odds_per_sd": 0.0339,
+    "odds_per_sd": 0.0451,
     "overlap": false
    },
    {
     "feature": "pen_hit",
     "label": "Opposing bullpen hits allowed",
-    "odds_per_sd": 0.0327,
+    "odds_per_sd": 0.0384,
+    "overlap": false
+   },
+   {
+    "feature": "hit_platoon",
+    "label": "League platoon edge (hits)",
+    "odds_per_sd": -0.0378,
+    "overlap": true
+   },
+   {
+    "feature": "bb_rate",
+    "label": "Walk rate",
+    "odds_per_sd": -0.0372,
+    "overlap": false
+   },
+   {
+    "feature": "sp_hit",
+    "label": "Starter's hits allowed",
+    "odds_per_sd": 0.0338,
     "overlap": false
    }
   ],
   "hit_dropped": [
    {
     "dropped": "hit_form",
-    "log_loss_before": 0.661923,
-    "log_loss_after": 0.661874
-   },
-   {
-    "dropped": "hit_rate",
-    "log_loss_before": 0.661874,
-    "log_loss_after": 0.661849
+    "log_loss_before": 0.661979,
+    "log_loss_after": 0.66193
    },
    {
     "dropped": "hit_split",
-    "log_loss_before": 0.661849,
-    "log_loss_after": 0.66182
+    "log_loss_before": 0.66193,
+    "log_loss_after": 0.661901
+   },
+   {
+    "dropped": "hit_rate",
+    "log_loss_before": 0.661901,
+    "log_loss_after": 0.661876
    }
   ],
-  "hit_board_rate": 0.6176,
+  "hit_board_rate": 0.6173,
   "parlays": {
    "hit3": {
     "name": "Parlay of the Day",
     "legs": 3,
     "hr": 0,
     "value": 0,
-    "days": 130,
-    "won": 50,
-    "predicted": 0.3938,
+    "days": 134,
+    "won": 51,
+    "predicted": 0.393,
     "wins_on": [
      "2026-05-13",
      "2026-05-16",
@@ -243,12 +252,13 @@
      "2026-09-11",
      "2026-09-14",
      "2026-09-16",
-     "2026-09-23"
+     "2026-09-23",
+     "2026-09-26"
     ],
-    "rate": 0.3846,
-    "rate_se": 0.0427,
-    "typical_odds": "+169",
-    "est_roi": 0.052,
+    "rate": 0.3806,
+    "rate_se": 0.0419,
+    "typical_odds": "+168",
+    "est_roi": 0.034,
     "days_per_win": 2.6
    },
    "hit3e1": {
@@ -256,9 +266,9 @@
     "legs": 3,
     "hr": 0,
     "value": 1,
-    "days": 130,
+    "days": 134,
     "won": 48,
-    "predicted": 0.3832,
+    "predicted": 0.3823,
     "wins_on": [
      "2026-05-13",
      "2026-05-16",
@@ -309,20 +319,20 @@
      "2026-09-22",
      "2026-09-23"
     ],
-    "rate": 0.3692,
-    "rate_se": 0.0423,
-    "typical_odds": "+192",
-    "est_roi": 0.0944,
-    "days_per_win": 2.7
+    "rate": 0.3582,
+    "rate_se": 0.0414,
+    "typical_odds": "+189",
+    "est_roi": 0.0558,
+    "days_per_win": 2.8
    },
    "hit3e2": {
     "name": "The Edge",
     "legs": 3,
     "hr": 0,
     "value": 2,
-    "days": 130,
-    "won": 55,
-    "predicted": 0.3717,
+    "days": 134,
+    "won": 53,
+    "predicted": 0.3701,
     "wins_on": [
      "2026-05-13",
      "2026-05-16",
@@ -342,7 +352,6 @@
      "2026-06-14",
      "2026-06-16",
      "2026-06-17",
-     "2026-06-23",
      "2026-06-25",
      "2026-06-27",
      "2026-06-29",
@@ -365,9 +374,7 @@
      "2026-08-11",
      "2026-08-12",
      "2026-08-17",
-     "2026-08-22",
      "2026-08-23",
-     "2026-08-25",
      "2026-08-29",
      "2026-08-30",
      "2026-09-01",
@@ -378,22 +385,23 @@
      "2026-09-16",
      "2026-09-17",
      "2026-09-21",
-     "2026-09-23"
+     "2026-09-23",
+     "2026-09-24"
     ],
-    "rate": 0.4231,
-    "rate_se": 0.0433,
-    "typical_odds": "+215",
-    "est_roi": 0.3399,
-    "days_per_win": 2.4
+    "rate": 0.3955,
+    "rate_se": 0.0422,
+    "typical_odds": "+213",
+    "est_roi": 0.25,
+    "days_per_win": 2.5
    },
    "hit4e1": {
     "name": "The Stretch",
     "legs": 4,
     "hr": 0,
     "value": 1,
-    "days": 129,
+    "days": 133,
     "won": 36,
-    "predicted": 0.277,
+    "predicted": 0.2757,
     "wins_on": [
      "2026-05-13",
      "2026-05-16",
@@ -432,20 +440,20 @@
      "2026-09-16",
      "2026-09-23"
     ],
-    "rate": 0.2791,
-    "rate_se": 0.0395,
-    "typical_odds": "+305",
-    "est_roi": 0.1648,
-    "days_per_win": 3.6
+    "rate": 0.2707,
+    "rate_se": 0.0385,
+    "typical_odds": "+301",
+    "est_roi": 0.1215,
+    "days_per_win": 3.7
    },
    "hit3e3": {
     "name": "Full Value",
     "legs": 3,
     "hr": 0,
     "value": 3,
-    "days": 130,
-    "won": 46,
-    "predicted": 0.3606,
+    "days": 134,
+    "won": 45,
+    "predicted": 0.3579,
     "wins_on": [
      "2026-05-13",
      "2026-05-16",
@@ -466,7 +474,6 @@
      "2026-06-27",
      "2026-06-29",
      "2026-07-01",
-     "2026-07-02",
      "2026-07-07",
      "2026-07-10",
      "2026-07-11",
@@ -481,24 +488,24 @@
      "2026-08-14",
      "2026-08-17",
      "2026-08-19",
-     "2026-08-22",
      "2026-08-23",
      "2026-08-29",
      "2026-08-30",
      "2026-09-01",
-     "2026-09-04",
      "2026-09-08",
      "2026-09-13",
      "2026-09-14",
      "2026-09-16",
      "2026-09-18",
-     "2026-09-21"
+     "2026-09-21",
+     "2026-09-23",
+     "2026-09-24"
     ],
-    "rate": 0.3538,
-    "rate_se": 0.0419,
-    "typical_odds": "+238",
-    "est_roi": 0.1849,
-    "days_per_win": 2.8
+    "rate": 0.3358,
+    "rate_se": 0.0408,
+    "typical_odds": "+236",
+    "est_roi": 0.125,
+    "days_per_win": 3.0
    }
   },
   "book": {
@@ -508,36 +515,36 @@
    },
    "legs": {
     "hr_prob": {
-     "legs": 649,
-     "actual": 0.2126,
-     "homer": 0.2091,
-     "market": 0.1829,
-     "break_even": 0.2231,
-     "roi": -0.0415
+     "legs": 669,
+     "actual": 0.2182,
+     "homer": 0.208,
+     "market": 0.1817,
+     "break_even": 0.2216,
+     "roi": -0.0102
     },
     "hr_value": {
-     "legs": 649,
-     "actual": 0.1818,
-     "homer": 0.186,
-     "market": 0.1319,
-     "break_even": 0.161,
-     "roi": 0.1604
+     "legs": 669,
+     "actual": 0.1958,
+     "homer": 0.1865,
+     "market": 0.1365,
+     "break_even": 0.1665,
+     "roi": 0.2059
     },
     "hit_prob": {
-     "legs": 649,
-     "actual": 0.7072,
-     "homer": 0.7267,
-     "market": 0.6713,
-     "break_even": 0.7149,
-     "roi": -0.0098
+     "legs": 669,
+     "actual": 0.707,
+     "homer": 0.7257,
+     "market": 0.6724,
+     "break_even": 0.7162,
+     "roi": -0.0119
     },
     "hit_value": {
-     "legs": 649,
-     "actual": 0.6934,
-     "homer": 0.7117,
-     "market": 0.6388,
-     "break_even": 0.6803,
-     "roi": 0.0209
+     "legs": 669,
+     "actual": 0.6861,
+     "homer": 0.709,
+     "market": 0.6384,
+     "break_even": 0.6799,
+     "roi": 0.0111
     }
    }
   },
@@ -545,221 +552,222 @@
   "games_serve": "rules",
   "hr_scores": {
    "learned": {
-    "n": 31068,
-    "log_loss": 0.35561,
-    "brier": 0.10271,
-    "auc": 0.6119,
-    "accuracy": 0.8817,
+    "n": 32076,
+    "log_loss": 0.35539,
+    "brier": 0.10266,
+    "auc": 0.6126,
+    "accuracy": 0.8818,
     "accuracy_se": 0.0018
    },
    "rules": {
-    "n": 31068,
-    "log_loss": 0.35613,
-    "brier": 0.10279,
-    "auc": 0.606,
-    "accuracy": 0.8817,
+    "n": 32076,
+    "log_loss": 0.35597,
+    "brier": 0.10275,
+    "auc": 0.6066,
+    "accuracy": 0.8818,
     "accuracy_se": 0.0018
    },
    "baseline": {
-    "n": 31068,
-    "log_loss": 0.35817,
-    "brier": 0.10319,
-    "auc": 0.5912,
-    "accuracy": 0.8817,
+    "n": 32076,
+    "log_loss": 0.35806,
+    "brier": 0.10316,
+    "auc": 0.5918,
+    "accuracy": 0.8818,
     "accuracy_se": 0.0018
    }
   },
   "hr_picks": {
    "calibrated": {
-    "days": 131,
-    "picks": 776,
-    "hit": 156,
-    "rate": 0.201,
+    "days": 135,
+    "picks": 800,
+    "hit": 167,
+    "rate": 0.2087,
     "rate_se": 0.0144,
-    "expected": 161.0
+    "expected": 165.0
    },
    "rules": {
-    "days": 131,
-    "picks": 776,
-    "hit": 148,
-    "rate": 0.1907,
-    "rate_se": 0.0141,
-    "expected": 162.6
+    "days": 135,
+    "picks": 800,
+    "hit": 153,
+    "rate": 0.1913,
+    "rate_se": 0.0139,
+    "expected": 167.3
    },
    "base": {
-    "days": 131,
-    "picks": 776,
-    "hit": 154,
-    "rate": 0.1985,
-    "rate_se": 0.0143,
-    "expected": 169.5
+    "days": 135,
+    "picks": 800,
+    "hit": 157,
+    "rate": 0.1963,
+    "rate_se": 0.014,
+    "expected": 174.9
    }
   },
   "hr_weights": [
    {
     "feature": "xhr",
     "label": "Expected HR rate (contact quality)",
-    "odds_per_sd": 0.3741,
+    "odds_per_sd": 0.3152,
     "overlap": false
    },
    {
     "feature": "exp_pa",
     "label": "Lineup spot (trips to the plate)",
-    "odds_per_sd": 0.1476,
+    "odds_per_sd": 0.1421,
     "overlap": false
    },
    {
     "feature": "weather",
     "label": "Temperature & wind",
-    "odds_per_sd": 0.1008,
+    "odds_per_sd": 0.1069,
     "overlap": false
    },
    {
     "feature": "sp_fly",
     "label": "Starter's fly-ball rate",
-    "odds_per_sd": 0.0842,
+    "odds_per_sd": 0.0902,
     "overlap": false
    },
    {
-    "feature": "park",
-    "label": "Ballpark",
-    "odds_per_sd": 0.0624,
-    "overlap": false
-   },
-   {
-    "feature": "sample",
-    "label": "Size of track record",
-    "odds_per_sd": 0.0568,
+    "feature": "hr",
+    "label": "Actual HR rate",
+    "odds_per_sd": 0.0609,
     "overlap": false
    },
    {
     "feature": "barrel",
     "label": "Barrel rate",
-    "odds_per_sd": -0.0513,
+    "odds_per_sd": -0.0593,
     "overlap": true
+   },
+   {
+    "feature": "park",
+    "label": "Ballpark",
+    "odds_per_sd": 0.0584,
+    "overlap": false
+   },
+   {
+    "feature": "sample",
+    "label": "Size of track record",
+    "odds_per_sd": 0.0566,
+    "overlap": false
    },
    {
     "feature": "form",
     "label": "Last 21 days vs season",
-    "odds_per_sd": 0.0463,
+    "odds_per_sd": 0.0522,
     "overlap": false
    },
    {
     "feature": "sp_hr",
     "label": "Starter's HR allowed",
-    "odds_per_sd": 0.0398,
+    "odds_per_sd": 0.0407,
     "overlap": false
    }
   ],
   "hr_dropped": [
    {
     "dropped": "sp_form",
-    "log_loss_before": 0.355738,
-    "log_loss_after": 0.355669
+    "log_loss_before": 0.355518,
+    "log_loss_after": 0.355455
    },
    {
     "dropped": "split",
-    "log_loss_before": 0.355669,
-    "log_loss_after": 0.355642
-   },
-   {
-    "dropped": "pen",
-    "log_loss_before": 0.355642,
-    "log_loss_after": 0.355627
+    "log_loss_before": 0.355455,
+    "log_loss_after": 0.355424
    },
    {
     "dropped": "platoon",
-    "log_loss_before": 0.355627,
-    "log_loss_after": 0.355611
+    "log_loss_before": 0.355424,
+    "log_loss_after": 0.355406
    },
    {
-    "dropped": "hr",
-    "log_loss_before": 0.355611,
-    "log_loss_after": 0.355608
+    "dropped": "pen",
+    "log_loss_before": 0.355406,
+    "log_loss_after": 0.355394
    }
   ],
   "grades": [
    {
     "grade": "A",
-    "min_prob": 0.1955,
+    "min_prob": 0.1929,
     "top_share": 0.05,
-    "n": 1374,
-    "hit": 291,
-    "rate": 0.2118,
-    "avg_prob": 0.2083
+    "n": 1421,
+    "hit": 308,
+    "rate": 0.2167,
+    "avg_prob": 0.207
    },
    {
     "grade": "B",
-    "min_prob": 0.1739,
+    "min_prob": 0.1742,
     "top_share": 0.13,
-    "n": 2199,
-    "hit": 404,
-    "rate": 0.1837,
-    "avg_prob": 0.1816
+    "n": 2273,
+    "hit": 412,
+    "rate": 0.1813,
+    "avg_prob": 0.1798
    },
    {
     "grade": "C",
-    "min_prob": 0.1415,
+    "min_prob": 0.14,
     "top_share": 0.3,
-    "n": 4673,
-    "hit": 737,
-    "rate": 0.1577,
-    "avg_prob": 0.1567
+    "n": 4832,
+    "hit": 756,
+    "rate": 0.1565,
+    "avg_prob": 0.1561
    },
    {
     "grade": "D",
     "min_prob": 0.0,
     "top_share": 1.0,
-    "n": 19243,
-    "hit": 1944,
-    "rate": 0.101,
-    "avg_prob": 0.0997
+    "n": 19895,
+    "hit": 2013,
+    "rate": 0.1012,
+    "avg_prob": 0.1005
    }
   ],
   "board_rate": 0.1228,
   "game_scores": {
    "learned": {
-    "n": 1745,
-    "log_loss": 0.6822,
-    "brier": 0.24462,
-    "auc": 0.5761,
-    "accuracy": 0.5536,
-    "accuracy_se": 0.0119
+    "n": 1801,
+    "log_loss": 0.68139,
+    "brier": 0.24423,
+    "auc": 0.5791,
+    "accuracy": 0.5552,
+    "accuracy_se": 0.0117
    },
    "rules": {
-    "n": 1745,
-    "log_loss": 0.68196,
-    "brier": 0.24447,
-    "auc": 0.5778,
-    "accuracy": 0.5587,
-    "accuracy_se": 0.0119
+    "n": 1801,
+    "log_loss": 0.6812,
+    "brier": 0.2441,
+    "auc": 0.5811,
+    "accuracy": 0.5608,
+    "accuracy_se": 0.0117
    },
    "home_team": {
-    "n": 1745,
-    "log_loss": 0.69182,
-    "brier": 0.24934,
+    "n": 1801,
+    "log_loss": 0.69185,
+    "brier": 0.24935,
     "auc": 0.5,
-    "accuracy": 0.5261,
-    "accuracy_se": 0.012
+    "accuracy": 0.5258,
+    "accuracy_se": 0.0118
    }
   },
   "game_weights": [
    {
     "feature": "starter",
     "label": "Starting pitcher matchup",
-    "odds_per_sd": 0.2385,
+    "odds_per_sd": 0.238,
     "overlap": false
    },
    {
     "feature": "bullpen",
     "label": "Bullpen matchup",
-    "odds_per_sd": 0.1451,
+    "odds_per_sd": 0.1528,
     "overlap": false
    },
    {
     "feature": "record",
     "label": "Season run differential",
-    "odds_per_sd": 0.0736,
+    "odds_per_sd": 0.0784,
     "overlap": false
    }
   ],
@@ -767,23 +775,23 @@
    {
     "label": "Strong",
     "min_prob": 0.6,
-    "n": 257,
-    "won": 162,
-    "rate": 0.6304
+    "n": 270,
+    "won": 171,
+    "rate": 0.6333
    },
    {
     "label": "Lean",
     "min_prob": 0.55,
-    "n": 574,
-    "won": 329,
-    "rate": 0.5732
+    "n": 591,
+    "won": 342,
+    "rate": 0.5787
    },
    {
     "label": "Coin flip",
     "min_prob": 0.0,
-    "n": 914,
-    "won": 484,
-    "rate": 0.5295
+    "n": 940,
+    "won": 497,
+    "rate": 0.5287
    }
   ],
   "house_winners": {
@@ -797,6 +805,206 @@
  "hr_picks": [],
  "hit_picks": [],
  "parlays": [],
+ "five_picks": [
+  {
+   "key": "hr5",
+   "name": "Five-Homer Parlay",
+   "legs": 5,
+   "hr": 5,
+   "blurb": "HOMER's five likeliest home run bats, one per game. Every one of them has to go deep, so this is a moonshot priced like one &mdash; a ticket for the story, not the bankroll.",
+   "value": 0,
+   "featured": false,
+   "leg_list": [
+    {
+     "batter": "Yordan Alvarez",
+     "batter_id": 670541,
+     "team": "Houston Astros",
+     "game_pk": 824948,
+     "matchup": "Houston Astros @ Athletics",
+     "sp_name": "Seth Johnson",
+     "prob": 0.21306,
+     "grade": "A",
+     "market_prob": 0.19833,
+     "book_implied": 0.2419626,
+     "book_price": "+313",
+     "book_edge": -0.11945069196644442,
+     "type": "hr",
+     "status": "lost"
+    },
+    {
+     "batter": "Pete Crow-Armstrong",
+     "batter_id": 691718,
+     "team": "Chicago Cubs",
+     "game_pk": 824705,
+     "matchup": "Chicago Cubs @ Boston Red Sox",
+     "sp_name": "Tanner Houck",
+     "prob": 0.2074967653361165,
+     "grade": "A",
+     "market_prob": 0.19833,
+     "book_implied": 0.2419626,
+     "book_price": "+313",
+     "book_edge": -0.14244281828631167,
+     "type": "hr",
+     "status": "lost"
+    },
+    {
+     "batter": "Pete Alonso",
+     "batter_id": 624413,
+     "team": "Baltimore Orioles",
+     "game_pk": 823490,
+     "matchup": "Baltimore Orioles @ New York Yankees",
+     "sp_name": "Elmer Rodr\u00edguez",
+     "prob": 0.20485786191105254,
+     "grade": "A",
+     "market_prob": 0.19788576962799587,
+     "book_implied": 0.24142063894615495,
+     "book_price": "+314",
+     "book_edge": -0.1514484312306752,
+     "type": "hr",
+     "status": "void"
+    },
+    {
+     "batter": "Munetaka Murakami",
+     "batter_id": 808959,
+     "team": "Chicago White Sox",
+     "game_pk": 824542,
+     "matchup": "Colorado Rockies @ Chicago White Sox",
+     "sp_name": "Kyle Freeland",
+     "prob": 0.19557170757713796,
+     "grade": "A",
+     "market_prob": 0.19558646430631113,
+     "book_implied": 0.23861548645369957,
+     "book_price": "+319",
+     "book_edge": -0.1803897119850757,
+     "type": "hr",
+     "status": "lost"
+    },
+    {
+     "batter": "James Wood",
+     "batter_id": 695578,
+     "team": "Washington Nationals",
+     "game_pk": 822679,
+     "matchup": "New York Mets @ Washington Nationals",
+     "sp_name": "Sean Manaea",
+     "prob": 0.19490860829409035,
+     "grade": "A",
+     "market_prob": 0.1746595766213825,
+     "book_implied": 0.21308468347808665,
+     "book_price": "+369",
+     "book_edge": -0.08529977325125537,
+     "type": "hr",
+     "status": "lost"
+    }
+   ],
+   "prob": 0.0003452255557896549,
+   "fair_odds": "+289566",
+   "book_decimal": 1391.4841366646974,
+   "book_odds": "+139048",
+   "ev": -0.5196241155474417,
+   "backfilled": true,
+   "evidence": null,
+   "status": "lost"
+  },
+  {
+   "key": "hit5",
+   "name": "Five-Hit Parlay",
+   "legs": 5,
+   "hr": 0,
+   "blurb": "HOMER's five likeliest bats to get a hit, one per game. His steadiest five-leg ticket, and still a long way from a sure thing.",
+   "value": 0,
+   "featured": false,
+   "leg_list": [
+    {
+     "batter": "Randal Grichuk",
+     "batter_id": 545341,
+     "team": "Chicago White Sox",
+     "game_pk": 824542,
+     "matchup": "Colorado Rockies @ Chicago White Sox",
+     "sp_name": "Kyle Freeland",
+     "prob": 0.738351539813538,
+     "grade": "A",
+     "market_prob": 0.68803,
+     "book_implied": 0.73275195,
+     "book_price": "-274",
+     "book_edge": 0.007641862725220827,
+     "type": "hit",
+     "status": "won"
+    },
+    {
+     "batter": "Mauricio Dub\u00f3n",
+     "batter_id": 643289,
+     "team": "Atlanta Braves",
+     "game_pk": 823814,
+     "matchup": "Atlanta Braves @ Miami Marlins",
+     "sp_name": "Janson Junk",
+     "prob": 0.7334728760076772,
+     "grade": "A",
+     "market_prob": 0.685057020853533,
+     "book_implied": 0.7295857272090126,
+     "book_price": "-270",
+     "book_edge": 0.005327884926607185,
+     "type": "hit",
+     "status": "won"
+    },
+    {
+     "batter": "Angel Mart\u00ednez",
+     "batter_id": 682657,
+     "team": "Cleveland Guardians",
+     "game_pk": 824055,
+     "matchup": "Cleveland Guardians @ Kansas City Royals",
+     "sp_name": "Daniel Lynch IV",
+     "prob": 0.7325499841295156,
+     "grade": "A",
+     "market_prob": 0.6719881711428393,
+     "book_implied": 0.7156674022671238,
+     "book_price": "-252",
+     "book_edge": 0.02358998301293358,
+     "type": "hit",
+     "status": "lost"
+    },
+    {
+     "batter": "Jeremy Pe\u00f1a",
+     "batter_id": 665161,
+     "team": "Houston Astros",
+     "game_pk": 824948,
+     "matchup": "Houston Astros @ Athletics",
+     "sp_name": "Seth Johnson",
+     "prob": 0.7288420216555225,
+     "grade": "A",
+     "market_prob": 0.6829853637596222,
+     "book_implied": 0.7273794124039975,
+     "book_price": "-267",
+     "book_edge": 0.0020107927535246706,
+     "type": "hit",
+     "status": "won"
+    },
+    {
+     "batter": "Trea Turner",
+     "batter_id": 607208,
+     "team": "Philadelphia Phillies",
+     "game_pk": 823408,
+     "matchup": "Tampa Bay Rays @ Philadelphia Phillies",
+     "sp_name": "Nick Martinez",
+     "prob": 0.7256657990477572,
+     "grade": "B",
+     "market_prob": 0.6561388478521772,
+     "book_implied": 0.6987878729625687,
+     "book_price": "-232",
+     "book_edge": 0.03846364129251034,
+     "type": "hit",
+     "status": "won"
+    }
+   ],
+   "prob": 0.20982371183567805,
+   "fair_odds": "+377",
+   "book_decimal": 5.142201462086262,
+   "book_odds": "+414",
+   "ev": 0.07895579778179007,
+   "backfilled": true,
+   "evidence": null,
+   "status": "lost"
+  }
+ ],
  "game_picks": [
   {
    "game_pk": 823731,
@@ -1353,46 +1561,32 @@
  ],
  "likes": [
   {
-   "batter": "Paul Goldschmidt",
-   "batter_id": 502671,
-   "team": "New York Yankees",
-   "game_pk": 823490,
-   "matchup": "Baltimore Orioles @ New York Yankees",
-   "prob": 0.15391495716021164,
-   "model_prob": 0.09607078551796468,
-   "edge": 0.057844171642246964,
-   "barrel_rate": 0.07311572972595587,
-   "sp_name": "Shane Baz",
-   "park": 1.163,
+   "batter": "Pete Crow-Armstrong",
+   "batter_id": 691718,
+   "team": "Chicago Cubs",
+   "game_pk": 824705,
+   "matchup": "Chicago Cubs @ Boston Red Sox",
+   "prob": 0.2074967653361165,
+   "model_prob": 0.1755274124392898,
+   "edge": 0.0319693528968267,
+   "barrel_rate": 0.09330368161812266,
+   "sp_name": "Tanner Houck",
+   "park": 1.082,
    "weather": 1.0
   },
   {
-   "batter": "Kevin McGonigle",
-   "batter_id": 805808,
-   "team": "Detroit Tigers",
-   "game_pk": 824217,
-   "matchup": "Pittsburgh Pirates @ Detroit Tigers",
-   "prob": 0.16968043635103866,
-   "model_prob": 0.11466859611395855,
-   "edge": 0.05501184023708011,
-   "barrel_rate": 0.06968062419119969,
-   "sp_name": "Jared Jones",
-   "park": 0.984,
-   "weather": 1.18
-  },
-  {
-   "batter": "Coby Mayo",
-   "batter_id": 691723,
-   "team": "Baltimore Orioles",
-   "game_pk": 823490,
-   "matchup": "Baltimore Orioles @ New York Yankees",
-   "prob": 0.17975477068063433,
-   "model_prob": 0.12587417828992867,
-   "edge": 0.05388059239070567,
-   "barrel_rate": 0.0886526389984561,
-   "sp_name": "Elmer Rodr\u00edguez",
-   "park": 1.163,
-   "weather": 1.0
+   "batter": "Shea Langeliers",
+   "batter_id": 669127,
+   "team": "Athletics",
+   "game_pk": 824948,
+   "matchup": "Houston Astros @ Athletics",
+   "prob": 0.1804466940095753,
+   "model_prob": 0.1487789971244397,
+   "edge": 0.0316676968851356,
+   "barrel_rate": 0.07915414196290724,
+   "sp_name": "Peter Lambert",
+   "park": 1.258,
+   "weather": 1.033
   },
   {
    "batter": "Brandon Nimmo",
@@ -1400,27 +1594,41 @@
    "team": "Texas Rangers",
    "game_pk": 823650,
    "matchup": "Texas Rangers @ Minnesota Twins",
-   "prob": 0.13781048535455484,
-   "model_prob": 0.08714647116771879,
-   "edge": 0.050664014186836054,
+   "prob": 0.12885694519874955,
+   "model_prob": 0.09870582983679063,
+   "edge": 0.030151115361958913,
    "barrel_rate": 0.056414011510138404,
    "sp_name": "Dean Kremer",
    "park": 0.859,
    "weather": 0.938
   },
   {
-   "batter": "James Wood",
-   "batter_id": 695578,
-   "team": "Washington Nationals",
-   "game_pk": 822679,
-   "matchup": "New York Mets @ Washington Nationals",
-   "prob": 0.203589876649948,
-   "model_prob": 0.15300677887051936,
-   "edge": 0.050583097779428626,
-   "barrel_rate": 0.10314017532253428,
-   "sp_name": "Sean Manaea",
-   "park": 1.13,
-   "weather": 0.928
+   "batter": "Kevin McGonigle",
+   "batter_id": 805808,
+   "team": "Detroit Tigers",
+   "game_pk": 824217,
+   "matchup": "Pittsburgh Pirates @ Detroit Tigers",
+   "prob": 0.16263063873267308,
+   "model_prob": 0.1339528790462992,
+   "edge": 0.02867775968637387,
+   "barrel_rate": 0.06968062419119969,
+   "sp_name": "Jared Jones",
+   "park": 0.984,
+   "weather": 1.18
+  },
+  {
+   "batter": "Corbin Carroll",
+   "batter_id": 682998,
+   "team": "Arizona Diamondbacks",
+   "game_pk": 823246,
+   "matchup": "Arizona Diamondbacks @ San Diego Padres",
+   "prob": 0.1611853446499802,
+   "model_prob": 0.1327577073633522,
+   "edge": 0.028427637286627977,
+   "barrel_rate": 0.06405843591371774,
+   "sp_name": "Randy V\u00e1squez",
+   "park": 0.955,
+   "weather": 1.072
   }
  ],
  "fades": [
@@ -1430,27 +1638,41 @@
    "team": "Cleveland Guardians",
    "game_pk": 824055,
    "matchup": "Cleveland Guardians @ Kansas City Royals",
-   "prob": 0.09796838894214543,
-   "model_prob": 0.1671901484015628,
-   "edge": -0.06922175945941736,
+   "prob": 0.10296594460867804,
+   "model_prob": 0.14653587914398597,
+   "edge": -0.04356993453530793,
    "barrel_rate": 0.06322869985086685,
    "sp_name": "Daniel Lynch IV",
    "park": 1.015,
    "weather": 1.018
   },
   {
-   "batter": "Austin Hedges",
-   "batter_id": 595978,
-   "team": "Cleveland Guardians",
+   "batter": "Isaac Collins",
+   "batter_id": 686555,
+   "team": "Kansas City Royals",
    "game_pk": 824055,
    "matchup": "Cleveland Guardians @ Kansas City Royals",
-   "prob": 0.0677324725079294,
-   "model_prob": 0.12226760985776636,
-   "edge": -0.05453513734983696,
-   "barrel_rate": 0.03534890350451688,
-   "sp_name": "Daniel Lynch IV",
+   "prob": 0.03609381356890567,
+   "model_prob": 0.06845037325318959,
+   "edge": -0.03235655968428392,
+   "barrel_rate": 0.029064805576608146,
+   "sp_name": "Parker Messick",
    "park": 1.015,
    "weather": 1.018
+  },
+  {
+   "batter": "Dylan Beavers",
+   "batter_id": 687637,
+   "team": "Baltimore Orioles",
+   "game_pk": 823490,
+   "matchup": "Baltimore Orioles @ New York Yankees",
+   "prob": 0.12663052842502803,
+   "model_prob": 0.15772546119313235,
+   "edge": -0.031094932768104322,
+   "barrel_rate": 0.07931675517999358,
+   "sp_name": "Elmer Rodr\u00edguez",
+   "park": 1.163,
+   "weather": 1.0
   },
   {
    "batter": "Richie Palacios",
@@ -1458,41 +1680,27 @@
    "team": "Tampa Bay Rays",
    "game_pk": 823408,
    "matchup": "Tampa Bay Rays @ Philadelphia Phillies",
-   "prob": 0.04814644881305142,
-   "model_prob": 0.10197170985886807,
-   "edge": -0.05382526104581665,
+   "prob": 0.05346190997974941,
+   "model_prob": 0.08249192615443815,
+   "edge": -0.02903001617468874,
    "barrel_rate": 0.033682578425228135,
    "sp_name": "Zack Wheeler",
    "park": 1.082,
    "weather": 0.745
   },
   {
-   "batter": "Leo Bernal",
-   "batter_id": 699024,
-   "team": "St. Louis Cardinals",
-   "game_pk": 823731,
-   "matchup": "St. Louis Cardinals @ Milwaukee Brewers",
-   "prob": 0.12202873365749328,
-   "model_prob": 0.16881841030412129,
-   "edge": -0.046789676646628,
-   "barrel_rate": 0.0662043023262562,
-   "sp_name": "Jacob Misiorowski",
-   "park": 1.078,
-   "weather": 1.0
-  },
-  {
-   "batter": "Weston Wilson",
-   "batter_id": 642215,
-   "team": "Seattle Mariners",
-   "game_pk": 823084,
-   "matchup": "Los Angeles Angels @ Seattle Mariners",
-   "prob": 0.0347491916239158,
-   "model_prob": 0.07663841345950266,
-   "edge": -0.04188922183558686,
-   "barrel_rate": 0.04481649785854099,
-   "sp_name": "Yusei Kikuchi",
-   "park": 1.059,
-   "weather": 0.752
+   "batter": "Maikel Garcia",
+   "batter_id": 672580,
+   "team": "Kansas City Royals",
+   "game_pk": 824055,
+   "matchup": "Cleveland Guardians @ Kansas City Royals",
+   "prob": 0.06720432705887275,
+   "model_prob": 0.09248480137025465,
+   "edge": -0.025280474311381904,
+   "barrel_rate": 0.02842615378870397,
+   "sp_name": "Parker Messick",
+   "park": 1.015,
+   "weather": 1.018
   }
  ],
  "locked": [
@@ -1536,7 +1744,13 @@
    "void": 0,
    "pending": 0
   },
-  "graded_at": "2026-10-01 13:58:21",
+  "five_picks": {
+   "won": 0,
+   "lost": 2,
+   "void": 0,
+   "pending": 0
+  },
+  "graded_at": "2026-10-01 14:17:39",
   "complete": true
  }
 }

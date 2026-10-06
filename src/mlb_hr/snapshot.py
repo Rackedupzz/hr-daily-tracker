@@ -424,6 +424,7 @@ def write_pdf(slate_data: dict, out_dir: Optional[Path] = None,
               include_models: bool = True) -> list[Path]:
     """Render the day's pages to PDF. Returns the files written."""
     from mlb_hr.render import render_html, render_models_html
+    from mlb_hr.ui import printing
 
     out = _out_dir(out_dir)
     day = slate_data.get("date", "unknown")
@@ -434,12 +435,16 @@ def write_pdf(slate_data: dict, out_dir: Optional[Path] = None,
     except ImportError as exc:
         print(f"[snapshot.py] weasyprint unavailable ({exc}); saving HTML instead")
         path = out / f"{day}-slate.html"
-        path.write_text(render_html(slate_data), encoding="utf-8")
+        with printing():
+            html = render_html(slate_data)
+        path.write_text(html, encoding="utf-8")
         return [path]
 
-    pages = [(f"{day}-slate.pdf", render_html(slate_data))]
-    if include_models and slate_data.get("ensemble_metrics"):
-        pages.append((f"{day}-models.pdf", render_models_html(slate_data)))
+    # Print mode: light theme, no script, no remote images to wait on.
+    with printing():
+        pages = [(f"{day}-slate.pdf", render_html(slate_data))]
+        if include_models and slate_data.get("ensemble_metrics"):
+            pages.append((f"{day}-models.pdf", render_models_html(slate_data)))
 
     for name, html in pages:
         path = out / name

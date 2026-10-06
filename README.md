@@ -30,6 +30,18 @@ docker-compose up
 
 Open http://localhost:5000 in your browser.
 
+## Live site (GitHub Actions + Vercel)
+
+The hosted site is static. `.github/workflows/publish.yml` runs four times a
+day: it pulls `data/` from Hugging Face, runs `python -m mlb_hr.publish` (one
+pass of the server's warm-up loop: feed top-up, refit when stale, live scores,
+snapshots, HOMER), pushes the data back to the Hub and commits `public/` and
+`snapshots/`. Vercel deploys `public/` on each push (`vercel.json`).
+
+Needs repo secrets `HF_TOKEN` and `HF_DATA_REPO`. Run it by hand from the
+Actions tab (tick *force fit* to refit regardless of age). To render locally
+from saved snapshots without fitting: `python -m mlb_hr.publish --render-only`.
+
 ## Kubernetes (alternative)
 
 ```bash
@@ -503,7 +515,10 @@ settle the question in days.
 ## Troubleshooting
 
 ### No games scheduled
-If the web interface shows "No games scheduled," check that today's date has games in the MLB schedule. The model uses `schedule()` to find games with state "Scheduled" or "Final".
+If the web interface shows "No games scheduled," check that today's date has games in the MLB schedule. `schedule()` follows the regular season and every postseason round (`fetch.TRACKED_GAME_TYPES`); on an off day the page keeps showing the most recent slate.
+
+### Short postseason slates
+Picks are one per team and parlay legs one per game, so a day with fewer than five games posts fewer than six picks and no 5-pick parlays. The slate page says so when that happens.
 
 ### Data fetch errors
 Network timeouts are retried with exponential backoff (up to 4 attempts). Check your internet connection or run with existing cached data.

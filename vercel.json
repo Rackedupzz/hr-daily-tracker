@@ -1,0 +1,20 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "installCommand": "",
+  "buildCommand": "",
+  "outputDirectory": "public",
+  "trailingSlash": true,
+  "ignoreCommand": "git diff --quiet HEAD^ HEAD -- public/ vercel.json",
+  "rewrites": [
+    { "source": "/api/remaining", "destination": "/api/remaining.json" },
+    { "source": "/api/homer", "destination": "/api/homer.json" },
+    { "source": "/health", "destination": "/health.json" }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }]
+    }
+  ]
+}

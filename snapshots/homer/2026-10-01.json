@@ -1,0 +1,1181 @@
+{
+ "bot": "HOMER",
+ "date": "2026-10-01",
+ "built_at": "2026-10-02 00:49:30",
+ "book_through": "2026-10-01",
+ "league": {
+  "pa": 183138,
+  "hr_rate": 0.030550732234708253,
+  "woba": 0.31297824591283,
+  "games": 2437
+ },
+ "method": "learned",
+ "evidence": {
+  "fitted_at": "2026-10-01 13:19:18",
+  "through": "2026-09-30",
+  "hits_serve": "learned",
+  "hit_scores": {
+   "learned": {
+    "n": 32076,
+    "log_loss": 0.66188,
+    "brier": 0.23464,
+    "auc": 0.5715,
+    "accuracy": 0.6114,
+    "accuracy_se": 0.0027
+   },
+   "rules": {
+    "n": 32076,
+    "log_loss": 0.66582,
+    "brier": 0.2365,
+    "auc": 0.5664,
+    "accuracy": 0.6087,
+    "accuracy_se": 0.0027
+   },
+   "baseline": {
+    "n": 32076,
+    "log_loss": 0.66805,
+    "brier": 0.23751,
+    "auc": 0.5571,
+    "accuracy": 0.6086,
+    "accuracy_se": 0.0027
+   }
+  },
+  "hit_picks": {
+   "calibrated": {
+    "days": 135,
+    "picks": 800,
+    "hit": 568,
+    "rate": 0.71,
+    "rate_se": 0.016,
+    "expected": 578.0
+   },
+   "rules": {
+    "days": 135,
+    "picks": 800,
+    "hit": 551,
+    "rate": 0.6887,
+    "rate_se": 0.0164,
+    "expected": 595.5
+   },
+   "base": {
+    "days": 135,
+    "picks": 800,
+    "hit": 551,
+    "rate": 0.6887,
+    "rate_se": 0.0164,
+    "expected": 594.8
+   }
+  },
+  "hit_grades": [
+   {
+    "grade": "A",
+    "min_prob": 0.726,
+    "top_share": 0.02,
+    "n": 568,
+    "hit": 414,
+    "rate": 0.7289,
+    "avg_prob": 0.7358
+   },
+   {
+    "grade": "B",
+    "min_prob": 0.7073,
+    "top_share": 0.05,
+    "n": 853,
+    "hit": 618,
+    "rate": 0.7245,
+    "avg_prob": 0.7156
+   },
+   {
+    "grade": "C",
+    "min_prob": 0.6726,
+    "top_share": 0.13,
+    "n": 2273,
+    "hit": 1559,
+    "rate": 0.6859,
+    "avg_prob": 0.6881
+   },
+   {
+    "grade": "D",
+    "min_prob": 0.6525,
+    "top_share": 0.3,
+    "n": 4832,
+    "hit": 3221,
+    "rate": 0.6666,
+    "avg_prob": 0.6644
+   },
+   {
+    "grade": "E",
+    "min_prob": 0.0,
+    "top_share": 1.0,
+    "n": 19895,
+    "hit": 11731,
+    "rate": 0.5896,
+    "avg_prob": 0.5903
+   }
+  ],
+  "hit_weights": [
+   {
+    "feature": "exp_pa",
+    "label": "Lineup spot (trips to the plate)",
+    "odds_per_sd": 0.1798,
+    "overlap": false
+   },
+   {
+    "feature": "sp_k",
+    "label": "Starter's strikeout rate",
+    "odds_per_sd": -0.0552,
+    "overlap": false
+   },
+   {
+    "feature": "k_rate",
+    "label": "Strikeout rate",
+    "odds_per_sd": -0.0532,
+    "overlap": false
+   },
+   {
+    "feature": "hit_park",
+    "label": "Ballpark (hits)",
+    "odds_per_sd": 0.0507,
+    "overlap": false
+   },
+   {
+    "feature": "sample",
+    "label": "Size of track record",
+    "odds_per_sd": 0.0483,
+    "overlap": false
+   },
+   {
+    "feature": "xhit",
+    "label": "Expected hits (contact quality)",
+    "odds_per_sd": 0.0451,
+    "overlap": false
+   },
+   {
+    "feature": "pen_hit",
+    "label": "Opposing bullpen hits allowed",
+    "odds_per_sd": 0.0384,
+    "overlap": false
+   },
+   {
+    "feature": "hit_platoon",
+    "label": "League platoon edge (hits)",
+    "odds_per_sd": -0.0378,
+    "overlap": true
+   },
+   {
+    "feature": "bb_rate",
+    "label": "Walk rate",
+    "odds_per_sd": -0.0372,
+    "overlap": false
+   },
+   {
+    "feature": "sp_hit",
+    "label": "Starter's hits allowed",
+    "odds_per_sd": 0.0338,
+    "overlap": false
+   }
+  ],
+  "hit_dropped": [
+   {
+    "dropped": "hit_form",
+    "log_loss_before": 0.661979,
+    "log_loss_after": 0.66193
+   },
+   {
+    "dropped": "hit_split",
+    "log_loss_before": 0.66193,
+    "log_loss_after": 0.661901
+   },
+   {
+    "dropped": "hit_rate",
+    "log_loss_before": 0.661901,
+    "log_loss_after": 0.661876
+   }
+  ],
+  "hit_board_rate": 0.6173,
+  "parlays": {
+   "hit3": {
+    "name": "Parlay of the Day",
+    "legs": 3,
+    "hr": 0,
+    "value": 0,
+    "days": 134,
+    "won": 51,
+    "predicted": 0.393,
+    "wins_on": [
+     "2026-05-13",
+     "2026-05-16",
+     "2026-05-17",
+     "2026-05-19",
+     "2026-05-20",
+     "2026-05-26",
+     "2026-05-27",
+     "2026-06-04",
+     "2026-06-05",
+     "2026-06-07",
+     "2026-06-10",
+     "2026-06-11",
+     "2026-06-12",
+     "2026-06-13",
+     "2026-06-14",
+     "2026-06-16",
+     "2026-06-18",
+     "2026-06-22",
+     "2026-06-23",
+     "2026-06-25",
+     "2026-06-27",
+     "2026-06-29",
+     "2026-07-03",
+     "2026-07-04",
+     "2026-07-06",
+     "2026-07-09",
+     "2026-07-11",
+     "2026-07-17",
+     "2026-07-19",
+     "2026-07-21",
+     "2026-07-23",
+     "2026-07-25",
+     "2026-07-29",
+     "2026-07-31",
+     "2026-08-04",
+     "2026-08-05",
+     "2026-08-06",
+     "2026-08-08",
+     "2026-08-15",
+     "2026-08-17",
+     "2026-08-18",
+     "2026-08-25",
+     "2026-08-29",
+     "2026-08-30",
+     "2026-08-31",
+     "2026-09-01",
+     "2026-09-11",
+     "2026-09-14",
+     "2026-09-16",
+     "2026-09-23",
+     "2026-09-26"
+    ],
+    "rate": 0.3806,
+    "rate_se": 0.0419,
+    "typical_odds": "+168",
+    "est_roi": 0.034,
+    "days_per_win": 2.6
+   },
+   "hit3e1": {
+    "name": "The Lock",
+    "legs": 3,
+    "hr": 0,
+    "value": 1,
+    "days": 134,
+    "won": 48,
+    "predicted": 0.3823,
+    "wins_on": [
+     "2026-05-13",
+     "2026-05-16",
+     "2026-05-17",
+     "2026-05-20",
+     "2026-05-25",
+     "2026-05-26",
+     "2026-05-27",
+     "2026-06-05",
+     "2026-06-07",
+     "2026-06-10",
+     "2026-06-11",
+     "2026-06-12",
+     "2026-06-13",
+     "2026-06-14",
+     "2026-06-16",
+     "2026-06-23",
+     "2026-06-25",
+     "2026-06-27",
+     "2026-06-29",
+     "2026-07-03",
+     "2026-07-04",
+     "2026-07-06",
+     "2026-07-07",
+     "2026-07-09",
+     "2026-07-11",
+     "2026-07-17",
+     "2026-07-19",
+     "2026-07-21",
+     "2026-07-26",
+     "2026-07-29",
+     "2026-07-31",
+     "2026-08-04",
+     "2026-08-06",
+     "2026-08-12",
+     "2026-08-17",
+     "2026-08-18",
+     "2026-08-23",
+     "2026-08-25",
+     "2026-08-29",
+     "2026-08-30",
+     "2026-09-01",
+     "2026-09-08",
+     "2026-09-09",
+     "2026-09-14",
+     "2026-09-16",
+     "2026-09-20",
+     "2026-09-22",
+     "2026-09-23"
+    ],
+    "rate": 0.3582,
+    "rate_se": 0.0414,
+    "typical_odds": "+189",
+    "est_roi": 0.0558,
+    "days_per_win": 2.8
+   },
+   "hit3e2": {
+    "name": "The Edge",
+    "legs": 3,
+    "hr": 0,
+    "value": 2,
+    "days": 134,
+    "won": 53,
+    "predicted": 0.3701,
+    "wins_on": [
+     "2026-05-13",
+     "2026-05-16",
+     "2026-05-17",
+     "2026-05-20",
+     "2026-05-21",
+     "2026-05-23",
+     "2026-05-25",
+     "2026-05-26",
+     "2026-05-27",
+     "2026-05-31",
+     "2026-06-03",
+     "2026-06-05",
+     "2026-06-11",
+     "2026-06-12",
+     "2026-06-13",
+     "2026-06-14",
+     "2026-06-16",
+     "2026-06-17",
+     "2026-06-25",
+     "2026-06-27",
+     "2026-06-29",
+     "2026-07-02",
+     "2026-07-03",
+     "2026-07-04",
+     "2026-07-07",
+     "2026-07-10",
+     "2026-07-11",
+     "2026-07-17",
+     "2026-07-21",
+     "2026-07-24",
+     "2026-07-26",
+     "2026-07-27",
+     "2026-07-28",
+     "2026-07-29",
+     "2026-07-31",
+     "2026-08-01",
+     "2026-08-04",
+     "2026-08-11",
+     "2026-08-12",
+     "2026-08-17",
+     "2026-08-23",
+     "2026-08-29",
+     "2026-08-30",
+     "2026-09-01",
+     "2026-09-04",
+     "2026-09-08",
+     "2026-09-09",
+     "2026-09-14",
+     "2026-09-16",
+     "2026-09-17",
+     "2026-09-21",
+     "2026-09-23",
+     "2026-09-24"
+    ],
+    "rate": 0.3955,
+    "rate_se": 0.0422,
+    "typical_odds": "+213",
+    "est_roi": 0.25,
+    "days_per_win": 2.5
+   },
+   "hit4e1": {
+    "name": "The Stretch",
+    "legs": 4,
+    "hr": 0,
+    "value": 1,
+    "days": 133,
+    "won": 36,
+    "predicted": 0.2757,
+    "wins_on": [
+     "2026-05-13",
+     "2026-05-16",
+     "2026-05-17",
+     "2026-05-26",
+     "2026-05-27",
+     "2026-06-05",
+     "2026-06-07",
+     "2026-06-11",
+     "2026-06-13",
+     "2026-06-14",
+     "2026-06-16",
+     "2026-06-23",
+     "2026-06-25",
+     "2026-06-27",
+     "2026-06-29",
+     "2026-07-03",
+     "2026-07-04",
+     "2026-07-06",
+     "2026-07-09",
+     "2026-07-11",
+     "2026-07-17",
+     "2026-07-19",
+     "2026-07-21",
+     "2026-07-23",
+     "2026-07-29",
+     "2026-07-31",
+     "2026-08-04",
+     "2026-08-17",
+     "2026-08-18",
+     "2026-08-25",
+     "2026-08-29",
+     "2026-08-30",
+     "2026-09-01",
+     "2026-09-14",
+     "2026-09-16",
+     "2026-09-23"
+    ],
+    "rate": 0.2707,
+    "rate_se": 0.0385,
+    "typical_odds": "+301",
+    "est_roi": 0.1215,
+    "days_per_win": 3.7
+   },
+   "hit3e3": {
+    "name": "Full Value",
+    "legs": 3,
+    "hr": 0,
+    "value": 3,
+    "days": 134,
+    "won": 45,
+    "predicted": 0.3579,
+    "wins_on": [
+     "2026-05-13",
+     "2026-05-16",
+     "2026-05-17",
+     "2026-05-20",
+     "2026-05-21",
+     "2026-05-23",
+     "2026-05-24",
+     "2026-05-26",
+     "2026-05-31",
+     "2026-06-03",
+     "2026-06-05",
+     "2026-06-11",
+     "2026-06-16",
+     "2026-06-17",
+     "2026-06-19",
+     "2026-06-25",
+     "2026-06-27",
+     "2026-06-29",
+     "2026-07-01",
+     "2026-07-07",
+     "2026-07-10",
+     "2026-07-11",
+     "2026-07-12",
+     "2026-07-22",
+     "2026-07-24",
+     "2026-07-26",
+     "2026-07-27",
+     "2026-07-29",
+     "2026-08-01",
+     "2026-08-12",
+     "2026-08-14",
+     "2026-08-17",
+     "2026-08-19",
+     "2026-08-23",
+     "2026-08-29",
+     "2026-08-30",
+     "2026-09-01",
+     "2026-09-08",
+     "2026-09-13",
+     "2026-09-14",
+     "2026-09-16",
+     "2026-09-18",
+     "2026-09-21",
+     "2026-09-23",
+     "2026-09-24"
+    ],
+    "rate": 0.3358,
+    "rate_se": 0.0408,
+    "typical_odds": "+236",
+    "est_roi": 0.125,
+    "days_per_win": 3.0
+   }
+  },
+  "book": {
+   "margins": {
+    "hr": 1.22,
+    "hits": 1.065
+   },
+   "legs": {
+    "hr_prob": {
+     "legs": 669,
+     "actual": 0.2182,
+     "homer": 0.208,
+     "market": 0.1817,
+     "break_even": 0.2216,
+     "roi": -0.0102
+    },
+    "hr_value": {
+     "legs": 669,
+     "actual": 0.1958,
+     "homer": 0.1865,
+     "market": 0.1365,
+     "break_even": 0.1665,
+     "roi": 0.2059
+    },
+    "hit_prob": {
+     "legs": 669,
+     "actual": 0.707,
+     "homer": 0.7257,
+     "market": 0.6724,
+     "break_even": 0.7162,
+     "roi": -0.0119
+    },
+    "hit_value": {
+     "legs": 669,
+     "actual": 0.6861,
+     "homer": 0.709,
+     "market": 0.6384,
+     "break_even": 0.6799,
+     "roi": 0.0111
+    }
+   }
+  },
+  "hr_serve": "learned",
+  "games_serve": "rules",
+  "hr_scores": {
+   "learned": {
+    "n": 32076,
+    "log_loss": 0.35539,
+    "brier": 0.10266,
+    "auc": 0.6126,
+    "accuracy": 0.8818,
+    "accuracy_se": 0.0018
+   },
+   "rules": {
+    "n": 32076,
+    "log_loss": 0.35597,
+    "brier": 0.10275,
+    "auc": 0.6066,
+    "accuracy": 0.8818,
+    "accuracy_se": 0.0018
+   },
+   "baseline": {
+    "n": 32076,
+    "log_loss": 0.35806,
+    "brier": 0.10316,
+    "auc": 0.5918,
+    "accuracy": 0.8818,
+    "accuracy_se": 0.0018
+   }
+  },
+  "hr_picks": {
+   "calibrated": {
+    "days": 135,
+    "picks": 800,
+    "hit": 167,
+    "rate": 0.2087,
+    "rate_se": 0.0144,
+    "expected": 165.0
+   },
+   "rules": {
+    "days": 135,
+    "picks": 800,
+    "hit": 153,
+    "rate": 0.1913,
+    "rate_se": 0.0139,
+    "expected": 167.3
+   },
+   "base": {
+    "days": 135,
+    "picks": 800,
+    "hit": 157,
+    "rate": 0.1963,
+    "rate_se": 0.014,
+    "expected": 174.9
+   }
+  },
+  "hr_weights": [
+   {
+    "feature": "xhr",
+    "label": "Expected HR rate (contact quality)",
+    "odds_per_sd": 0.3152,
+    "overlap": false
+   },
+   {
+    "feature": "exp_pa",
+    "label": "Lineup spot (trips to the plate)",
+    "odds_per_sd": 0.1421,
+    "overlap": false
+   },
+   {
+    "feature": "weather",
+    "label": "Temperature & wind",
+    "odds_per_sd": 0.1069,
+    "overlap": false
+   },
+   {
+    "feature": "sp_fly",
+    "label": "Starter's fly-ball rate",
+    "odds_per_sd": 0.0902,
+    "overlap": false
+   },
+   {
+    "feature": "hr",
+    "label": "Actual HR rate",
+    "odds_per_sd": 0.0609,
+    "overlap": false
+   },
+   {
+    "feature": "barrel",
+    "label": "Barrel rate",
+    "odds_per_sd": -0.0593,
+    "overlap": true
+   },
+   {
+    "feature": "park",
+    "label": "Ballpark",
+    "odds_per_sd": 0.0584,
+    "overlap": false
+   },
+   {
+    "feature": "sample",
+    "label": "Size of track record",
+    "odds_per_sd": 0.0566,
+    "overlap": false
+   },
+   {
+    "feature": "form",
+    "label": "Last 21 days vs season",
+    "odds_per_sd": 0.0522,
+    "overlap": false
+   },
+   {
+    "feature": "sp_hr",
+    "label": "Starter's HR allowed",
+    "odds_per_sd": 0.0407,
+    "overlap": false
+   }
+  ],
+  "hr_dropped": [
+   {
+    "dropped": "sp_form",
+    "log_loss_before": 0.355518,
+    "log_loss_after": 0.355455
+   },
+   {
+    "dropped": "split",
+    "log_loss_before": 0.355455,
+    "log_loss_after": 0.355424
+   },
+   {
+    "dropped": "platoon",
+    "log_loss_before": 0.355424,
+    "log_loss_after": 0.355406
+   },
+   {
+    "dropped": "pen",
+    "log_loss_before": 0.355406,
+    "log_loss_after": 0.355394
+   }
+  ],
+  "grades": [
+   {
+    "grade": "A",
+    "min_prob": 0.1929,
+    "top_share": 0.05,
+    "n": 1421,
+    "hit": 308,
+    "rate": 0.2167,
+    "avg_prob": 0.207
+   },
+   {
+    "grade": "B",
+    "min_prob": 0.1742,
+    "top_share": 0.13,
+    "n": 2273,
+    "hit": 412,
+    "rate": 0.1813,
+    "avg_prob": 0.1798
+   },
+   {
+    "grade": "C",
+    "min_prob": 0.14,
+    "top_share": 0.3,
+    "n": 4832,
+    "hit": 756,
+    "rate": 0.1565,
+    "avg_prob": 0.1561
+   },
+   {
+    "grade": "D",
+    "min_prob": 0.0,
+    "top_share": 1.0,
+    "n": 19895,
+    "hit": 2013,
+    "rate": 0.1012,
+    "avg_prob": 0.1005
+   }
+  ],
+  "board_rate": 0.1228,
+  "game_scores": {
+   "learned": {
+    "n": 1801,
+    "log_loss": 0.68139,
+    "brier": 0.24423,
+    "auc": 0.5791,
+    "accuracy": 0.5552,
+    "accuracy_se": 0.0117
+   },
+   "rules": {
+    "n": 1801,
+    "log_loss": 0.6812,
+    "brier": 0.2441,
+    "auc": 0.5811,
+    "accuracy": 0.5608,
+    "accuracy_se": 0.0117
+   },
+   "home_team": {
+    "n": 1801,
+    "log_loss": 0.69185,
+    "brier": 0.24935,
+    "auc": 0.5,
+    "accuracy": 0.5258,
+    "accuracy_se": 0.0118
+   }
+  },
+  "game_weights": [
+   {
+    "feature": "starter",
+    "label": "Starting pitcher matchup",
+    "odds_per_sd": 0.238,
+    "overlap": false
+   },
+   {
+    "feature": "bullpen",
+    "label": "Bullpen matchup",
+    "odds_per_sd": 0.1528,
+    "overlap": false
+   },
+   {
+    "feature": "record",
+    "label": "Season run differential",
+    "odds_per_sd": 0.0784,
+    "overlap": false
+   }
+  ],
+  "confidence": [
+   {
+    "label": "Strong",
+    "min_prob": 0.6,
+    "n": 270,
+    "won": 171,
+    "rate": 0.6333
+   },
+   {
+    "label": "Lean",
+    "min_prob": 0.55,
+    "n": 591,
+    "won": 342,
+    "rate": 0.5787
+   },
+   {
+    "label": "Coin flip",
+    "min_prob": 0.0,
+    "n": 940,
+    "won": 497,
+    "rate": 0.5287
+   }
+  ],
+  "house_winners": {
+   "n": 1937,
+   "accuracy": 0.5467217346411978,
+   "accuracy_se": 0.01131099490937996,
+   "brier": 0.24697265034737342,
+   "log_loss": 0.6870700122028418
+  }
+ },
+ "hr_picks": [
+  {
+   "rules_prob": 0.21636633956497653,
+   "xhr_rate": 0.053637146039001736,
+   "hr_rate": 0.05109000321289607,
+   "recent_rate": 0.05009611811114063,
+   "recent_pa": 75,
+   "recent_hr": 4,
+   "season_pa": 702,
+   "season_hr": 41,
+   "season_xhr": 40.42364617589443,
+   "barrel_rate": 0.08930832659739925,
+   "hard_rate": 0.5205183585313174,
+   "split_index": 1.110016549950982,
+   "split_pa": 415,
+   "split_hr": 25,
+   "sp_index": 1.2864299584467915,
+   "sp_fly": 0.27788731191464483,
+   "sp_form_index": 1.201906265234182,
+   "pen_index": 0.9655595139736978,
+   "platoon": 1.059933823191337,
+   "park": 1.021,
+   "weather": 1.081,
+   "weather_note": "",
+   "exp_pa": 4.45,
+   "slot": 3,
+   "usual_slot": 3,
+   "pa_vs_sp": 2.59,
+   "pa_vs_pen": 1.86,
+   "sp_hand": "R",
+   "bat_side": "L",
+   "lg": 0.030550732234708253,
+   "batter": "Matt Olson",
+   "batter_id": 621566,
+   "team": "Atlanta Braves",
+   "game_pk": 849844,
+   "matchup": "Philadelphia Phillies @ Atlanta Braves",
+   "venue": "Truist Park",
+   "sp_name": "Aaron Nola",
+   "model_prob": 0.20531794285588276,
+   "injury_note": null,
+   "lineup_posted": true,
+   "lineup_confirmed": true,
+   "prob": 0.2060940096477346,
+   "method": "learned",
+   "contrib": {
+    "xhr": 0.5123,
+    "hr": 0.1249,
+    "form": -0.0005,
+    "barrel": -0.0861,
+    "sp_hr": 0.0765,
+    "sp_fly": 0.0358,
+    "park": 0.0118,
+    "weather": 0.0281,
+    "exp_pa": 0.1028,
+    "sample": 0.0812
+   },
+   "take": [
+    "Contact quality: 40.4 xHR in 702 PA (1.76&times; league) <span class='muted'>(+67% odds)</span>",
+    "Proven power: 41 HR in 702 PA <span class='muted'>(+13% odds)</span>",
+    "Batting 3: 4.5 projected trips <span class='muted'>(+11% odds)</span>"
+   ],
+   "market_prob": 0.1884807528300333,
+   "book_implied": 0.2299465184526406,
+   "book_price": "+335",
+   "book_edge": -0.10373068035739197,
+   "grade": "A",
+   "evidence": {
+    "grade": "A",
+    "min_prob": 0.1929,
+    "top_share": 0.05,
+    "n": 1421,
+    "hit": 308,
+    "rate": 0.2167,
+    "avg_prob": 0.207
+   },
+   "tag": "HAMMER IT &#128296;",
+   "edge": 0.0007760667918518538,
+   "result": {
+    "hr": 1,
+    "summary": "1-3 | HR, BB, RBI",
+    "final": true,
+    "state": "Final"
+   }
+  }
+ ],
+ "hit_picks": [
+  {
+   "rules_prob": 0.7689122154405615,
+   "season_pa": 626,
+   "season_hits": 178,
+   "avg_line": 0.28434504792332266,
+   "hit_rate": 0.2683508330702972,
+   "xhit_rate": 0.25926584999180985,
+   "recent_hit_rate": 0.31894734836528665,
+   "recent_pa": 72,
+   "recent_hits": 26,
+   "k_rate": 0.1977503613127974,
+   "bb_rate": 0.049883246738727696,
+   "split_index": 1.0631576368415343,
+   "split_pa": 399,
+   "split_hits": 117,
+   "platoon": 1.0053562593634398,
+   "sp_hit_index": 1.0412370299191163,
+   "sp_k_rate": 0.23575075231025644,
+   "pen_hit_index": 1.0213938603196389,
+   "park": 1.048,
+   "exp_pa": 4.35,
+   "slot": 4,
+   "usual_slot": 4,
+   "sp_hand": "R",
+   "lg_hit": 0.2182889405803274,
+   "lg_k": 0.22302853585820528,
+   "batter": "Michael Harris II",
+   "batter_id": 671739,
+   "team": "Atlanta Braves",
+   "game_pk": 849844,
+   "matchup": "Philadelphia Phillies @ Atlanta Braves",
+   "venue": "Truist Park",
+   "sp_name": "Aaron Nola",
+   "model_prob": 0.7179507753588616,
+   "injury_note": null,
+   "lineup_posted": true,
+   "lineup_confirmed": true,
+   "prob": 0.7134332929830167,
+   "method": "learned",
+   "take": [
+    "Walk rate 5% &mdash; walks are trips without a hit chance <span class='muted'>(+14% odds)</span>",
+    "Contact quality says 1.19&times; league hits <span class='muted'>(+11% odds)</span>",
+    "Truist Park plays 1.05&times; for hits <span class='muted'>(+8% odds)</span>"
+   ],
+   "market_prob": 0.68803,
+   "book_implied": 0.73275195,
+   "book_price": "-274",
+   "book_edge": -0.026364524880463702,
+   "grade": "B",
+   "evidence": {
+    "grade": "B",
+    "min_prob": 0.7073,
+    "top_share": 0.05,
+    "n": 853,
+    "hit": 618,
+    "rate": 0.7245,
+    "avg_prob": 0.7156
+   },
+   "tag": "LOVE IT",
+   "result": {
+    "hits": 1,
+    "summary": "1-3 | HR, HBP, K",
+    "final": true,
+    "dnp": false,
+    "state": "Final"
+   }
+  }
+ ],
+ "parlays": [],
+ "five_picks": [],
+ "game_picks": [
+  {
+   "game_pk": 849844,
+   "matchup": "Philadelphia Phillies @ Atlanta Braves",
+   "away": "Philadelphia Phillies",
+   "home": "Atlanta Braves",
+   "venue": "Truist Park",
+   "pick": "Atlanta Braves",
+   "pick_side": "home",
+   "win_prob": 0.6133485519165225,
+   "confidence": "Strong",
+   "evidence": {
+    "label": "Strong",
+    "min_prob": 0.6,
+    "n": 270,
+    "won": 171,
+    "rate": 0.6333
+   },
+   "method": "rules",
+   "away_runs": 4.0,
+   "home_runs": 5.21,
+   "total": 9.2,
+   "park_runs": 1.052,
+   "take": [
+    "Pitching edge: Ray Kerr allows 0.291 wOBA, Aaron Nola 0.335",
+    "Atlanta Braves lineup 0.311 wOBA vs 0.309"
+   ],
+   "model_pick_prob": 0.6068751525549335,
+   "tag": "HAMMER",
+   "result": {
+    "final": true,
+    "won": true,
+    "home_score": 6,
+    "away_score": 2,
+    "total": 8,
+    "state": "Final"
+   }
+  }
+ ],
+ "likes": [
+  {
+   "batter": "Bryce Harper",
+   "batter_id": 547180,
+   "team": "Philadelphia Phillies",
+   "game_pk": 849844,
+   "matchup": "Philadelphia Phillies @ Atlanta Braves",
+   "prob": 0.17046796399818048,
+   "model_prob": 0.14524969566453502,
+   "edge": 0.02521826833364546,
+   "barrel_rate": 0.07076254378956466,
+   "sp_name": "Ray Kerr",
+   "park": 1.021,
+   "weather": 1.126
+  },
+  {
+   "batter": "Michael Harris II",
+   "batter_id": 671739,
+   "team": "Atlanta Braves",
+   "game_pk": 849844,
+   "matchup": "Philadelphia Phillies @ Atlanta Braves",
+   "prob": 0.165544477776726,
+   "model_prob": 0.15121144073982853,
+   "edge": 0.014333037036897478,
+   "barrel_rate": 0.05049938143967196,
+   "sp_name": "Aaron Nola",
+   "park": 1.021,
+   "weather": 1.126
+  },
+  {
+   "batter": "Ozzie Albies",
+   "batter_id": 645277,
+   "team": "Atlanta Braves",
+   "game_pk": 849844,
+   "matchup": "Philadelphia Phillies @ Atlanta Braves",
+   "prob": 0.11788226183534485,
+   "model_prob": 0.10447680029679787,
+   "edge": 0.013405461538546978,
+   "barrel_rate": 0.04134578393136426,
+   "sp_name": "Aaron Nola",
+   "park": 1.021,
+   "weather": 1.126
+  },
+  {
+   "batter": "Trea Turner",
+   "batter_id": 607208,
+   "team": "Philadelphia Phillies",
+   "game_pk": 849844,
+   "matchup": "Philadelphia Phillies @ Atlanta Braves",
+   "prob": 0.1213765197783171,
+   "model_prob": 0.112197795529177,
+   "edge": 0.009178724249140097,
+   "barrel_rate": 0.0410344811950824,
+   "sp_name": "Ray Kerr",
+   "park": 1.021,
+   "weather": 1.126
+  },
+  {
+   "batter": "Drake Baldwin",
+   "batter_id": 686948,
+   "team": "Atlanta Braves",
+   "game_pk": 849844,
+   "matchup": "Philadelphia Phillies @ Atlanta Braves",
+   "prob": 0.19857815812929563,
+   "model_prob": 0.19195676693796426,
+   "edge": 0.006621391191331372,
+   "barrel_rate": 0.08171615061992803,
+   "sp_name": "Aaron Nola",
+   "park": 1.021,
+   "weather": 1.126
+  }
+ ],
+ "fades": [
+  {
+   "batter": "Austin Riley",
+   "batter_id": 663586,
+   "team": "Atlanta Braves",
+   "game_pk": 849844,
+   "matchup": "Philadelphia Phillies @ Atlanta Braves",
+   "prob": 0.14093058664671476,
+   "model_prob": 0.1706074242349955,
+   "edge": -0.02967683758828074,
+   "barrel_rate": 0.07468350127808876,
+   "sp_name": "Aaron Nola",
+   "park": 1.021,
+   "weather": 1.126
+  },
+  {
+   "batter": "Mike Yastrzemski",
+   "batter_id": 573262,
+   "team": "Atlanta Braves",
+   "game_pk": 849844,
+   "matchup": "Philadelphia Phillies @ Atlanta Braves",
+   "prob": 0.12577331549166576,
+   "model_prob": 0.14101734990799128,
+   "edge": -0.01524403441632552,
+   "barrel_rate": 0.04957734026478311,
+   "sp_name": "Aaron Nola",
+   "park": 1.021,
+   "weather": 1.126
+  },
+  {
+   "batter": "J.T. Realmuto",
+   "batter_id": 592663,
+   "team": "Philadelphia Phillies",
+   "game_pk": 849844,
+   "matchup": "Philadelphia Phillies @ Atlanta Braves",
+   "prob": 0.10007446419063257,
+   "model_prob": 0.11119011245580555,
+   "edge": -0.011115648265172987,
+   "barrel_rate": 0.05044281915406384,
+   "sp_name": "Ray Kerr",
+   "park": 1.021,
+   "weather": 1.126
+  },
+  {
+   "batter": "Alec Bohm",
+   "batter_id": 664761,
+   "team": "Philadelphia Phillies",
+   "game_pk": 849844,
+   "matchup": "Philadelphia Phillies @ Atlanta Braves",
+   "prob": 0.1246597820369122,
+   "model_prob": 0.13359715273875827,
+   "edge": -0.008937370701846067,
+   "barrel_rate": 0.0403237921339479,
+   "sp_name": "Ray Kerr",
+   "park": 1.021,
+   "weather": 1.126
+  },
+  {
+   "batter": "Justin Crawford",
+   "batter_id": 702222,
+   "team": "Philadelphia Phillies",
+   "game_pk": 849844,
+   "matchup": "Philadelphia Phillies @ Atlanta Braves",
+   "prob": 0.041890064624534096,
+   "model_prob": 0.05044977633461931,
+   "edge": -0.008559711710085217,
+   "barrel_rate": 0.01968557064097182,
+   "sp_name": "Ray Kerr",
+   "park": 1.021,
+   "weather": 1.126
+  }
+ ],
+ "locked": [
+  849844
+ ],
+ "record": {
+  "hr": {
+   "hit": 1,
+   "scored": 1,
+   "dnp": 0,
+   "pending": 0
+  },
+  "games": {
+   "won": 1,
+   "lost": 0,
+   "pending": 0
+  },
+  "hits": {
+   "hit": 1,
+   "scored": 1,
+   "dnp": 0,
+   "pending": 0
+  },
+  "parlays": {
+   "won": 0,
+   "lost": 0,
+   "void": 0,
+   "pending": 0
+  },
+  "five_picks": {
+   "won": 0,
+   "lost": 0,
+   "void": 0,
+   "pending": 0
+  },
+  "graded_at": "2026-10-02 18:34:09",
+  "complete": true
+ }
+}

@@ -54,7 +54,15 @@ class GameRef:
     state: str
 
 
-def schedule(start: date, end: date, game_type: str = "R") -> list[GameRef]:
+# The games the tracker follows: the regular season and every postseason round
+# (F wild card, D division series, L championship series, W World Series).
+# Asking for "R" alone froze the page on the last day of the regular season --
+# the playoffs were being played and the schedule kept answering "no games".
+# Spring training (S), exhibitions (E) and the All-Star Game (A) stay out.
+TRACKED_GAME_TYPES = "R,F,D,L,W"
+
+
+def schedule(start: date, end: date, game_type: str = TRACKED_GAME_TYPES) -> list[GameRef]:
     """Every scheduled game in [start, end]. Includes non-final games; filter on .state."""
     out: list[GameRef] = []
     # The API caps a single schedule request, so walk it in month-sized chunks.

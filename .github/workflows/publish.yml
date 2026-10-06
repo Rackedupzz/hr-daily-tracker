@@ -1,0 +1,76 @@
+# Fits the day's slate, scores results, and commits the static site in
+# public/ plus the snapshot archive. Vercel deploys public/ on every push.
+name: Publish site
+
+on:
+  schedule:
+    # UTC. Morning fit, pre-night-game lineups, then two results passes.
+    - cron: "0 16 * * *"
+    - cron: "0 22 * * *"
+    - cron: "30 2 * * *"
+    - cron: "30 5 * * *"
+  workflow_dispatch:
+    inputs:
+      force_fit:
+        description: "Refit the slate even if the saved one is fresh"
+        type: boolean
+        default: false
+
+concurrency:
+  group: publish
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 75
+    env:
+      PYTHONPATH: ${{ github.workspace }}/src
+      SNAPSHOT_DIR: ${{ github.workspace }}/snapshots
+      PYTHONUNBUFFERED: "1"
+      HF_TOKEN: ${{ secrets.HF_TOKEN }}
+      HF_DATA_REPO: ${{ secrets.HF_DATA_REPO }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: WeasyPrint system libraries
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends libpango-1.0-0 libpangoft2-1.0-0 fonts-dejavu-core
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: |
+            requirements-ml.txt
+            requirements.txt
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements-ml.txt
+          pip install -r requirements.txt
+
+      - name: Pull model data from Hugging Face
+        run: python -m mlb_hr.hf_data pull
+
+      - name: Fit, score and render
+        run: python -m mlb_hr.publish --out public ${{ inputs.force_fit && '--force-fit' || '' }}
+
+      - name: Push refreshed data to Hugging Face
+        if: success()
+        run: python -m mlb_hr.hf_data push
+
+      - name: Commit site and snapshots
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git add public snapshots
+          if git diff --cached --quiet; then
+            echo "Nothing changed."
+            exit 0
+          fi
+          git commit -m "Publish $(date -u +'%Y-%m-%d %H:%M') UTC"
+          git pull --rebase -X theirs origin main
+          git push
