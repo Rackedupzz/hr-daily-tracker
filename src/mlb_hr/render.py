@@ -197,17 +197,32 @@ def _chance(prob: float) -> str:
     return chance(prob)
 
 
+def _leg_kind(leg: dict) -> str:
+    """The leg's market as a short tag: HR, 1+ HIT, 2+ HITS, WIN."""
+    if leg["type"] == "hr":
+        return "HR"
+    if leg["type"] == "win":
+        return "WIN"
+    n = int(leg.get("line") or 1)
+    return f"{n}+ HIT{'S' if n != 1 else ''}"
+
+
 def _ticket_leg(leg: dict, extra: str = "") -> str:
     st = leg.get("status", "pending")
     mark = {"won": "&#10003;", "lost": "&#10007;"}.get(st, "")
-    kind = "HR" if leg["type"] == "hr" else "1+ HIT"
     line = (leg.get("result") or {}).get("summary") or ""
-    sp = leg.get("opp_sp") or leg.get("sp_name")
-    vs = f"vs {escape(sp)} {hand(leg.get('facing_hand'))}" if sp else f"vs {hand(leg.get('facing_hand'))}"
-    sub = f"{abbr(leg.get('team', ''))} &middot; {vs}{' &middot; ' + escape(line) if line else ''}{extra}"
     void = " (void)" if st == "void" else ""
-    return (f'<li class="leg {st}"><span class="st">{mark}</span>{avatar(leg.get("batter_id"), leg["batter"], leg.get("team"), "xs")}'
-            f'<span class="lp"><b><span class="ltype{" hit" if leg["type"] != "hr" else ""}">{kind}</span>{escape(leg["batter"])}{void}</b>'
+    if leg["type"] == "win":
+        sub = f"over {escape(leg.get('opp') or '')}{' &middot; ' + escape(line) if line else ''}{extra}"
+        face = logo(leg.get("team"), "sm")
+    else:
+        sp = leg.get("opp_sp") or leg.get("sp_name")
+        vs = f"vs {escape(sp)} {hand(leg.get('facing_hand'))}" if sp else f"vs {hand(leg.get('facing_hand'))}"
+        sub = f"{abbr(leg.get('team', ''))} &middot; {vs}{' &middot; ' + escape(line) if line else ''}{extra}"
+        face = avatar(leg.get("batter_id"), leg["batter"], leg.get("team"), "xs")
+    tone = "" if leg["type"] == "hr" else " hit"
+    return (f'<li class="leg {st}"><span class="st">{mark}</span>{face}'
+            f'<span class="lp"><b><span class="ltype{tone}">{_leg_kind(leg)}</span>{escape(leg["batter"])}{void}</b>'
             f'<small>{sub}</small></span><span class="lpct">{leg["prob"]:.0%}</span></li>')
 
 
@@ -215,45 +230,92 @@ _TICKET_BADGES = {"won": ("&#10003; CASHED", "hit"), "lost": ("&#10007; LOST", "
                   "void": ("VOID", "void"), "pending": ("&#9679; OPEN", "live")}
 
 
-def _render_parlays_section(slate_data: dict) -> str:
-    """The model's two 5-pick parlays (mlb_hr.parlays), graded as games finish."""
-    plays = slate_data.get("parlays") or []
-    if not plays:
-        return ""
-    cards = []
-    for play in plays:
-        legs = "".join(_ticket_leg(leg) for leg in play["leg_list"])
-        status = play.get("status", "pending")
-        text, cls = _TICKET_BADGES.get(status, _TICKET_BADGES["pending"])
-        ev = play.get("evidence")
-        record = ""
-        if ev and ev.get("days"):
-            if ev["won"]:
-                record = (f"In the 2026 replay this ticket, built this way every day, cashed "
-                          f"{ev['won']} of {ev['days']} days ({ev['rate']:.1%}) &mdash; the model "
-                          f"expected {ev['predicted']:.1%}.")
-            else:
-                record = (f"In the 2026 replay this ticket, built this way every day, cashed 0 of "
-                          f"{ev['days']} days &mdash; the model expected "
-                          f"{ev['expected_wins']:.2f} wins in all that time.")
-        late = "<div>Built after the fact from that morning's projections.</div>" if play.get("backfilled") else ""
-        long = " long" if play["prob"] < 0.10 else ""
-        cards.append(f"""<article class="card ticket{long} st-{status}">
+def _ticket_card(play: dict) -> str:
+    legs = "".join(_ticket_leg(leg) for leg in play["leg_list"])
+    status = play.get("status", "pending")
+    text, cls = _TICKET_BADGES.get(status, _TICKET_BADGES["pending"])
+    ev = play.get("evidence") or {}
+    record = ""
+    if ev.get("days"):
+        record = (f"Season replay: built this way every day, cashed <b>{ev['won']}</b> of {ev['days']} days "
+                  f"(model expected {ev['expected_wins']:.1f}).")
+    late = "<div>Built after the fact from that morning's projections.</div>" if play.get("backfilled") else ""
+    if play.get("note"):
+        late += f"<div>{escape(play['note'])}</div>"
+    long = " long" if play["prob"] < 0.10 else ""
+    payout = f"${10 / play['prob']:,.0f}" if play["prob"] > 0 else "&mdash;"
+    return f"""<article class="card ticket{long} st-{status}">
 <div class="thead"><div><div class="tname">{play['name']}</div><div class="blurb">{play['blurb']}</div></div>
 <div class="tchance"><b>{_chance(play['prob'])}</b><small>chance</small></div></div>
 <div class="tstats"><span class="chip"><b>{len(play['leg_list'])}</b> legs</span><span class="chip">fair <b>{play['fair_odds']}</b></span>
-<span class="chip">cashes only if all land</span></div>
-<ol class="legs">{legs}</ol><div class="tfoot">{f'<div>{record}</div>' if record else ''}{late}<span class="badge {cls}">{text}</span></div></article>""")
+<span class="chip">$10 pays <b>{payout}</b> fair</span></div>
+<ol class="legs">{legs}</ol><div class="tfoot">{f'<div>{record}</div>' if record else ''}{late}<span class="badge {cls}">{text}</span></div></article>"""
+
+
+def _parlay_replay_table(replay: dict) -> str:
+    """Every house rule rebuilt on every replayed day: offered, below the bar, or a long shot."""
+    from mlb_hr.parlays import CORE_MIN_CASHED, PARLAYS, qualifies
+    rows = ""
+    for spec in PARLAYS:
+        r = (replay or {}).get(spec["key"])
+        if not r or not r.get("days"):
+            continue
+        status = ("<span class='chip'>long shot</span>" if spec.get("longshot")
+                  else "<span class='chip'><b>&#10003; offered</b></span>" if qualifies(spec, r)
+                  else f"<span class='chip'>below {CORE_MIN_CASHED}</span>")
+        legs = f"{r['leg_rate']:.0%} / {r['leg_projected']:.0%}" if r.get("leg_rate") is not None else "&mdash;"
+        rows += (f"<tr><td><b>{escape(spec['name'])}</b></td><td class='n'>{r['legs']}</td><td class='n'>{r['days']}</td>"
+                 f"<td class='n'><b>{r['won']}</b></td><td class='n'>{r['expected_wins']:.1f}</td>"
+                 f"<td class='n'>{(r['rate'] or 0):.1%}</td><td class='n'>{(r['predicted'] or 0):.1%}</td>"
+                 f"<td class='n'>{legs}</td><td>{status}</td></tr>")
+    if not rows:
+        return ""
+    note = ("Every ticket rebuilt by the live rules on every day of the walk-forward 2026 replay, from projections "
+            f"that had only seen earlier days. A core ticket is offered only if it cashed {CORE_MIN_CASHED}+ times. "
+            "The replay knows lineups but not injury notes, and prices winners without the park factor.")
+    return (head("House parlays in the replay", "", note, tag="h3")
+            + "<div class='card scroll'><table class='t'><tr><th>Ticket</th><th class='n'>Legs</th><th class='n'>Days</th>"
+              "<th class='n'>Cashed</th><th class='n'>Model expected</th><th class='n'>Actual rate</th>"
+              "<th class='n'>Predicted rate</th><th class='n'>Legs landed / projected</th><th></th></tr>"
+            + rows + "</table></div>")
+
+
+def _render_parlays_section(slate_data: dict) -> str:
+    """The house parlays (mlb_hr.parlays): core tickets, the long shots, and
+    tickets posted under earlier rules, graded as games finish."""
+    from mlb_hr.parlays import CORE_MIN_CASHED, CORE_MIN_LEGS
+    plays = slate_data.get("parlays") or []
+    replay = slate_data.get("parlay_replay") or {}
+    if not plays and not replay:
+        return ""
+    core = [p for p in plays if not p.get("longshot") and not p.get("retired")]
+    longshots = [p for p in plays if p.get("longshot") and not p.get("retired")]
+    retired = [p for p in plays if p.get("retired")]
     backfilled = any(p.get("backfilled") for p in plays)
-    note = ("The model's best judgment in two tickets: its five likeliest home run bats and its five likeliest "
-            "hit bats, one leg per game so the legs are independent and the chance is simply their product. "
-            "Tickets lock the moment any of their games starts; a scratched player's leg is void and the rest "
-            "ride. Fair odds are the price a ticket needs to break even. Parlays carry a steep house edge "
-            "&mdash; never stake what you cannot afford to lose."
+    note = (f"Core tickets: at least {CORE_MIN_LEGS} legs, one per game, and only rules that cashed "
+            f"{CORE_MIN_CASHED} or more times when rebuilt on every day of the walk-forward season replay. Each "
+            "game's single likeliest leg, then the best of those, so the legs are independent and the ticket's "
+            "chance is the product of its legs. A hitter with an injury note is passed over; a scratched leg is "
+            "void and the rest ride. Tickets lock the moment any of their games starts. Fair odds are the price a "
+            "ticket needs to break even; parlays carry a steep house edge &mdash; never stake what you cannot "
+            "afford to lose."
             + (" This day was over before the parlays existed, so they were built from that "
                "morning&rsquo;s projections and graded against what happened." if backfilled else ""))
-    return (f'<section class="section" id="parlays">{head("5-Pick Parlays", "&#127903;", note)}'
-            f'<div class="grid wide">{"".join(cards)}</div></section>')
+    empty = "<div class='card'>No core ticket can be built from the games still to start.</div>"
+    parts = [f'<section class="section" id="parlays">{head("House Parlays", "&#127903;", note)}'
+             f'<div class="grid wide">{"".join(_ticket_card(p) for p in core) or empty}</div>']
+    if longshots:
+        parts.append(head("Long shots: +1000 or more", "", "Ten legs from one first-pitch window at fair odds. "
+                          f"These pay +1000 or more and do <b>not</b> meet the {CORE_MIN_CASHED}-cash bar "
+                          "&mdash; their replay record is on each card.", tag="h3")
+                     + f'<div class="grid wide">{"".join(_ticket_card(p) for p in longshots)}</div>')
+    if retired:
+        parts.append(head("Posted earlier, still settling", "", "Tickets posted under the earlier rules before "
+                          "their games started. They stay here until they settle.", tag="h3")
+                     + f'<div class="grid wide">{"".join(_ticket_card(p) for p in retired)}</div>')
+    parts.append(_parlay_replay_table(replay))
+    parts.append("</section>")
+    return "".join(parts)
 
 
 # --------------------------------------------------------------- matchups
@@ -689,7 +751,7 @@ def _print_slate(slate_data: dict) -> str:
             [("#", 0), ("Hitter", 0), ("Team", 0), ("Opponent &middot; starter", 0), ("Proj. hits", 1), ("1+ hit", 1),
              ("Season rate", 1), ("Result", 0)], hit_rows))
     for play in slate_data.get("parlays") or []:
-        legs = [f"<tr><td>{'HR' if l['type'] == 'hr' else '1+ hit'}</td><td><b>{escape(l['batter'])}</b></td>"
+        legs = [f"<tr><td>{_leg_kind(l)}</td><td><b>{escape(l['batter'])}</b></td>"
                 f"<td>{abbr(l.get('team'))}</td><td class='n'>{l['prob']:.0%}</td><td>{escape(l.get('status', 'pending'))}</td></tr>"
                 for l in play["leg_list"]]
         parts.append(head(f"{play['name']} &middot; {_chance(play['prob'])} &middot; fair {play['fair_odds']} "
@@ -749,7 +811,7 @@ def render_html(slate_data: dict) -> str:
         parts.append(alert(
             f"Short slate: {games_count} game{'' if games_count == 1 else 's'} today. Picks are one per team, so "
             f"there {'is' if len(picks) == 1 else 'are'} {len(picks)} home run pick{'' if len(picks) == 1 else 's'} "
-            f"instead of six, and the 5-pick parlays need five different games, so none "
+            f"instead of six, and the core parlays need five different games, so none "
             f"{'is' if not slate_data.get('parlays') else 'may be'} posted."))
 
     nav = [("picks", "HR Picks")]
@@ -758,7 +820,7 @@ def render_html(slate_data: dict) -> str:
         nav.append(("remaining", "Still to Play"))
     if hit_picks:
         nav.append(("hits", "Hits"))
-    if slate_data.get("parlays"):
+    if slate_data.get("parlays") or slate_data.get("parlay_replay"):
         nav.append(("parlays", "Parlays"))
     if highlighted:
         nav.append(("bvp", "Batter vs Pitcher"))

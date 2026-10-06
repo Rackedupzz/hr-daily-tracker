@@ -831,31 +831,104 @@ def score_hits(rows: pd.DataFrame, mu: np.ndarray) -> dict:
     }
 
 
-def parlay_record(rows: pd.DataFrame, p: np.ndarray, y: np.ndarray, legs: int = 5) -> dict:
-    """mlb_hr.parlays' ticket, rebuilt on every day with a prediction.
+def game_lines(pa_path: str, log=print) -> dict:
+    """Every replayed game's first pitch and the slate's win model as of that
+    morning (winloss_fit.build_games: game.py's runs model, nothing fitted to
+    outcomes), keyed by game_pk -- what the Five Winners and the Tens need."""
+    from mlb_hr.winloss_fit import build_games, load_results
+    results = load_results(pa_path)
+    start = {g["game_pk"]: g.get("start", "") for g in results}
+    out = {}
+    for g in build_games(pa_path, results):
+        p = float(g["current_prob"])
+        home_fav = p >= 0.5
+        out[g["game_pk"]] = {
+            "start": start.get(g["game_pk"], ""),
+            "projection": {"home_team": g["home"], "away_team": g["away"],
+                           "favorite": g["home"] if home_fav else g["away"],
+                           "underdog": g["away"] if home_fav else g["home"],
+                           "favorite_prob": max(p, 1 - p)},
+            "fav_won": int(home_fav == bool(g["home_win"])),
+        }
+    log(f"[replay] {len(out):,} games with a win projection and a first pitch")
+    return out
 
-    Each game's likeliest leg, the best `legs` of those; the ticket cashes when
-    every leg does. The replay knows lineups but not injury notes, so it can
-    only take a leg the live page would have passed over for one -- a minor gap.
-    """
-    df = pd.DataFrame({"date": rows["date"].values, "game": rows["game_pk"].values,
-                       "p": p, "y": y}).dropna(subset=["p"])
-    days = won = 0
-    products, wins_on = [], []
-    for day, g in df.groupby("date", sort=True):
-        best = g.loc[g.groupby("game")["p"].idxmax()]
-        top = best.nlargest(legs, "p")
-        if len(top) < legs:
+
+def _leg_landed(leg: dict, y: dict) -> bool:
+    if leg["type"] == "win":
+        return bool(y["fav_won"])
+    if leg["type"] == "hr":
+        return y["hr"] > 0
+    return y["hits"] >= int(leg.get("line") or 1)
+
+
+def parlay_records(rows: pd.DataFrame, p_hr: np.ndarray, p_hit: np.ndarray,
+                   games: Optional[dict] = None) -> dict:
+    """Every house parlay (mlb_hr.parlays.PARLAYS), rebuilt by the live rule
+    (parlays.build) on every replayed day from the served numbers, and graded
+    against what happened. The replay knows lineups but not injury notes, so
+    it can take a leg the live page would have passed over for one -- a minor
+    gap. Without `games` (no win projections or first pitches) the winner and
+    window tickets are skipped."""
+    from mlb_hr.parlays import PARLAYS, build
+
+    games = games or {}
+    days: dict = {}
+    outcomes: dict = {}
+    for r, ph, p1 in zip(rows.itertuples(index=False), p_hr, p_hit):
+        if np.isnan(ph) or np.isnan(p1):
             continue
-        days += 1
-        products.append(float(np.prod(top["p"].values)))
-        if bool(top["y"].all()):
-            won += 1
-            wins_on.append(day)
-    return {"legs": legs, "days": days, "won": won,
-            "rate": round(won / days, 4) if days else None,
-            "predicted": round(float(np.mean(products)), 6) if products else None,
-            "expected_wins": round(float(np.sum(products)), 3), "wins_on": wins_on}
+        g = days.setdefault(r.date, {}).setdefault(r.game_pk, {
+            "game_pk": r.game_pk, "hitters": [], **{k: v for k, v in (games.get(r.game_pk) or {}).items()
+                                                     if k in ("start", "projection")}})
+        g["hitters"].append({
+            "batter_id": int(r.batter_id), "batter": r.batter or str(r.batter_id), "team": r.team,
+            "side": "home" if r.is_home else "away", "lineup_slot": int(r.slot),
+            "prob_hr": float(ph),
+            "hits_proj": {"prob_at_least_one": float(p1), "expected_pa": float(r.exposure)}})
+        outcomes[(r.game_pk, int(r.batter_id))] = {"hr": int(r.y_hr), "hits": int(r.y_hits)}
+    fav_won = {pk: g["fav_won"] for pk, g in games.items()}
+
+    out = {}
+    for spec in PARLAYS:
+        if spec["kind"] in ("win", "mix", "ladder") and not games:
+            continue
+        n = won = 0
+        products, wins_on, leg_p, leg_y = [], [], [], []
+        by_kind: dict = {}
+        for day in sorted(days):
+            play = build(list(days[day].values()), spec)
+            if not play:
+                continue
+            n += 1
+            products.append(play["prob"])
+            landed = []
+            for leg in play["leg_list"]:
+                y = (fav_won.get(leg["game_pk"]) if leg["type"] == "win"
+                     else outcomes[(leg["game_pk"], leg["batter_id"])])
+                ok = _leg_landed(leg, {"fav_won": y} if leg["type"] == "win" else y)
+                landed.append(ok)
+                leg_p.append(leg["prob"])
+                leg_y.append(float(ok))
+                kind = leg["type"] if leg["type"] != "hits" else f"hits{leg.get('line') or 1}"
+                k = by_kind.setdefault(kind, [0, 0.0, 0])
+                k[0] += 1
+                k[1] += leg["prob"]
+                k[2] += int(ok)
+            if all(landed):
+                won += 1
+                wins_on.append(str(day))
+        rec = {"legs": spec["legs"], "days": n, "won": won,
+               "rate": round(won / n, 4) if n else None,
+               "predicted": round(float(np.mean(products)), 6) if products else None,
+               "expected_wins": round(float(np.sum(products)), 3), "wins_on": wins_on,
+               "leg_rate": round(float(np.mean(leg_y)), 4) if leg_y else None,
+               "leg_projected": round(float(np.mean(leg_p)), 4) if leg_p else None}
+        if spec.get("longshot"):
+            rec["by_kind"] = {k: {"n": c, "projected": round(sp / c, 4), "hit": round(h / c, 4)}
+                              for k, (c, sp, h) in sorted(by_kind.items())}
+        out[spec["key"]] = rec
+    return out
 
 
 def log5_hits(rows: pd.DataFrame) -> np.ndarray:
@@ -879,7 +952,7 @@ def _fmt_hr(label: str, s: dict) -> str:
 
 # ----------------------------------------------------------------------- main
 
-def fit_and_validate(rows: pd.DataFrame, log=print) -> dict:
+def fit_and_validate(rows: pd.DataFrame, log=print, games: Optional[dict] = None) -> dict:
     """Full-season stack fits plus their walk-forward validation."""
     from mlb_hr.pitching import split_exposure
     from mlb_hr.snapshot import LEVEL_HALF_LIFE_DAYS, LEVEL_PSEUDO_HR
@@ -953,16 +1026,16 @@ def fit_and_validate(rows: pd.DataFrame, log=print) -> dict:
     log(f"  hits served, by band [band, projected, actual]: {report['hits']['served']['bands']}")
     log(f"  hits served, by slot (actual / projected): {report['hits']['served']['by_slot']}")
 
-    # The two 5-pick parlays (mlb_hr.parlays), built from the served numbers.
+    # The house parlays (mlb_hr.parlays), rebuilt by the live rule from the
+    # served numbers.
     exposure = np.clip(rows["exposure"].values, 1.5, 5.2)
     one_plus = 1 - (1 - np.clip(wf_hit_top / exposure, 0, 0.9)) ** exposure
-    parlays = {
-        "hr5": parlay_record(sub, wf_top[scored], y_hr[scored]),
-        "hit5": parlay_record(sub, one_plus[scored], (y_hits[scored] > 0).astype(float)),
-    }
+    parlays = parlay_records(sub, wf_top[scored], one_plus[scored], games)
     for key, rec in parlays.items():
-        log(f"  5-pick parlay {key}: cashed {rec['won']} of {rec['days']} days "
-            f"(model expected {rec['expected_wins']:.2f} wins, {rec['predicted']:.4%} a day)")
+        log(f"  parlay {key}: cashed {rec['won']} of {rec['days']} days "
+            f"(model expected {rec['expected_wins']:.2f} wins, {rec['predicted'] or 0:.4%} a day)"
+            + (f"; legs landed {rec['leg_rate']:.1%} (projected {rec['leg_projected']:.1%})"
+               if rec.get("leg_rate") is not None else ""))
     return {
         "hr_stack": {"coef": dict(zip(["intercept"] + HR_TERMS, map(float, b_hr)))},
         "hr_top_cal": {"coef": top_cal},
@@ -991,7 +1064,7 @@ def main() -> None:
         espn = ESPNData(str(DATA_DIR / "espn_cache.json"), ttl_hours=1e9).load()
         rows = replay(args.pa_path, args.start, espn)
         rows.to_parquet(args.rows)
-    fit = fit_and_validate(rows)
+    fit = fit_and_validate(rows, games=game_lines(args.pa_path))
     fit.update({
         "fitted_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
         "model_version": MODEL_VERSION,

@@ -196,6 +196,7 @@ class GameSlate:
             game_record = {
                 "game_pk": g.game_pk,
                 "date": g.date,
+                "start": pp.get("start", ""),
                 "venue": g.venue,
                 "home": g.home,
                 "away": g.away,
@@ -556,7 +557,7 @@ def lock_started_picks(previous: dict, fresh: dict, started: set) -> dict:
         fresh[key] = chooser(fresh.get("games", []), locked=kept, closed=started)
     # A parlay is one ticket: once any leg's game is under way the whole
     # ticket stands as posted (parlays.choose).
-    evidence = {p["key"]: p.get("evidence") for p in fresh.get("parlays") or []}
+    evidence = fresh.get("parlay_replay") or {p["key"]: p.get("evidence") for p in fresh.get("parlays") or []}
     fresh["parlays"] = parlay_mod.choose(
         fresh.get("games", []), previous=previous.get("parlays"), started=started,
         evidence=evidence,
@@ -692,14 +693,18 @@ def build_slate_for_date(
 
     from mlb_hr.ensemble import MODEL_VERSION, load_model_fit
 
-    # The two 5-pick parlays, with the season replay's record for each.
-    parlays = parlay_mod.choose(slate.games, evidence=load_model_fit().get("parlays"))
+    # The house parlays, with the season replay's record for each; the record
+    # of every rule, offered or not, goes to the page's replay table.
+    replay = load_model_fit().get("parlays") or {}
+    parlays = parlay_mod.choose(slate.games, evidence=replay)
+    parlay_replay = {k: {f: v for f, v in r.items() if f != "wins_on"} for k, r in replay.items()}
 
     return {
         "date": str(today),
         "games_count": len(slate.games),
         "picks_6": picks,
         "games": slate.games,
+        "parlay_replay": parlay_replay,
         # Which model produced these numbers, and the level it applied: the
         # tracker only learns its level from days the current model projected.
         "model_version": MODEL_VERSION if ensemble else "empirical_bayes",

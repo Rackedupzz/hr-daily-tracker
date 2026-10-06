@@ -82,6 +82,7 @@ def fetch_game_results(start: _date, end: _date) -> list[dict]:
                 games[g["gamePk"]] = {
                     "game_pk": g["gamePk"],
                     "date": g.get("officialDate") or day["date"],
+                    "start": g.get("gameDate", ""),
                     "home": home["team"]["name"],
                     "away": away["team"]["name"],
                     "home_id": home["team"]["id"],
@@ -98,7 +99,8 @@ def load_results(pa_path: str, refresh: bool = False) -> list[dict]:
     lo, hi = season_bounds(pa_path, sample_every=1)
     if RESULTS_PATH.exists() and not refresh:
         cached = json.loads(RESULTS_PATH.read_text(encoding="utf-8"))
-        if cached and cached[-1]["date"] >= hi:
+        # A cache from before first-pitch times were kept is refetched once.
+        if cached and cached[-1]["date"] >= hi and "start" in cached[-1]:
             return cached
     results = fetch_game_results(_date.fromisoformat(lo), _date.fromisoformat(hi))
     RESULTS_PATH.write_text(json.dumps(results), encoding="utf-8")

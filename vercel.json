@@ -19,8 +19,11 @@
     { "source": "/homer", "destination": "/api/live?page=homer" },
     { "source": "/homer/", "destination": "/api/live?page=homer" },
     { "source": "/api/remaining", "destination": "/api/remaining.json" },
+    { "source": "/api/remaining/", "destination": "/api/remaining.json" },
     { "source": "/api/homer", "destination": "/api/homer.json" },
-    { "source": "/health", "destination": "/health.json" }
+    { "source": "/api/homer/", "destination": "/api/homer.json" },
+    { "source": "/health", "destination": "/health.json" },
+    { "source": "/health/", "destination": "/health.json" }
   ],
   "headers": [
     {

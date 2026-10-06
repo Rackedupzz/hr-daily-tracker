@@ -167,8 +167,12 @@ def summary_row(slate_data: dict) -> dict:
         built_at=slate_data.get("built_at", ""),
     )
     row.update(slate_calibration(slate_data))
+    # The two original tickets keep their columns; the rest of the house
+    # parlays are in the archived slate.
     for play in slate_data.get("parlays") or []:
-        prefix = "hr_parlay" if play.get("kind") == "hr" else "hit_parlay"
+        prefix = {"hr5": "hr_parlay", "hit5": "hit_parlay"}.get(play.get("key"))
+        if not prefix:
+            continue
         row[prefix] = play.get("status", "pending") + (" (backfilled)" if play.get("backfilled") else "")
         row[f"{prefix}_prob"] = round(play["prob"], 6)
     return row

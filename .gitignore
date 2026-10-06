@@ -37,6 +37,10 @@ env/
 # Project specific
 src/mlb_hr/data/**/*.jsonl
 src/mlb_hr/data/*.json
+# The replay's fit (python -m mlb_hr.replay): small, changes only on a refit,
+# and the scheduled build needs its parlay records to post the core tickets.
+!src/mlb_hr/data/model_fit.json
+src/mlb_hr/data/.cache/
 src/mlb_hr/data/*.parquet
 src/mlb_hr/data/slate_cache/
 .pytest_cache/
@@ -50,3 +54,4 @@ k8s/secret.yaml
 
 # Docker
 Dockerfile.dev
+site/

@@ -156,7 +156,8 @@ def attach_results(slate_data: dict, results: dict) -> dict:
     hits = score(slate_data.get("hit_picks") or [], "hits")
     grade_parlays(slate_data.get("parlays") or [],
                   lambda leg: _line_for(results, leg),
-                  lambda leg: _did_not_play(results, leg))
+                  lambda leg: _did_not_play(results, leg),
+                  lambda leg: results["games"].get(leg.get("game_pk")))
 
     slate_data["results"] = {
         "fetched_at": results["fetched_at"],

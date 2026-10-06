@@ -35,8 +35,12 @@ Open http://localhost:5000 in your browser.
 The fit runs on a schedule; scores are live. `.github/workflows/publish.yml`
 runs hourly through game hours: it pulls `data/` from Hugging Face, runs
 `python -m mlb_hr.publish` (one pass of the server's warm-up loop: feed top-up,
-refit when stale, snapshots, HOMER), pushes the data back to the Hub and
-commits `public/` and `snapshots/`. Vercel deploys on each push.
+refit when stale, snapshots, HOMER), pushes the data back to the Hub,
+commits `public/` and `snapshots/`, then packages what Vercel serves (`vercel.json`,
+`api/`, `public/`, the code without `data/`, and the slate snapshots) into `site/`
+and deploys it with the Vercel CLI to the `hr-daily-tracker` project
+(https://hr-daily-tracker-zeta.vercel.app) -- the same setup as the NFL tracker.
+Pushes to `main` that touch the code run it too.
 
 `/`, `/models` and `/homer` are served by `api/live.py`, a standard-library-only
 Vercel function that loads the published slate and pulls live scores and box
@@ -46,7 +50,8 @@ Results and past HOMER cards are static. `requirements.txt` is deliberately
 empty so Vercel installs nothing into the function; the pipeline's
 dependencies are in `requirements-ml.txt` and `requirements-app.txt`.
 
-Needs repo secrets `HF_TOKEN` and `HF_DATA_REPO`. Run it by hand from the
+Needs repo secrets `HF_TOKEN`, `HF_DATA_REPO` and `VERCEL_TOKEN` (a token from
+vercel.com/account/tokens; without it the deploy step is skipped with a warning). Run it by hand from the
 Actions tab (tick *force fit* to refit regardless of age). To render locally
 from saved snapshots without fitting: `python -m mlb_hr.publish --render-only`.
 
@@ -195,6 +200,23 @@ data was pulled.
 | `/health` | JSON health check |
 
 The pages are linked by a tab bar in the header.
+
+### House parlays (`parlays.py`)
+
+The NFL tracker's parlay rules, market for market. Core tickets are five legs,
+one per game (each game's likeliest leg, then the best five): Five Hits, Five
+Multi-Hit (2+), Five Homers, Five Winners and Chalk Five (any market; skipped on
+a day it is Five Hits leg for leg). A core ticket posts only if its rule cashed
+`CORE_MIN_CASHED` (20) or more times when the season replay rebuilt it on every
+day; the NFL bar is 30, which no baseball five-leg rule reached (Five Hits
+cashed 25 of 140). The long shots, Early Ten (first pitch before 7 PM ET) and
+Late Ten (7 PM ET and later), take ten legs from one window -- one home run,
+hits at the highest rung the model trusts, favourites to win, at most two legs
+a game -- the most probable ten that pays +1000 or more at fair odds, loosened
+to three a game when the window is short. There is no odds feed, so every
+ticket is at fair odds. The slate's Parlays section ends with every rule's
+replay record; refit it with `python -m mlb_hr.replay`, which writes the
+records to `data/model_fit.json` (committed, unlike the other fits).
 
 ### HOMER (`homer.py`)
 
@@ -526,7 +548,7 @@ settle the question in days.
 If the web interface shows "No games scheduled," check that today's date has games in the MLB schedule. `schedule()` follows the regular season and every postseason round (`fetch.TRACKED_GAME_TYPES`); on an off day the page keeps showing the most recent slate.
 
 ### Short postseason slates
-Picks are one per team and parlay legs one per game, so a day with fewer than five games posts fewer than six picks and no 5-pick parlays. The slate page says so when that happens.
+Picks are one per team and parlay legs one per game, so a day with fewer than five games posts fewer than six picks and no core parlays. The slate page says so when that happens.
 
 ### Data fetch errors
 Network timeouts are retried with exponential backoff (up to 4 attempts). Check your internet connection or run with existing cached data.

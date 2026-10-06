@@ -1,5 +1,10 @@
-# Fits the day's slate, scores results, and commits the static site in
-# public/ plus the snapshot archive. Vercel deploys public/ on every push.
+# Fits the day's slate, scores results, commits the static site in public/
+# plus the snapshot archive, then packages what Vercel serves into site/ and
+# deploys it to the hr-daily-tracker Vercel project -- the NFL tracker's way:
+# the heavy work runs here, Vercel serves the pages and api/live.py alone.
+#
+# Needs a VERCEL_TOKEN repository secret (vercel.com/account/tokens); without
+# it the site is still committed, and the deploy step says what is missing.
 name: Publish site
 
 on:
@@ -8,6 +13,9 @@ on:
     # the latest lineups and scratches. Scores are live via api/live.py.
     - cron: "5 15-23 * * *"
     - cron: "5 0-6 * * *"
+  push:
+    branches: [main]
+    paths: ["src/**", "api/**", "vercel.json", ".github/workflows/publish.yml"]
   workflow_dispatch:
     inputs:
       force_fit:
@@ -75,3 +83,24 @@ jobs:
           git commit -m "Publish $(date -u +'%Y-%m-%d %H:%M') UTC"
           git pull --rebase -X theirs origin main
           git push
+
+      - name: Assemble the site
+        run: |
+          rm -rf site && mkdir -p site/src site/snapshots/homer
+          cp -r vercel.json requirements.txt api public site/
+          rsync -a --exclude data --exclude __pycache__ src/mlb_hr site/src/
+          cp snapshots/current.json snapshots/*-slate.json.gz site/snapshots/
+          cp snapshots/homer/*.json site/snapshots/homer/ 2>/dev/null || true
+          du -sh site
+
+      - name: Deploy to Vercel
+        working-directory: site
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: team_b9Ang4tfUOFZfL5RCz3UOl29
+          VERCEL_PROJECT_ID: prj_d65zPfscnREEHTzuBrqIdZZT7BBv
+        run: |
+          if [ -z "$VERCEL_TOKEN" ]; then
+            echo "::warning::Add the VERCEL_TOKEN repository secret (vercel.com/account/tokens) to deploy"; exit 0
+          fi
+          npx --yes vercel@latest deploy --prod --yes --token "$VERCEL_TOKEN"

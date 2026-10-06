@@ -323,7 +323,10 @@ def probable_pitchers(day: date) -> list[dict]:
         for g in d.get("games", []):
             row = {"game_pk": g["gamePk"], "date": g.get("officialDate", ""),
                    "venue": g.get("venue", {}).get("name", ""),
-                   "state": g.get("status", {}).get("abstractGameState", "")}
+                   "state": g.get("status", {}).get("abstractGameState", ""),
+                   # First pitch, UTC ISO ("2026-09-24T23:05:00Z"): which
+                   # parlay window a game belongs to (parlays.window_of).
+                   "start": g.get("gameDate", "")}
             for side in ("away", "home"):
                 t = g["teams"][side]
                 pp = t.get("probablePitcher") or {}
