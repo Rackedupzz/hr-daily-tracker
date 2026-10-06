@@ -4,11 +4,10 @@ name: Publish site
 
 on:
   schedule:
-    # UTC. Morning fit, pre-night-game lineups, then two results passes.
-    - cron: "0 16 * * *"
-    - cron: "0 22 * * *"
-    - cron: "30 2 * * *"
-    - cron: "30 5 * * *"
+    # UTC, hourly through game hours (11:00-02:00 ET): each run refits with
+    # the latest lineups and scratches. Scores are live via api/live.py.
+    - cron: "5 15-23 * * *"
+    - cron: "5 0-6 * * *"
   workflow_dispatch:
     inputs:
       force_fit:
@@ -31,6 +30,8 @@ jobs:
       PYTHONPATH: ${{ github.workspace }}/src
       SNAPSHOT_DIR: ${{ github.workspace }}/snapshots
       PYTHONUNBUFFERED: "1"
+      # Refit on every hourly run unless the day is complete.
+      PUBLISH_SLATE_TTL_MINUTES: "45"
       HF_TOKEN: ${{ secrets.HF_TOKEN }}
       HF_DATA_REPO: ${{ secrets.HF_DATA_REPO }}
     steps:
