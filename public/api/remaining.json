@@ -1,7 +1,7 @@
 {
   "date": "2026-10-06",
-  "built_at": "2026-10-06 10:10:27",
-  "fetched_at": "2026-10-06 10:10:27",
+  "built_at": "2026-10-06 16:27:10",
+  "fetched_at": "2026-10-06 16:27:11",
   "games": [
     {
       "game_pk": 849819,
@@ -22,7 +22,7 @@
           "batter": "Matt Olson",
           "batter_id": 621566,
           "team": "Atlanta Braves",
-          "prob_hr": 0.17124391404638273,
+          "prob_hr": 0.17034255195278733,
           "facing_hand": "R",
           "season": "42 HR / 720 PA",
           "result": null
@@ -31,7 +31,7 @@
           "batter": "Ronald Acu\u00f1a Jr.",
           "batter_id": 660670,
           "team": "Atlanta Braves",
-          "prob_hr": 0.16479573180291696,
+          "prob_hr": 0.16390468108989148,
           "facing_hand": "R",
           "season": "20 HR / 491 PA",
           "result": null
@@ -40,7 +40,7 @@
           "batter": "Shohei Ohtani",
           "batter_id": 660271,
           "team": "Los Angeles Dodgers",
-          "prob_hr": 0.14995806283355134,
+          "prob_hr": 0.14909456584446917,
           "facing_hand": "L",
           "season": "30 HR / 626 PA",
           "result": null
@@ -52,7 +52,7 @@
           "batter_id": 605141,
           "team": "Los Angeles Dodgers",
           "projected_hits": 1.04,
-          "prob_at_least_one": 0.6923141079918118,
+          "prob_at_least_one": 0.6923192088013301,
           "result": null,
           "matchup": null
         },
@@ -61,7 +61,7 @@
           "batter_id": 686948,
           "team": "Atlanta Braves",
           "projected_hits": 0.96,
-          "prob_at_least_one": 0.6611990776302556,
+          "prob_at_least_one": 0.661210809340689,
           "result": null,
           "matchup": null
         },
@@ -70,7 +70,7 @@
           "batter_id": 518692,
           "team": "Los Angeles Dodgers",
           "projected_hits": 0.95,
-          "prob_at_least_one": 0.6613823720978964,
+          "prob_at_least_one": 0.661387057086112,
           "result": null,
           "matchup": null
         }
@@ -95,7 +95,7 @@
           "batter": "Fernando Tatis Jr.",
           "batter_id": 665487,
           "team": "San Diego Padres",
-          "prob_hr": 0.15880326372049672,
+          "prob_hr": 0.1579224078975483,
           "facing_hand": "R",
           "season": "26 HR / 722 PA",
           "result": null
@@ -104,7 +104,7 @@
           "batter": "Jackson Chourio",
           "batter_id": 694192,
           "team": "Milwaukee Brewers",
-          "prob_hr": 0.14555654066716442,
+          "prob_hr": 0.1447035091050375,
           "facing_hand": "R",
           "season": "26 HR / 582 PA",
           "result": null
@@ -113,7 +113,7 @@
           "batter": "Jackson Merrill",
           "batter_id": 701538,
           "team": "San Diego Padres",
-          "prob_hr": 0.13844977593048816,
+          "prob_hr": 0.13761368732486892,
           "facing_hand": "R",
           "season": "26 HR / 681 PA",
           "result": null
@@ -125,7 +125,7 @@
           "batter_id": 665487,
           "team": "San Diego Padres",
           "projected_hits": 1.06,
-          "prob_at_least_one": 0.7002235217295147,
+          "prob_at_least_one": 0.7002356662573517,
           "result": null,
           "matchup": null
         },
@@ -134,7 +134,7 @@
           "batter_id": 694192,
           "team": "Milwaukee Brewers",
           "projected_hits": 0.97,
-          "prob_at_least_one": 0.6639230166898665,
+          "prob_at_least_one": 0.6639344141615153,
           "result": null,
           "matchup": null
         },
@@ -143,7 +143,7 @@
           "batter_id": 661388,
           "team": "Milwaukee Brewers",
           "projected_hits": 0.97,
-          "prob_at_least_one": 0.6655381966920677,
+          "prob_at_least_one": 0.6655437377322195,
           "result": null,
           "matchup": null
         }
