@@ -1,7 +1,7 @@
 {
   "date": "2026-10-05",
-  "built_at": "2026-10-06 01:42:52",
-  "fetched_at": "2026-10-06 02:10:10",
+  "built_at": "2026-10-06 02:28:48",
+  "fetched_at": "2026-10-06 02:28:49",
   "games": [
     {
       "game_pk": 849839,
@@ -14,7 +14,7 @@
       "home_sp_hand": "R",
       "state": "Live",
       "detailed": "In Progress",
-      "inning": "5th",
+      "inning": "6th",
       "away_score": 1,
       "home_score": 5,
       "hr": [
@@ -22,7 +22,7 @@
           "batter": "Ben Rice",
           "batter_id": 700250,
           "team": "New York Yankees",
-          "prob_hr": 0.1957866718037435,
+          "prob_hr": 0.1966678303299606,
           "facing_hand": "R",
           "season": "43 HR / 681 PA",
           "result": {
@@ -38,38 +38,38 @@
           }
         },
         {
-          "batter": "Luis Garc\u00eda Jr.",
-          "batter_id": 671277,
-          "team": "New York Yankees",
-          "prob_hr": 0.16774544183837367,
+          "batter": "Junior Caminero",
+          "batter_id": 691406,
+          "team": "Tampa Bay Rays",
+          "prob_hr": 0.16659474340967342,
           "facing_hand": "R",
-          "season": "31 HR / 552 PA",
+          "season": "42 HR / 706 PA",
           "result": {
-            "pa": 2,
-            "ab": 2,
-            "hits": 0,
+            "pa": 4,
+            "ab": 4,
+            "hits": 2,
             "hr": 0,
             "rbi": 0,
-            "summary": "0-2 | K",
+            "summary": "2-4 | 2B, R",
             "state": "Live",
             "detailed": "In Progress",
             "final": false
           }
         },
         {
-          "batter": "Junior Caminero",
-          "batter_id": 691406,
-          "team": "Tampa Bay Rays",
-          "prob_hr": 0.1637115072373243,
+          "batter": "Luis Garc\u00eda Jr.",
+          "batter_id": 671277,
+          "team": "New York Yankees",
+          "prob_hr": 0.16561599439922972,
           "facing_hand": "R",
-          "season": "42 HR / 706 PA",
+          "season": "31 HR / 552 PA",
           "result": {
             "pa": 3,
             "ab": 3,
-            "hits": 2,
+            "hits": 0,
             "hr": 0,
             "rbi": 0,
-            "summary": "2-3 | 2B, R",
+            "summary": "0-3 | K",
             "state": "Live",
             "detailed": "In Progress",
             "final": false
@@ -82,14 +82,14 @@
           "batter_id": 671277,
           "team": "New York Yankees",
           "projected_hits": 1.06,
-          "prob_at_least_one": 0.7024237911852271,
+          "prob_at_least_one": 0.7024094236824965,
           "result": {
-            "pa": 2,
-            "ab": 2,
+            "pa": 3,
+            "ab": 3,
             "hits": 0,
             "hr": 0,
             "rbi": 0,
-            "summary": "0-2 | K",
+            "summary": "0-3 | K",
             "state": "Live",
             "detailed": "In Progress",
             "final": false
@@ -101,7 +101,7 @@
           "batter_id": 641355,
           "team": "New York Yankees",
           "projected_hits": 1.04,
-          "prob_at_least_one": 0.6933012161128984,
+          "prob_at_least_one": 0.6932907900652558,
           "result": {
             "pa": 3,
             "ab": 3,
@@ -120,7 +120,7 @@
           "batter_id": 700250,
           "team": "New York Yankees",
           "projected_hits": 1.01,
-          "prob_at_least_one": 0.6802966407833513,
+          "prob_at_least_one": 0.6802872037925152,
           "result": {
             "pa": 3,
             "ab": 2,
