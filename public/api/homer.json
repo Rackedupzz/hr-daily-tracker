@@ -4,7 +4,7 @@
   "card": {
     "bot": "HOMER",
     "date": "2026-10-06",
-    "built_at": "2026-10-07 00:40:08",
+    "built_at": "2026-10-07 05:50:42",
     "book_through": "2026-10-06",
     "league": {
       "pa": 183772,
@@ -730,7 +730,13 @@
           "avg_prob": 0.1792
         },
         "tag": "LOVE IT",
-        "edge": 0.033611452112837725
+        "edge": 0.033611452112837725,
+        "result": {
+          "hr": 0,
+          "summary": "0-4 | K, RBI",
+          "final": true,
+          "state": "Final"
+        }
       },
       {
         "rules_prob": 0.17229185076677,
@@ -812,9 +818,9 @@
         "edge": 0.008854675382891558,
         "result": {
           "hr": 0,
-          "summary": "1-3 | K",
-          "final": false,
-          "state": "In Progress"
+          "summary": "1-4 | 2 K",
+          "final": true,
+          "state": "Final"
         }
       }
     ],
@@ -881,10 +887,10 @@
         "tag": "LOVE IT",
         "result": {
           "hits": 2,
-          "summary": "2-4",
+          "summary": "2-5 | K",
           "final": true,
           "dnp": false,
-          "state": "In Progress"
+          "state": "Final"
         }
       },
       {
@@ -946,7 +952,14 @@
           "rate": 0.6671,
           "avg_prob": 0.6638
         },
-        "tag": "LIKE IT"
+        "tag": "LIKE IT",
+        "result": {
+          "hits": 0,
+          "summary": "0-4 | K, RBI",
+          "final": true,
+          "dnp": false,
+          "state": "Final"
+        }
       }
     ],
     "parlays": [],
@@ -981,10 +994,12 @@
         "model_pick_prob": 0.5131077974644682,
         "tag": "SMALL PLAY",
         "result": {
-          "final": false,
+          "final": true,
+          "won": true,
           "home_score": 1,
           "away_score": 3,
-          "state": "In Progress"
+          "total": 4,
+          "state": "Final"
         }
       },
       {
@@ -1014,7 +1029,15 @@
           "Milwaukee Brewers lineup 0.322 wOBA vs 0.313"
         ],
         "model_pick_prob": 0.5137264757490754,
-        "tag": "SMALL PLAY"
+        "tag": "SMALL PLAY",
+        "result": {
+          "final": true,
+          "won": false,
+          "home_score": 4,
+          "away_score": 3,
+          "total": 7,
+          "state": "Final"
+        }
       }
     ],
     "likes": [
@@ -1024,13 +1047,13 @@
         "team": "Milwaukee Brewers",
         "game_pk": 849826,
         "matchup": "Milwaukee Brewers @ San Diego Padres",
-        "prob": 0.1669596313861281,
-        "model_prob": 0.12471063432702466,
-        "edge": 0.04224899705910344,
+        "prob": 0.16564742426962106,
+        "model_prob": 0.12341530414712201,
+        "edge": 0.04223212012249905,
         "barrel_rate": 0.08217143163941908,
         "sp_name": "Nick Pivetta",
         "park": 0.958,
-        "weather": 1.065
+        "weather": 1.048
       },
       {
         "batter": "Brice Turang",
@@ -1038,13 +1061,13 @@
         "team": "Milwaukee Brewers",
         "game_pk": 849826,
         "matchup": "Milwaukee Brewers @ San Diego Padres",
-        "prob": 0.13614663534229632,
-        "model_prob": 0.09756407924965659,
-        "edge": 0.03858255609263973,
+        "prob": 0.13470170281695237,
+        "model_prob": 0.09642954102302354,
+        "edge": 0.03827216179392884,
         "barrel_rate": 0.05754138812185012,
         "sp_name": "Nick Pivetta",
         "park": 0.958,
-        "weather": 1.065
+        "weather": 1.048
       },
       {
         "batter": "Jackson Chourio",
@@ -1052,13 +1075,13 @@
         "team": "Milwaukee Brewers",
         "game_pk": 849826,
         "matchup": "Milwaukee Brewers @ San Diego Padres",
-        "prob": 0.1749832496142388,
-        "model_prob": 0.14137179750140108,
-        "edge": 0.033611452112837725,
+        "prob": 0.17409525112440238,
+        "model_prob": 0.14000077818344442,
+        "edge": 0.034094472940957965,
         "barrel_rate": 0.07581678669233667,
         "sp_name": "Nick Pivetta",
         "park": 0.958,
-        "weather": 0.974
+        "weather": 0.958
       },
       {
         "batter": "Garrett Mitchell",
@@ -1066,13 +1089,13 @@
         "team": "Milwaukee Brewers",
         "game_pk": 849826,
         "matchup": "Milwaukee Brewers @ San Diego Padres",
-        "prob": 0.12382608410586968,
-        "model_prob": 0.09176688869853494,
-        "edge": 0.032059195407334734,
+        "prob": 0.12273496688690991,
+        "model_prob": 0.0906731210811197,
+        "edge": 0.032061845805790204,
         "barrel_rate": 0.06537044946928984,
         "sp_name": "Nick Pivetta",
         "park": 0.958,
-        "weather": 1.065
+        "weather": 1.048
       },
       {
         "batter": "Christian Yelich",
@@ -1080,13 +1103,13 @@
         "team": "Milwaukee Brewers",
         "game_pk": 849826,
         "matchup": "Milwaukee Brewers @ San Diego Padres",
-        "prob": 0.1277942767556971,
-        "model_prob": 0.0972893026192775,
-        "edge": 0.030504974136419602,
+        "prob": 0.12723705625681317,
+        "model_prob": 0.09615664353037028,
+        "edge": 0.031080412726442894,
         "barrel_rate": 0.07620352565693742,
         "sp_name": "Nick Pivetta",
         "park": 0.958,
-        "weather": 1.065
+        "weather": 1.048
       }
     ],
     "fades": [
@@ -1111,8 +1134,8 @@
         "game_pk": 849819,
         "matchup": "Los Angeles Dodgers @ Atlanta Braves",
         "prob": 0.1047538617348448,
-        "model_prob": 0.12343189215242178,
-        "edge": -0.018678030417576985,
+        "model_prob": 0.12343189215242173,
+        "edge": -0.01867803041757693,
         "barrel_rate": 0.0736441825573661,
         "sp_name": "Yoshinobu Yamamoto",
         "park": 1.015,
@@ -1153,8 +1176,8 @@
         "game_pk": 849819,
         "matchup": "Los Angeles Dodgers @ Atlanta Braves",
         "prob": 0.06930843006321107,
-        "model_prob": 0.07086004912145755,
-        "edge": -0.0015516190582464812,
+        "model_prob": 0.07086004912145752,
+        "edge": -0.0015516190582464534,
         "barrel_rate": 0.03443080806555529,
         "sp_name": "Chris Sale",
         "park": 1.015,
@@ -1162,25 +1185,26 @@
       }
     ],
     "locked": [
-      849819
+      849819,
+      849826
     ],
     "record": {
       "hr": {
         "hit": 0,
-        "scored": 0,
+        "scored": 2,
         "dnp": 0,
-        "pending": 2
+        "pending": 0
       },
       "games": {
-        "won": 0,
-        "lost": 0,
-        "pending": 2
+        "won": 1,
+        "lost": 1,
+        "pending": 0
       },
       "hits": {
         "hit": 1,
-        "scored": 1,
+        "scored": 2,
         "dnp": 0,
-        "pending": 1
+        "pending": 0
       },
       "parlays": {
         "won": 0,
@@ -1194,18 +1218,18 @@
         "void": 0,
         "pending": 0
       },
-      "graded_at": "2026-10-07 00:40:01",
-      "complete": false
+      "graded_at": "2026-10-07 05:50:34",
+      "complete": true
     }
   },
   "record": {
     "hr_hit": 21,
-    "hr_scored": 89,
-    "hr_expected": 17.75,
-    "games_won": 127,
-    "games_lost": 76,
+    "hr_scored": 91,
+    "hr_expected": 18.1,
+    "games_won": 128,
+    "games_lost": 77,
     "hits_hit": 50,
-    "hits_scored": 75,
+    "hits_scored": 76,
     "parlays_won": 27,
     "parlays_lost": 39,
     "five_won": 0,
@@ -1214,15 +1238,15 @@
       {
         "date": "2026-10-06",
         "hr_hit": 0,
-        "hr_scored": 0,
-        "hr_expected": 0,
-        "games_won": 0,
-        "games_lost": 0,
+        "hr_scored": 2,
+        "hr_expected": 0.34,
+        "games_won": 1,
+        "games_lost": 1,
         "hits_hit": 1,
-        "hits_scored": 1,
+        "hits_scored": 2,
         "parlays_won": 0,
         "parlays_lost": 0,
-        "complete": false,
+        "complete": true,
         "backfilled": false
       },
       {
