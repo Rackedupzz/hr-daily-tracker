@@ -1,7 +1,7 @@
 {
   "date": "2026-10-06",
-  "built_at": "2026-10-06 20:14:37",
-  "fetched_at": "2026-10-06 20:14:37",
+  "built_at": "2026-10-07 00:40:00",
+  "fetched_at": "2026-10-07 00:40:01",
   "games": [
     {
       "game_pk": 849819,
@@ -12,38 +12,68 @@
       "home_sp": "Chris Sale",
       "away_sp_hand": "R",
       "home_sp_hand": "L",
-      "state": "Preview",
-      "detailed": "Pre-Game",
-      "inning": "1st",
-      "away_score": 0,
-      "home_score": 0,
+      "state": "Live",
+      "detailed": "In Progress",
+      "inning": "8th",
+      "away_score": 3,
+      "home_score": 1,
       "hr": [
         {
           "batter": "Matt Olson",
           "batter_id": 621566,
           "team": "Atlanta Braves",
-          "prob_hr": 0.1609071875624196,
+          "prob_hr": 0.17445397904031906,
           "facing_hand": "R",
           "season": "42 HR / 720 PA",
-          "result": null
+          "result": {
+            "pa": 3,
+            "ab": 3,
+            "hits": 1,
+            "hr": 0,
+            "rbi": 0,
+            "summary": "1-3 | K",
+            "state": "Live",
+            "detailed": "In Progress",
+            "final": false
+          }
         },
         {
           "batter": "Ronald Acu\u00f1a Jr.",
           "batter_id": 660670,
           "team": "Atlanta Braves",
-          "prob_hr": 0.15458524069846752,
+          "prob_hr": 0.16797234844863027,
           "facing_hand": "R",
           "season": "20 HR / 491 PA",
-          "result": null
+          "result": {
+            "pa": 3,
+            "ab": 3,
+            "hits": 0,
+            "hr": 0,
+            "rbi": 0,
+            "summary": "0-3 | K",
+            "state": "Live",
+            "detailed": "In Progress",
+            "final": false
+          }
         },
         {
           "batter": "Drake Baldwin",
           "batter_id": 686948,
           "team": "Atlanta Braves",
-          "prob_hr": 0.13885185017878765,
+          "prob_hr": 0.1517460717056224,
           "facing_hand": "R",
           "season": "25 HR / 637 PA",
-          "result": null
+          "result": {
+            "pa": 3,
+            "ab": 3,
+            "hits": 0,
+            "hr": 0,
+            "rbi": 1,
+            "summary": "0-3 | 2 K, RBI",
+            "state": "Live",
+            "detailed": "In Progress",
+            "final": false
+          }
         }
       ],
       "hits": [
@@ -53,7 +83,17 @@
           "team": "Los Angeles Dodgers",
           "projected_hits": 1.04,
           "prob_at_least_one": 0.6923192088013301,
-          "result": null,
+          "result": {
+            "pa": 4,
+            "ab": 4,
+            "hits": 2,
+            "hr": 0,
+            "rbi": 0,
+            "summary": "2-4",
+            "state": "Live",
+            "detailed": "In Progress",
+            "final": false
+          },
           "matchup": null
         },
         {
@@ -62,7 +102,17 @@
           "team": "Los Angeles Dodgers",
           "projected_hits": 1.0,
           "prob_at_least_one": 0.6789564373768325,
-          "result": null,
+          "result": {
+            "pa": 4,
+            "ab": 4,
+            "hits": 1,
+            "hr": 1,
+            "rbi": 1,
+            "summary": "1-4 | HR, K, RBI",
+            "state": "Live",
+            "detailed": "In Progress",
+            "final": false
+          },
           "matchup": null
         },
         {
@@ -71,7 +121,17 @@
           "team": "Atlanta Braves",
           "projected_hits": 0.96,
           "prob_at_least_one": 0.661210809340689,
-          "result": null,
+          "result": {
+            "pa": 3,
+            "ab": 3,
+            "hits": 0,
+            "hr": 0,
+            "rbi": 1,
+            "summary": "0-3 | 2 K, RBI",
+            "state": "Live",
+            "detailed": "In Progress",
+            "final": false
+          },
           "matchup": null
         }
       ]
@@ -86,36 +146,36 @@
       "away_sp_hand": "R",
       "home_sp_hand": "R",
       "state": "Preview",
-      "detailed": "Scheduled",
-      "inning": null,
-      "away_score": null,
-      "home_score": null,
+      "detailed": "Pre-Game",
+      "inning": "1st",
+      "away_score": 0,
+      "home_score": 0,
       "hr": [
         {
           "batter": "Fernando Tatis Jr.",
           "batter_id": 665487,
           "team": "San Diego Padres",
-          "prob_hr": 0.1579224078975483,
+          "prob_hr": 0.15447854381599038,
           "facing_hand": "R",
           "season": "26 HR / 722 PA",
-          "result": null
-        },
-        {
-          "batter": "Jackson Chourio",
-          "batter_id": 694192,
-          "team": "Milwaukee Brewers",
-          "prob_hr": 0.1447035091050375,
-          "facing_hand": "R",
-          "season": "26 HR / 582 PA",
           "result": null
         },
         {
           "batter": "Jackson Merrill",
           "batter_id": 701538,
           "team": "San Diego Padres",
-          "prob_hr": 0.13761368732486892,
+          "prob_hr": 0.14847874634301017,
           "facing_hand": "R",
           "season": "26 HR / 681 PA",
+          "result": null
+        },
+        {
+          "batter": "Jackson Chourio",
+          "batter_id": 694192,
+          "team": "Milwaukee Brewers",
+          "prob_hr": 0.14137179750140108,
+          "facing_hand": "R",
+          "season": "26 HR / 582 PA",
           "result": null
         }
       ],
