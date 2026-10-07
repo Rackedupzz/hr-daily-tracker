@@ -1,6 +1,319 @@
 {
-  "date": "2026-10-06",
-  "built_at": "2026-10-07 05:50:34",
-  "fetched_at": "2026-10-07 05:50:34",
-  "games": []
+  "date": "2026-10-07",
+  "built_at": "2026-10-07 13:15:48",
+  "fetched_at": "2026-10-07 13:15:49",
+  "games": [
+    {
+      "game_pk": 849822,
+      "away": "Los Angeles Dodgers",
+      "home": "Atlanta Braves",
+      "venue": "Truist Park",
+      "away_sp": "Tyler Glasnow",
+      "home_sp": "Tyler Mahle",
+      "away_sp_hand": "R",
+      "home_sp_hand": "R",
+      "state": "Preview",
+      "detailed": "Scheduled",
+      "inning": null,
+      "away_score": null,
+      "home_score": null,
+      "hr": [
+        {
+          "batter": "Shohei Ohtani",
+          "batter_id": 660271,
+          "team": "Los Angeles Dodgers",
+          "prob_hr": 0.1780996744850561,
+          "facing_hand": "R",
+          "season": "30 HR / 630 PA",
+          "result": null
+        },
+        {
+          "batter": "Matt Olson",
+          "batter_id": 621566,
+          "team": "Atlanta Braves",
+          "prob_hr": 0.1666116981324655,
+          "facing_hand": "R",
+          "season": "42 HR / 724 PA",
+          "result": null
+        },
+        {
+          "batter": "Ronald Acu\u00f1a Jr.",
+          "batter_id": 660670,
+          "team": "Atlanta Braves",
+          "prob_hr": 0.15989647549747496,
+          "facing_hand": "R",
+          "season": "20 HR / 495 PA",
+          "result": null
+        }
+      ],
+      "hits": [
+        {
+          "batter": "Mookie Betts",
+          "batter_id": 605141,
+          "team": "Los Angeles Dodgers",
+          "projected_hits": 1.13,
+          "prob_at_least_one": 0.7266825389676892,
+          "result": null,
+          "matchup": null
+        },
+        {
+          "batter": "Freddie Freeman",
+          "batter_id": 518692,
+          "team": "Los Angeles Dodgers",
+          "projected_hits": 1.05,
+          "prob_at_least_one": 0.7012207771149651,
+          "result": null,
+          "matchup": null
+        },
+        {
+          "batter": "Shohei Ohtani",
+          "batter_id": 660271,
+          "team": "Los Angeles Dodgers",
+          "projected_hits": 1.03,
+          "prob_at_least_one": 0.6894434789494694,
+          "result": null,
+          "matchup": null
+        }
+      ]
+    },
+    {
+      "game_pk": 849827,
+      "away": "Milwaukee Brewers",
+      "home": "San Diego Padres",
+      "venue": "Petco Park",
+      "away_sp": null,
+      "home_sp": "Walker Buehler",
+      "away_sp_hand": "R",
+      "home_sp_hand": "R",
+      "state": "Preview",
+      "detailed": "Scheduled",
+      "inning": null,
+      "away_score": null,
+      "home_score": null,
+      "hr": [
+        {
+          "batter": "Fernando Tatis Jr.",
+          "batter_id": 665487,
+          "team": "San Diego Padres",
+          "prob_hr": 0.1667890938891065,
+          "facing_hand": "R",
+          "season": "26 HR / 726 PA",
+          "result": null
+        },
+        {
+          "batter": "Jackson Chourio",
+          "batter_id": 694192,
+          "team": "Milwaukee Brewers",
+          "prob_hr": 0.1602389524514167,
+          "facing_hand": "R",
+          "season": "26 HR / 587 PA",
+          "result": null
+        },
+        {
+          "batter": "Jackson Merrill",
+          "batter_id": 701538,
+          "team": "San Diego Padres",
+          "prob_hr": 0.1462712479926092,
+          "facing_hand": "R",
+          "season": "26 HR / 685 PA",
+          "result": null
+        }
+      ],
+      "hits": [
+        {
+          "batter": "Fernando Tatis Jr.",
+          "batter_id": 665487,
+          "team": "San Diego Padres",
+          "projected_hits": 1.05,
+          "prob_at_least_one": 0.6980192014011641,
+          "result": null,
+          "matchup": null
+        },
+        {
+          "batter": "Jackson Chourio",
+          "batter_id": 694192,
+          "team": "Milwaukee Brewers",
+          "projected_hits": 1.05,
+          "prob_at_least_one": 0.6967500481374325,
+          "result": null,
+          "matchup": null
+        },
+        {
+          "batter": "William Contreras",
+          "batter_id": 661388,
+          "team": "Milwaukee Brewers",
+          "projected_hits": 1.05,
+          "prob_at_least_one": 0.6996129892894257,
+          "result": null,
+          "matchup": null
+        }
+      ]
+    },
+    {
+      "game_pk": 849833,
+      "away": "Cleveland Guardians",
+      "home": "Chicago White Sox",
+      "venue": "Rate Field",
+      "away_sp": "Daniel Espino",
+      "home_sp": "Sean Newcomb",
+      "away_sp_hand": "R",
+      "home_sp_hand": "L",
+      "state": "Preview",
+      "detailed": "Scheduled",
+      "inning": null,
+      "away_score": null,
+      "home_score": null,
+      "hr": [
+        {
+          "batter": "Munetaka Murakami",
+          "batter_id": 808959,
+          "team": "Chicago White Sox",
+          "prob_hr": 0.18318864125320727,
+          "facing_hand": "R",
+          "season": "36 HR / 571 PA",
+          "result": null
+        },
+        {
+          "batter": "Miguel Vargas",
+          "batter_id": 678246,
+          "team": "Chicago White Sox",
+          "prob_hr": 0.15297233637805477,
+          "facing_hand": "R",
+          "season": "33 HR / 722 PA",
+          "result": null
+        },
+        {
+          "batter": "Randal Grichuk",
+          "batter_id": 545341,
+          "team": "Chicago White Sox",
+          "prob_hr": 0.15224162751685208,
+          "facing_hand": "R",
+          "season": "15 HR / 287 PA",
+          "result": null
+        }
+      ],
+      "hits": [
+        {
+          "batter": "Steven Kwan",
+          "batter_id": 680757,
+          "team": "Cleveland Guardians",
+          "projected_hits": 1.05,
+          "prob_at_least_one": 0.6962420123573898,
+          "result": null,
+          "matchup": null
+        },
+        {
+          "batter": "Chase DeLauter",
+          "batter_id": 800050,
+          "team": "Cleveland Guardians",
+          "projected_hits": 0.99,
+          "prob_at_least_one": 0.6743727692894517,
+          "result": null,
+          "matchup": null
+        },
+        {
+          "batter": "Jos\u00e9 Ram\u00edrez",
+          "batter_id": 608070,
+          "team": "Cleveland Guardians",
+          "projected_hits": 0.99,
+          "prob_at_least_one": 0.6755613623136354,
+          "result": null,
+          "matchup": null
+        }
+      ]
+    },
+    {
+      "game_pk": 849838,
+      "away": "Tampa Bay Rays",
+      "home": "New York Yankees",
+      "venue": "Yankee Stadium",
+      "away_sp": "Nick Martinez",
+      "home_sp": "Max Fried",
+      "away_sp_hand": "R",
+      "home_sp_hand": "L",
+      "state": "Preview",
+      "detailed": "Scheduled",
+      "inning": null,
+      "away_score": null,
+      "home_score": null,
+      "hr": [
+        {
+          "batter": "Ben Rice",
+          "batter_id": 700250,
+          "team": "New York Yankees",
+          "prob_hr": 0.22779854240869896,
+          "facing_hand": "R",
+          "season": "45 HR / 685 PA",
+          "result": null
+        },
+        {
+          "batter": "Luis Garc\u00eda Jr.",
+          "batter_id": 671277,
+          "team": "New York Yankees",
+          "prob_hr": 0.19120325192204196,
+          "facing_hand": "R",
+          "season": "31 HR / 556 PA",
+          "result": null
+        },
+        {
+          "batter": "Spencer Jones",
+          "batter_id": 682987,
+          "team": "New York Yankees",
+          "prob_hr": 0.17954501013003657,
+          "facing_hand": "R",
+          "season": "11 HR / 305 PA",
+          "result": null
+        }
+      ],
+      "hits": [
+        {
+          "batter": "Luis Garc\u00eda Jr.",
+          "batter_id": 671277,
+          "team": "New York Yankees",
+          "projected_hits": 1.16,
+          "prob_at_least_one": 0.7422452734318574,
+          "result": null,
+          "matchup": null
+        },
+        {
+          "batter": "Cody Bellinger",
+          "batter_id": 641355,
+          "team": "New York Yankees",
+          "projected_hits": 1.15,
+          "prob_at_least_one": 0.7372340494363796,
+          "result": null,
+          "matchup": {
+            "pa": 9,
+            "hits": 4,
+            "home_runs": 1,
+            "strikeouts": 0,
+            "hit_rate": 0.4444444444444444,
+            "baseline_hit_rate": 0.23488773747841105,
+            "baseline_hr_rate": 0.031088082901554404,
+            "verdict": "hot",
+            "pitcher": "Nick Martinez"
+          }
+        },
+        {
+          "batter": "Ben Rice",
+          "batter_id": 700250,
+          "team": "New York Yankees",
+          "projected_hits": 1.12,
+          "prob_at_least_one": 0.7253615925280112,
+          "result": null,
+          "matchup": {
+            "pa": 9,
+            "hits": 3,
+            "home_runs": 0,
+            "strikeouts": 1,
+            "hit_rate": 0.3333333333333333,
+            "baseline_hit_rate": 0.23065693430656933,
+            "baseline_hr_rate": 0.06569343065693431,
+            "verdict": "hot",
+            "pitcher": "Nick Martinez"
+          }
+        }
+      ]
+    }
+  ]
 }
