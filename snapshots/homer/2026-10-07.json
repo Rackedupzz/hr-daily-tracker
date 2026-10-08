@@ -1,7 +1,7 @@
 {
  "bot": "HOMER",
  "date": "2026-10-07",
- "built_at": "2026-10-07 20:37:31",
+ "built_at": "2026-10-08 00:59:30",
  "book_through": "2026-10-07",
  "league": {
   "pa": 183915,
@@ -734,7 +734,13 @@
     "avg_prob": 0.2088
    },
    "tag": "HAMMER IT &#128296;",
-   "edge": -0.012940355567474054
+   "edge": -0.012940355567474054,
+   "result": {
+    "hr": 0,
+    "summary": "0-1",
+    "final": false,
+    "state": "In Progress"
+   }
   },
   {
    "rules_prob": 0.18049225087328258,
@@ -812,7 +818,13 @@
     "avg_prob": 0.1793
    },
    "tag": "LOVE IT",
-   "edge": 0.021179879693195985
+   "edge": 0.021179879693195985,
+   "result": {
+    "hr": 0,
+    "summary": "0-4 | K",
+    "final": false,
+    "state": "In Progress"
+   }
   },
   {
    "rules_prob": 0.1911397037659276,
@@ -893,13 +905,13 @@
    "edge": 0.009389045029948667,
    "result": {
     "hr": 0,
-    "summary": "0-1 | K",
-    "final": false,
-    "state": "In Progress"
+    "summary": "0-4 | 3 K",
+    "final": true,
+    "state": "Final"
    }
   },
   {
-   "rules_prob": 0.1398131554155977,
+   "rules_prob": 0.13720017147386865,
    "xhr_rate": 0.041434228398985584,
    "hr_rate": 0.03470856761324688,
    "recent_rate": 0.04963985219568641,
@@ -910,23 +922,23 @@
    "season_xhr": 31.099668658475522,
    "barrel_rate": 0.06669382644800374,
    "hard_rate": 0.5357833655705996,
-   "split_index": 1.0249487741436336,
-   "split_pa": 555,
-   "split_hr": 16,
-   "sp_index": 1.0,
-   "sp_fly": 0.26971021140645246,
-   "sp_form_index": 1.0,
+   "split_index": 1.0542182128551707,
+   "split_pa": 164,
+   "split_hr": 10,
+   "sp_index": 0.9777583911406945,
+   "sp_fly": 0.2731242585550062,
+   "sp_form_index": 1.1573759695742796,
    "pen_index": 0.8293027133885527,
-   "platoon": 0.98925499576605,
+   "platoon": 1.0172254727289156,
    "park": 0.958,
-   "weather": 1.0,
+   "weather": 0.976,
    "weather_note": "",
    "exp_pa": 4.65,
-   "slot": null,
+   "slot": 1,
    "usual_slot": 1,
-   "pa_vs_sp": 2.59,
-   "pa_vs_pen": 2.06,
-   "sp_hand": "R",
+   "pa_vs_sp": 2.64,
+   "pa_vs_pen": 2.01,
+   "sp_hand": "L",
    "bat_side": "R",
    "lg": 0.030530408068944893,
    "batter": "Fernando Tatis Jr.",
@@ -935,34 +947,35 @@
    "game_pk": 849827,
    "matchup": "Milwaukee Brewers @ San Diego Padres",
    "venue": "Petco Park",
-   "sp_name": "TBD",
-   "model_prob": 0.1667890938891065,
+   "sp_name": "Robert Gasser",
+   "model_prob": 0.16408991630536604,
    "injury_note": null,
-   "lineup_posted": false,
-   "lineup_confirmed": false,
-   "prob": 0.1666681575349481,
+   "lineup_posted": true,
+   "lineup_confirmed": true,
+   "prob": 0.16574934310203004,
    "method": "learned",
    "contrib": {
     "xhr": 0.291,
     "hr": 0.0331,
     "form": 0.0528,
     "barrel": -0.0215,
-    "sp_hr": 0.0026,
-    "sp_fly": 0.0079,
+    "sp_hr": -0.0044,
+    "sp_fly": 0.0203,
     "park": -0.0266,
-    "weather": -0.0474,
+    "weather": -0.0712,
     "exp_pa": 0.1966,
     "sample": 0.0815
    },
    "take": [
     "Contact quality: 31.1 xHR in 719 PA (1.36&times; league) <span class='muted'>(+34% odds)</span>",
-    "Lineup not posted; usually bats 1 (4.7 trips) <span class='muted'>(+22% odds)</span>",
-    "Established: 719 PA of track record <span class='muted'>(+8% odds)</span>"
+    "Batting 1: 4.7 projected trips <span class='muted'>(+22% odds)</span>",
+    "Established: 719 PA of track record <span class='muted'>(+8% odds)</span>",
+    "Knock: Weather 0.98&times; <span class='muted'>(-7% odds)</span>"
    ],
    "market_prob": 0.15674263318772705,
    "book_implied": 0.191226012489027,
    "book_price": "+423",
-   "book_edge": -0.12842319219247478,
+   "book_edge": -0.13322805331444565,
    "grade": "C",
    "evidence": {
     "grade": "C",
@@ -974,7 +987,7 @@
     "avg_prob": 0.1556
    },
    "tag": "LIKE IT",
-   "edge": -0.00012093635415841297
+   "edge": 0.0016594267966640042
   }
  ],
  "hit_picks": [
@@ -1036,7 +1049,14 @@
     "rate": 0.7272,
     "avg_prob": 0.721
    },
-   "tag": "BANK IT &#128176;"
+   "tag": "BANK IT &#128176;",
+   "result": {
+    "hits": 0,
+    "summary": "0-1 | K",
+    "final": false,
+    "dnp": false,
+    "state": "In Progress"
+   }
   },
   {
    "rules_prob": 0.7291049755402901,
@@ -1096,7 +1116,14 @@
     "rate": 0.7272,
     "avg_prob": 0.721
    },
-   "tag": "BANK IT &#128176;"
+   "tag": "BANK IT &#128176;",
+   "result": {
+    "hits": 0,
+    "summary": "0-4",
+    "final": false,
+    "dnp": false,
+    "state": "In Progress"
+   }
   },
   {
    "rules_prob": 0.6866584869206067,
@@ -1159,11 +1186,11 @@
    },
    "tag": "LOVE IT",
    "result": {
-    "hits": 0,
-    "summary": "0-1",
-    "final": false,
+    "hits": 1,
+    "summary": "1-6 | K, RBI, R",
+    "final": true,
     "dnp": false,
-    "state": "In Progress"
+    "state": "Final"
    }
   },
   {
@@ -1187,7 +1214,7 @@
    "pen_hit_index": 0.9616057153498055,
    "park": 0.946,
    "exp_pa": 4.65,
-   "slot": null,
+   "slot": 1,
    "usual_slot": 1,
    "sp_hand": "R",
    "lg_hit": 0.2180790038876655,
@@ -1201,12 +1228,12 @@
    "sp_name": "Walker Buehler",
    "model_prob": 0.6967500481374325,
    "injury_note": null,
-   "lineup_posted": false,
-   "lineup_confirmed": false,
+   "lineup_posted": true,
+   "lineup_confirmed": true,
    "prob": 0.6678057609192919,
    "method": "learned",
    "take": [
-    "Usually bats 1: 4.7 trips <span class='muted'>(+27% odds)</span>",
+    "Batting 1: 4.7 trips to the plate <span class='muted'>(+27% odds)</span>",
     "Established: 582 PA of track record <span class='muted'>(+6% odds)</span>",
     "Contact quality says 1.07&times; league hits <span class='muted'>(+4% odds)</span>",
     "Knock: Petco Park plays 0.95&times; for hits <span class='muted'>(-9% odds)</span>"
@@ -1258,7 +1285,13 @@
     "New York Yankees lineup 0.312 wOBA vs 0.315"
    ],
    "model_pick_prob": 0.5832977355799581,
-   "tag": "LEAN"
+   "tag": "LEAN",
+   "result": {
+    "final": false,
+    "home_score": 0,
+    "away_score": 1,
+    "state": "In Progress"
+   }
   },
   {
    "game_pk": 849822,
@@ -1287,7 +1320,13 @@
     "Los Angeles Dodgers lineup 0.327 wOBA vs 0.311"
    ],
    "model_pick_prob": 0.5238463412853813,
-   "tag": "LEAN"
+   "tag": "LEAN",
+   "result": {
+    "final": false,
+    "home_score": 1,
+    "away_score": 4,
+    "state": "In Progress"
+   }
   },
   {
    "game_pk": 849833,
@@ -1318,10 +1357,12 @@
    "model_pick_prob": 0.5962055782036111,
    "tag": "LEAN",
    "result": {
-    "final": false,
-    "home_score": 1,
-    "away_score": 0,
-    "state": "In Progress"
+    "final": true,
+    "won": false,
+    "home_score": 3,
+    "away_score": 9,
+    "total": 12,
+    "state": "Final"
    }
   },
   {
@@ -1332,7 +1373,7 @@
    "venue": "Petco Park",
    "pick": "Milwaukee Brewers",
    "pick_side": "away",
-   "win_prob": 0.5430652234317703,
+   "win_prob": 0.5476294888932348,
    "confidence": "Coin flip",
    "evidence": {
     "label": "Coin flip",
@@ -1343,14 +1384,14 @@
    },
    "method": "rules",
    "away_runs": 4.27,
-   "home_runs": 4.0,
-   "total": 8.3,
+   "home_runs": 3.94,
+   "total": 8.2,
    "park_runs": 0.927,
    "take": [
-    "Pitching edge: TBD allows 0.313 wOBA, Walker Buehler 0.322",
+    "Pitching edge: Robert Gasser allows 0.308 wOBA, Walker Buehler 0.322",
     "Milwaukee Brewers lineup 0.322 wOBA vs 0.312"
    ],
-   "model_pick_prob": 0.5404063289099375,
+   "model_pick_prob": 0.5442157202132407,
    "tag": "SMALL PLAY"
   }
  ],
@@ -1361,13 +1402,13 @@
    "team": "Atlanta Braves",
    "game_pk": 849822,
    "matchup": "Los Angeles Dodgers @ Atlanta Braves",
-   "prob": 0.16646367013196076,
-   "model_prob": 0.12889820794732199,
-   "edge": 0.03756546218463877,
+   "prob": 0.1676778917967342,
+   "model_prob": 0.1269184922140937,
+   "edge": 0.04075939958264049,
    "barrel_rate": 0.0510374304514094,
    "sp_name": "Tyler Glasnow",
    "park": 1.014,
-   "weather": 1.063
+   "weather": 1.081
   },
   {
    "batter": "Junior Caminero",
@@ -1375,13 +1416,13 @@
    "team": "Tampa Bay Rays",
    "game_pk": 849838,
    "matchup": "Tampa Bay Rays @ New York Yankees",
-   "prob": 0.1656943927957633,
-   "model_prob": 0.1303384061822678,
-   "edge": 0.03535598661349551,
+   "prob": 0.16739448246900046,
+   "model_prob": 0.13262656120927654,
+   "edge": 0.034767921259723916,
    "barrel_rate": 0.05664595513973919,
    "sp_name": "Max Fried",
    "park": 1.171,
-   "weather": 0.919
+   "weather": 0.946
   },
   {
    "batter": "Drake Baldwin",
@@ -1389,13 +1430,13 @@
    "team": "Atlanta Braves",
    "game_pk": 849822,
    "matchup": "Los Angeles Dodgers @ Atlanta Braves",
-   "prob": 0.1633665452743568,
-   "model_prob": 0.1320047969107712,
-   "edge": 0.0313617483635856,
+   "prob": 0.16416458637845668,
+   "model_prob": 0.13000302949175202,
+   "edge": 0.034161556886704664,
    "barrel_rate": 0.07986707735806199,
    "sp_name": "Tyler Glasnow",
    "park": 1.014,
-   "weather": 1.063
+   "weather": 1.081
   },
   {
    "batter": "Jake Cronenworth",
@@ -1403,43 +1444,43 @@
    "team": "San Diego Padres",
    "game_pk": 849827,
    "matchup": "Milwaukee Brewers @ San Diego Padres",
-   "prob": 0.08204279676645779,
-   "model_prob": 0.05419445259547638,
-   "edge": 0.027848344170981407,
+   "prob": 0.08043428821283582,
+   "model_prob": 0.05205369378919069,
+   "edge": 0.028380594423645135,
    "barrel_rate": 0.0375818169971206,
-   "sp_name": "TBD",
+   "sp_name": "Robert Gasser",
    "park": 0.958,
-   "weather": 1.0
+   "weather": 1.033
   },
   {
-   "batter": "Yandy D\u00edaz",
-   "batter_id": 650490,
-   "team": "Tampa Bay Rays",
-   "game_pk": 849838,
-   "matchup": "Tampa Bay Rays @ New York Yankees",
-   "prob": 0.12599984625178468,
-   "model_prob": 0.09840656788347457,
-   "edge": 0.027593278368310103,
-   "barrel_rate": 0.057070260166988046,
-   "sp_name": "Max Fried",
-   "park": 1.171,
-   "weather": 0.919
+   "batter": "Ronald Acu\u00f1a Jr.",
+   "batter_id": 660670,
+   "team": "Atlanta Braves",
+   "game_pk": 849822,
+   "matchup": "Los Angeles Dodgers @ Atlanta Braves",
+   "prob": 0.19081105853924185,
+   "model_prob": 0.16325712079082993,
+   "edge": 0.027553937748411916,
+   "barrel_rate": 0.066174398922715,
+   "sp_name": "Tyler Glasnow",
+   "park": 1.014,
+   "weather": 1.081
   }
  ],
  "fades": [
   {
-   "batter": "Teoscar Hern\u00e1ndez",
-   "batter_id": 606192,
-   "team": "Los Angeles Dodgers",
-   "game_pk": 849822,
-   "matchup": "Los Angeles Dodgers @ Atlanta Braves",
-   "prob": 0.13949555936403948,
-   "model_prob": 0.15942803446114467,
-   "edge": -0.01993247509710519,
-   "barrel_rate": 0.07851607519350987,
-   "sp_name": "Tyler Mahle",
-   "park": 1.014,
-   "weather": 1.063
+   "batter": "Austin Hays",
+   "batter_id": 669720,
+   "team": "San Diego Padres",
+   "game_pk": 849827,
+   "matchup": "Milwaukee Brewers @ San Diego Padres",
+   "prob": 0.08509529805879217,
+   "model_prob": 0.10454812151859671,
+   "edge": -0.01945282345980455,
+   "barrel_rate": 0.0457905480001427,
+   "sp_name": "Robert Gasser",
+   "park": 0.958,
+   "weather": 0.976
   },
   {
    "batter": "Austin Wells",
@@ -1447,41 +1488,27 @@
    "team": "New York Yankees",
    "game_pk": 849838,
    "matchup": "Tampa Bay Rays @ New York Yankees",
-   "prob": 0.12867132502762765,
-   "model_prob": 0.14671352634646123,
-   "edge": -0.01804220131883358,
+   "prob": 0.1298961163038133,
+   "model_prob": 0.14911785022039442,
+   "edge": -0.019221733916581107,
    "barrel_rate": 0.053977473023952637,
    "sp_name": "Nick Martinez",
    "park": 1.171,
-   "weather": 0.919
+   "weather": 0.946
   },
   {
-   "batter": "Sal Frelick",
-   "batter_id": 686217,
-   "team": "Milwaukee Brewers",
-   "game_pk": 849827,
-   "matchup": "Milwaukee Brewers @ San Diego Padres",
-   "prob": 0.04022516597094318,
-   "model_prob": 0.05678666785241565,
-   "edge": -0.01656150188147247,
-   "barrel_rate": 0.027340945949911207,
-   "sp_name": "Walker Buehler",
-   "park": 0.958,
-   "weather": 1.0
-  },
-  {
-   "batter": "Luis Garc\u00eda Jr.",
-   "batter_id": 671277,
-   "team": "New York Yankees",
-   "game_pk": 849838,
-   "matchup": "Tampa Bay Rays @ New York Yankees",
-   "prob": 0.1679836516446832,
-   "model_prob": 0.18380834212583116,
-   "edge": -0.015824690481147957,
-   "barrel_rate": 0.07283556400840611,
-   "sp_name": "Nick Martinez",
-   "park": 1.171,
-   "weather": 0.919
+   "batter": "Teoscar Hern\u00e1ndez",
+   "batter_id": 606192,
+   "team": "Los Angeles Dodgers",
+   "game_pk": 849822,
+   "matchup": "Los Angeles Dodgers @ Atlanta Braves",
+   "prob": 0.14006441929824046,
+   "model_prob": 0.15726885651944358,
+   "edge": -0.017204437221203128,
+   "barrel_rate": 0.07851607519350987,
+   "sp_name": "Tyler Mahle",
+   "park": 1.014,
+   "weather": 1.081
   },
   {
    "batter": "Cody Bellinger",
@@ -1489,35 +1516,51 @@
    "team": "New York Yankees",
    "game_pk": 849838,
    "matchup": "Tampa Bay Rays @ New York Yankees",
-   "prob": 0.12669772078038216,
-   "model_prob": 0.14162477664761228,
-   "edge": -0.014927055867230116,
+   "prob": 0.12788110187595375,
+   "model_prob": 0.1439959575365615,
+   "edge": -0.016114855660607746,
    "barrel_rate": 0.04382189388635394,
    "sp_name": "Nick Martinez",
    "park": 1.171,
-   "weather": 0.919
+   "weather": 0.946
+  },
+  {
+   "batter": "Luis Garc\u00eda Jr.",
+   "batter_id": 671277,
+   "team": "New York Yankees",
+   "game_pk": 849838,
+   "matchup": "Tampa Bay Rays @ New York Yankees",
+   "prob": 0.1703343050897517,
+   "model_prob": 0.18637733437705678,
+   "edge": -0.016043029287305083,
+   "barrel_rate": 0.07283556400840611,
+   "sp_name": "Nick Martinez",
+   "park": 1.171,
+   "weather": 0.946
   }
  ],
  "locked": [
-  849833
+  849822,
+  849833,
+  849838
  ],
  "record": {
   "hr": {
    "hit": 0,
-   "scored": 0,
+   "scored": 1,
    "dnp": 0,
-   "pending": 4
+   "pending": 3
   },
   "games": {
    "won": 0,
-   "lost": 0,
-   "pending": 4
+   "lost": 1,
+   "pending": 3
   },
   "hits": {
-   "hit": 0,
-   "scored": 0,
+   "hit": 1,
+   "scored": 1,
    "dnp": 0,
-   "pending": 4
+   "pending": 3
   },
   "parlays": {
    "won": 0,
@@ -1531,7 +1574,7 @@
    "void": 0,
    "pending": 0
   },
-  "graded_at": "2026-10-07 20:37:24",
+  "graded_at": "2026-10-08 00:59:22",
   "complete": false
  }
 }

@@ -1,141 +1,8 @@
 {
   "date": "2026-10-07",
-  "built_at": "2026-10-07 20:37:24",
-  "fetched_at": "2026-10-07 20:37:24",
+  "built_at": "2026-10-08 00:59:22",
+  "fetched_at": "2026-10-08 00:59:22",
   "games": [
-    {
-      "game_pk": 849833,
-      "away": "Cleveland Guardians",
-      "home": "Chicago White Sox",
-      "venue": "Rate Field",
-      "away_sp": "Daniel Espino",
-      "home_sp": "Sean Newcomb",
-      "away_sp_hand": "R",
-      "home_sp_hand": "L",
-      "state": "Live",
-      "detailed": "In Progress",
-      "inning": "2nd",
-      "away_score": 0,
-      "home_score": 1,
-      "hr": [
-        {
-          "batter": "Munetaka Murakami",
-          "batter_id": 808959,
-          "team": "Chicago White Sox",
-          "prob_hr": 0.1921062963766378,
-          "facing_hand": "R",
-          "season": "36 HR / 571 PA",
-          "result": {
-            "pa": 1,
-            "ab": 1,
-            "hits": 0,
-            "hr": 0,
-            "rbi": 0,
-            "summary": "0-1 | K",
-            "state": "Live",
-            "detailed": "In Progress",
-            "final": false
-          }
-        },
-        {
-          "batter": "Miguel Vargas",
-          "batter_id": 678246,
-          "team": "Chicago White Sox",
-          "prob_hr": 0.1610817220741663,
-          "facing_hand": "R",
-          "season": "33 HR / 722 PA",
-          "result": {
-            "pa": 1,
-            "ab": 1,
-            "hits": 1,
-            "hr": 0,
-            "rbi": 0,
-            "summary": "1-1",
-            "state": "Live",
-            "detailed": "In Progress",
-            "final": false
-          }
-        },
-        {
-          "batter": "Kyle Teel",
-          "batter_id": 691019,
-          "team": "Chicago White Sox",
-          "prob_hr": 0.13216924110765538,
-          "facing_hand": "R",
-          "season": "5 HR / 162 PA",
-          "result": {
-            "pa": 1,
-            "ab": 1,
-            "hits": 1,
-            "hr": 0,
-            "rbi": 1,
-            "summary": "1-1 | 2B, RBI",
-            "state": "Live",
-            "detailed": "In Progress",
-            "final": false
-          }
-        }
-      ],
-      "hits": [
-        {
-          "batter": "Steven Kwan",
-          "batter_id": 680757,
-          "team": "Cleveland Guardians",
-          "projected_hits": 1.05,
-          "prob_at_least_one": 0.6962420123573898,
-          "result": {
-            "pa": 1,
-            "ab": 1,
-            "hits": 0,
-            "hr": 0,
-            "rbi": 0,
-            "summary": "0-1",
-            "state": "Live",
-            "detailed": "In Progress",
-            "final": false
-          },
-          "matchup": null
-        },
-        {
-          "batter": "Jos\u00e9 Ram\u00edrez",
-          "batter_id": 608070,
-          "team": "Cleveland Guardians",
-          "projected_hits": 0.99,
-          "prob_at_least_one": 0.6755613623136354,
-          "result": {
-            "pa": 1,
-            "ab": 1,
-            "hits": 0,
-            "hr": 0,
-            "rbi": 0,
-            "summary": "0-1",
-            "state": "Live",
-            "detailed": "In Progress",
-            "final": false
-          },
-          "matchup": null
-        },
-        {
-          "batter": "Chase DeLauter",
-          "batter_id": 800050,
-          "team": "Cleveland Guardians",
-          "projected_hits": 0.99,
-          "prob_at_least_one": 0.6743727692894517,
-          "result": {
-            "pa": 1,
-            "ab": 1,
-            "hits": 0,
-            "hr": 0,
-            "rbi": 0,
-            "summary": "0-1",
-            "state": "Live",
-            "detailed": "In Progress",
-            "final": false
-          },
-          "matchup": null
-        }
-      ]
-    },
     {
       "game_pk": 849822,
       "away": "Los Angeles Dodgers",
@@ -145,38 +12,68 @@
       "home_sp": "Tyler Mahle",
       "away_sp_hand": "R",
       "home_sp_hand": "R",
-      "state": "Preview",
-      "detailed": "Pre-Game",
-      "inning": "1st",
-      "away_score": 0,
-      "home_score": 0,
+      "state": "Live",
+      "detailed": "In Progress",
+      "inning": "9th",
+      "away_score": 4,
+      "home_score": 1,
       "hr": [
         {
           "batter": "Matt Olson",
           "batter_id": 621566,
           "team": "Atlanta Braves",
-          "prob_hr": 0.1722245859483175,
+          "prob_hr": 0.17001404296883704,
           "facing_hand": "R",
           "season": "42 HR / 724 PA",
-          "result": null
+          "result": {
+            "pa": 4,
+            "ab": 4,
+            "hits": 0,
+            "hr": 0,
+            "rbi": 0,
+            "summary": "0-4 | K",
+            "state": "Live",
+            "detailed": "In Progress",
+            "final": false
+          }
         },
         {
           "batter": "Shohei Ohtani",
           "batter_id": 660271,
           "team": "Los Angeles Dodgers",
-          "prob_hr": 0.17109236542488937,
+          "prob_hr": 0.16888581584613113,
           "facing_hand": "R",
           "season": "30 HR / 630 PA",
-          "result": null
+          "result": {
+            "pa": 4,
+            "ab": 3,
+            "hits": 0,
+            "hr": 0,
+            "rbi": 0,
+            "summary": "0-3 | BB, K, R",
+            "state": "Live",
+            "detailed": "In Progress",
+            "final": false
+          }
         },
         {
           "batter": "Ronald Acu\u00f1a Jr.",
           "batter_id": 660670,
           "team": "Atlanta Braves",
-          "prob_hr": 0.16544214782563824,
+          "prob_hr": 0.16325712079082993,
           "facing_hand": "R",
           "season": "20 HR / 495 PA",
-          "result": null
+          "result": {
+            "pa": 4,
+            "ab": 3,
+            "hits": 0,
+            "hr": 0,
+            "rbi": 0,
+            "summary": "0-3 | BB, 2 K",
+            "state": "Live",
+            "detailed": "In Progress",
+            "final": false
+          }
         }
       ],
       "hits": [
@@ -186,7 +83,17 @@
           "team": "Los Angeles Dodgers",
           "projected_hits": 1.13,
           "prob_at_least_one": 0.7266825389676892,
-          "result": null,
+          "result": {
+            "pa": 4,
+            "ab": 4,
+            "hits": 0,
+            "hr": 0,
+            "rbi": 0,
+            "summary": "0-4",
+            "state": "Live",
+            "detailed": "In Progress",
+            "final": false
+          },
           "matchup": null
         },
         {
@@ -195,7 +102,17 @@
           "team": "Los Angeles Dodgers",
           "projected_hits": 1.09,
           "prob_at_least_one": 0.7158648880790432,
-          "result": null,
+          "result": {
+            "pa": 4,
+            "ab": 4,
+            "hits": 0,
+            "hr": 0,
+            "rbi": 0,
+            "summary": "0-4",
+            "state": "Live",
+            "detailed": "In Progress",
+            "final": false
+          },
           "matchup": null
         },
         {
@@ -204,80 +121,17 @@
           "team": "Los Angeles Dodgers",
           "projected_hits": 1.01,
           "prob_at_least_one": 0.6857122805344205,
-          "result": null,
-          "matchup": null
-        }
-      ]
-    },
-    {
-      "game_pk": 849827,
-      "away": "Milwaukee Brewers",
-      "home": "San Diego Padres",
-      "venue": "Petco Park",
-      "away_sp": null,
-      "home_sp": "Walker Buehler",
-      "away_sp_hand": "R",
-      "home_sp_hand": "R",
-      "state": "Preview",
-      "detailed": "Scheduled",
-      "inning": null,
-      "away_score": null,
-      "home_score": null,
-      "hr": [
-        {
-          "batter": "Fernando Tatis Jr.",
-          "batter_id": 665487,
-          "team": "San Diego Padres",
-          "prob_hr": 0.1667890938891065,
-          "facing_hand": "R",
-          "season": "26 HR / 726 PA",
-          "result": null
-        },
-        {
-          "batter": "Jackson Chourio",
-          "batter_id": 694192,
-          "team": "Milwaukee Brewers",
-          "prob_hr": 0.1602389524514167,
-          "facing_hand": "R",
-          "season": "26 HR / 587 PA",
-          "result": null
-        },
-        {
-          "batter": "Jackson Merrill",
-          "batter_id": 701538,
-          "team": "San Diego Padres",
-          "prob_hr": 0.1462712479926092,
-          "facing_hand": "R",
-          "season": "26 HR / 685 PA",
-          "result": null
-        }
-      ],
-      "hits": [
-        {
-          "batter": "Fernando Tatis Jr.",
-          "batter_id": 665487,
-          "team": "San Diego Padres",
-          "projected_hits": 1.05,
-          "prob_at_least_one": 0.6980192014011641,
-          "result": null,
-          "matchup": null
-        },
-        {
-          "batter": "Jackson Chourio",
-          "batter_id": 694192,
-          "team": "Milwaukee Brewers",
-          "projected_hits": 1.05,
-          "prob_at_least_one": 0.6967500481374325,
-          "result": null,
-          "matchup": null
-        },
-        {
-          "batter": "William Contreras",
-          "batter_id": 661388,
-          "team": "Milwaukee Brewers",
-          "projected_hits": 1.05,
-          "prob_at_least_one": 0.6996129892894257,
-          "result": null,
+          "result": {
+            "pa": 4,
+            "ab": 4,
+            "hits": 0,
+            "hr": 0,
+            "rbi": 0,
+            "summary": "0-4 | 2 K",
+            "state": "Live",
+            "detailed": "In Progress",
+            "final": false
+          },
           "matchup": null
         }
       ]
@@ -291,38 +145,68 @@
       "home_sp": "Max Fried",
       "away_sp_hand": "R",
       "home_sp_hand": "L",
-      "state": "Preview",
-      "detailed": "Pre-Game",
-      "inning": "1st",
-      "away_score": 0,
+      "state": "Live",
+      "detailed": "In Progress",
+      "inning": "3rd",
+      "away_score": 1,
       "home_score": 0,
       "hr": [
         {
           "batter": "Ben Rice",
           "batter_id": 700250,
           "team": "New York Yankees",
-          "prob_hr": 0.2164744578993615,
+          "prob_hr": 0.2190813838273155,
           "facing_hand": "R",
           "season": "45 HR / 685 PA",
-          "result": null
+          "result": {
+            "pa": 1,
+            "ab": 1,
+            "hits": 0,
+            "hr": 0,
+            "rbi": 0,
+            "summary": "0-1",
+            "state": "Live",
+            "detailed": "In Progress",
+            "final": false
+          }
         },
         {
           "batter": "Luis Garc\u00eda Jr.",
           "batter_id": 671277,
           "team": "New York Yankees",
-          "prob_hr": 0.18380834212583116,
+          "prob_hr": 0.18637733437705678,
           "facing_hand": "R",
           "season": "31 HR / 556 PA",
-          "result": null
+          "result": {
+            "pa": 1,
+            "ab": 1,
+            "hits": 0,
+            "hr": 0,
+            "rbi": 0,
+            "summary": "0-1 | K",
+            "state": "Live",
+            "detailed": "In Progress",
+            "final": false
+          }
         },
         {
           "batter": "Austin Wells",
           "batter_id": 669224,
           "team": "New York Yankees",
-          "prob_hr": 0.14671352634646123,
+          "prob_hr": 0.14911785022039442,
           "facing_hand": "R",
           "season": "14 HR / 402 PA",
-          "result": null
+          "result": {
+            "pa": 1,
+            "ab": 1,
+            "hits": 0,
+            "hr": 0,
+            "rbi": 0,
+            "summary": "0-1",
+            "state": "Live",
+            "detailed": "In Progress",
+            "final": false
+          }
         }
       ],
       "hits": [
@@ -332,7 +216,17 @@
           "team": "New York Yankees",
           "projected_hits": 1.16,
           "prob_at_least_one": 0.7422452734318574,
-          "result": null,
+          "result": {
+            "pa": 1,
+            "ab": 1,
+            "hits": 0,
+            "hr": 0,
+            "rbi": 0,
+            "summary": "0-1 | K",
+            "state": "Live",
+            "detailed": "In Progress",
+            "final": false
+          },
           "matchup": null
         },
         {
@@ -341,7 +235,17 @@
           "team": "New York Yankees",
           "projected_hits": 1.11,
           "prob_at_least_one": 0.724583896009175,
-          "result": null,
+          "result": {
+            "pa": 1,
+            "ab": 1,
+            "hits": 0,
+            "hr": 0,
+            "rbi": 0,
+            "summary": "0-1",
+            "state": "Live",
+            "detailed": "In Progress",
+            "final": false
+          },
           "matchup": {
             "pa": 9,
             "hits": 4,
@@ -360,7 +264,17 @@
           "team": "New York Yankees",
           "projected_hits": 1.1,
           "prob_at_least_one": 0.7197794593627017,
-          "result": null,
+          "result": {
+            "pa": 1,
+            "ab": 1,
+            "hits": 0,
+            "hr": 0,
+            "rbi": 0,
+            "summary": "0-1",
+            "state": "Live",
+            "detailed": "In Progress",
+            "final": false
+          },
           "matchup": {
             "pa": 9,
             "hits": 3,
@@ -372,6 +286,79 @@
             "verdict": "hot",
             "pitcher": "Nick Martinez"
           }
+        }
+      ]
+    },
+    {
+      "game_pk": 849827,
+      "away": "Milwaukee Brewers",
+      "home": "San Diego Padres",
+      "venue": "Petco Park",
+      "away_sp": "Robert Gasser",
+      "home_sp": "Walker Buehler",
+      "away_sp_hand": "L",
+      "home_sp_hand": "R",
+      "state": "Preview",
+      "detailed": "Pre-Game",
+      "inning": "1st",
+      "away_score": 0,
+      "home_score": 0,
+      "hr": [
+        {
+          "batter": "Fernando Tatis Jr.",
+          "batter_id": 665487,
+          "team": "San Diego Padres",
+          "prob_hr": 0.16408991630536604,
+          "facing_hand": "L",
+          "season": "26 HR / 726 PA",
+          "result": null
+        },
+        {
+          "batter": "Jackson Chourio",
+          "batter_id": 694192,
+          "team": "Milwaukee Brewers",
+          "prob_hr": 0.15246635156074903,
+          "facing_hand": "R",
+          "season": "26 HR / 587 PA",
+          "result": null
+        },
+        {
+          "batter": "Jackson Merrill",
+          "batter_id": 701538,
+          "team": "San Diego Padres",
+          "prob_hr": 0.14821277007239153,
+          "facing_hand": "L",
+          "season": "26 HR / 685 PA",
+          "result": null
+        }
+      ],
+      "hits": [
+        {
+          "batter": "Jackson Chourio",
+          "batter_id": 694192,
+          "team": "Milwaukee Brewers",
+          "projected_hits": 1.05,
+          "prob_at_least_one": 0.6967500481374325,
+          "result": null,
+          "matchup": null
+        },
+        {
+          "batter": "William Contreras",
+          "batter_id": 661388,
+          "team": "Milwaukee Brewers",
+          "projected_hits": 1.05,
+          "prob_at_least_one": 0.6996129892894257,
+          "result": null,
+          "matchup": null
+        },
+        {
+          "batter": "Fernando Tatis Jr.",
+          "batter_id": 665487,
+          "team": "San Diego Padres",
+          "projected_hits": 1.04,
+          "prob_at_least_one": 0.6933589110963325,
+          "result": null,
+          "matchup": null
         }
       ]
     }
