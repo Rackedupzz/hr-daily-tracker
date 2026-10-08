@@ -4,7 +4,7 @@
   "card": {
     "bot": "HOMER",
     "date": "2026-10-07",
-    "built_at": "2026-10-08 00:59:30",
+    "built_at": "2026-10-08 05:55:07",
     "book_through": "2026-10-07",
     "league": {
       "pa": 183915,
@@ -740,9 +740,9 @@
         "edge": -0.012940355567474054,
         "result": {
           "hr": 0,
-          "summary": "0-1",
-          "final": false,
-          "state": "In Progress"
+          "summary": "1-4 | 2 K, RBI",
+          "final": true,
+          "state": "Final"
         }
       },
       {
@@ -825,8 +825,8 @@
         "result": {
           "hr": 0,
           "summary": "0-4 | K",
-          "final": false,
-          "state": "In Progress"
+          "final": true,
+          "state": "Final"
         }
       },
       {
@@ -990,7 +990,13 @@
           "avg_prob": 0.1556
         },
         "tag": "LIKE IT",
-        "edge": 0.0016594267966640042
+        "edge": 0.0016594267966640042,
+        "result": {
+          "hr": 1,
+          "summary": "1-3 | HR, BB, RBI",
+          "final": true,
+          "state": "Final"
+        }
       }
     ],
     "hit_picks": [
@@ -1054,11 +1060,11 @@
         },
         "tag": "BANK IT &#128176;",
         "result": {
-          "hits": 0,
-          "summary": "0-1 | K",
-          "final": false,
+          "hits": 1,
+          "summary": "1-3 | K",
+          "final": true,
           "dnp": false,
-          "state": "In Progress"
+          "state": "Final"
         }
       },
       {
@@ -1123,9 +1129,9 @@
         "result": {
           "hits": 0,
           "summary": "0-4",
-          "final": false,
+          "final": true,
           "dnp": false,
-          "state": "In Progress"
+          "state": "Final"
         }
       },
       {
@@ -1255,7 +1261,14 @@
           "rate": 0.6671,
           "avg_prob": 0.6639
         },
-        "tag": "LIKE IT"
+        "tag": "LIKE IT",
+        "result": {
+          "hits": 1,
+          "summary": "1-4 | BB, RBI",
+          "final": true,
+          "dnp": false,
+          "state": "Final"
+        }
       }
     ],
     "parlays": [],
@@ -1290,10 +1303,12 @@
         "model_pick_prob": 0.5832977355799581,
         "tag": "LEAN",
         "result": {
-          "final": false,
-          "home_score": 0,
-          "away_score": 1,
-          "state": "In Progress"
+          "final": true,
+          "won": false,
+          "home_score": 3,
+          "away_score": 4,
+          "total": 7,
+          "state": "Final"
         }
       },
       {
@@ -1325,10 +1340,12 @@
         "model_pick_prob": 0.5238463412853813,
         "tag": "LEAN",
         "result": {
-          "final": false,
+          "final": true,
+          "won": true,
           "home_score": 1,
           "away_score": 4,
-          "state": "In Progress"
+          "total": 5,
+          "state": "Final"
         }
       },
       {
@@ -1395,7 +1412,15 @@
           "Milwaukee Brewers lineup 0.322 wOBA vs 0.312"
         ],
         "model_pick_prob": 0.5442157202132407,
-        "tag": "SMALL PLAY"
+        "tag": "SMALL PLAY",
+        "result": {
+          "final": true,
+          "won": true,
+          "home_score": 1,
+          "away_score": 3,
+          "total": 4,
+          "state": "Final"
+        }
       }
     ],
     "likes": [
@@ -1406,8 +1431,8 @@
         "game_pk": 849822,
         "matchup": "Los Angeles Dodgers @ Atlanta Braves",
         "prob": 0.1676778917967342,
-        "model_prob": 0.1269184922140937,
-        "edge": 0.04075939958264049,
+        "model_prob": 0.1269184922140938,
+        "edge": 0.04075939958264041,
         "barrel_rate": 0.0510374304514094,
         "sp_name": "Tyler Glasnow",
         "park": 1.014,
@@ -1420,8 +1445,8 @@
         "game_pk": 849838,
         "matchup": "Tampa Bay Rays @ New York Yankees",
         "prob": 0.16739448246900046,
-        "model_prob": 0.13262656120927654,
-        "edge": 0.034767921259723916,
+        "model_prob": 0.13262656120927652,
+        "edge": 0.034767921259723944,
         "barrel_rate": 0.05664595513973919,
         "sp_name": "Max Fried",
         "park": 1.171,
@@ -1434,8 +1459,8 @@
         "game_pk": 849822,
         "matchup": "Los Angeles Dodgers @ Atlanta Braves",
         "prob": 0.16416458637845668,
-        "model_prob": 0.13000302949175202,
-        "edge": 0.034161556886704664,
+        "model_prob": 0.130003029491752,
+        "edge": 0.03416155688670469,
         "barrel_rate": 0.07986707735806199,
         "sp_name": "Tyler Glasnow",
         "park": 1.014,
@@ -1447,13 +1472,13 @@
         "team": "San Diego Padres",
         "game_pk": 849827,
         "matchup": "Milwaukee Brewers @ San Diego Padres",
-        "prob": 0.08043428821283582,
-        "model_prob": 0.05205369378919069,
-        "edge": 0.028380594423645135,
+        "prob": 0.0831212806988877,
+        "model_prob": 0.05321124836100574,
+        "edge": 0.02991003233788196,
         "barrel_rate": 0.0375818169971206,
         "sp_name": "Robert Gasser",
         "park": 0.958,
-        "weather": 1.033
+        "weather": 1.059
       },
       {
         "batter": "Ronald Acu\u00f1a Jr.",
@@ -1477,13 +1502,13 @@
         "team": "San Diego Padres",
         "game_pk": 849827,
         "matchup": "Milwaukee Brewers @ San Diego Padres",
-        "prob": 0.08509529805879217,
-        "model_prob": 0.10454812151859671,
-        "edge": -0.01945282345980455,
+        "prob": 0.085231356411054,
+        "model_prob": 0.10637356203631747,
+        "edge": -0.021142205625263463,
         "barrel_rate": 0.0457905480001427,
         "sp_name": "Robert Gasser",
         "park": 0.958,
-        "weather": 0.976
+        "weather": 1.0
       },
       {
         "batter": "Austin Wells",
@@ -1520,8 +1545,8 @@
         "game_pk": 849838,
         "matchup": "Tampa Bay Rays @ New York Yankees",
         "prob": 0.12788110187595375,
-        "model_prob": 0.1439959575365615,
-        "edge": -0.016114855660607746,
+        "model_prob": 0.14399595753656144,
+        "edge": -0.01611485566060769,
         "barrel_rate": 0.04382189388635394,
         "sp_name": "Nick Martinez",
         "park": 1.171,
@@ -1544,26 +1569,27 @@
     ],
     "locked": [
       849822,
+      849827,
       849833,
       849838
     ],
     "record": {
       "hr": {
-        "hit": 0,
-        "scored": 1,
+        "hit": 1,
+        "scored": 4,
         "dnp": 0,
-        "pending": 3
+        "pending": 0
       },
       "games": {
-        "won": 0,
-        "lost": 1,
-        "pending": 3
+        "won": 2,
+        "lost": 2,
+        "pending": 0
       },
       "hits": {
-        "hit": 1,
-        "scored": 1,
+        "hit": 3,
+        "scored": 4,
         "dnp": 0,
-        "pending": 3
+        "pending": 0
       },
       "parlays": {
         "won": 0,
@@ -1577,18 +1603,18 @@
         "void": 0,
         "pending": 0
       },
-      "graded_at": "2026-10-08 00:59:22",
-      "complete": false
+      "graded_at": "2026-10-08 05:55:03",
+      "complete": true
     }
   },
   "record": {
-    "hr_hit": 21,
-    "hr_scored": 92,
-    "hr_expected": 18.29,
-    "games_won": 128,
-    "games_lost": 78,
-    "hits_hit": 51,
-    "hits_scored": 77,
+    "hr_hit": 22,
+    "hr_scored": 95,
+    "hr_expected": 18.85,
+    "games_won": 130,
+    "games_lost": 79,
+    "hits_hit": 53,
+    "hits_scored": 80,
     "parlays_won": 27,
     "parlays_lost": 39,
     "five_won": 0,
@@ -1596,16 +1622,16 @@
     "days": [
       {
         "date": "2026-10-07",
-        "hr_hit": 0,
-        "hr_scored": 1,
-        "hr_expected": 0.19,
-        "games_won": 0,
-        "games_lost": 1,
-        "hits_hit": 1,
-        "hits_scored": 1,
+        "hr_hit": 1,
+        "hr_scored": 4,
+        "hr_expected": 0.76,
+        "games_won": 2,
+        "games_lost": 2,
+        "hits_hit": 3,
+        "hits_scored": 4,
         "parlays_won": 0,
         "parlays_lost": 0,
-        "complete": false,
+        "complete": true,
         "backfilled": false
       },
       {
