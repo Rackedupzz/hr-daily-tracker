@@ -1,7 +1,7 @@
 {
   "date": "2026-10-08",
-  "built_at": "2026-10-08 13:22:26",
-  "fetched_at": "2026-10-08 13:22:26",
+  "built_at": "2026-10-08 20:43:12",
+  "fetched_at": "2026-10-08 20:43:12",
   "games": [
     {
       "game_pk": 849832,
@@ -13,16 +13,16 @@
       "away_sp_hand": "L",
       "home_sp_hand": "L",
       "state": "Preview",
-      "detailed": "Scheduled",
-      "inning": null,
-      "away_score": null,
-      "home_score": null,
+      "detailed": "Pre-Game",
+      "inning": "1st",
+      "away_score": 0,
+      "home_score": 0,
       "hr": [
         {
           "batter": "Munetaka Murakami",
           "batter_id": 808959,
           "team": "Chicago White Sox",
-          "prob_hr": 0.1571057429014728,
+          "prob_hr": 0.13897539799041206,
           "facing_hand": "L",
           "season": "36 HR / 575 PA",
           "result": null
@@ -31,7 +31,7 @@
           "batter": "Randal Grichuk",
           "batter_id": 545341,
           "team": "Chicago White Sox",
-          "prob_hr": 0.13896767641809255,
+          "prob_hr": 0.12178737791302803,
           "facing_hand": "L",
           "season": "15 HR / 291 PA",
           "result": null
@@ -40,7 +40,7 @@
           "batter": "Miguel Vargas",
           "batter_id": 678246,
           "team": "Chicago White Sox",
-          "prob_hr": 0.13856260682731275,
+          "prob_hr": 0.12140622162590667,
           "facing_hand": "L",
           "season": "33 HR / 727 PA",
           "result": null
@@ -67,20 +67,20 @@
           }
         },
         {
-          "batter": "Sam Antonacci",
-          "batter_id": 803011,
-          "team": "Chicago White Sox",
-          "projected_hits": 0.96,
-          "prob_at_least_one": 0.6623668508605087,
-          "result": null,
-          "matchup": null
-        },
-        {
           "batter": "Steven Kwan",
           "batter_id": 680757,
           "team": "Cleveland Guardians",
           "projected_hits": 0.96,
           "prob_at_least_one": 0.661448545656248,
+          "result": null,
+          "matchup": null
+        },
+        {
+          "batter": "Chase Meidroth",
+          "batter_id": 805367,
+          "team": "Chicago White Sox",
+          "projected_hits": 0.93,
+          "prob_at_least_one": 0.6452264191524313,
           "result": null,
           "matchup": null
         }
