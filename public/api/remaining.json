@@ -1,6 +1,80 @@
 {
-  "date": "2026-10-08",
-  "built_at": "2026-10-09 06:01:57",
-  "fetched_at": "2026-10-09 06:01:57",
-  "games": []
+  "date": "2026-10-10",
+  "built_at": "2026-10-09 13:09:59",
+  "fetched_at": "2026-10-09 13:09:59",
+  "games": [
+    {
+      "game_pk": 849831,
+      "away": "Chicago White Sox",
+      "home": "Cleveland Guardians",
+      "venue": "Progressive Field",
+      "away_sp": null,
+      "home_sp": null,
+      "away_sp_hand": "R",
+      "home_sp_hand": "R",
+      "state": "Preview",
+      "detailed": "Scheduled",
+      "inning": null,
+      "away_score": null,
+      "home_score": null,
+      "hr": [
+        {
+          "batter": "Munetaka Murakami",
+          "batter_id": 808959,
+          "team": "Chicago White Sox",
+          "prob_hr": 0.17026149775718255,
+          "facing_hand": "R",
+          "season": "36 HR / 580 PA",
+          "result": null
+        },
+        {
+          "batter": "Miguel Vargas",
+          "batter_id": 678246,
+          "team": "Chicago White Sox",
+          "prob_hr": 0.14615677367059565,
+          "facing_hand": "R",
+          "season": "34 HR / 732 PA",
+          "result": null
+        },
+        {
+          "batter": "Randal Grichuk",
+          "batter_id": 545341,
+          "team": "Chicago White Sox",
+          "prob_hr": 0.14097379212068722,
+          "facing_hand": "R",
+          "season": "15 HR / 293 PA",
+          "result": null
+        }
+      ],
+      "hits": [
+        {
+          "batter": "Steven Kwan",
+          "batter_id": 680757,
+          "team": "Cleveland Guardians",
+          "projected_hits": 1.1,
+          "prob_at_least_one": 0.7156335593920178,
+          "result": null,
+          "matchup": null
+        },
+        {
+          "batter": "Sam Antonacci",
+          "batter_id": 803011,
+          "team": "Chicago White Sox",
+          "projected_hits": 1.05,
+          "prob_at_least_one": 0.6972952070921727,
+          "result": null,
+          "matchup": null
+        },
+        {
+          "batter": "Chase DeLauter",
+          "batter_id": 800050,
+          "team": "Cleveland Guardians",
+          "projected_hits": 1.04,
+          "prob_at_least_one": 0.696922906068561,
+          "result": null,
+          "matchup": null
+        }
+      ]
+    }
+  ]
 }
