@@ -1,15 +1,15 @@
 {
   "date": "2026-10-10",
-  "built_at": "2026-10-09 13:09:59",
-  "fetched_at": "2026-10-09 13:09:59",
+  "built_at": "2026-10-09 20:07:30",
+  "fetched_at": "2026-10-09 20:07:30",
   "games": [
     {
       "game_pk": 849831,
       "away": "Chicago White Sox",
       "home": "Cleveland Guardians",
       "venue": "Progressive Field",
-      "away_sp": null,
-      "home_sp": null,
+      "away_sp": "Sean Burke",
+      "home_sp": "Gavin Williams",
       "away_sp_hand": "R",
       "home_sp_hand": "R",
       "state": "Preview",
@@ -22,7 +22,7 @@
           "batter": "Munetaka Murakami",
           "batter_id": 808959,
           "team": "Chicago White Sox",
-          "prob_hr": 0.17026149775718255,
+          "prob_hr": 0.17755125316941872,
           "facing_hand": "R",
           "season": "36 HR / 580 PA",
           "result": null
@@ -31,7 +31,7 @@
           "batter": "Miguel Vargas",
           "batter_id": 678246,
           "team": "Chicago White Sox",
-          "prob_hr": 0.14615677367059565,
+          "prob_hr": 0.15310558414442926,
           "facing_hand": "R",
           "season": "34 HR / 732 PA",
           "result": null
@@ -40,7 +40,7 @@
           "batter": "Randal Grichuk",
           "batter_id": 545341,
           "team": "Chicago White Sox",
-          "prob_hr": 0.14097379212068722,
+          "prob_hr": 0.1478273625419602,
           "facing_hand": "R",
           "season": "15 HR / 293 PA",
           "result": null
@@ -51,17 +51,8 @@
           "batter": "Steven Kwan",
           "batter_id": 680757,
           "team": "Cleveland Guardians",
-          "projected_hits": 1.1,
-          "prob_at_least_one": 0.7156335593920178,
-          "result": null,
-          "matchup": null
-        },
-        {
-          "batter": "Sam Antonacci",
-          "batter_id": 803011,
-          "team": "Chicago White Sox",
-          "projected_hits": 1.05,
-          "prob_at_least_one": 0.6972952070921727,
+          "projected_hits": 1.04,
+          "prob_at_least_one": 0.6945852271131604,
           "result": null,
           "matchup": null
         },
@@ -69,8 +60,17 @@
           "batter": "Chase DeLauter",
           "batter_id": 800050,
           "team": "Cleveland Guardians",
-          "projected_hits": 1.04,
-          "prob_at_least_one": 0.696922906068561,
+          "projected_hits": 0.99,
+          "prob_at_least_one": 0.6738092087729459,
+          "result": null,
+          "matchup": null
+        },
+        {
+          "batter": "Jos\u00e9 Ram\u00edrez",
+          "batter_id": 608070,
+          "team": "Cleveland Guardians",
+          "projected_hits": 0.97,
+          "prob_at_least_one": 0.6664238096158759,
           "result": null,
           "matchup": null
         }

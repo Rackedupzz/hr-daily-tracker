@@ -1,7 +1,7 @@
 {
  "bot": "HOMER",
  "date": "2026-10-10",
- "built_at": "2026-10-09 13:10:06",
+ "built_at": "2026-10-09 20:07:36",
  "book_through": "2026-10-10",
  "league": {
   "pa": 184298,
@@ -11,20 +11,20 @@
  },
  "method": "learned",
  "evidence": {
-  "fitted_at": "2026-10-08 13:23:02",
-  "through": "2026-10-07",
+  "fitted_at": "2026-10-09 13:10:36",
+  "through": "2026-10-08",
   "hits_serve": "learned",
   "hit_scores": {
    "learned": {
-    "n": 32490,
-    "log_loss": 0.66222,
+    "n": 32508,
+    "log_loss": 0.66221,
     "brier": 0.2348,
     "auc": 0.5718,
     "accuracy": 0.6108,
     "accuracy_se": 0.0027
    },
    "rules": {
-    "n": 32490,
+    "n": 32508,
     "log_loss": 0.6663,
     "brier": 0.23673,
     "auc": 0.5664,
@@ -32,95 +32,95 @@
     "accuracy_se": 0.0027
    },
    "baseline": {
-    "n": 32490,
+    "n": 32508,
     "log_loss": 0.66866,
     "brier": 0.2378,
-    "auc": 0.5568,
+    "auc": 0.5569,
     "accuracy": 0.6077,
     "accuracy_se": 0.0027
    }
   },
   "hit_picks": {
    "calibrated": {
-    "days": 143,
-    "picks": 823,
-    "hit": 586,
-    "rate": 0.712,
+    "days": 144,
+    "picks": 824,
+    "hit": 585,
+    "rate": 0.71,
     "rate_se": 0.0158,
-    "expected": 590.2
+    "expected": 593.8
    },
    "rules": {
-    "days": 143,
-    "picks": 823,
+    "days": 144,
+    "picks": 824,
     "hit": 565,
-    "rate": 0.6865,
+    "rate": 0.6857,
     "rate_se": 0.0162,
-    "expected": 612.0
+    "expected": 612.7
    },
    "base": {
-    "days": 143,
-    "picks": 823,
+    "days": 144,
+    "picks": 824,
     "hit": 566,
-    "rate": 0.6877,
+    "rate": 0.6869,
     "rate_se": 0.0162,
-    "expected": 611.7
+    "expected": 612.4
    }
   },
   "hit_grades": [
    {
     "grade": "A",
-    "min_prob": 0.7032,
+    "min_prob": 0.7057,
     "top_share": 0.05,
-    "n": 1441,
-    "hit": 1047,
-    "rate": 0.7266,
-    "avg_prob": 0.7182
+    "n": 1442,
+    "hit": 1048,
+    "rate": 0.7268,
+    "avg_prob": 0.7227
    },
    {
     "grade": "B",
-    "min_prob": 0.674,
+    "min_prob": 0.6725,
     "top_share": 0.13,
-    "n": 2306,
+    "n": 2307,
     "hit": 1574,
-    "rate": 0.6826,
-    "avg_prob": 0.6899
+    "rate": 0.6823,
+    "avg_prob": 0.6871
    },
    {
     "grade": "C",
     "min_prob": 0.6517,
     "top_share": 0.3,
-    "n": 4901,
-    "hit": 3272,
-    "rate": 0.6676,
+    "n": 4904,
+    "hit": 3276,
+    "rate": 0.668,
     "avg_prob": 0.6646
    },
    {
     "grade": "D",
     "min_prob": 0.0,
     "top_share": 1.0,
-    "n": 20179,
-    "hit": 11869,
-    "rate": 0.5882,
-    "avg_prob": 0.5893
+    "n": 20191,
+    "hit": 11875,
+    "rate": 0.5881,
+    "avg_prob": 0.5895
    }
   ],
   "hit_weights": [
    {
     "feature": "exp_pa",
     "label": "Lineup spot (trips to the plate)",
-    "odds_per_sd": 0.1781,
+    "odds_per_sd": 0.1785,
     "overlap": false
    },
    {
     "feature": "sp_k",
     "label": "Starter's strikeout rate",
-    "odds_per_sd": -0.0554,
+    "odds_per_sd": -0.0555,
     "overlap": false
    },
    {
     "feature": "k_rate",
     "label": "Strikeout rate",
-    "odds_per_sd": -0.0528,
+    "odds_per_sd": -0.0529,
     "overlap": false
    },
    {
@@ -130,15 +130,15 @@
     "overlap": false
    },
    {
-    "feature": "xhit",
-    "label": "Expected hits (contact quality)",
-    "odds_per_sd": 0.0472,
+    "feature": "sample",
+    "label": "Size of track record",
+    "odds_per_sd": 0.0476,
     "overlap": false
    },
    {
-    "feature": "sample",
-    "label": "Size of track record",
-    "odds_per_sd": 0.0472,
+    "feature": "xhit",
+    "label": "Expected hits (contact quality)",
+    "odds_per_sd": 0.0467,
     "overlap": false
    },
    {
@@ -150,37 +150,37 @@
    {
     "feature": "hit_platoon",
     "label": "League platoon edge (hits)",
-    "odds_per_sd": -0.0396,
+    "odds_per_sd": -0.0398,
     "overlap": true
    },
    {
     "feature": "sp_hit",
     "label": "Starter's hits allowed",
-    "odds_per_sd": 0.0365,
+    "odds_per_sd": 0.0362,
     "overlap": false
    },
    {
     "feature": "bb_rate",
     "label": "Walk rate",
-    "odds_per_sd": -0.0356,
+    "odds_per_sd": -0.0353,
     "overlap": false
    }
   ],
   "hit_dropped": [
    {
     "dropped": "hit_form",
-    "log_loss_before": 0.662326,
-    "log_loss_after": 0.662274
+    "log_loss_before": 0.662316,
+    "log_loss_after": 0.662264
    },
    {
     "dropped": "hit_split",
-    "log_loss_before": 0.662274,
-    "log_loss_after": 0.662242
+    "log_loss_before": 0.662264,
+    "log_loss_after": 0.662232
    },
    {
     "dropped": "hit_rate",
-    "log_loss_before": 0.662242,
-    "log_loss_after": 0.662216
+    "log_loss_before": 0.662232,
+    "log_loss_after": 0.662206
    }
   ],
   "hit_board_rate": 0.6162,
@@ -188,10 +188,10 @@
    "hit5": {
     "legs": 5,
     "days": 133,
-    "won": 24,
-    "rate": 0.1805,
-    "predicted": 0.195025,
-    "expected_wins": 25.938,
+    "won": 22,
+    "rate": 0.1654,
+    "predicted": 0.200813,
+    "expected_wins": 26.708,
     "wins_on": [
      "2026-05-16",
      "2026-05-26",
@@ -208,47 +208,45 @@
      "2026-07-19",
      "2026-07-23",
      "2026-07-25",
-     "2026-08-01",
      "2026-08-04",
      "2026-08-06",
      "2026-08-08",
      "2026-08-18",
      "2026-09-01",
      "2026-09-11",
-     "2026-09-13",
      "2026-09-23"
     ],
-    "leg_rate": 0.7113,
-    "leg_projected": 0.721
+    "leg_rate": 0.7083,
+    "leg_projected": 0.7252
    },
    "multi5": {
     "legs": 5,
     "days": 133,
     "won": 3,
     "rate": 0.0226,
-    "predicted": 0.002893,
-    "expected_wins": 0.385,
+    "predicted": 0.003133,
+    "expected_wins": 0.417,
     "wins_on": [
      "2026-05-27",
      "2026-06-05",
      "2026-06-29"
     ],
-    "leg_rate": 0.3263,
-    "leg_projected": 0.3103
+    "leg_rate": 0.3233,
+    "leg_projected": 0.3151
    },
    "hr5": {
     "legs": 5,
     "days": 133,
     "won": 2,
     "rate": 0.015,
-    "predicted": 0.000414,
-    "expected_wins": 0.055,
+    "predicted": 0.000397,
+    "expected_wins": 0.053,
     "wins_on": [
      "2026-06-12",
      "2026-08-26"
     ],
     "leg_rate": 0.218,
-    "leg_projected": 0.2102
+    "leg_projected": 0.2085
    },
    "win5": {
     "legs": 5,
@@ -272,10 +270,10 @@
    "chalk5": {
     "legs": 5,
     "days": 133,
-    "won": 24,
-    "rate": 0.1805,
-    "predicted": 0.195148,
-    "expected_wins": 25.955,
+    "won": 22,
+    "rate": 0.1654,
+    "predicted": 0.200911,
+    "expected_wins": 26.721,
     "wins_on": [
      "2026-05-16",
      "2026-05-26",
@@ -292,38 +290,36 @@
      "2026-07-19",
      "2026-07-23",
      "2026-07-25",
-     "2026-08-01",
      "2026-08-04",
      "2026-08-06",
      "2026-08-08",
      "2026-08-18",
      "2026-09-01",
      "2026-09-11",
-     "2026-09-13",
      "2026-09-23"
     ],
-    "leg_rate": 0.7113,
-    "leg_projected": 0.7211
+    "leg_rate": 0.7083,
+    "leg_projected": 0.7253
    },
    "early10": {
     "legs": 10,
     "days": 100,
     "won": 0,
     "rate": 0.0,
-    "predicted": 0.00928,
-    "expected_wins": 0.928,
+    "predicted": 0.009431,
+    "expected_wins": 0.943,
     "wins_on": [],
-    "leg_rate": 0.67,
-    "leg_projected": 0.656,
+    "leg_rate": 0.669,
+    "leg_projected": 0.6573,
     "by_kind": {
      "hits1": {
       "n": 897,
-      "projected": 0.7053,
-      "hit": 0.7246
+      "projected": 0.707,
+      "hit": 0.7235
      },
      "hr": {
       "n": 100,
-      "projected": 0.2129,
+      "projected": 0.2112,
       "hit": 0.19
      },
      "win": {
@@ -338,26 +334,26 @@
     "days": 102,
     "won": 0,
     "rate": 0.0,
-    "predicted": 0.009789,
-    "expected_wins": 0.998,
+    "predicted": 0.010051,
+    "expected_wins": 1.025,
     "wins_on": [],
-    "leg_rate": 0.651,
-    "leg_projected": 0.6595,
+    "leg_rate": 0.65,
+    "leg_projected": 0.6616,
     "by_kind": {
      "hits1": {
-      "n": 910,
-      "projected": 0.7091,
-      "hit": 0.6978
+      "n": 909,
+      "projected": 0.7116,
+      "hit": 0.6964
      },
      "hr": {
       "n": 102,
-      "projected": 0.2144,
+      "projected": 0.2127,
       "hit": 0.2353
      },
      "win": {
-      "n": 8,
-      "projected": 0.6971,
-      "hit": 0.625
+      "n": 9,
+      "projected": 0.6975,
+      "hit": 0.6667
      }
     }
    }
@@ -369,36 +365,36 @@
    },
    "legs": {
     "hr_prob": {
-     "legs": 692,
-     "actual": 0.2197,
-     "homer": 0.2094,
-     "market": 0.1809,
-     "break_even": 0.2207,
-     "roi": 0.0033
+     "legs": 693,
+     "actual": 0.2193,
+     "homer": 0.2076,
+     "market": 0.1826,
+     "break_even": 0.2227,
+     "roi": -0.0081
     },
     "hr_value": {
-     "legs": 692,
-     "actual": 0.1908,
-     "homer": 0.1877,
-     "market": 0.1384,
-     "break_even": 0.1688,
-     "roi": 0.1548
+     "legs": 693,
+     "actual": 0.1934,
+     "homer": 0.1849,
+     "market": 0.1358,
+     "break_even": 0.1657,
+     "roi": 0.1982
     },
     "hit_prob": {
-     "legs": 692,
-     "actual": 0.7095,
-     "homer": 0.7196,
-     "market": 0.671,
-     "break_even": 0.7146,
-     "roi": -0.0062
+     "legs": 693,
+     "actual": 0.7071,
+     "homer": 0.7235,
+     "market": 0.6712,
+     "break_even": 0.7148,
+     "roi": -0.0099
     },
     "hit_value": {
-     "legs": 692,
-     "actual": 0.685,
-     "homer": 0.703,
-     "market": 0.6348,
-     "break_even": 0.676,
-     "roi": 0.0163
+     "legs": 693,
+     "actual": 0.6898,
+     "homer": 0.7062,
+     "market": 0.6362,
+     "break_even": 0.6776,
+     "roi": 0.0213
     }
    }
   },
@@ -406,24 +402,24 @@
   "games_serve": "rules",
   "hr_scores": {
    "learned": {
-    "n": 32490,
-    "log_loss": 0.35472,
+    "n": 32508,
+    "log_loss": 0.35471,
     "brier": 0.10242,
     "auc": 0.6132,
     "accuracy": 0.8821,
     "accuracy_se": 0.0018
    },
    "rules": {
-    "n": 32490,
-    "log_loss": 0.35529,
+    "n": 32508,
+    "log_loss": 0.35528,
     "brier": 0.1025,
     "auc": 0.6071,
     "accuracy": 0.8821,
     "accuracy_se": 0.0018
    },
    "baseline": {
-    "n": 32490,
-    "log_loss": 0.35746,
+    "n": 32508,
+    "log_loss": 0.35745,
     "brier": 0.10293,
     "auc": 0.5918,
     "accuracy": 0.8821,
@@ -432,28 +428,28 @@
   },
   "hr_picks": {
    "calibrated": {
-    "days": 143,
-    "picks": 823,
+    "days": 144,
+    "picks": 824,
     "hit": 173,
-    "rate": 0.2102,
+    "rate": 0.21,
     "rate_se": 0.0142,
-    "expected": 170.9
+    "expected": 169.6
    },
    "rules": {
-    "days": 143,
-    "picks": 823,
+    "days": 144,
+    "picks": 824,
     "hit": 158,
-    "rate": 0.192,
+    "rate": 0.1917,
     "rate_se": 0.0137,
-    "expected": 171.5
+    "expected": 171.7
    },
    "base": {
-    "days": 143,
-    "picks": 823,
+    "days": 144,
+    "picks": 824,
     "hit": 161,
-    "rate": 0.1956,
+    "rate": 0.1954,
     "rate_se": 0.0138,
-    "expected": 179.8
+    "expected": 180.0
    }
   },
   "hr_weights": [
@@ -466,13 +462,13 @@
    {
     "feature": "exp_pa",
     "label": "Lineup spot (trips to the plate)",
-    "odds_per_sd": 0.1422,
+    "odds_per_sd": 0.1428,
     "overlap": false
    },
    {
     "feature": "weather",
     "label": "Temperature & wind",
-    "odds_per_sd": 0.1088,
+    "odds_per_sd": 0.1087,
     "overlap": false
    },
    {
@@ -484,14 +480,8 @@
    {
     "feature": "hr",
     "label": "Actual HR rate",
-    "odds_per_sd": 0.062,
+    "odds_per_sd": 0.0615,
     "overlap": false
-   },
-   {
-    "feature": "barrel",
-    "label": "Barrel rate",
-    "odds_per_sd": -0.0584,
-    "overlap": true
    },
    {
     "feature": "park",
@@ -500,15 +490,21 @@
     "overlap": false
    },
    {
+    "feature": "barrel",
+    "label": "Barrel rate",
+    "odds_per_sd": -0.0579,
+    "overlap": true
+   },
+   {
     "feature": "sample",
     "label": "Size of track record",
-    "odds_per_sd": 0.0541,
+    "odds_per_sd": 0.0544,
     "overlap": false
    },
    {
     "feature": "form",
     "label": "Last 21 days vs season",
-    "odds_per_sd": 0.0516,
+    "odds_per_sd": 0.0508,
     "overlap": false
    },
    {
@@ -521,61 +517,61 @@
   "hr_dropped": [
    {
     "dropped": "sp_form",
-    "log_loss_before": 0.354837,
-    "log_loss_after": 0.354774
+    "log_loss_before": 0.354825,
+    "log_loss_after": 0.354762
    },
    {
     "dropped": "split",
-    "log_loss_before": 0.354774,
-    "log_loss_after": 0.354743
+    "log_loss_before": 0.354762,
+    "log_loss_after": 0.354731
    },
    {
     "dropped": "platoon",
-    "log_loss_before": 0.354743,
-    "log_loss_after": 0.354726
+    "log_loss_before": 0.354731,
+    "log_loss_after": 0.354716
    },
    {
     "dropped": "pen",
-    "log_loss_before": 0.354726,
-    "log_loss_after": 0.354719
+    "log_loss_before": 0.354716,
+    "log_loss_after": 0.354709
    }
   ],
   "grades": [
    {
     "grade": "A",
-    "min_prob": 0.1941,
+    "min_prob": 0.192,
     "top_share": 0.05,
-    "n": 1441,
+    "n": 1442,
     "hit": 312,
-    "rate": 0.2165,
-    "avg_prob": 0.2089
+    "rate": 0.2164,
+    "avg_prob": 0.2072
    },
    {
     "grade": "B",
-    "min_prob": 0.1709,
+    "min_prob": 0.1732,
     "top_share": 0.13,
-    "n": 2306,
+    "n": 2307,
     "hit": 416,
-    "rate": 0.1804,
-    "avg_prob": 0.1786
+    "rate": 0.1803,
+    "avg_prob": 0.1783
    },
    {
     "grade": "C",
-    "min_prob": 0.1393,
+    "min_prob": 0.1382,
     "top_share": 0.3,
-    "n": 4901,
+    "n": 4904,
     "hit": 766,
-    "rate": 0.1563,
-    "avg_prob": 0.156
+    "rate": 0.1562,
+    "avg_prob": 0.158
    },
    {
     "grade": "D",
     "min_prob": 0.0,
     "top_share": 1.0,
-    "n": 20179,
-    "hit": 2034,
+    "n": 20191,
+    "hit": 2036,
     "rate": 0.1008,
-    "avg_prob": 0.0997
+    "avg_prob": 0.0994
    }
   ],
   "board_rate": 0.1224,
@@ -658,7 +654,7 @@
  },
  "hr_picks": [
   {
-   "rules_prob": 0.17824771748671997,
+   "rules_prob": 0.18933308157658146,
    "xhr_rate": 0.05621887310764936,
    "hr_rate": 0.05307327952594707,
    "recent_rate": 0.07525634978909428,
@@ -672,9 +668,9 @@
    "split_index": 1.0832992557186254,
    "split_pa": 389,
    "split_hr": 28,
-   "sp_index": 1.0,
-   "sp_fly": 0.26959126796083754,
-   "sp_form_index": 1.0,
+   "sp_index": 1.1250585823811527,
+   "sp_fly": 0.2589306199554658,
+   "sp_form_index": 0.953169727211712,
    "pen_index": 0.8735491355555389,
    "platoon": 1.06003068262562,
    "park": 0.938,
@@ -683,8 +679,8 @@
    "exp_pa": 4.35,
    "slot": null,
    "usual_slot": 4,
-   "pa_vs_sp": 2.42,
-   "pa_vs_pen": 1.93,
+   "pa_vs_sp": 2.61,
+   "pa_vs_pen": 1.74,
    "sp_hand": "R",
    "bat_side": "L",
    "lg": 0.03050494308131396,
@@ -694,51 +690,51 @@
    "game_pk": 849831,
    "matchup": "Chicago White Sox @ Cleveland Guardians",
    "venue": "Progressive Field",
-   "sp_name": "TBD",
-   "model_prob": 0.17026149775718255,
+   "sp_name": "Gavin Williams",
+   "model_prob": 0.17755125316941872,
    "injury_note": null,
    "lineup_posted": false,
    "lineup_confirmed": false,
-   "prob": 0.17285668036539886,
+   "prob": 0.1743798146518063,
    "method": "learned",
    "contrib": {
-    "xhr": 0.5509,
-    "hr": 0.1361,
-    "form": 0.0757,
-    "barrel": -0.1577,
-    "sp_hr": 0.0026,
-    "sp_fly": 0.0079,
+    "xhr": 0.5508,
+    "hr": 0.1351,
+    "form": 0.0745,
+    "barrel": -0.1563,
+    "sp_hr": 0.0386,
+    "sp_fly": -0.032,
     "park": -0.0392,
-    "weather": -0.0475,
-    "exp_pa": 0.0555,
-    "sample": 0.0654
+    "weather": -0.0473,
+    "exp_pa": 0.0557,
+    "sample": 0.0656
    },
    "take": [
     "Contact quality: 35.2 xHR in 572 PA (1.84&times; league) <span class='muted'>(+73% odds)</span>",
-    "Proven power: 36 HR in 572 PA <span class='muted'>(+15% odds)</span>",
+    "Proven power: 36 HR in 572 PA <span class='muted'>(+14% odds)</span>",
     "Last 21 days: contact running 1.34&times; his season pace (4 HR in 63 PA) <span class='muted'>(+8% odds)</span>"
    ],
-   "market_prob": 0.18946886116888773,
-   "book_implied": 0.23115201062604301,
-   "book_price": "+333",
-   "book_edge": -0.25219477910989985,
+   "market_prob": 0.19198944540359555,
+   "book_implied": 0.23422712339238658,
+   "book_price": "+327",
+   "book_edge": -0.2555097286505188,
    "grade": "B",
    "evidence": {
     "grade": "B",
-    "min_prob": 0.1709,
+    "min_prob": 0.1732,
     "top_share": 0.13,
-    "n": 2306,
+    "n": 2307,
     "hit": 416,
-    "rate": 0.1804,
-    "avg_prob": 0.1786
+    "rate": 0.1803,
+    "avg_prob": 0.1783
    },
    "tag": "LOVE IT",
-   "edge": 0.002595182608216312
+   "edge": -0.003171438517612424
   }
  ],
  "hit_picks": [
   {
-   "rules_prob": 0.7079107472758228,
+   "rules_prob": 0.6952131186727984,
    "season_pa": 650,
    "season_hits": 155,
    "avg_line": 0.23846153846153847,
@@ -753,8 +749,8 @@
    "split_pa": 438,
    "split_hits": 114,
    "platoon": 1.0054031682452829,
-   "sp_hit_index": 1.0,
-   "sp_k_rate": 0.22312776047488306,
+   "sp_hit_index": 0.9458376656060613,
+   "sp_k_rate": 0.2572603506810735,
    "pen_hit_index": 0.9523679467417212,
    "park": 1.016,
    "exp_pa": 4.65,
@@ -769,34 +765,34 @@
    "game_pk": 849831,
    "matchup": "Chicago White Sox @ Cleveland Guardians",
    "venue": "Progressive Field",
-   "sp_name": "TBD",
-   "model_prob": 0.7156335593920178,
+   "sp_name": "Sean Burke",
+   "model_prob": 0.6945852271131604,
    "injury_note": null,
    "lineup_posted": false,
    "lineup_confirmed": false,
-   "prob": 0.701305044651237,
+   "prob": 0.6711849093701078,
    "method": "learned",
    "take": [
     "Usually bats 1: 4.7 trips <span class='muted'>(+28% odds)</span>",
     "Strikeout rate 12% (league 22%) <span class='muted'>(+20% odds)</span>",
     "Established: 650 PA of track record <span class='muted'>(+7% odds)</span>",
-    "Knock: Walk rate 13% &mdash; walks are trips without a hit chance <span class='muted'>(-6% odds)</span>"
+    "Knock: Sean Burke strikes out 26% (league 22%) <span class='muted'>(-7% odds)</span>"
    ],
-   "market_prob": 0.6683335413510912,
-   "book_implied": 0.7117752215389122,
+   "market_prob": 0.6685065220544029,
+   "book_implied": 0.711959445987939,
    "book_price": "-247",
-   "book_edge": -0.014709948549540441,
-   "grade": "B",
+   "book_edge": -0.05727086963675454,
+   "grade": "C",
    "evidence": {
-    "grade": "B",
-    "min_prob": 0.674,
-    "top_share": 0.13,
-    "n": 2306,
-    "hit": 1574,
-    "rate": 0.6826,
-    "avg_prob": 0.6899
+    "grade": "C",
+    "min_prob": 0.6517,
+    "top_share": 0.3,
+    "n": 4904,
+    "hit": 3276,
+    "rate": 0.668,
+    "avg_prob": 0.6646
    },
-   "tag": "LOVE IT"
+   "tag": "LIKE IT"
   }
  ],
  "parlays": [],
@@ -810,7 +806,7 @@
    "venue": "Progressive Field",
    "pick": "Cleveland Guardians",
    "pick_side": "home",
-   "win_prob": 0.5016259897591397,
+   "win_prob": 0.5082219404868458,
    "confidence": "Coin flip",
    "evidence": {
     "label": "Coin flip",
@@ -820,57 +816,30 @@
     "rate": 0.5287
    },
    "method": "rules",
-   "away_runs": 4.27,
-   "home_runs": 4.25,
-   "total": 8.5,
+   "away_runs": 4.0,
+   "home_runs": 4.07,
+   "total": 8.1,
    "park_runs": 0.991,
    "take": [
+    "Pitching edge: Gavin Williams allows 0.295 wOBA, Sean Burke 0.301",
     "Cleveland Guardians lineup 0.307 wOBA vs 0.315"
    ],
-   "model_pick_prob": 0.4959626341428811,
+   "model_pick_prob": 0.5043508479762019,
    "tag": "SMALL PLAY"
   }
  ],
  "likes": [
-  {
-   "batter": "Sam Antonacci",
-   "batter_id": 803011,
-   "team": "Chicago White Sox",
-   "game_pk": 849831,
-   "matchup": "Chicago White Sox @ Cleveland Guardians",
-   "prob": 0.10036812017443832,
-   "model_prob": 0.08483965721065524,
-   "edge": 0.015528462963783074,
-   "barrel_rate": 0.04288722513802228,
-   "sp_name": "TBD",
-   "park": 0.938,
-   "weather": 1.0
-  },
-  {
-   "batter": "Chase Meidroth",
-   "batter_id": 805367,
-   "team": "Chicago White Sox",
-   "game_pk": 849831,
-   "matchup": "Chicago White Sox @ Cleveland Guardians",
-   "prob": 0.08500191789281537,
-   "model_prob": 0.07382200565928146,
-   "edge": 0.011179912233533915,
-   "barrel_rate": 0.046275655200337315,
-   "sp_name": "TBD",
-   "park": 0.938,
-   "weather": 1.0
-  },
   {
    "batter": "Jo Adell",
    "batter_id": 666176,
    "team": "Cleveland Guardians",
    "game_pk": 849831,
    "matchup": "Chicago White Sox @ Cleveland Guardians",
-   "prob": 0.13931544064426293,
-   "model_prob": 0.1307408395638237,
-   "edge": 0.008574601080439226,
+   "prob": 0.1586344337619014,
+   "model_prob": 0.12963672256828235,
+   "edge": 0.028997711193619047,
    "barrel_rate": 0.061260234619813704,
-   "sp_name": "TBD",
+   "sp_name": "Sean Burke",
    "park": 0.938,
    "weather": 1.0
   },
@@ -880,11 +849,25 @@
    "team": "Cleveland Guardians",
    "game_pk": 849831,
    "matchup": "Chicago White Sox @ Cleveland Guardians",
-   "prob": 0.11601919209075202,
-   "model_prob": 0.10754352829837349,
-   "edge": 0.008475663792378532,
+   "prob": 0.1251540985090898,
+   "model_prob": 0.10654379621337347,
+   "edge": 0.01861030229571632,
    "barrel_rate": 0.047363092996524775,
-   "sp_name": "TBD",
+   "sp_name": "Sean Burke",
+   "park": 0.938,
+   "weather": 1.0
+  },
+  {
+   "batter": "Chase DeLauter",
+   "batter_id": 800050,
+   "team": "Cleveland Guardians",
+   "game_pk": 849831,
+   "matchup": "Chicago White Sox @ Cleveland Guardians",
+   "prob": 0.12437357288032418,
+   "model_prob": 0.10745684399162417,
+   "edge": 0.01691672888870001,
+   "barrel_rate": 0.043452814224981824,
+   "sp_name": "Sean Burke",
    "park": 0.938,
    "weather": 1.0
   },
@@ -894,55 +877,11 @@
    "team": "Cleveland Guardians",
    "game_pk": 849831,
    "matchup": "Chicago White Sox @ Cleveland Guardians",
-   "prob": 0.06647445164203478,
-   "model_prob": 0.061494625487894354,
-   "edge": 0.004979826154140422,
+   "prob": 0.07694866691885847,
+   "model_prob": 0.06079447038164547,
+   "edge": 0.016154196537213006,
    "barrel_rate": 0.03503990140702374,
-   "sp_name": "TBD",
-   "park": 0.938,
-   "weather": 1.0
-  }
- ],
- "fades": [
-  {
-   "batter": "Steven Kwan",
-   "batter_id": 680757,
-   "team": "Cleveland Guardians",
-   "game_pk": 849831,
-   "matchup": "Chicago White Sox @ Cleveland Guardians",
-   "prob": 0.030059427669467797,
-   "model_prob": 0.04664822808043283,
-   "edge": -0.01658880041096503,
-   "barrel_rate": 0.008881730652705339,
-   "sp_name": "TBD",
-   "park": 0.938,
-   "weather": 1.0
-  },
-  {
-   "batter": "Travis Bazzana",
-   "batter_id": 683953,
-   "team": "Cleveland Guardians",
-   "game_pk": 849831,
-   "matchup": "Chicago White Sox @ Cleveland Guardians",
-   "prob": 0.0921036093604362,
-   "model_prob": 0.10119385890160444,
-   "edge": -0.009090249541168244,
-   "barrel_rate": 0.05865492121617314,
-   "sp_name": "TBD",
-   "park": 0.938,
-   "weather": 1.0
-  },
-  {
-   "batter": "Tristan Peters",
-   "batter_id": 671976,
-   "team": "Chicago White Sox",
-   "game_pk": 849831,
-   "matchup": "Chicago White Sox @ Cleveland Guardians",
-   "prob": 0.08518817951935763,
-   "model_prob": 0.09175812475722679,
-   "edge": -0.0065699452378691625,
-   "barrel_rate": 0.04611249513178013,
-   "sp_name": "TBD",
+   "sp_name": "Sean Burke",
    "park": 0.938,
    "weather": 1.0
   },
@@ -952,25 +891,83 @@
    "team": "Cleveland Guardians",
    "game_pk": 849831,
    "matchup": "Chicago White Sox @ Cleveland Guardians",
-   "prob": 0.10396821493635176,
-   "model_prob": 0.10973535466155751,
-   "edge": -0.005767139725205747,
+   "prob": 0.1238559315673197,
+   "model_prob": 0.10872452785392896,
+   "edge": 0.015131403713390737,
    "barrel_rate": 0.057598540737692716,
-   "sp_name": "TBD",
+   "sp_name": "Sean Burke",
    "park": 0.938,
    "weather": 1.0
-  },
+  }
+ ],
+ "fades": [
   {
    "batter": "Randal Grichuk",
    "batter_id": 545341,
    "team": "Chicago White Sox",
    "game_pk": 849831,
    "matchup": "Chicago White Sox @ Cleveland Guardians",
-   "prob": 0.13687897833291088,
-   "model_prob": 0.14097379212068722,
-   "edge": -0.004094813787776347,
+   "prob": 0.13531257335401192,
+   "model_prob": 0.1478273625419602,
+   "edge": -0.012514789187948266,
    "barrel_rate": 0.06747688641578142,
-   "sp_name": "TBD",
+   "sp_name": "Gavin Williams",
+   "park": 0.938,
+   "weather": 1.0
+  },
+  {
+   "batter": "Tristan Peters",
+   "batter_id": 671976,
+   "team": "Chicago White Sox",
+   "game_pk": 849831,
+   "matchup": "Chicago White Sox @ Cleveland Guardians",
+   "prob": 0.08546114975227932,
+   "model_prob": 0.09728427932056184,
+   "edge": -0.01182312956828252,
+   "barrel_rate": 0.04611249513178013,
+   "sp_name": "Gavin Williams",
+   "park": 0.938,
+   "weather": 1.0
+  },
+  {
+   "batter": "Kyle Teel",
+   "batter_id": 691019,
+   "team": "Chicago White Sox",
+   "game_pk": 849831,
+   "matchup": "Chicago White Sox @ Cleveland Guardians",
+   "prob": 0.12360513671857222,
+   "model_prob": 0.13237509263432132,
+   "edge": -0.008769955915749097,
+   "barrel_rate": 0.05875111288546086,
+   "sp_name": "Gavin Williams",
+   "park": 0.938,
+   "weather": 1.0
+  },
+  {
+   "batter": "Colson Montgomery",
+   "batter_id": 695657,
+   "team": "Chicago White Sox",
+   "game_pk": 849831,
+   "matchup": "Chicago White Sox @ Cleveland Guardians",
+   "prob": 0.10404878861046958,
+   "model_prob": 0.11130015968945911,
+   "edge": -0.00725137107898953,
+   "barrel_rate": 0.10178029429866906,
+   "sp_name": "Gavin Williams",
+   "park": 0.938,
+   "weather": 1.0
+  },
+  {
+   "batter": "Steven Kwan",
+   "batter_id": 680757,
+   "team": "Cleveland Guardians",
+   "game_pk": 849831,
+   "matchup": "Chicago White Sox @ Cleveland Guardians",
+   "prob": 0.04119228190531776,
+   "model_prob": 0.04607581513178815,
+   "edge": -0.0048835332264703865,
+   "barrel_rate": 0.008881730652705339,
+   "sp_name": "Sean Burke",
    "park": 0.938,
    "weather": 1.0
   }
@@ -1006,7 +1003,7 @@
    "void": 0,
    "pending": 0
   },
-  "graded_at": "2026-10-09 13:09:59",
+  "graded_at": "2026-10-09 20:07:30",
   "complete": false
  }
 }
