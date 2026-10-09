@@ -1,7 +1,7 @@
 {
  "bot": "HOMER",
  "date": "2026-10-08",
- "built_at": "2026-10-08 20:43:19",
+ "built_at": "2026-10-09 01:13:45",
  "book_through": "2026-10-08",
  "league": {
   "pa": 184211,
@@ -734,7 +734,13 @@
     "avg_prob": 0.156
    },
    "tag": "LIKE IT",
-   "edge": 0.0032416814572349684
+   "edge": 0.0032416814572349684,
+   "result": {
+    "hr": 0,
+    "summary": "0-1 | BB, K, RBI",
+    "final": false,
+    "state": "In Progress"
+   }
   }
  ],
  "hit_picks": [
@@ -797,7 +803,14 @@
     "rate": 0.6676,
     "avg_prob": 0.6646
    },
-   "tag": "LIKE IT"
+   "tag": "LIKE IT",
+   "result": {
+    "hits": 0,
+    "summary": "0-1 | BB",
+    "final": false,
+    "dnp": false,
+    "state": "In Progress"
+   }
   }
  ],
  "parlays": [],
@@ -830,7 +843,13 @@
     "Chicago White Sox lineup 0.315 wOBA vs 0.306"
    ],
    "model_pick_prob": 0.5631549373868354,
-   "tag": "SMALL PLAY"
+   "tag": "SMALL PLAY",
+   "result": {
+    "final": false,
+    "home_score": 1,
+    "away_score": 0,
+    "state": "In Progress"
+   }
   }
  ],
  "likes": [
@@ -840,13 +859,13 @@
    "team": "Cleveland Guardians",
    "game_pk": 849832,
    "matchup": "Cleveland Guardians @ Chicago White Sox",
-   "prob": 0.07834087352373989,
-   "model_prob": 0.06444390224407481,
-   "edge": 0.013896971279665077,
+   "prob": 0.0793781740966886,
+   "model_prob": 0.06493624141792191,
+   "edge": 0.014441932678766686,
    "barrel_rate": 0.03814461356617389,
    "sp_name": "Hagen Smith",
    "park": 0.99,
-   "weather": 0.912
+   "weather": 0.921
   },
   {
    "batter": "Jo Adell",
@@ -854,27 +873,13 @@
    "team": "Cleveland Guardians",
    "game_pk": 849832,
    "matchup": "Cleveland Guardians @ Chicago White Sox",
-   "prob": 0.12364969852284652,
-   "model_prob": 0.11257197160495452,
-   "edge": 0.011077726917891995,
+   "prob": 0.12419769450026437,
+   "model_prob": 0.11326758652898217,
+   "edge": 0.010930107971282202,
    "barrel_rate": 0.061627069070806416,
    "sp_name": "Hagen Smith",
    "park": 0.99,
-   "weather": 0.912
-  },
-  {
-   "batter": "Angel Mart\u00ednez",
-   "batter_id": 682657,
-   "team": "Cleveland Guardians",
-   "game_pk": 849832,
-   "matchup": "Cleveland Guardians @ Chicago White Sox",
-   "prob": 0.08505152974718144,
-   "model_prob": 0.07746595966844075,
-   "edge": 0.007585570078740694,
-   "barrel_rate": 0.0476304094487343,
-   "sp_name": "Hagen Smith",
-   "park": 0.99,
-   "weather": 0.912
+   "weather": 0.921
   },
   {
    "batter": "Nathaniel Lowe",
@@ -882,13 +887,27 @@
    "team": "Cleveland Guardians",
    "game_pk": 849832,
    "matchup": "Cleveland Guardians @ Chicago White Sox",
-   "prob": 0.08815538038494769,
-   "model_prob": 0.0820442458140912,
-   "edge": 0.006111134570856491,
+   "prob": 0.09026362320404954,
+   "model_prob": 0.08262232345680645,
+   "edge": 0.007641299747243091,
    "barrel_rate": 0.05827510157471531,
    "sp_name": "Hagen Smith",
    "park": 0.99,
-   "weather": 0.912
+   "weather": 0.921
+  },
+  {
+   "batter": "Angel Mart\u00ednez",
+   "batter_id": 682657,
+   "team": "Cleveland Guardians",
+   "game_pk": 849832,
+   "matchup": "Cleveland Guardians @ Chicago White Sox",
+   "prob": 0.08510764843924891,
+   "model_prob": 0.07802309448200243,
+   "edge": 0.007084553957246484,
+   "barrel_rate": 0.0476304094487343,
+   "sp_name": "Hagen Smith",
+   "park": 0.99,
+   "weather": 0.921
   },
   {
    "batter": "Randal Grichuk",
@@ -896,16 +915,30 @@
    "team": "Chicago White Sox",
    "game_pk": 849832,
    "matchup": "Cleveland Guardians @ Chicago White Sox",
-   "prob": 0.1278655649434932,
-   "model_prob": 0.12178737791302803,
-   "edge": 0.006078187030465157,
+   "prob": 0.12815291355463024,
+   "model_prob": 0.12251146920604901,
+   "edge": 0.005641444348581229,
    "barrel_rate": 0.06773207047681827,
    "sp_name": "Parker Messick",
    "park": 0.99,
-   "weather": 0.912
+   "weather": 0.921
   }
  ],
  "fades": [
+  {
+   "batter": "Chase Meidroth",
+   "batter_id": 805367,
+   "team": "Chicago White Sox",
+   "game_pk": 849832,
+   "matchup": "Cleveland Guardians @ Chicago White Sox",
+   "prob": 0.08537176692410502,
+   "model_prob": 0.08685159140581235,
+   "edge": -0.0014798244817073314,
+   "barrel_rate": 0.046653444857675266,
+   "sp_name": "Parker Messick",
+   "park": 0.99,
+   "weather": 0.921
+  },
   {
    "batter": "Steven Kwan",
    "batter_id": 680757,
@@ -913,26 +946,12 @@
    "game_pk": 849832,
    "matchup": "Cleveland Guardians @ Chicago White Sox",
    "prob": 0.02833,
-   "model_prob": 0.029315792693672783,
-   "edge": -0.0009857926936727816,
+   "model_prob": 0.029587728599613342,
+   "edge": -0.0012577285996133412,
    "barrel_rate": 0.008930490789245283,
    "sp_name": "Hagen Smith",
    "park": 0.99,
-   "weather": 0.912
-  },
-  {
-   "batter": "Chase Meidroth",
-   "batter_id": 805367,
-   "team": "Chicago White Sox",
-   "game_pk": 849832,
-   "matchup": "Cleveland Guardians @ Chicago White Sox",
-   "prob": 0.08531356597848,
-   "model_prob": 0.08625505436859167,
-   "edge": -0.0009414883901116694,
-   "barrel_rate": 0.046653444857675266,
-   "sp_name": "Parker Messick",
-   "park": 0.99,
-   "weather": 0.912
+   "weather": 0.921
   },
   {
    "batter": "Kyle Teel",
@@ -940,13 +959,13 @@
    "team": "Chicago White Sox",
    "game_pk": 849832,
    "matchup": "Cleveland Guardians @ Chicago White Sox",
-   "prob": 0.07849790819073772,
-   "model_prob": 0.07840958632807518,
-   "edge": 8.832186266254094e-05,
+   "prob": 0.07953649073254612,
+   "model_prob": 0.07897111329455685,
+   "edge": 0.0005653774379892756,
    "barrel_rate": 0.05964530179697105,
    "sp_name": "Parker Messick",
    "park": 0.99,
-   "weather": 0.912
+   "weather": 0.921
   },
   {
    "batter": "Travis Bazzana",
@@ -954,13 +973,13 @@
    "team": "Cleveland Guardians",
    "game_pk": 849832,
    "matchup": "Cleveland Guardians @ Chicago White Sox",
-   "prob": 0.06927270528596431,
-   "model_prob": 0.0679901017789484,
-   "edge": 0.0012826035070159086,
+   "prob": 0.07023543508670095,
+   "model_prob": 0.06850087991906456,
+   "edge": 0.0017345551676363896,
    "barrel_rate": 0.0567500859089632,
    "sp_name": "Hagen Smith",
    "park": 0.99,
-   "weather": 0.912
+   "weather": 0.921
   },
   {
    "batter": "Brenton Doyle",
@@ -968,16 +987,18 @@
    "team": "Chicago White Sox",
    "game_pk": 849832,
    "matchup": "Cleveland Guardians @ Chicago White Sox",
-   "prob": 0.06990572268832196,
-   "model_prob": 0.06734112213228319,
-   "edge": 0.002564600556038771,
+   "prob": 0.07087369260264886,
+   "model_prob": 0.06784857141807304,
+   "edge": 0.0030251211845758186,
    "barrel_rate": 0.03075944198626036,
    "sp_name": "Parker Messick",
    "park": 0.99,
-   "weather": 0.912
+   "weather": 0.921
   }
  ],
- "locked": [],
+ "locked": [
+  849832
+ ],
  "record": {
   "hr": {
    "hit": 0,
@@ -1008,7 +1029,7 @@
    "void": 0,
    "pending": 0
   },
-  "graded_at": "2026-10-08 20:43:12",
+  "graded_at": "2026-10-09 01:13:37",
   "complete": false
  }
 }
