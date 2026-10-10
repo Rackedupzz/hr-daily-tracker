@@ -1,7 +1,7 @@
 {
   "date": "2026-10-10",
-  "built_at": "2026-10-10 19:17:27",
-  "fetched_at": "2026-10-10 19:17:27",
+  "built_at": "2026-10-10 23:31:20",
+  "fetched_at": "2026-10-10 23:31:20",
   "games": [
     {
       "game_pk": 849831,
@@ -13,16 +13,16 @@
       "away_sp_hand": "R",
       "home_sp_hand": "R",
       "state": "Preview",
-      "detailed": "Scheduled",
-      "inning": null,
-      "away_score": null,
-      "home_score": null,
+      "detailed": "Pre-Game",
+      "inning": "1st",
+      "away_score": 0,
+      "home_score": 0,
       "hr": [
         {
           "batter": "Munetaka Murakami",
           "batter_id": 808959,
           "team": "Chicago White Sox",
-          "prob_hr": 0.17755125316941872,
+          "prob_hr": 0.1824379239669909,
           "facing_hand": "R",
           "season": "36 HR / 580 PA",
           "result": null
@@ -31,18 +31,18 @@
           "batter": "Miguel Vargas",
           "batter_id": 678246,
           "team": "Chicago White Sox",
-          "prob_hr": 0.15310558414442926,
+          "prob_hr": 0.15778997750513094,
           "facing_hand": "R",
           "season": "34 HR / 732 PA",
           "result": null
         },
         {
-          "batter": "Randal Grichuk",
-          "batter_id": 545341,
+          "batter": "Kyle Teel",
+          "batter_id": 691019,
           "team": "Chicago White Sox",
-          "prob_hr": 0.1478273625419602,
+          "prob_hr": 0.13679879051702798,
           "facing_hand": "R",
-          "season": "15 HR / 293 PA",
+          "season": "5 HR / 171 PA",
           "result": null
         }
       ],
