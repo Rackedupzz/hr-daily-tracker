@@ -1,7 +1,7 @@
 {
   "date": "2026-10-10",
-  "built_at": "2026-10-10 12:26:07",
-  "fetched_at": "2026-10-10 12:26:07",
+  "built_at": "2026-10-10 19:17:27",
+  "fetched_at": "2026-10-10 19:17:27",
   "games": [
     {
       "game_pk": 849831,
@@ -22,7 +22,7 @@
           "batter": "Munetaka Murakami",
           "batter_id": 808959,
           "team": "Chicago White Sox",
-          "prob_hr": 0.1775512531694187,
+          "prob_hr": 0.17755125316941872,
           "facing_hand": "R",
           "season": "36 HR / 580 PA",
           "result": null

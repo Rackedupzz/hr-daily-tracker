@@ -1,7 +1,7 @@
 {
  "bot": "HOMER",
  "date": "2026-10-10",
- "built_at": "2026-10-10 12:26:14",
+ "built_at": "2026-10-10 19:17:34",
  "book_through": "2026-10-10",
  "league": {
   "pa": 184298,
@@ -11,8 +11,8 @@
  },
  "method": "learned",
  "evidence": {
-  "fitted_at": "2026-10-09 13:10:36",
-  "through": "2026-10-08",
+  "fitted_at": "2026-10-10 12:26:44",
+  "through": "2026-10-09",
   "hits_serve": "learned",
   "hit_scores": {
    "learned": {
@@ -691,7 +691,7 @@
    "matchup": "Chicago White Sox @ Cleveland Guardians",
    "venue": "Progressive Field",
    "sp_name": "Gavin Williams",
-   "model_prob": 0.1775512531694187,
+   "model_prob": 0.17755125316941872,
    "injury_note": null,
    "lineup_posted": false,
    "lineup_confirmed": false,
@@ -729,7 +729,7 @@
     "avg_prob": 0.1783
    },
    "tag": "LOVE IT",
-   "edge": -0.003171438517612396
+   "edge": -0.003171438517612424
   }
  ],
  "hit_picks": [
@@ -878,8 +878,8 @@
    "game_pk": 849831,
    "matchup": "Chicago White Sox @ Cleveland Guardians",
    "prob": 0.07694866691885847,
-   "model_prob": 0.06079447038164548,
-   "edge": 0.016154196537212992,
+   "model_prob": 0.06079447038164547,
+   "edge": 0.016154196537213006,
    "barrel_rate": 0.03503990140702374,
    "sp_name": "Sean Burke",
    "park": 0.938,
@@ -922,8 +922,8 @@
    "game_pk": 849831,
    "matchup": "Chicago White Sox @ Cleveland Guardians",
    "prob": 0.08546114975227932,
-   "model_prob": 0.09728427932056183,
-   "edge": -0.011823129568282506,
+   "model_prob": 0.09728427932056184,
+   "edge": -0.01182312956828252,
    "barrel_rate": 0.04611249513178013,
    "sp_name": "Gavin Williams",
    "park": 0.938,
@@ -1003,7 +1003,7 @@
    "void": 0,
    "pending": 0
   },
-  "graded_at": "2026-10-10 12:26:07",
+  "graded_at": "2026-10-10 19:17:27",
   "complete": false
  }
 }
