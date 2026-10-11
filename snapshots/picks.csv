@@ -275,7 +275,7 @@ date,kind,rank,batter,batter_id,team,game_pk,opponent_sp,facing_hand,lineup_slot
 2026-10-10,hit,2,Sam Antonacci,803011,Chicago White Sox,849831,Gavin Williams,R,1,0.94,0.6511,0.018727130327501194,4.491,0.985,1.042,0.933,1.131,8,580,4,4,1,0,0,1-4,Final,True,True
 2026-10-10,hr,1,Munetaka Murakami,808959,Chicago White Sox,849831,Gavin Williams,R,4,0.1824,0.1824,0.06758271093074922,4.197,0.98,1.042,0.933,1.131,36,580,4,4,0,0,0,0-4 | 4 K,Final,True,False
 2026-10-10,hr,2,Jo Adell,666176,Cleveland Guardians,849831,Sean Burke,R,4,0.134,0.134,0.030394250347499218,4.197,0.911,1.042,0.94,0.979,23,679,4,4,1,0,0,1-4 | K,Final,True,False
-2026-10-11,hit,1,William Contreras,661388,Milwaukee Brewers,849809,Tarik Skubal,L,,0.91,0.6405,0.03036599320935236,4.303,1.03,1.0,0.933,0.859,20,658,,,,,,,,,
-2026-10-11,hit,2,Mookie Betts,605141,Los Angeles Dodgers,849809,Jacob Misiorowski,R,,0.87,0.622,0.025352101066760193,4.491,1.033,1.0,0.905,0.796,23,545,,,,,,,,,
-2026-10-11,hr,1,Shohei Ohtani,660271,Los Angeles Dodgers,849809,Jacob Misiorowski,R,,0.1593,0.1593,0.0452760447019505,4.402,1.135,1.0,0.905,0.796,30,634,,,,,,,,,
-2026-10-11,hr,2,Jackson Chourio,694192,Milwaukee Brewers,849809,Tarik Skubal,L,,0.1517,0.1517,0.03372382463646141,4.491,1.027,1.0,0.933,0.859,26,592,,,,,,,,,
+2026-10-11,hit,1,William Contreras,661388,Milwaukee Brewers,849809,Tarik Skubal,L,3,0.91,0.6405,0.029088024011221885,4.303,1.03,0.958,0.933,0.859,20,658,,,,,,,,,
+2026-10-11,hit,2,Mookie Betts,605141,Los Angeles Dodgers,849809,Jacob Misiorowski,R,1,0.87,0.622,0.02428514422303569,4.491,1.033,0.958,0.905,0.796,23,545,,,,,,,,,
+2026-10-11,hr,1,Jackson Chourio,694192,Milwaukee Brewers,849809,Tarik Skubal,L,1,0.1468,0.1468,0.032304539292115166,4.491,1.027,0.958,0.933,0.859,26,592,,,,,,,,,
+2026-10-11,hr,2,Shohei Ohtani,660271,Los Angeles Dodgers,849809,Jacob Misiorowski,R,4,0.1459,0.1459,0.04337057794697373,4.197,1.135,0.958,0.905,0.796,30,634,,,,,,,,,

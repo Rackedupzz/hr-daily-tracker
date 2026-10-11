@@ -4,7 +4,7 @@
   "card": {
     "bot": "HOMER",
     "date": "2026-10-11",
-    "built_at": "2026-10-11 19:31:38",
+    "built_at": "2026-10-11 23:40:41",
     "book_through": "2026-10-11",
     "league": {
       "pa": 184361,
@@ -654,7 +654,7 @@
     },
     "hr_picks": [
       {
-        "rules_prob": 0.1592135633621905,
+        "rules_prob": 0.15653614068092603,
         "xhr_rate": 0.04531488190917141,
         "hr_rate": 0.040173220742689024,
         "recent_rate": 0.05047718046543835,
@@ -674,10 +674,10 @@
         "pen_index": 0.8781674695838766,
         "platoon": 1.0175763281891297,
         "park": 1.073,
-        "weather": 1.0,
+        "weather": 0.982,
         "weather_note": "",
         "exp_pa": 4.65,
-        "slot": null,
+        "slot": 1,
         "usual_slot": 1,
         "pa_vs_sp": 2.83,
         "pa_vs_pen": 1.82,
@@ -691,11 +691,11 @@
         "matchup": "Los Angeles Dodgers @ Milwaukee Brewers",
         "venue": "American Family Field",
         "sp_name": "Tarik Skubal",
-        "model_prob": 0.15169211671522034,
+        "model_prob": 0.14681746500062048,
         "injury_note": null,
-        "lineup_posted": false,
-        "lineup_confirmed": false,
-        "prob": 0.16997420422683915,
+        "lineup_posted": true,
+        "lineup_confirmed": true,
+        "prob": 0.16904742269749937,
         "method": "learned",
         "contrib": {
           "xhr": 0.368,
@@ -705,19 +705,20 @@
           "sp_hr": -0.0426,
           "sp_fly": -0.0408,
           "park": 0.0416,
-          "weather": -0.0473,
+          "weather": -0.0651,
           "exp_pa": 0.1992,
           "sample": 0.0669
         },
         "take": [
           "Contact quality: 28.4 xHR in 587 PA (1.49&times; league) <span class='muted'>(+44% odds)</span>",
-          "Lineup not posted; usually bats 1 (4.7 trips) <span class='muted'>(+22% odds)</span>",
-          "Proven power: 26 HR in 587 PA <span class='muted'>(+7% odds)</span>"
+          "Batting 1: 4.7 projected trips <span class='muted'>(+22% odds)</span>",
+          "Proven power: 26 HR in 587 PA <span class='muted'>(+7% odds)</span>",
+          "Knock: Weather 0.98&times; <span class='muted'>(-6% odds)</span>"
         ],
         "market_prob": 0.16713608587299233,
         "book_implied": 0.20390602476505065,
         "book_price": "+390",
-        "book_edge": -0.16640911212559417,
+        "book_edge": -0.17095425261571784,
         "grade": "C",
         "evidence": {
           "grade": "C",
@@ -729,7 +730,7 @@
           "avg_prob": 0.1558
         },
         "tag": "LIKE IT",
-        "edge": 0.018282087511618805
+        "edge": 0.022229957696878883
       }
     ],
     "hit_picks": [
@@ -754,7 +755,7 @@
         "pen_hit_index": 0.9247966522205473,
         "park": 1.002,
         "exp_pa": 4.65,
-        "slot": null,
+        "slot": 1,
         "usual_slot": 1,
         "sp_hand": "L",
         "lg_hit": 0.21797994152776345,
@@ -768,12 +769,12 @@
         "sp_name": "Tarik Skubal",
         "model_prob": 0.638144076587013,
         "injury_note": null,
-        "lineup_posted": false,
-        "lineup_confirmed": false,
+        "lineup_posted": true,
+        "lineup_confirmed": true,
         "prob": 0.6327248858416366,
         "method": "learned",
         "take": [
-          "Usually bats 1: 4.7 trips <span class='muted'>(+28% odds)</span>",
+          "Batting 1: 4.7 trips to the plate <span class='muted'>(+28% odds)</span>",
           "Established: 587 PA of track record <span class='muted'>(+6% odds)</span>",
           "Contact quality says 1.08&times; league hits <span class='muted'>(+5% odds)</span>",
           "Knock: Tarik Skubal strikes out 28% (league 22%) <span class='muted'>(-11% odds)</span>"
@@ -835,13 +836,13 @@
         "team": "Milwaukee Brewers",
         "game_pk": 849809,
         "matchup": "Los Angeles Dodgers @ Milwaukee Brewers",
-        "prob": 0.12902346921373709,
-        "model_prob": 0.10926836097533528,
-        "edge": 0.019755108238401806,
+        "prob": 0.12847440843259075,
+        "model_prob": 0.10509820938931215,
+        "edge": 0.023376199043278603,
         "barrel_rate": 0.056567927380272595,
         "sp_name": "Tarik Skubal",
         "park": 1.073,
-        "weather": 1.0
+        "weather": 0.982
       },
       {
         "batter": "Jackson Chourio",
@@ -849,13 +850,13 @@
         "team": "Milwaukee Brewers",
         "game_pk": 849809,
         "matchup": "Los Angeles Dodgers @ Milwaukee Brewers",
-        "prob": 0.16997420422683915,
-        "model_prob": 0.15169211671522034,
-        "edge": 0.018282087511618805,
+        "prob": 0.16904742269749937,
+        "model_prob": 0.14681746500062048,
+        "edge": 0.022229957696878883,
         "barrel_rate": 0.07668105193446963,
         "sp_name": "Tarik Skubal",
         "park": 1.073,
-        "weather": 1.0
+        "weather": 0.982
       },
       {
         "batter": "Mookie Betts",
@@ -863,41 +864,41 @@
         "team": "Los Angeles Dodgers",
         "game_pk": 849809,
         "matchup": "Los Angeles Dodgers @ Milwaukee Brewers",
-        "prob": 0.12250214533448042,
-        "model_prob": 0.11297740351416219,
-        "edge": 0.009524741820318233,
+        "prob": 0.12139410676701685,
+        "model_prob": 0.10873034356392511,
+        "edge": 0.012663763203091746,
         "barrel_rate": 0.059654653371116376,
         "sp_name": "Jacob Misiorowski",
         "park": 1.073,
-        "weather": 1.0
+        "weather": 0.982
       },
       {
-        "batter": "Freddie Freeman",
-        "batter_id": 518692,
+        "batter": "Andy Pages",
+        "batter_id": 681624,
         "team": "Los Angeles Dodgers",
         "game_pk": 849809,
         "matchup": "Los Angeles Dodgers @ Milwaukee Brewers",
-        "prob": 0.12544858119517202,
-        "model_prob": 0.11617641341562893,
-        "edge": 0.009272167779543095,
-        "barrel_rate": 0.059911859846043705,
+        "prob": 0.09907499572965277,
+        "model_prob": 0.08976523134879985,
+        "edge": 0.009309764380852917,
+        "barrel_rate": 0.06223152824675855,
         "sp_name": "Jacob Misiorowski",
         "park": 1.073,
-        "weather": 1.0
+        "weather": 0.982
       },
       {
-        "batter": "Shohei Ohtani",
-        "batter_id": 660271,
+        "batter": "Will Smith",
+        "batter_id": 669257,
         "team": "Los Angeles Dodgers",
         "game_pk": 849809,
         "matchup": "Los Angeles Dodgers @ Milwaukee Brewers",
-        "prob": 0.16685998286201936,
-        "model_prob": 0.1593419531295829,
-        "edge": 0.007518029732436454,
-        "barrel_rate": 0.07845289461310721,
+        "prob": 0.12660769076529554,
+        "model_prob": 0.11762669062535737,
+        "edge": 0.008981000139938175,
+        "barrel_rate": 0.07831303390612336,
         "sp_name": "Jacob Misiorowski",
         "park": 1.073,
-        "weather": 1.0
+        "weather": 0.982
       }
     ],
     "fades": [
@@ -907,69 +908,69 @@
         "team": "Los Angeles Dodgers",
         "game_pk": 849809,
         "matchup": "Los Angeles Dodgers @ Milwaukee Brewers",
-        "prob": 0.08521362150708656,
-        "model_prob": 0.10628592740980979,
-        "edge": -0.02107230590272323,
+        "prob": 0.0760710880868353,
+        "model_prob": 0.08492095660856924,
+        "edge": -0.008849868521733945,
         "barrel_rate": 0.047531332491515386,
         "sp_name": "Jacob Misiorowski",
         "park": 1.073,
-        "weather": 1.0
+        "weather": 0.982
       },
       {
-        "batter": "Sal Frelick",
-        "batter_id": 686217,
+        "batter": "Luis Lara",
+        "batter_id": 800325,
         "team": "Milwaukee Brewers",
         "game_pk": 849809,
         "matchup": "Los Angeles Dodgers @ Milwaukee Brewers",
-        "prob": 0.04734644765541178,
-        "model_prob": 0.05325977263107551,
-        "edge": -0.005913324975663728,
-        "barrel_rate": 0.02710828060289837,
+        "prob": 0.040876120955358086,
+        "model_prob": 0.042302192671115534,
+        "edge": -0.0014260717157574473,
+        "barrel_rate": 0.029065987891246047,
         "sp_name": "Tarik Skubal",
         "park": 1.073,
-        "weather": 1.0
+        "weather": 0.982
       },
       {
-        "batter": "Christian Yelich",
-        "batter_id": 592885,
+        "batter": "Jake Bauers",
+        "batter_id": 641343,
         "team": "Milwaukee Brewers",
         "game_pk": 849809,
         "matchup": "Los Angeles Dodgers @ Milwaukee Brewers",
-        "prob": 0.10276317999760384,
-        "model_prob": 0.10416929427659208,
-        "edge": -0.0014061142789882353,
-        "barrel_rate": 0.0747666601565839,
+        "prob": 0.12834474277841532,
+        "model_prob": 0.1273398847441866,
+        "edge": 0.0010048580342287283,
+        "barrel_rate": 0.08194999355917343,
         "sp_name": "Tarik Skubal",
         "park": 1.073,
-        "weather": 1.0
+        "weather": 0.982
       },
       {
-        "batter": "Tommy Edman",
-        "batter_id": 669242,
+        "batter": "Shohei Ohtani",
+        "batter_id": 660271,
         "team": "Los Angeles Dodgers",
         "game_pk": 849809,
         "matchup": "Los Angeles Dodgers @ Milwaukee Brewers",
-        "prob": 0.06108533694400909,
-        "model_prob": 0.06030710282344723,
-        "edge": 0.0007782341205618618,
-        "barrel_rate": 0.03147570563660432,
+        "prob": 0.14726606030408532,
+        "model_prob": 0.1458742816875439,
+        "edge": 0.0013917786165414114,
+        "barrel_rate": 0.07845289461310721,
         "sp_name": "Jacob Misiorowski",
         "park": 1.073,
-        "weather": 1.0
+        "weather": 0.982
       },
       {
-        "batter": "William Contreras",
-        "batter_id": 661388,
+        "batter": "Garrett Mitchell",
+        "batter_id": 669003,
         "team": "Milwaukee Brewers",
         "game_pk": 849809,
         "matchup": "Los Angeles Dodgers @ Milwaukee Brewers",
-        "prob": 0.1282120657452264,
-        "model_prob": 0.12726932029187413,
-        "edge": 0.0009427454533522672,
-        "barrel_rate": 0.050939922304485734,
+        "prob": 0.10074288385908411,
+        "model_prob": 0.09773542604532119,
+        "edge": 0.003007457813762923,
+        "barrel_rate": 0.06444406095550624,
         "sp_name": "Tarik Skubal",
         "park": 1.073,
-        "weather": 1.0
+        "weather": 0.982
       }
     ],
     "locked": [],
@@ -1003,7 +1004,7 @@
         "void": 0,
         "pending": 0
       },
-      "graded_at": "2026-10-11 19:31:32",
+      "graded_at": "2026-10-11 23:40:34",
       "complete": false
     }
   },

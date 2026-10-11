@@ -1,7 +1,7 @@
 {
   "date": "2026-10-11",
-  "built_at": "2026-10-11 19:31:32",
-  "fetched_at": "2026-10-11 19:31:32",
+  "built_at": "2026-10-11 23:40:34",
+  "fetched_at": "2026-10-11 23:40:34",
   "games": [
     {
       "game_pk": 849809,
@@ -13,36 +13,36 @@
       "away_sp_hand": "L",
       "home_sp_hand": "R",
       "state": "Preview",
-      "detailed": "Scheduled",
-      "inning": null,
-      "away_score": null,
-      "home_score": null,
+      "detailed": "Pre-Game",
+      "inning": "1st",
+      "away_score": 0,
+      "home_score": 0,
       "hr": [
-        {
-          "batter": "Shohei Ohtani",
-          "batter_id": 660271,
-          "team": "Los Angeles Dodgers",
-          "prob_hr": 0.1593419531295829,
-          "facing_hand": "R",
-          "season": "30 HR / 634 PA",
-          "result": null
-        },
         {
           "batter": "Jackson Chourio",
           "batter_id": 694192,
           "team": "Milwaukee Brewers",
-          "prob_hr": 0.15169211671522034,
+          "prob_hr": 0.14681746500062048,
           "facing_hand": "L",
           "season": "26 HR / 592 PA",
           "result": null
         },
         {
-          "batter": "William Contreras",
-          "batter_id": 661388,
+          "batter": "Shohei Ohtani",
+          "batter_id": 660271,
+          "team": "Los Angeles Dodgers",
+          "prob_hr": 0.1458742816875439,
+          "facing_hand": "R",
+          "season": "30 HR / 634 PA",
+          "result": null
+        },
+        {
+          "batter": "Jake Bauers",
+          "batter_id": 641343,
           "team": "Milwaukee Brewers",
-          "prob_hr": 0.12726932029187413,
+          "prob_hr": 0.1273398847441866,
           "facing_hand": "L",
-          "season": "20 HR / 658 PA",
+          "season": "26 HR / 595 PA",
           "result": null
         }
       ],
