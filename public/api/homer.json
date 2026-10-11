@@ -4,7 +4,7 @@
   "card": {
     "bot": "HOMER",
     "date": "2026-10-10",
-    "built_at": "2026-10-10 23:31:26",
+    "built_at": "2026-10-11 05:40:17",
     "book_through": "2026-10-10",
     "league": {
       "pa": 184298,
@@ -732,7 +732,13 @@
           "avg_prob": 0.1783
         },
         "tag": "LOVE IT",
-        "edge": 0.0033085567010588957
+        "edge": 0.0033085567010588957,
+        "result": {
+          "hr": 0,
+          "summary": "0-4 | 4 K",
+          "final": true,
+          "state": "Final"
+        }
       }
     ],
     "hit_picks": [
@@ -795,7 +801,14 @@
           "rate": 0.668,
           "avg_prob": 0.6646
         },
-        "tag": "LIKE IT"
+        "tag": "LIKE IT",
+        "result": {
+          "hits": 1,
+          "summary": "1-3 | BB, K, R",
+          "final": true,
+          "dnp": false,
+          "state": "Final"
+        }
       }
     ],
     "parlays": [],
@@ -828,7 +841,15 @@
           "Cleveland Guardians lineup 0.307 wOBA vs 0.315"
         ],
         "model_pick_prob": 0.5043508479762019,
-        "tag": "SMALL PLAY"
+        "tag": "SMALL PLAY",
+        "result": {
+          "final": true,
+          "won": true,
+          "home_score": 2,
+          "away_score": 0,
+          "total": 2,
+          "state": "Final"
+        }
       }
     ],
     "likes": [
@@ -838,13 +859,13 @@
         "team": "Cleveland Guardians",
         "game_pk": 849831,
         "matchup": "Chicago White Sox @ Cleveland Guardians",
-        "prob": 0.17141535564294705,
-        "model_prob": 0.13401958590188984,
-        "edge": 0.03739576974105721,
+        "prob": 0.16764609844987438,
+        "model_prob": 0.1303435467464049,
+        "edge": 0.037302551703469494,
         "barrel_rate": 0.061260234619813704,
         "sp_name": "Sean Burke",
         "park": 0.938,
-        "weather": 1.132
+        "weather": 1.081
       },
       {
         "batter": "Jos\u00e9 Ram\u00edrez",
@@ -852,27 +873,13 @@
         "team": "Cleveland Guardians",
         "game_pk": 849831,
         "matchup": "Chicago White Sox @ Cleveland Guardians",
-        "prob": 0.12465880658385929,
-        "model_prob": 0.10262972277061232,
-        "edge": 0.022029083813246975,
+        "prob": 0.12315819284990791,
+        "model_prob": 0.09942972778127739,
+        "edge": 0.023728465068630522,
         "barrel_rate": 0.041978597486792994,
         "sp_name": "Sean Burke",
         "park": 0.938,
-        "weather": 1.132
-      },
-      {
-        "batter": "Petey Halpin",
-        "batter_id": 690984,
-        "team": "Cleveland Guardians",
-        "game_pk": 849831,
-        "matchup": "Chicago White Sox @ Cleveland Guardians",
-        "prob": 0.09840642204432734,
-        "model_prob": 0.07953907758136582,
-        "edge": 0.018867344462961524,
-        "barrel_rate": 0.06089638151425925,
-        "sp_name": "Sean Burke",
-        "park": 0.938,
-        "weather": 1.132
+        "weather": 1.081
       },
       {
         "batter": "Brenton Doyle",
@@ -880,13 +887,13 @@
         "team": "Chicago White Sox",
         "game_pk": 849831,
         "matchup": "Chicago White Sox @ Cleveland Guardians",
-        "prob": 0.0852013784315895,
-        "model_prob": 0.0664558452752036,
-        "edge": 0.0187455331563859,
+        "prob": 0.08480005714995105,
+        "model_prob": 0.06403372049807306,
+        "edge": 0.020766336651877992,
         "barrel_rate": 0.030280718821699446,
         "sp_name": "Gavin Williams",
         "park": 0.938,
-        "weather": 1.132
+        "weather": 1.081
       },
       {
         "batter": "Nathaniel Lowe",
@@ -894,13 +901,27 @@
         "team": "Cleveland Guardians",
         "game_pk": 849831,
         "matchup": "Chicago White Sox @ Cleveland Guardians",
-        "prob": 0.13089216159496903,
-        "model_prob": 0.11274367252669525,
-        "edge": 0.01814848906827378,
+        "prob": 0.12824898486228822,
+        "model_prob": 0.10937150095834003,
+        "edge": 0.018877483903948195,
         "barrel_rate": 0.057598540737692716,
         "sp_name": "Sean Burke",
         "park": 0.938,
-        "weather": 1.132
+        "weather": 1.081
+      },
+      {
+        "batter": "Chase DeLauter",
+        "batter_id": 800050,
+        "team": "Cleveland Guardians",
+        "game_pk": 849831,
+        "matchup": "Chicago White Sox @ Cleveland Guardians",
+        "prob": 0.12686734996854984,
+        "model_prob": 0.10809970172728572,
+        "edge": 0.018767648241264118,
+        "barrel_rate": 0.043452814224981824,
+        "sp_name": "Sean Burke",
+        "park": 0.938,
+        "weather": 1.081
       }
     ],
     "fades": [
@@ -910,13 +931,13 @@
         "team": "Chicago White Sox",
         "game_pk": 849831,
         "matchup": "Chicago White Sox @ Cleveland Guardians",
-        "prob": 0.12500168139121687,
-        "model_prob": 0.1348610031847445,
-        "edge": -0.009859321793527637,
+        "prob": 0.12348954807172151,
+        "model_prob": 0.13117451121888124,
+        "edge": -0.007684963147159732,
         "barrel_rate": 0.0793771295145077,
         "sp_name": "Gavin Williams",
         "park": 0.938,
-        "weather": 1.132
+        "weather": 1.081
       },
       {
         "batter": "Kyle Teel",
@@ -924,13 +945,13 @@
         "team": "Chicago White Sox",
         "game_pk": 849831,
         "matchup": "Chicago White Sox @ Cleveland Guardians",
-        "prob": 0.1275957315724789,
-        "model_prob": 0.13679879051702798,
-        "edge": -0.009203058944549092,
+        "prob": 0.12611849160035737,
+        "model_prob": 0.13308866710684256,
+        "edge": -0.006970175506485182,
         "barrel_rate": 0.05875111288546086,
         "sp_name": "Gavin Williams",
         "park": 0.938,
-        "weather": 1.132
+        "weather": 1.081
       },
       {
         "batter": "Tristan Peters",
@@ -938,13 +959,13 @@
         "team": "Chicago White Sox",
         "game_pk": 849831,
         "matchup": "Chicago White Sox @ Cleveland Guardians",
-        "prob": 0.09855690364864249,
-        "model_prob": 0.10106366767411547,
-        "edge": -0.0025067640254729795,
+        "prob": 0.09287590273094283,
+        "model_prob": 0.09789200081245918,
+        "edge": -0.005016098081516346,
         "barrel_rate": 0.04611249513178013,
         "sp_name": "Gavin Williams",
         "park": 0.938,
-        "weather": 1.132
+        "weather": 1.081
       },
       {
         "batter": "Munetaka Murakami",
@@ -952,47 +973,49 @@
         "team": "Chicago White Sox",
         "game_pk": 849831,
         "matchup": "Chicago White Sox @ Cleveland Guardians",
-        "prob": 0.1857464806680498,
-        "model_prob": 0.1824379239669909,
-        "edge": 0.0033085567010588957,
+        "prob": 0.17854218131890637,
+        "model_prob": 0.1783423310516994,
+        "edge": 0.00019985026720698018,
         "barrel_rate": 0.11540406900867176,
         "sp_name": "Gavin Williams",
         "park": 0.938,
-        "weather": 1.132
+        "weather": 1.081
       },
       {
-        "batter": "Colson Montgomery",
-        "batter_id": 695657,
-        "team": "Chicago White Sox",
+        "batter": "Steven Kwan",
+        "batter_id": 680757,
+        "team": "Cleveland Guardians",
         "game_pk": 849831,
         "matchup": "Chicago White Sox @ Cleveland Guardians",
-        "prob": 0.12649542761467922,
-        "model_prob": 0.12204020345239543,
-        "edge": 0.004455224162283791,
-        "barrel_rate": 0.10178029429866906,
-        "sp_name": "Gavin Williams",
+        "prob": 0.049813052080108194,
+        "model_prob": 0.046441904678088494,
+        "edge": 0.0033711474020197,
+        "barrel_rate": 0.008881730652705339,
+        "sp_name": "Sean Burke",
         "park": 0.938,
-        "weather": 1.132
+        "weather": 1.081
       }
     ],
-    "locked": [],
+    "locked": [
+      849831
+    ],
     "record": {
       "hr": {
         "hit": 0,
-        "scored": 0,
+        "scored": 1,
         "dnp": 0,
-        "pending": 1
+        "pending": 0
       },
       "games": {
-        "won": 0,
+        "won": 1,
         "lost": 0,
-        "pending": 1
+        "pending": 0
       },
       "hits": {
-        "hit": 0,
-        "scored": 0,
+        "hit": 1,
+        "scored": 1,
         "dnp": 0,
-        "pending": 1
+        "pending": 0
       },
       "parlays": {
         "won": 0,
@@ -1006,18 +1029,18 @@
         "void": 0,
         "pending": 0
       },
-      "graded_at": "2026-10-10 23:31:20",
-      "complete": false
+      "graded_at": "2026-10-11 05:40:10",
+      "complete": true
     }
   },
   "record": {
     "hr_hit": 22,
-    "hr_scored": 96,
-    "hr_expected": 18.99,
-    "games_won": 130,
+    "hr_scored": 97,
+    "hr_expected": 19.18,
+    "games_won": 131,
     "games_lost": 80,
-    "hits_hit": 54,
-    "hits_scored": 81,
+    "hits_hit": 55,
+    "hits_scored": 82,
     "parlays_won": 27,
     "parlays_lost": 39,
     "five_won": 0,
@@ -1026,15 +1049,15 @@
       {
         "date": "2026-10-10",
         "hr_hit": 0,
-        "hr_scored": 0,
-        "hr_expected": 0,
-        "games_won": 0,
+        "hr_scored": 1,
+        "hr_expected": 0.19,
+        "games_won": 1,
         "games_lost": 0,
-        "hits_hit": 0,
-        "hits_scored": 0,
+        "hits_hit": 1,
+        "hits_scored": 1,
         "parlays_won": 0,
         "parlays_lost": 0,
-        "complete": false,
+        "complete": true,
         "backfilled": false
       },
       {
