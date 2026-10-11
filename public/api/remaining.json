@@ -1,7 +1,7 @@
 {
   "date": "2026-10-11",
-  "built_at": "2026-10-11 12:43:09",
-  "fetched_at": "2026-10-11 12:43:09",
+  "built_at": "2026-10-11 19:31:32",
+  "fetched_at": "2026-10-11 19:31:32",
   "games": [
     {
       "game_pk": 849809,
@@ -31,7 +31,7 @@
           "batter": "Jackson Chourio",
           "batter_id": 694192,
           "team": "Milwaukee Brewers",
-          "prob_hr": 0.1516921167152203,
+          "prob_hr": 0.15169211671522034,
           "facing_hand": "L",
           "season": "26 HR / 592 PA",
           "result": null
