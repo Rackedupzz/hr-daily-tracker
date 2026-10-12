@@ -1,6 +1,153 @@
 {
-  "date": "2026-10-11",
-  "built_at": "2026-10-12 05:50:16",
-  "fetched_at": "2026-10-12 05:50:17",
-  "games": []
+  "date": "2026-10-12",
+  "built_at": "2026-10-12 15:16:28",
+  "fetched_at": "2026-10-12 15:16:28",
+  "games": [
+    {
+      "game_pk": 849812,
+      "away": "Los Angeles Dodgers",
+      "home": "Milwaukee Brewers",
+      "venue": "American Family Field",
+      "away_sp": "Yoshinobu Yamamoto",
+      "home_sp": "Logan Henderson",
+      "away_sp_hand": "R",
+      "home_sp_hand": "R",
+      "state": "Preview",
+      "detailed": "Scheduled",
+      "inning": null,
+      "away_score": null,
+      "home_score": null,
+      "hr": [
+        {
+          "batter": "Shohei Ohtani",
+          "batter_id": 660271,
+          "team": "Los Angeles Dodgers",
+          "prob_hr": 0.17604069722242693,
+          "facing_hand": "R",
+          "season": "30 HR / 638 PA",
+          "result": null
+        },
+        {
+          "batter": "Jackson Chourio",
+          "batter_id": 694192,
+          "team": "Milwaukee Brewers",
+          "prob_hr": 0.15226348906634246,
+          "facing_hand": "R",
+          "season": "26 HR / 596 PA",
+          "result": null
+        },
+        {
+          "batter": "Teoscar Hern\u00e1ndez",
+          "batter_id": 606192,
+          "team": "Los Angeles Dodgers",
+          "prob_hr": 0.1406035338676477,
+          "facing_hand": "R",
+          "season": "17 HR / 511 PA",
+          "result": null
+        }
+      ],
+      "hits": [
+        {
+          "batter": "Mookie Betts",
+          "batter_id": 605141,
+          "team": "Los Angeles Dodgers",
+          "projected_hits": 0.98,
+          "prob_at_least_one": 0.6681537062310718,
+          "result": null,
+          "matchup": null
+        },
+        {
+          "batter": "Freddie Freeman",
+          "batter_id": 518692,
+          "team": "Los Angeles Dodgers",
+          "projected_hits": 0.96,
+          "prob_at_least_one": 0.6632239314500544,
+          "result": null,
+          "matchup": null
+        },
+        {
+          "batter": "Jackson Chourio",
+          "batter_id": 694192,
+          "team": "Milwaukee Brewers",
+          "projected_hits": 0.89,
+          "prob_at_least_one": 0.6308979174830942,
+          "result": null,
+          "matchup": null
+        }
+      ]
+    },
+    {
+      "game_pk": 849820,
+      "away": "Cleveland Guardians",
+      "home": "Tampa Bay Rays",
+      "venue": "Tropicana Field",
+      "away_sp": "Foster Griffin",
+      "home_sp": "Drew Rasmussen",
+      "away_sp_hand": "L",
+      "home_sp_hand": "R",
+      "state": "Preview",
+      "detailed": "Scheduled",
+      "inning": null,
+      "away_score": null,
+      "home_score": null,
+      "hr": [
+        {
+          "batter": "Junior Caminero",
+          "batter_id": 691406,
+          "team": "Tampa Bay Rays",
+          "prob_hr": 0.1713334968561397,
+          "facing_hand": "L",
+          "season": "42 HR / 714 PA",
+          "result": null
+        },
+        {
+          "batter": "Jo Adell",
+          "batter_id": 666176,
+          "team": "Cleveland Guardians",
+          "prob_hr": 0.14712257480314184,
+          "facing_hand": "R",
+          "season": "23 HR / 683 PA",
+          "result": null
+        },
+        {
+          "batter": "Jonathan Aranda",
+          "batter_id": 666018,
+          "team": "Tampa Bay Rays",
+          "prob_hr": 0.13683724088432386,
+          "facing_hand": "L",
+          "season": "23 HR / 681 PA",
+          "result": null
+        }
+      ],
+      "hits": [
+        {
+          "batter": "Yandy D\u00edaz",
+          "batter_id": 650490,
+          "team": "Tampa Bay Rays",
+          "projected_hits": 1.1,
+          "prob_at_least_one": 0.7176491567520096,
+          "result": null,
+          "matchup": null
+        },
+        {
+          "batter": "Chandler Simpson",
+          "batter_id": 802415,
+          "team": "Tampa Bay Rays",
+          "projected_hits": 1.02,
+          "prob_at_least_one": 0.6898317477070545,
+          "result": null,
+          "matchup": null
+        },
+        {
+          "batter": "Liam Hicks",
+          "batter_id": 689414,
+          "team": "Tampa Bay Rays",
+          "projected_hits": 1.02,
+          "prob_at_least_one": 0.6872278532272404,
+          "result": null,
+          "matchup": null
+        }
+      ]
+    }
+  ]
 }
