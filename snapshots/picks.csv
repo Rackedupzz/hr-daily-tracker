@@ -279,11 +279,11 @@ date,kind,rank,batter,batter_id,team,game_pk,opponent_sp,facing_hand,lineup_slot
 2026-10-11,hit,2,Mookie Betts,605141,Los Angeles Dodgers,849809,Jacob Misiorowski,R,1,0.87,0.622,0.02428514422303569,4.491,1.033,0.958,0.905,0.796,23,545,5,4,1,0,0,1-4 | BB,Final,True,True
 2026-10-11,hr,1,Jackson Chourio,694192,Milwaukee Brewers,849809,Tarik Skubal,L,1,0.1468,0.1468,0.032304539292115166,4.491,1.027,0.958,0.933,0.859,26,592,4,4,2,0,0,2-4 | K,Final,True,False
 2026-10-11,hr,2,Shohei Ohtani,660271,Los Angeles Dodgers,849809,Jacob Misiorowski,R,4,0.1459,0.1459,0.04337057794697373,4.197,1.135,0.958,0.905,0.796,30,634,4,3,1,0,0,"1-3 | BB, K, R",Final,True,False
-2026-10-12,hit,1,Mookie Betts,605141,Los Angeles Dodgers,849812,Logan Henderson,R,,0.98,0.6682,0.03412669410638927,4.491,1.026,1.0,0.903,1.088,23,550,2,1,1,0,0,"1-1 | BB, R",In Progress,False,
-2026-10-12,hit,2,Jackson Chourio,694192,Milwaukee Brewers,849812,Yoshinobu Yamamoto,R,,0.89,0.6309,0.03025674285265869,4.491,1.022,1.0,0.932,0.935,26,596,2,2,0,0,0,0-2 | K,In Progress,False,
-2026-10-12,hit,3,Yandy Díaz,650490,Tampa Bay Rays,849820,Foster Griffin,L,1,1.1,0.7176,0.032900038307709115,4.491,1.127,0.993,0.931,1.024,22,699,,,,,,,,,
-2026-10-12,hit,4,Steven Kwan,680757,Cleveland Guardians,849820,Drew Rasmussen,R,1,1.02,0.6841,0.0061284364025507385,4.491,0.955,0.993,1.072,0.788,3,661,,,,,,,,,
-2026-10-12,hr,1,Shohei Ohtani,660271,Los Angeles Dodgers,849812,Logan Henderson,R,,0.176,0.176,0.061613064821172396,4.402,1.138,1.0,0.903,1.088,30,638,2,2,0,0,0,0-2 | K,In Progress,False,
-2026-10-12,hr,2,Jackson Chourio,694192,Milwaukee Brewers,849812,Yoshinobu Yamamoto,R,,0.1523,0.1523,0.03025674285265869,4.491,1.022,1.0,0.932,0.935,26,596,2,2,0,0,0,0-2 | K,In Progress,False,
-2026-10-12,hr,3,Junior Caminero,691406,Tampa Bay Rays,849820,Foster Griffin,L,3,0.1705,0.1705,0.05010531619588982,4.303,1.229,0.993,0.931,1.024,42,714,,,,,,,,,
-2026-10-12,hr,4,Jo Adell,666176,Cleveland Guardians,849820,Drew Rasmussen,R,4,0.1464,0.1464,0.030551508578716493,4.197,1.195,0.993,1.072,0.788,23,683,,,,,,,,,
+2026-10-12,hit,1,Mookie Betts,605141,Los Angeles Dodgers,849812,Logan Henderson,R,,0.98,0.6682,0.03412669410638927,4.491,1.026,1.0,0.903,1.088,23,550,4,3,1,0,0,"1-3 | BB, K, R",Final,True,True
+2026-10-12,hit,2,Jackson Chourio,694192,Milwaukee Brewers,849812,Yoshinobu Yamamoto,R,,0.89,0.6309,0.03025674285265869,4.491,1.022,1.0,0.932,0.935,26,596,5,5,0,0,0,0-5 | 2 K,Final,True,False
+2026-10-12,hit,3,Yandy Díaz,650490,Tampa Bay Rays,849820,Foster Griffin,L,1,1.1,0.7176,0.032900038307709115,4.491,1.127,0.993,0.931,1.024,22,699,5,5,2,0,0,"2-5 | 2B, K, R",Final,True,True
+2026-10-12,hit,4,Steven Kwan,680757,Cleveland Guardians,849820,Drew Rasmussen,R,1,1.02,0.6841,0.0061284364025507385,4.491,0.955,0.993,1.072,0.788,3,661,5,5,1,0,0,1-5 | K,Final,True,True
+2026-10-12,hr,1,Shohei Ohtani,660271,Los Angeles Dodgers,849812,Logan Henderson,R,,0.176,0.176,0.061613064821172396,4.402,1.138,1.0,0.903,1.088,30,638,4,4,0,0,0,0-4 | 2 K,Final,True,False
+2026-10-12,hr,2,Jackson Chourio,694192,Milwaukee Brewers,849812,Yoshinobu Yamamoto,R,,0.1523,0.1523,0.03025674285265869,4.491,1.022,1.0,0.932,0.935,26,596,5,5,0,0,0,0-5 | 2 K,Final,True,False
+2026-10-12,hr,3,Junior Caminero,691406,Tampa Bay Rays,849820,Foster Griffin,L,3,0.1705,0.1705,0.05010531619588982,4.303,1.229,0.993,0.931,1.024,42,714,4,4,1,0,1,"1-4 | 2 K, RBI, R",Final,True,False
+2026-10-12,hr,4,Jo Adell,666176,Cleveland Guardians,849820,Drew Rasmussen,R,4,0.1464,0.1464,0.030551508578716493,4.197,1.195,0.993,1.072,0.788,23,683,5,5,1,0,2,"1-5 | 2B, K, 2 RBI",Final,True,False
