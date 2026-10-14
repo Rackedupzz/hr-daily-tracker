@@ -1,0 +1,1014 @@
+{
+ "bot": "HOMER",
+ "date": "2026-10-14",
+ "built_at": "2026-10-14 10:08:07",
+ "book_through": "2026-10-14",
+ "league": {
+  "pa": 184646,
+  "hr_rate": 0.030479945409052998,
+  "woba": 0.31264240763397905,
+  "games": 2458
+ },
+ "method": "learned",
+ "evidence": {
+  "fitted_at": "2026-10-13 20:39:50",
+  "through": "2026-10-12",
+  "hits_serve": "learned",
+  "hit_scores": {
+   "learned": {
+    "n": 32580,
+    "log_loss": 0.66221,
+    "brier": 0.2348,
+    "auc": 0.5721,
+    "accuracy": 0.6107,
+    "accuracy_se": 0.0027
+   },
+   "rules": {
+    "n": 32580,
+    "log_loss": 0.66634,
+    "brier": 0.23675,
+    "auc": 0.5666,
+    "accuracy": 0.6077,
+    "accuracy_se": 0.0027
+   },
+   "baseline": {
+    "n": 32580,
+    "log_loss": 0.66871,
+    "brier": 0.23782,
+    "auc": 0.5571,
+    "accuracy": 0.6075,
+    "accuracy_se": 0.0027
+   }
+  },
+  "hit_picks": {
+   "calibrated": {
+    "days": 147,
+    "picks": 828,
+    "hit": 589,
+    "rate": 0.7114,
+    "rate_se": 0.0157,
+    "expected": 595.9
+   },
+   "rules": {
+    "days": 147,
+    "picks": 828,
+    "hit": 568,
+    "rate": 0.686,
+    "rate_se": 0.0161,
+    "expected": 615.6
+   },
+   "base": {
+    "days": 147,
+    "picks": 828,
+    "hit": 569,
+    "rate": 0.6872,
+    "rate_se": 0.0161,
+    "expected": 615.4
+   }
+  },
+  "hit_grades": [
+   {
+    "grade": "A",
+    "min_prob": 0.7067,
+    "top_share": 0.05,
+    "n": 1445,
+    "hit": 1049,
+    "rate": 0.726,
+    "avg_prob": 0.7219
+   },
+   {
+    "grade": "B",
+    "min_prob": 0.6728,
+    "top_share": 0.13,
+    "n": 2314,
+    "hit": 1577,
+    "rate": 0.6815,
+    "avg_prob": 0.6878
+   },
+   {
+    "grade": "C",
+    "min_prob": 0.6518,
+    "top_share": 0.3,
+    "n": 4915,
+    "hit": 3287,
+    "rate": 0.6688,
+    "avg_prob": 0.6647
+   },
+   {
+    "grade": "D",
+    "min_prob": 0.0,
+    "top_share": 1.0,
+    "n": 20242,
+    "hit": 11899,
+    "rate": 0.5878,
+    "avg_prob": 0.5889
+   }
+  ],
+  "hit_weights": [
+   {
+    "feature": "exp_pa",
+    "label": "Lineup spot (trips to the plate)",
+    "odds_per_sd": 0.1798,
+    "overlap": false
+   },
+   {
+    "feature": "sp_k",
+    "label": "Starter's strikeout rate",
+    "odds_per_sd": -0.0565,
+    "overlap": false
+   },
+   {
+    "feature": "k_rate",
+    "label": "Strikeout rate",
+    "odds_per_sd": -0.0536,
+    "overlap": false
+   },
+   {
+    "feature": "hit_park",
+    "label": "Ballpark (hits)",
+    "odds_per_sd": 0.05,
+    "overlap": false
+   },
+   {
+    "feature": "sample",
+    "label": "Size of track record",
+    "odds_per_sd": 0.047,
+    "overlap": false
+   },
+   {
+    "feature": "xhit",
+    "label": "Expected hits (contact quality)",
+    "odds_per_sd": 0.0467,
+    "overlap": false
+   },
+   {
+    "feature": "pen_hit",
+    "label": "Opposing bullpen hits allowed",
+    "odds_per_sd": 0.0415,
+    "overlap": false
+   },
+   {
+    "feature": "hit_platoon",
+    "label": "League platoon edge (hits)",
+    "odds_per_sd": -0.0398,
+    "overlap": true
+   },
+   {
+    "feature": "sp_hit",
+    "label": "Starter's hits allowed",
+    "odds_per_sd": 0.0352,
+    "overlap": false
+   },
+   {
+    "feature": "bb_rate",
+    "label": "Walk rate",
+    "odds_per_sd": -0.0351,
+    "overlap": false
+   }
+  ],
+  "hit_dropped": [
+   {
+    "dropped": "hit_form",
+    "log_loss_before": 0.662316,
+    "log_loss_after": 0.662264
+   },
+   {
+    "dropped": "hit_split",
+    "log_loss_before": 0.662264,
+    "log_loss_after": 0.662232
+   },
+   {
+    "dropped": "hit_rate",
+    "log_loss_before": 0.662232,
+    "log_loss_after": 0.662206
+   }
+  ],
+  "hit_board_rate": 0.616,
+  "parlays": {
+   "hit5": {
+    "legs": 5,
+    "days": 133,
+    "won": 22,
+    "rate": 0.1654,
+    "predicted": 0.199452,
+    "expected_wins": 26.527,
+    "wins_on": [
+     "2026-05-16",
+     "2026-05-26",
+     "2026-05-27",
+     "2026-06-05",
+     "2026-06-07",
+     "2026-06-11",
+     "2026-06-13",
+     "2026-06-16",
+     "2026-06-29",
+     "2026-07-04",
+     "2026-07-11",
+     "2026-07-17",
+     "2026-07-19",
+     "2026-07-23",
+     "2026-07-25",
+     "2026-08-04",
+     "2026-08-06",
+     "2026-08-08",
+     "2026-08-18",
+     "2026-09-01",
+     "2026-09-11",
+     "2026-09-23"
+    ],
+    "leg_rate": 0.7083,
+    "leg_projected": 0.7242
+   },
+   "multi5": {
+    "legs": 5,
+    "days": 133,
+    "won": 3,
+    "rate": 0.0226,
+    "predicted": 0.003072,
+    "expected_wins": 0.409,
+    "wins_on": [
+     "2026-05-27",
+     "2026-06-05",
+     "2026-06-29"
+    ],
+    "leg_rate": 0.3218,
+    "leg_projected": 0.314
+   },
+   "hr5": {
+    "legs": 5,
+    "days": 133,
+    "won": 3,
+    "rate": 0.0226,
+    "predicted": 0.000363,
+    "expected_wins": 0.048,
+    "wins_on": [
+     "2026-06-12",
+     "2026-07-07",
+     "2026-08-26"
+    ],
+    "leg_rate": 0.212,
+    "leg_projected": 0.2049
+   },
+   "win5": {
+    "legs": 5,
+    "days": 133,
+    "won": 7,
+    "rate": 0.0526,
+    "predicted": 0.076054,
+    "expected_wins": 10.115,
+    "wins_on": [
+     "2026-05-29",
+     "2026-06-08",
+     "2026-07-03",
+     "2026-08-29",
+     "2026-09-20",
+     "2026-09-25",
+     "2026-09-27"
+    ],
+    "leg_rate": 0.6075,
+    "leg_projected": 0.5969
+   },
+   "chalk5": {
+    "legs": 5,
+    "days": 133,
+    "won": 22,
+    "rate": 0.1654,
+    "predicted": 0.199551,
+    "expected_wins": 26.54,
+    "wins_on": [
+     "2026-05-16",
+     "2026-05-26",
+     "2026-05-27",
+     "2026-06-05",
+     "2026-06-07",
+     "2026-06-11",
+     "2026-06-13",
+     "2026-06-16",
+     "2026-06-29",
+     "2026-07-04",
+     "2026-07-11",
+     "2026-07-17",
+     "2026-07-19",
+     "2026-07-23",
+     "2026-07-25",
+     "2026-08-04",
+     "2026-08-06",
+     "2026-08-08",
+     "2026-08-18",
+     "2026-09-01",
+     "2026-09-11",
+     "2026-09-23"
+    ],
+    "leg_rate": 0.7083,
+    "leg_projected": 0.7243
+   },
+   "early10": {
+    "legs": 10,
+    "days": 100,
+    "won": 0,
+    "rate": 0.0,
+    "predicted": 0.00923,
+    "expected_wins": 0.923,
+    "wins_on": [],
+    "leg_rate": 0.667,
+    "leg_projected": 0.6568,
+    "by_kind": {
+     "hits1": {
+      "n": 897,
+      "projected": 0.7068,
+      "hit": 0.7224
+     },
+     "hr": {
+      "n": 100,
+      "projected": 0.2072,
+      "hit": 0.18
+     },
+     "win": {
+      "n": 3,
+      "projected": 0.6943,
+      "hit": 0.3333
+     }
+    }
+   },
+   "late10": {
+    "legs": 10,
+    "days": 102,
+    "won": 1,
+    "rate": 0.0098,
+    "predicted": 0.009783,
+    "expected_wins": 0.998,
+    "wins_on": [
+     "2026-07-04"
+    ],
+    "leg_rate": 0.651,
+    "leg_projected": 0.6607,
+    "by_kind": {
+     "hits1": {
+      "n": 911,
+      "projected": 0.711,
+      "hit": 0.6948
+     },
+     "hr": {
+      "n": 102,
+      "projected": 0.2085,
+      "hit": 0.2647
+     },
+     "win": {
+      "n": 7,
+      "projected": 0.7005,
+      "hit": 0.5714
+     }
+    }
+   }
+  },
+  "book": {
+   "margins": {
+    "hr": 1.22,
+    "hits": 1.065
+   },
+   "legs": {
+    "hr_prob": {
+     "legs": 697,
+     "actual": 0.2123,
+     "homer": 0.2039,
+     "market": 0.1802,
+     "break_even": 0.2198,
+     "roi": -0.0322
+    },
+    "hr_value": {
+     "legs": 697,
+     "actual": 0.1951,
+     "homer": 0.1858,
+     "market": 0.1357,
+     "break_even": 0.1655,
+     "roi": 0.2007
+    },
+    "hit_prob": {
+     "legs": 697,
+     "actual": 0.7088,
+     "homer": 0.7223,
+     "market": 0.6708,
+     "break_even": 0.7144,
+     "roi": -0.0071
+    },
+    "hit_value": {
+     "legs": 697,
+     "actual": 0.6901,
+     "homer": 0.705,
+     "market": 0.635,
+     "break_even": 0.6763,
+     "roi": 0.0231
+    }
+   }
+  },
+  "hr_serve": "learned",
+  "games_serve": "rules",
+  "hr_scores": {
+   "learned": {
+    "n": 32580,
+    "log_loss": 0.35452,
+    "brier": 0.10235,
+    "auc": 0.613,
+    "accuracy": 0.8822,
+    "accuracy_se": 0.0018
+   },
+   "rules": {
+    "n": 32580,
+    "log_loss": 0.35508,
+    "brier": 0.10243,
+    "auc": 0.607,
+    "accuracy": 0.8822,
+    "accuracy_se": 0.0018
+   },
+   "baseline": {
+    "n": 32580,
+    "log_loss": 0.35726,
+    "brier": 0.10285,
+    "auc": 0.5916,
+    "accuracy": 0.8822,
+    "accuracy_se": 0.0018
+   }
+  },
+  "hr_picks": {
+   "calibrated": {
+    "days": 147,
+    "picks": 828,
+    "hit": 174,
+    "rate": 0.2101,
+    "rate_se": 0.0142,
+    "expected": 167.7
+   },
+   "rules": {
+    "days": 147,
+    "picks": 828,
+    "hit": 158,
+    "rate": 0.1908,
+    "rate_se": 0.0137,
+    "expected": 172.4
+   },
+   "base": {
+    "days": 147,
+    "picks": 828,
+    "hit": 161,
+    "rate": 0.1944,
+    "rate_se": 0.0138,
+    "expected": 180.8
+   }
+  },
+  "hr_weights": [
+   {
+    "feature": "xhr",
+    "label": "Expected HR rate (contact quality)",
+    "odds_per_sd": 0.3141,
+    "overlap": false
+   },
+   {
+    "feature": "exp_pa",
+    "label": "Lineup spot (trips to the plate)",
+    "odds_per_sd": 0.1436,
+    "overlap": false
+   },
+   {
+    "feature": "weather",
+    "label": "Temperature & wind",
+    "odds_per_sd": 0.1092,
+    "overlap": false
+   },
+   {
+    "feature": "sp_fly",
+    "label": "Starter's fly-ball rate",
+    "odds_per_sd": 0.0937,
+    "overlap": false
+   },
+   {
+    "feature": "hr",
+    "label": "Actual HR rate",
+    "odds_per_sd": 0.061,
+    "overlap": false
+   },
+   {
+    "feature": "barrel",
+    "label": "Barrel rate",
+    "odds_per_sd": -0.0573,
+    "overlap": true
+   },
+   {
+    "feature": "sample",
+    "label": "Size of track record",
+    "odds_per_sd": 0.055,
+    "overlap": false
+   },
+   {
+    "feature": "park",
+    "label": "Ballpark",
+    "odds_per_sd": 0.0539,
+    "overlap": false
+   },
+   {
+    "feature": "form",
+    "label": "Last 21 days vs season",
+    "odds_per_sd": 0.0511,
+    "overlap": false
+   },
+   {
+    "feature": "sp_hr",
+    "label": "Starter's HR allowed",
+    "odds_per_sd": 0.0386,
+    "overlap": false
+   },
+   {
+    "feature": "pen",
+    "label": "Opposing bullpen HR allowed",
+    "odds_per_sd": 0.0324,
+    "overlap": false
+   }
+  ],
+  "hr_dropped": [
+   {
+    "dropped": "sp_form",
+    "log_loss_before": 0.354627,
+    "log_loss_after": 0.354565
+   },
+   {
+    "dropped": "split",
+    "log_loss_before": 0.354565,
+    "log_loss_after": 0.354533
+   },
+   {
+    "dropped": "platoon",
+    "log_loss_before": 0.354533,
+    "log_loss_after": 0.354516
+   }
+  ],
+  "grades": [
+   {
+    "grade": "A",
+    "min_prob": 0.1915,
+    "top_share": 0.05,
+    "n": 1445,
+    "hit": 302,
+    "rate": 0.209,
+    "avg_prob": 0.2039
+   },
+   {
+    "grade": "B",
+    "min_prob": 0.1752,
+    "top_share": 0.13,
+    "n": 2314,
+    "hit": 413,
+    "rate": 0.1785,
+    "avg_prob": 0.1815
+   },
+   {
+    "grade": "C",
+    "min_prob": 0.139,
+    "top_share": 0.3,
+    "n": 4915,
+    "hit": 788,
+    "rate": 0.1603,
+    "avg_prob": 0.1554
+   },
+   {
+    "grade": "D",
+    "min_prob": 0.0,
+    "top_share": 1.0,
+    "n": 20242,
+    "hit": 2032,
+    "rate": 0.1004,
+    "avg_prob": 0.0987
+   }
+  ],
+  "board_rate": 0.1223,
+  "game_scores": {
+   "learned": {
+    "n": 1801,
+    "log_loss": 0.68139,
+    "brier": 0.24423,
+    "auc": 0.5791,
+    "accuracy": 0.5552,
+    "accuracy_se": 0.0117
+   },
+   "rules": {
+    "n": 1801,
+    "log_loss": 0.6812,
+    "brier": 0.2441,
+    "auc": 0.5811,
+    "accuracy": 0.5608,
+    "accuracy_se": 0.0117
+   },
+   "home_team": {
+    "n": 1801,
+    "log_loss": 0.69185,
+    "brier": 0.24935,
+    "auc": 0.5,
+    "accuracy": 0.5258,
+    "accuracy_se": 0.0118
+   }
+  },
+  "game_weights": [
+   {
+    "feature": "starter",
+    "label": "Starting pitcher matchup",
+    "odds_per_sd": 0.238,
+    "overlap": false
+   },
+   {
+    "feature": "bullpen",
+    "label": "Bullpen matchup",
+    "odds_per_sd": 0.1528,
+    "overlap": false
+   },
+   {
+    "feature": "record",
+    "label": "Season run differential",
+    "odds_per_sd": 0.0784,
+    "overlap": false
+   }
+  ],
+  "confidence": [
+   {
+    "label": "Strong",
+    "min_prob": 0.6,
+    "n": 270,
+    "won": 171,
+    "rate": 0.6333
+   },
+   {
+    "label": "Lean",
+    "min_prob": 0.55,
+    "n": 591,
+    "won": 342,
+    "rate": 0.5787
+   },
+   {
+    "label": "Coin flip",
+    "min_prob": 0.0,
+    "n": 940,
+    "won": 497,
+    "rate": 0.5287
+   }
+  ],
+  "house_winners": {
+   "n": 1937,
+   "accuracy": 0.5467217346411978,
+   "accuracy_se": 0.01131099490937996,
+   "brier": 0.24697265034737342,
+   "log_loss": 0.6870700122028418
+  }
+ },
+ "hr_picks": [
+  {
+   "rules_prob": 0.14424895763780488,
+   "xhr_rate": 0.05196265744687503,
+   "hr_rate": 0.0430927678720083,
+   "recent_rate": 0.041719870396713266,
+   "recent_pa": 45,
+   "recent_hr": 0,
+   "season_pa": 623,
+   "season_hr": 30,
+   "season_xhr": 34.950661033941785,
+   "barrel_rate": 0.07772932058369078,
+   "hard_rate": 0.522077922077922,
+   "split_index": 1.3198802768455629,
+   "split_pa": 213,
+   "split_hr": 12,
+   "sp_index": 1.0009177484185037,
+   "sp_fly": 0.26979895725067343,
+   "sp_form_index": 1.1767079067521393,
+   "pen_index": 0.8189301920645204,
+   "platoon": 0.7777166660878138,
+   "park": 1.046,
+   "weather": 1.0,
+   "weather_note": "",
+   "exp_pa": 4.55,
+   "slot": null,
+   "usual_slot": 2,
+   "pa_vs_sp": 2.56,
+   "pa_vs_pen": 1.99,
+   "sp_hand": "L",
+   "bat_side": "L",
+   "lg": 0.030479945409052998,
+   "batter": "Shohei Ohtani",
+   "batter_id": 660271,
+   "team": "Los Angeles Dodgers",
+   "game_pk": 849811,
+   "matchup": "Milwaukee Brewers @ Los Angeles Dodgers",
+   "venue": "UNIQLO Field at Dodger Stadium",
+   "sp_name": "Robert Gasser",
+   "model_prob": 0.14562342849837714,
+   "injury_note": null,
+   "lineup_posted": false,
+   "lineup_confirmed": false,
+   "prob": 0.17856599031461973,
+   "method": "learned",
+   "contrib": {
+    "xhr": 0.4844,
+    "hr": 0.0846,
+    "form": -0.0324,
+    "barrel": -0.0515,
+    "sp_hr": 0.0027,
+    "sp_fly": 0.0091,
+    "pen": -0.0468,
+    "park": 0.0243,
+    "weather": -0.0476,
+    "exp_pa": 0.1516,
+    "sample": 0.0712
+   },
+   "take": [
+    "Contact quality: 35.0 xHR in 623 PA (1.70&times; league) <span class='muted'>(+62% odds)</span>",
+    "Lineup not posted; usually bats 2 (4.5 trips) <span class='muted'>(+16% odds)</span>",
+    "Proven power: 30 HR in 623 PA <span class='muted'>(+9% odds)</span>"
+   ],
+   "market_prob": 0.16935057674883974,
+   "book_implied": 0.2066077036335845,
+   "book_price": "+384",
+   "book_edge": -0.1357244324669341,
+   "grade": "B",
+   "evidence": {
+    "grade": "B",
+    "min_prob": 0.1752,
+    "top_share": 0.13,
+    "n": 2314,
+    "hit": 413,
+    "rate": 0.1785,
+    "avg_prob": 0.1815
+   },
+   "tag": "LOVE IT",
+   "edge": 0.03294256181624258
+  }
+ ],
+ "hit_picks": [
+  {
+   "rules_prob": 0.6891529279977342,
+   "season_pa": 551,
+   "season_hits": 128,
+   "avg_line": 0.2323049001814882,
+   "hit_rate": 0.22848981849213956,
+   "xhit_rate": 0.2410217562888444,
+   "recent_hit_rate": 0.21223728139746142,
+   "recent_pa": 47,
+   "recent_hits": 9,
+   "k_rate": 0.13479049080043254,
+   "bb_rate": 0.09375650268857756,
+   "split_index": 1.0017930127893215,
+   "split_pa": 177,
+   "split_hits": 41,
+   "platoon": 1.010432968755792,
+   "sp_hit_index": 0.9893746207009427,
+   "sp_k_rate": 0.22252709808193635,
+   "pen_hit_index": 0.9245085976433338,
+   "park": 0.978,
+   "exp_pa": 4.65,
+   "slot": null,
+   "usual_slot": 1,
+   "sp_hand": "L",
+   "lg_hit": 0.21797926843798404,
+   "lg_k": 0.22325422700735462,
+   "batter": "Mookie Betts",
+   "batter_id": 605141,
+   "team": "Los Angeles Dodgers",
+   "game_pk": 849811,
+   "matchup": "Milwaukee Brewers @ Los Angeles Dodgers",
+   "venue": "UNIQLO Field at Dodger Stadium",
+   "sp_name": "Robert Gasser",
+   "model_prob": 0.704630830943231,
+   "injury_note": null,
+   "lineup_posted": false,
+   "lineup_confirmed": false,
+   "prob": 0.6785526792426415,
+   "method": "learned",
+   "take": [
+    "Usually bats 1: 4.7 trips <span class='muted'>(+28% odds)</span>",
+    "Strikeout rate 13% (league 22%) <span class='muted'>(+16% odds)</span>",
+    "Contact quality says 1.11&times; league hits <span class='muted'>(+6% odds)</span>",
+    "Knock: Opposing bullpen allows hits at 0.92&times; league <span class='muted'>(-7% odds)</span>"
+   ],
+   "market_prob": 0.6620365381415555,
+   "book_implied": 0.7050689131207566,
+   "book_price": "-239",
+   "book_edge": -0.03760800311100043,
+   "grade": "B",
+   "evidence": {
+    "grade": "B",
+    "min_prob": 0.6728,
+    "top_share": 0.13,
+    "n": 2314,
+    "hit": 1577,
+    "rate": 0.6815,
+    "avg_prob": 0.6878
+   },
+   "tag": "LOVE IT"
+  }
+ ],
+ "parlays": [],
+ "parlay_rules": "house-2026-10-06",
+ "game_picks": [
+  {
+   "game_pk": 849811,
+   "matchup": "Milwaukee Brewers @ Los Angeles Dodgers",
+   "away": "Milwaukee Brewers",
+   "home": "Los Angeles Dodgers",
+   "venue": "UNIQLO Field at Dodger Stadium",
+   "pick": "Los Angeles Dodgers",
+   "pick_side": "home",
+   "win_prob": 0.5479375200444296,
+   "confidence": "Coin flip",
+   "evidence": {
+    "label": "Coin flip",
+    "min_prob": 0.0,
+    "n": 940,
+    "won": 497,
+    "rate": 0.5287
+   },
+   "method": "rules",
+   "away_runs": 3.89,
+   "home_runs": 4.41,
+   "total": 8.3,
+   "park_runs": 0.968,
+   "take": [
+    "Pitching edge: Blake Snell allows 0.285 wOBA, Robert Gasser 0.307",
+    "Los Angeles Dodgers lineup 0.325 wOBA vs 0.322"
+   ],
+   "model_pick_prob": 0.5437759180724139,
+   "tag": "SMALL PLAY"
+  }
+ ],
+ "likes": [
+  {
+   "batter": "Shohei Ohtani",
+   "batter_id": 660271,
+   "team": "Los Angeles Dodgers",
+   "game_pk": 849811,
+   "matchup": "Milwaukee Brewers @ Los Angeles Dodgers",
+   "prob": 0.17856599031461973,
+   "model_prob": 0.14562342849837714,
+   "edge": 0.03294256181624258,
+   "barrel_rate": 0.07772932058369078,
+   "sp_name": "Robert Gasser",
+   "park": 1.046,
+   "weather": 1.0
+  },
+  {
+   "batter": "Brice Turang",
+   "batter_id": 668930,
+   "team": "Milwaukee Brewers",
+   "game_pk": 849811,
+   "matchup": "Milwaukee Brewers @ Los Angeles Dodgers",
+   "prob": 0.12990357876918643,
+   "model_prob": 0.09929839154723517,
+   "edge": 0.030605187221951255,
+   "barrel_rate": 0.058184632748756245,
+   "sp_name": "Blake Snell",
+   "park": 1.046,
+   "weather": 1.0
+  },
+  {
+   "batter": "Jackson Chourio",
+   "batter_id": 694192,
+   "team": "Milwaukee Brewers",
+   "game_pk": 849811,
+   "matchup": "Milwaukee Brewers @ Los Angeles Dodgers",
+   "prob": 0.157647510964982,
+   "model_prob": 0.13851382656947442,
+   "edge": 0.019133684395507583,
+   "barrel_rate": 0.07785272707370758,
+   "sp_name": "Blake Snell",
+   "park": 1.046,
+   "weather": 1.0
+  },
+  {
+   "batter": "Christian Yelich",
+   "batter_id": 592885,
+   "team": "Milwaukee Brewers",
+   "game_pk": 849811,
+   "matchup": "Milwaukee Brewers @ Los Angeles Dodgers",
+   "prob": 0.10503628586363968,
+   "model_prob": 0.08594815115691803,
+   "edge": 0.019088134706721646,
+   "barrel_rate": 0.07396876184549331,
+   "sp_name": "Blake Snell",
+   "park": 1.046,
+   "weather": 1.0
+  },
+  {
+   "batter": "Jake Bauers",
+   "batter_id": 641343,
+   "team": "Milwaukee Brewers",
+   "game_pk": 849811,
+   "matchup": "Milwaukee Brewers @ Los Angeles Dodgers",
+   "prob": 0.12569982702878502,
+   "model_prob": 0.10807087581125596,
+   "edge": 0.017628951217529054,
+   "barrel_rate": 0.08129882441663716,
+   "sp_name": "Blake Snell",
+   "park": 1.046,
+   "weather": 1.0
+  }
+ ],
+ "fades": [
+  {
+   "batter": "Teoscar Hern\u00e1ndez",
+   "batter_id": 606192,
+   "team": "Los Angeles Dodgers",
+   "game_pk": 849811,
+   "matchup": "Milwaukee Brewers @ Los Angeles Dodgers",
+   "prob": 0.135425564125854,
+   "model_prob": 0.14224910256887152,
+   "edge": -0.006823538443017529,
+   "barrel_rate": 0.07683267854374796,
+   "sp_name": "Robert Gasser",
+   "park": 1.046,
+   "weather": 1.0
+  },
+  {
+   "batter": "Will Smith",
+   "batter_id": 669257,
+   "team": "Los Angeles Dodgers",
+   "game_pk": 849811,
+   "matchup": "Milwaukee Brewers @ Los Angeles Dodgers",
+   "prob": 0.1312349179949349,
+   "model_prob": 0.13707570423502768,
+   "edge": -0.0058407862400927935,
+   "barrel_rate": 0.07649519094172003,
+   "sp_name": "Robert Gasser",
+   "park": 1.046,
+   "weather": 1.0
+  },
+  {
+   "batter": "Sal Frelick",
+   "batter_id": 686217,
+   "team": "Milwaukee Brewers",
+   "game_pk": 849811,
+   "matchup": "Milwaukee Brewers @ Los Angeles Dodgers",
+   "prob": 0.037458605756177876,
+   "model_prob": 0.04241549871866722,
+   "edge": -0.004956892962489343,
+   "barrel_rate": 0.02695674300523485,
+   "sp_name": "Blake Snell",
+   "park": 1.046,
+   "weather": 1.0
+  },
+  {
+   "batter": "Tommy Edman",
+   "batter_id": 669242,
+   "team": "Los Angeles Dodgers",
+   "game_pk": 849811,
+   "matchup": "Milwaukee Brewers @ Los Angeles Dodgers",
+   "prob": 0.0629719683869263,
+   "model_prob": 0.06791368879961218,
+   "edge": -0.004941720412685882,
+   "barrel_rate": 0.031249129269168386,
+   "sp_name": "Robert Gasser",
+   "park": 1.046,
+   "weather": 1.0
+  },
+  {
+   "batter": "Kyle Tucker",
+   "batter_id": 663656,
+   "team": "Los Angeles Dodgers",
+   "game_pk": 849811,
+   "matchup": "Milwaukee Brewers @ Los Angeles Dodgers",
+   "prob": 0.08476583366170895,
+   "model_prob": 0.0874318240404637,
+   "edge": -0.002665990378754743,
+   "barrel_rate": 0.04724653661489184,
+   "sp_name": "Robert Gasser",
+   "park": 1.046,
+   "weather": 1.0
+  }
+ ],
+ "locked": [],
+ "record": {
+  "hr": {
+   "hit": 0,
+   "scored": 0,
+   "dnp": 0,
+   "pending": 1
+  },
+  "games": {
+   "won": 0,
+   "lost": 0,
+   "pending": 1
+  },
+  "hits": {
+   "hit": 0,
+   "scored": 0,
+   "dnp": 0,
+   "pending": 1
+  },
+  "parlays": {
+   "won": 0,
+   "lost": 0,
+   "void": 0,
+   "pending": 0
+  },
+  "five_picks": {
+   "won": 0,
+   "lost": 0,
+   "void": 0,
+   "pending": 0
+  },
+  "graded_at": "2026-10-14 10:07:58",
+  "complete": false
+ }
+}

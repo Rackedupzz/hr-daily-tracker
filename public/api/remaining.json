@@ -1,6 +1,80 @@
 {
-  "date": "2026-10-13",
-  "built_at": "2026-10-14 04:46:47",
-  "fetched_at": "2026-10-14 04:46:47",
-  "games": []
+  "date": "2026-10-14",
+  "built_at": "2026-10-14 10:07:58",
+  "fetched_at": "2026-10-14 10:07:58",
+  "games": [
+    {
+      "game_pk": 849811,
+      "away": "Milwaukee Brewers",
+      "home": "Los Angeles Dodgers",
+      "venue": "UNIQLO Field at Dodger Stadium",
+      "away_sp": "Robert Gasser",
+      "home_sp": "Blake Snell",
+      "away_sp_hand": "L",
+      "home_sp_hand": "L",
+      "state": "Preview",
+      "detailed": "Scheduled",
+      "inning": null,
+      "away_score": null,
+      "home_score": null,
+      "hr": [
+        {
+          "batter": "Shohei Ohtani",
+          "batter_id": 660271,
+          "team": "Los Angeles Dodgers",
+          "prob_hr": 0.14562342849837714,
+          "facing_hand": "L",
+          "season": "30 HR / 642 PA",
+          "result": null
+        },
+        {
+          "batter": "Teoscar Hern\u00e1ndez",
+          "batter_id": 606192,
+          "team": "Los Angeles Dodgers",
+          "prob_hr": 0.14224910256887152,
+          "facing_hand": "L",
+          "season": "17 HR / 515 PA",
+          "result": null
+        },
+        {
+          "batter": "Jackson Chourio",
+          "batter_id": 694192,
+          "team": "Milwaukee Brewers",
+          "prob_hr": 0.13851382656947442,
+          "facing_hand": "L",
+          "season": "26 HR / 601 PA",
+          "result": null
+        }
+      ],
+      "hits": [
+        {
+          "batter": "Mookie Betts",
+          "batter_id": 605141,
+          "team": "Los Angeles Dodgers",
+          "projected_hits": 1.07,
+          "prob_at_least_one": 0.704630830943231,
+          "result": null,
+          "matchup": null
+        },
+        {
+          "batter": "Freddie Freeman",
+          "batter_id": 518692,
+          "team": "Los Angeles Dodgers",
+          "projected_hits": 1.0,
+          "prob_at_least_one": 0.6774524955907422,
+          "result": null,
+          "matchup": null
+        },
+        {
+          "batter": "Will Smith",
+          "batter_id": 669257,
+          "team": "Los Angeles Dodgers",
+          "projected_hits": 0.95,
+          "prob_at_least_one": 0.656949157993604,
+          "result": null,
+          "matchup": null
+        }
+      ]
+    }
+  ]
 }
