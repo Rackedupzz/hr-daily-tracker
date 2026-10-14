@@ -1,7 +1,7 @@
 {
   "date": "2026-10-14",
-  "built_at": "2026-10-14 10:07:58",
-  "fetched_at": "2026-10-14 10:07:58",
+  "built_at": "2026-10-14 19:21:43",
+  "fetched_at": "2026-10-14 19:21:43",
   "games": [
     {
       "game_pk": 849811,
@@ -22,7 +22,7 @@
           "batter": "Shohei Ohtani",
           "batter_id": 660271,
           "team": "Los Angeles Dodgers",
-          "prob_hr": 0.14562342849837714,
+          "prob_hr": 0.1456234284983772,
           "facing_hand": "L",
           "season": "30 HR / 642 PA",
           "result": null
@@ -40,7 +40,7 @@
           "batter": "Jackson Chourio",
           "batter_id": 694192,
           "team": "Milwaukee Brewers",
-          "prob_hr": 0.13851382656947442,
+          "prob_hr": 0.1385138265694744,
           "facing_hand": "L",
           "season": "26 HR / 601 PA",
           "result": null

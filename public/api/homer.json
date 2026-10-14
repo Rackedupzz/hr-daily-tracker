@@ -4,7 +4,7 @@
   "card": {
     "bot": "HOMER",
     "date": "2026-10-14",
-    "built_at": "2026-10-14 10:08:07",
+    "built_at": "2026-10-14 19:21:51",
     "book_through": "2026-10-14",
     "league": {
       "pa": 184646,
@@ -698,7 +698,7 @@
         "matchup": "Milwaukee Brewers @ Los Angeles Dodgers",
         "venue": "UNIQLO Field at Dodger Stadium",
         "sp_name": "Robert Gasser",
-        "model_prob": 0.14562342849837714,
+        "model_prob": 0.1456234284983772,
         "injury_note": null,
         "lineup_posted": false,
         "lineup_confirmed": false,
@@ -737,7 +737,7 @@
           "avg_prob": 0.1815
         },
         "tag": "LOVE IT",
-        "edge": 0.03294256181624258
+        "edge": 0.03294256181624253
       }
     ],
     "hit_picks": [
@@ -844,8 +844,8 @@
         "game_pk": 849811,
         "matchup": "Milwaukee Brewers @ Los Angeles Dodgers",
         "prob": 0.17856599031461973,
-        "model_prob": 0.14562342849837714,
-        "edge": 0.03294256181624258,
+        "model_prob": 0.1456234284983772,
+        "edge": 0.03294256181624253,
         "barrel_rate": 0.07772932058369078,
         "sp_name": "Robert Gasser",
         "park": 1.046,
@@ -872,8 +872,8 @@
         "game_pk": 849811,
         "matchup": "Milwaukee Brewers @ Los Angeles Dodgers",
         "prob": 0.157647510964982,
-        "model_prob": 0.13851382656947442,
-        "edge": 0.019133684395507583,
+        "model_prob": 0.1385138265694744,
+        "edge": 0.01913368439550761,
         "barrel_rate": 0.07785272707370758,
         "sp_name": "Blake Snell",
         "park": 1.046,
@@ -900,8 +900,8 @@
         "game_pk": 849811,
         "matchup": "Milwaukee Brewers @ Los Angeles Dodgers",
         "prob": 0.12569982702878502,
-        "model_prob": 0.10807087581125596,
-        "edge": 0.017628951217529054,
+        "model_prob": 0.108070875811256,
+        "edge": 0.017628951217529013,
         "barrel_rate": 0.08129882441663716,
         "sp_name": "Blake Snell",
         "park": 1.046,
@@ -930,8 +930,8 @@
         "game_pk": 849811,
         "matchup": "Milwaukee Brewers @ Los Angeles Dodgers",
         "prob": 0.1312349179949349,
-        "model_prob": 0.13707570423502768,
-        "edge": -0.0058407862400927935,
+        "model_prob": 0.13707570423502763,
+        "edge": -0.005840786240092738,
         "barrel_rate": 0.07649519094172003,
         "sp_name": "Robert Gasser",
         "park": 1.046,
@@ -1011,7 +1011,7 @@
         "void": 0,
         "pending": 0
       },
-      "graded_at": "2026-10-14 10:07:58",
+      "graded_at": "2026-10-14 19:21:43",
       "complete": false
     }
   },
