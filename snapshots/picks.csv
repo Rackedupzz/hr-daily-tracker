@@ -287,7 +287,7 @@ date,kind,rank,batter,batter_id,team,game_pk,opponent_sp,facing_hand,lineup_slot
 2026-10-12,hr,2,Jackson Chourio,694192,Milwaukee Brewers,849812,Yoshinobu Yamamoto,R,,0.1523,0.1523,0.03025674285265869,4.491,1.022,1.0,0.932,0.935,26,596,5,5,0,0,0,0-5 | 2 K,Final,True,False
 2026-10-12,hr,3,Junior Caminero,691406,Tampa Bay Rays,849820,Foster Griffin,L,3,0.1705,0.1705,0.05010531619588982,4.303,1.229,0.993,0.931,1.024,42,714,4,4,1,0,1,"1-4 | 2 K, RBI, R",Final,True,False
 2026-10-12,hr,4,Jo Adell,666176,Cleveland Guardians,849820,Drew Rasmussen,R,4,0.1464,0.1464,0.030551508578716493,4.197,1.195,0.993,1.072,0.788,23,683,5,5,1,0,2,"1-5 | 2B, K, 2 RBI",Final,True,False
-2026-10-13,hit,1,Steven Kwan,680757,Cleveland Guardians,849813,Freddy Peralta,R,1,1.11,0.7187,0.008086215033084376,4.491,0.963,0.994,1.069,1.039,3,666,,,,,,,,,
-2026-10-13,hit,2,Yandy Díaz,650490,Tampa Bay Rays,849813,Parker Messick,L,1,1.04,0.6938,0.027284936958003648,4.491,1.123,0.994,0.934,0.844,22,704,,,,,,,,,
-2026-10-13,hr,1,Jo Adell,666176,Cleveland Guardians,849813,Freddy Peralta,R,4,0.1599,0.1599,0.03976704020043228,4.197,1.189,0.994,1.069,1.039,23,688,,,,,,,,,
+2026-10-13,hit,1,Steven Kwan,680757,Cleveland Guardians,849813,Freddy Peralta,R,1,1.11,0.7187,0.008086215033084376,4.491,0.963,0.994,1.069,1.039,3,666,1,1,1,0,0,1-1,In Progress,False,
+2026-10-13,hit,2,Yandy Díaz,650490,Tampa Bay Rays,849813,Parker Messick,L,1,1.04,0.6938,0.027284936958003648,4.491,1.123,0.994,0.934,0.844,22,704,1,1,0,0,0,0-1,In Progress,False,
+2026-10-13,hr,1,Jo Adell,666176,Cleveland Guardians,849813,Freddy Peralta,R,4,0.1599,0.1599,0.03976704020043228,4.197,1.189,0.994,1.069,1.039,23,688,1,1,0,0,0,0-1,In Progress,False,
 2026-10-13,hr,2,Junior Caminero,691406,Tampa Bay Rays,849813,Parker Messick,L,3,0.1583,0.1583,0.04163250724374451,4.303,1.22,0.994,0.934,0.844,42,718,,,,,,,,,

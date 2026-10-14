@@ -1,7 +1,7 @@
 {
   "date": "2026-10-13",
-  "built_at": "2026-10-13 20:39:22",
-  "fetched_at": "2026-10-13 20:39:22",
+  "built_at": "2026-10-14 00:17:24",
+  "fetched_at": "2026-10-14 00:17:24",
   "games": [
     {
       "game_pk": 849813,
@@ -12,8 +12,8 @@
       "home_sp": "Freddy Peralta",
       "away_sp_hand": "L",
       "home_sp_hand": "R",
-      "state": "Preview",
-      "detailed": "Pre-Game",
+      "state": "Live",
+      "detailed": "In Progress",
       "inning": "1st",
       "away_score": 0,
       "home_score": 0,
@@ -25,7 +25,17 @@
           "prob_hr": 0.15988339592851813,
           "facing_hand": "R",
           "season": "23 HR / 688 PA",
-          "result": null
+          "result": {
+            "pa": 1,
+            "ab": 1,
+            "hits": 0,
+            "hr": 0,
+            "rbi": 0,
+            "summary": "0-1",
+            "state": "Live",
+            "detailed": "In Progress",
+            "final": false
+          }
         },
         {
           "batter": "Junior Caminero",
@@ -43,7 +53,17 @@
           "prob_hr": 0.12929989098755135,
           "facing_hand": "L",
           "season": "23 HR / 685 PA",
-          "result": null
+          "result": {
+            "pa": 1,
+            "ab": 1,
+            "hits": 0,
+            "hr": 0,
+            "rbi": 0,
+            "summary": "0-1",
+            "state": "Live",
+            "detailed": "In Progress",
+            "final": false
+          }
         }
       ],
       "hits": [
@@ -53,7 +73,17 @@
           "team": "Cleveland Guardians",
           "projected_hits": 1.11,
           "prob_at_least_one": 0.7187427672998581,
-          "result": null,
+          "result": {
+            "pa": 1,
+            "ab": 1,
+            "hits": 1,
+            "hr": 0,
+            "rbi": 0,
+            "summary": "1-1",
+            "state": "Live",
+            "detailed": "In Progress",
+            "final": false
+          },
           "matchup": null
         },
         {
@@ -62,7 +92,17 @@
           "team": "Cleveland Guardians",
           "projected_hits": 1.06,
           "prob_at_least_one": 0.7038293187463456,
-          "result": null,
+          "result": {
+            "pa": 1,
+            "ab": 1,
+            "hits": 0,
+            "hr": 0,
+            "rbi": 0,
+            "summary": "0-1 | K",
+            "state": "Live",
+            "detailed": "In Progress",
+            "final": false
+          },
           "matchup": null
         },
         {
@@ -71,7 +111,17 @@
           "team": "Tampa Bay Rays",
           "projected_hits": 1.04,
           "prob_at_least_one": 0.6937727489157466,
-          "result": null,
+          "result": {
+            "pa": 1,
+            "ab": 1,
+            "hits": 0,
+            "hr": 0,
+            "rbi": 0,
+            "summary": "0-1",
+            "state": "Live",
+            "detailed": "In Progress",
+            "final": false
+          },
           "matchup": null
         }
       ]
