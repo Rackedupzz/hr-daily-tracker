@@ -291,7 +291,7 @@ date,kind,rank,batter,batter_id,team,game_pk,opponent_sp,facing_hand,lineup_slot
 2026-10-13,hit,2,Yandy Díaz,650490,Tampa Bay Rays,849813,Parker Messick,L,1,1.04,0.6938,0.027284936958003648,4.491,1.123,0.994,0.934,0.844,22,704,4,4,0,0,0,0-4 | K,Final,True,False
 2026-10-13,hr,1,Jo Adell,666176,Cleveland Guardians,849813,Freddy Peralta,R,4,0.1599,0.1599,0.03976704020043228,4.197,1.189,0.994,1.069,1.039,23,688,4,4,0,0,0,0-4 | K,Final,True,False
 2026-10-13,hr,2,Junior Caminero,691406,Tampa Bay Rays,849813,Parker Messick,L,3,0.1583,0.1583,0.04163250724374451,4.303,1.22,0.994,0.934,0.844,42,718,4,3,1,0,0,"1-3 | 2B, BB, K",Final,True,False
-2026-10-14,hit,1,Mookie Betts,605141,Los Angeles Dodgers,849811,Robert Gasser,L,,1.07,0.7046,0.040784254742415836,4.491,1.062,1.0,0.901,1.057,23,554,,,,,,,,,
-2026-10-14,hit,2,William Contreras,661388,Milwaukee Brewers,849811,Blake Snell,L,,0.94,0.6527,0.026028158851494888,4.303,1.057,1.0,0.933,0.676,21,667,,,,,,,,,
-2026-10-14,hr,1,Shohei Ohtani,660271,Los Angeles Dodgers,849811,Robert Gasser,L,,0.1456,0.1456,0.03774616393902211,4.197,1.019,1.0,0.901,1.057,30,642,,,,,,,,,
-2026-10-14,hr,2,Jackson Chourio,694192,Milwaukee Brewers,849811,Blake Snell,L,,0.1385,0.1385,0.026811850013151346,4.491,1.052,1.0,0.933,0.676,26,601,,,,,,,,,
+2026-10-14,hit,1,Mookie Betts,605141,Los Angeles Dodgers,849811,Robert Gasser,L,1,1.07,0.7046,0.043313998035594305,4.491,1.062,1.062,0.901,1.057,23,554,,,,,,,,,
+2026-10-14,hit,2,William Contreras,661388,Milwaukee Brewers,849811,Blake Snell,L,3,0.94,0.6527,0.02764261915496769,4.303,1.057,1.062,0.933,0.676,21,667,,,,,,,,,
+2026-10-14,hr,1,Teoscar Hernández,606192,Los Angeles Dodgers,849811,Robert Gasser,L,3,0.1595,0.1595,0.04869298219267651,4.303,1.056,1.062,0.901,1.057,17,515,,,,,,,,,
+2026-10-14,hr,2,Jackson Chourio,694192,Milwaukee Brewers,849811,Blake Snell,L,1,0.1452,0.1452,0.02847492068041883,4.491,1.052,1.062,0.933,0.676,26,601,,,,,,,,,

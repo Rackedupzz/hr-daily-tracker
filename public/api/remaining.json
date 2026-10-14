@@ -1,7 +1,7 @@
 {
   "date": "2026-10-14",
-  "built_at": "2026-10-14 19:21:43",
-  "fetched_at": "2026-10-14 19:21:43",
+  "built_at": "2026-10-14 23:10:56",
+  "fetched_at": "2026-10-14 23:10:56",
   "games": [
     {
       "game_pk": 849811,
@@ -13,25 +13,16 @@
       "away_sp_hand": "L",
       "home_sp_hand": "L",
       "state": "Preview",
-      "detailed": "Scheduled",
-      "inning": null,
-      "away_score": null,
-      "home_score": null,
+      "detailed": "Pre-Game",
+      "inning": "1st",
+      "away_score": 0,
+      "home_score": 0,
       "hr": [
-        {
-          "batter": "Shohei Ohtani",
-          "batter_id": 660271,
-          "team": "Los Angeles Dodgers",
-          "prob_hr": 0.1456234284983772,
-          "facing_hand": "L",
-          "season": "30 HR / 642 PA",
-          "result": null
-        },
         {
           "batter": "Teoscar Hern\u00e1ndez",
           "batter_id": 606192,
           "team": "Los Angeles Dodgers",
-          "prob_hr": 0.14224910256887152,
+          "prob_hr": 0.15952069752279865,
           "facing_hand": "L",
           "season": "17 HR / 515 PA",
           "result": null
@@ -40,9 +31,18 @@
           "batter": "Jackson Chourio",
           "batter_id": 694192,
           "team": "Milwaukee Brewers",
-          "prob_hr": 0.1385138265694744,
+          "prob_hr": 0.14520076365372112,
           "facing_hand": "L",
           "season": "26 HR / 601 PA",
+          "result": null
+        },
+        {
+          "batter": "Shohei Ohtani",
+          "batter_id": 660271,
+          "team": "Los Angeles Dodgers",
+          "prob_hr": 0.13954023002556915,
+          "facing_hand": "L",
+          "season": "30 HR / 642 PA",
           "result": null
         }
       ],
@@ -66,11 +66,11 @@
           "matchup": null
         },
         {
-          "batter": "Will Smith",
-          "batter_id": 669257,
-          "team": "Los Angeles Dodgers",
-          "projected_hits": 0.95,
-          "prob_at_least_one": 0.656949157993604,
+          "batter": "William Contreras",
+          "batter_id": 661388,
+          "team": "Milwaukee Brewers",
+          "projected_hits": 0.94,
+          "prob_at_least_one": 0.6527211331576777,
           "result": null,
           "matchup": null
         }
