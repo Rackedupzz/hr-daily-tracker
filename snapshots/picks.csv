@@ -295,11 +295,11 @@ date,kind,rank,batter,batter_id,team,game_pk,opponent_sp,facing_hand,lineup_slot
 2026-10-14,hit,2,William Contreras,661388,Milwaukee Brewers,849811,Blake Snell,L,3,0.94,0.6527,0.02764261915496769,4.303,1.057,1.062,0.933,0.676,21,667,4,4,1,0,0,1-4 | 2 K,Final,True,True
 2026-10-14,hr,1,Teoscar Hernández,606192,Los Angeles Dodgers,849811,Robert Gasser,L,3,0.1595,0.1595,0.04869298219267651,4.303,1.056,1.062,0.901,1.057,17,515,4,3,0,0,0,"0-3 | BB, K, R",Final,True,False
 2026-10-14,hr,2,Jackson Chourio,694192,Milwaukee Brewers,849811,Blake Snell,L,1,0.1452,0.1452,0.02847492068041883,4.491,1.052,1.062,0.933,0.676,26,601,5,5,1,1,1,"1-5 | HR, RBI, R",Final,True,True
-2026-10-15,hit,1,Mookie Betts,605141,Los Angeles Dodgers,849810,Shane Drohan,L,,1.08,0.7087,0.03546936095930804,4.491,1.06,1.0,0.899,0.93,23,559,,,,,,,,,
-2026-10-15,hit,2,Steven Kwan,680757,Cleveland Guardians,849818,Griffin Jax,R,1,1.06,0.7033,0.008070772101022528,4.491,0.984,0.986,1.067,1.033,3,671,3,3,0,0,0,0-3 | K,In Progress,False,
-2026-10-15,hit,3,Yandy Díaz,650490,Tampa Bay Rays,849818,Gavin Williams,R,1,0.97,0.6662,0.027148955855119485,4.491,0.946,0.986,0.932,1.112,22,708,3,3,1,0,0,"1-3 | 2B, R",In Progress,False,
-2026-10-15,hit,4,William Contreras,661388,Milwaukee Brewers,849810,Tyler Glasnow,R,,0.88,0.6282,0.03232902954505881,4.303,1.055,1.0,0.931,0.892,21,671,,,,,,,,,
-2026-10-15,hr,1,Jonathan Aranda,666018,Tampa Bay Rays,849818,Gavin Williams,R,2,0.1536,0.1536,0.04649239414029655,4.402,0.981,0.986,0.932,1.112,23,689,3,3,0,0,0,0-3 | 2 K,In Progress,False,
-2026-10-15,hr,2,Jackson Chourio,694192,Milwaukee Brewers,849810,Tyler Glasnow,R,,0.15,0.15,0.028184372395340957,4.491,1.051,1.0,0.931,0.892,27,606,,,,,,,,,
-2026-10-15,hr,3,Shohei Ohtani,660271,Los Angeles Dodgers,849810,Shane Drohan,L,,0.1405,0.1405,0.03529549176300994,4.197,1.026,1.0,0.899,0.93,30,646,,,,,,,,,
-2026-10-15,hr,4,Jo Adell,666176,Cleveland Guardians,849818,Griffin Jax,R,4,0.1379,0.1379,0.03016240707553983,4.197,0.917,0.986,1.067,1.033,23,692,3,2,0,0,0,"0-2 | BB, K, R",In Progress,False,
+2026-10-15,hit,1,Steven Kwan,680757,Cleveland Guardians,849818,Griffin Jax,R,1,1.06,0.7033,0.008070772101022528,4.491,0.984,0.986,1.067,1.033,3,671,4,4,0,0,0,0-4 | K,Final,True,False
+2026-10-15,hit,2,Yandy Díaz,650490,Tampa Bay Rays,849818,Gavin Williams,R,1,0.97,0.6662,0.027148955855119485,4.491,0.946,0.986,0.932,1.112,22,708,4,4,1,0,0,"1-4 | 2B, K, R",Final,True,True
+2026-10-15,hit,3,Mookie Betts,605141,Los Angeles Dodgers,849810,Shane Drohan,L,2,1.06,0.7025,0.04164061633685354,4.402,1.06,1.174,0.899,0.93,23,559,,,,,,,,,
+2026-10-15,hit,4,William Contreras,661388,Milwaukee Brewers,849810,Tyler Glasnow,R,3,0.88,0.6282,0.03795390386009536,4.303,1.055,1.174,0.931,0.892,21,671,,,,,,,,,
+2026-10-15,hr,1,Jonathan Aranda,666018,Tampa Bay Rays,849818,Gavin Williams,R,2,0.1536,0.1536,0.04649239414029655,4.402,0.981,0.986,0.932,1.112,23,689,4,4,0,0,0,0-4 | 2 K,Final,True,False
+2026-10-15,hr,2,Jo Adell,666176,Cleveland Guardians,849818,Griffin Jax,R,4,0.1379,0.1379,0.03016240707553983,4.197,0.917,0.986,1.067,1.033,23,692,3,2,0,0,0,"0-2 | BB, K, R",Final,True,False
+2026-10-15,hr,3,Shohei Ohtani,660271,Los Angeles Dodgers,849810,Shane Drohan,L,1,0.1711,0.1711,0.04143649592701159,4.491,1.026,1.174,0.899,0.93,30,646,,,,,,,,,
+2026-10-15,hr,4,Jackson Chourio,694192,Milwaukee Brewers,849810,Tyler Glasnow,R,1,0.1686,0.1686,0.03308812467627538,4.491,1.051,1.174,0.931,0.892,27,606,,,,,,,,,
