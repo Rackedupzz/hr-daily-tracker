@@ -1,6 +1,90 @@
 {
-  "date": "2026-10-15",
-  "built_at": "2026-10-16 04:25:17",
-  "fetched_at": "2026-10-16 09:42:36",
-  "games": []
+  "date": "2026-10-16",
+  "built_at": "2026-10-16 18:49:04",
+  "fetched_at": "2026-10-16 18:49:04",
+  "games": [
+    {
+      "game_pk": 849817,
+      "away": "Tampa Bay Rays",
+      "home": "Cleveland Guardians",
+      "venue": "Progressive Field",
+      "away_sp": "Nick Martinez",
+      "home_sp": "Shawn Armstrong",
+      "away_sp_hand": "R",
+      "home_sp_hand": "R",
+      "state": "Preview",
+      "detailed": "Scheduled",
+      "inning": null,
+      "away_score": null,
+      "home_score": null,
+      "hr": [
+        {
+          "batter": "Jonathan Aranda",
+          "batter_id": 666018,
+          "team": "Tampa Bay Rays",
+          "prob_hr": 0.1440066502284433,
+          "facing_hand": "R",
+          "season": "23 HR / 693 PA",
+          "result": null
+        },
+        {
+          "batter": "Junior Caminero",
+          "batter_id": 691406,
+          "team": "Tampa Bay Rays",
+          "prob_hr": 0.14086302324304303,
+          "facing_hand": "R",
+          "season": "42 HR / 726 PA",
+          "result": null
+        },
+        {
+          "batter": "Jo Adell",
+          "batter_id": 666176,
+          "team": "Cleveland Guardians",
+          "prob_hr": 0.13840125497787675,
+          "facing_hand": "R",
+          "season": "23 HR / 695 PA",
+          "result": null
+        }
+      ],
+      "hits": [
+        {
+          "batter": "Steven Kwan",
+          "batter_id": 680757,
+          "team": "Cleveland Guardians",
+          "projected_hits": 1.18,
+          "prob_at_least_one": 0.7442642746085482,
+          "result": null,
+          "matchup": {
+            "pa": 6,
+            "hits": 2,
+            "home_runs": 0,
+            "strikeouts": 1,
+            "hit_rate": 0.3333333333333333,
+            "baseline_hit_rate": 0.23555555555555555,
+            "baseline_hr_rate": 0.0044444444444444444,
+            "verdict": "hot",
+            "pitcher": "Nick Martinez"
+          }
+        },
+        {
+          "batter": "Chase DeLauter",
+          "batter_id": 800050,
+          "team": "Cleveland Guardians",
+          "projected_hits": 1.13,
+          "prob_at_least_one": 0.7302418013128128,
+          "result": null,
+          "matchup": null
+        },
+        {
+          "batter": "Jos\u00e9 Ram\u00edrez",
+          "batter_id": 608070,
+          "team": "Cleveland Guardians",
+          "projected_hits": 1.12,
+          "prob_at_least_one": 0.7243640816390837,
+          "result": null,
+          "matchup": null
+        }
+      ]
+    }
+  ]
 }
