@@ -1,7 +1,7 @@
 {
   "date": "2026-10-15",
-  "built_at": "2026-10-15 22:15:22",
-  "fetched_at": "2026-10-15 22:15:22",
+  "built_at": "2026-10-16 01:16:38",
+  "fetched_at": "2026-10-16 01:16:38",
   "games": [
     {
       "game_pk": 849810,
@@ -12,38 +12,68 @@
       "home_sp": "Tyler Glasnow",
       "away_sp_hand": "L",
       "home_sp_hand": "R",
-      "state": "Preview",
-      "detailed": "Pre-Game",
-      "inning": "1st",
-      "away_score": 0,
-      "home_score": 0,
+      "state": "Live",
+      "detailed": "In Progress",
+      "inning": "4th",
+      "away_score": 2,
+      "home_score": 4,
       "hr": [
         {
           "batter": "Shohei Ohtani",
           "batter_id": 660271,
           "team": "Los Angeles Dodgers",
-          "prob_hr": 0.17109932163864303,
+          "prob_hr": 0.16470368378962055,
           "facing_hand": "L",
           "season": "30 HR / 646 PA",
-          "result": null
+          "result": {
+            "pa": 2,
+            "ab": 2,
+            "hits": 1,
+            "hr": 1,
+            "rbi": 3,
+            "summary": "1-2 | HR, K, 3 RBI",
+            "state": "Live",
+            "detailed": "In Progress",
+            "final": false
+          }
         },
         {
           "batter": "Jackson Chourio",
           "batter_id": 694192,
           "team": "Milwaukee Brewers",
-          "prob_hr": 0.1685710630227623,
+          "prob_hr": 0.16220366037798165,
           "facing_hand": "R",
           "season": "27 HR / 606 PA",
-          "result": null
+          "result": {
+            "pa": 2,
+            "ab": 2,
+            "hits": 0,
+            "hr": 0,
+            "rbi": 0,
+            "summary": "0-2",
+            "state": "Live",
+            "detailed": "In Progress",
+            "final": false
+          }
         },
         {
           "batter": "Jake Bauers",
           "batter_id": 641343,
           "team": "Milwaukee Brewers",
-          "prob_hr": 0.15175943161954636,
+          "prob_hr": 0.1456192163292873,
           "facing_hand": "R",
           "season": "27 HR / 608 PA",
-          "result": null
+          "result": {
+            "pa": 2,
+            "ab": 2,
+            "hits": 1,
+            "hr": 0,
+            "rbi": 2,
+            "summary": "1-2 | 2B, K, 2 RBI",
+            "state": "Live",
+            "detailed": "In Progress",
+            "final": false
+          }
         }
       ],
       "hits": [
@@ -53,7 +83,17 @@
           "team": "Los Angeles Dodgers",
           "projected_hits": 1.06,
           "prob_at_least_one": 0.7024714073164584,
-          "result": null,
+          "result": {
+            "pa": 2,
+            "ab": 1,
+            "hits": 0,
+            "hr": 0,
+            "rbi": 0,
+            "summary": "0-1 | BB",
+            "state": "Live",
+            "detailed": "In Progress",
+            "final": false
+          },
           "matchup": null
         },
         {
@@ -62,7 +102,17 @@
           "team": "Los Angeles Dodgers",
           "projected_hits": 0.99,
           "prob_at_least_one": 0.6737186243500074,
-          "result": null,
+          "result": {
+            "pa": 2,
+            "ab": 1,
+            "hits": 0,
+            "hr": 0,
+            "rbi": 0,
+            "summary": "0-1 | BB",
+            "state": "Live",
+            "detailed": "In Progress",
+            "final": false
+          },
           "matchup": null
         },
         {
@@ -71,7 +121,17 @@
           "team": "Los Angeles Dodgers",
           "projected_hits": 0.94,
           "prob_at_least_one": 0.6504545996839444,
-          "result": null,
+          "result": {
+            "pa": 2,
+            "ab": 2,
+            "hits": 1,
+            "hr": 1,
+            "rbi": 3,
+            "summary": "1-2 | HR, K, 3 RBI",
+            "state": "Live",
+            "detailed": "In Progress",
+            "final": false
+          },
           "matchup": null
         }
       ]
