@@ -1,7 +1,7 @@
 {
  "bot": "HOMER",
  "date": "2026-10-15",
- "built_at": "2026-10-16 01:16:46",
+ "built_at": "2026-10-16 04:25:25",
  "book_through": "2026-10-15",
  "league": {
   "pa": 184720,
@@ -738,9 +738,9 @@
    "edge": 0.03758602144090453,
    "result": {
     "hr": 1,
-    "summary": "1-2 | HR, K, 3 RBI",
+    "summary": "1-4 | HR, 3 K, 3 RBI",
     "final": true,
-    "state": "In Progress"
+    "state": "Final"
    }
   }
  ],
@@ -807,10 +807,10 @@
    "tag": "LIKE IT",
    "result": {
     "hits": 0,
-    "summary": "0-1 | BB",
-    "final": false,
+    "summary": "0-3 | BB",
+    "final": true,
     "dnp": false,
-    "state": "In Progress"
+    "state": "Final"
    }
   }
  ],
@@ -846,10 +846,12 @@
    "model_pick_prob": 0.5686990711920008,
    "tag": "LEAN",
    "result": {
-    "final": false,
+    "final": true,
+    "won": false,
     "home_score": 4,
-    "away_score": 2,
-    "state": "In Progress"
+    "away_score": 6,
+    "total": 10,
+    "state": "Final"
    }
   },
   {
@@ -1047,14 +1049,14 @@
   },
   "games": {
    "won": 1,
-   "lost": 0,
-   "pending": 1
+   "lost": 1,
+   "pending": 0
   },
   "hits": {
    "hit": 0,
-   "scored": 0,
+   "scored": 1,
    "dnp": 0,
-   "pending": 1
+   "pending": 0
   },
   "parlays": {
    "won": 0,
@@ -1068,7 +1070,7 @@
    "void": 0,
    "pending": 0
   },
-  "graded_at": "2026-10-16 01:16:38",
-  "complete": false
+  "graded_at": "2026-10-16 04:25:17",
+  "complete": true
  }
 }
