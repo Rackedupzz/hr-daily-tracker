@@ -1,7 +1,7 @@
 {
   "date": "2026-10-16",
-  "built_at": "2026-10-16 22:05:26",
-  "fetched_at": "2026-10-16 22:05:26",
+  "built_at": "2026-10-17 00:27:04",
+  "fetched_at": "2026-10-17 00:27:04",
   "games": [
     {
       "game_pk": 849817,
@@ -13,7 +13,7 @@
       "away_sp_hand": "R",
       "home_sp_hand": "R",
       "state": "Preview",
-      "detailed": "Pre-Game",
+      "detailed": "Delayed Start",
       "inning": "1st",
       "away_score": 0,
       "home_score": 0,
