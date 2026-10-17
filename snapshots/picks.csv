@@ -303,7 +303,7 @@ date,kind,rank,batter,batter_id,team,game_pk,opponent_sp,facing_hand,lineup_slot
 2026-10-15,hr,2,Jo Adell,666176,Cleveland Guardians,849818,Griffin Jax,R,4,0.1379,0.1379,0.03016240707553983,4.197,0.917,0.986,1.067,1.033,23,692,3,2,0,0,0,"0-2 | BB, K, R",Final,True,False
 2026-10-15,hr,3,Shohei Ohtani,660271,Los Angeles Dodgers,849810,Shane Drohan,L,1,0.1711,0.1711,0.04143649592701159,4.491,1.026,1.174,0.899,0.93,30,646,4,4,1,1,3,"1-4 | HR, 3 K, 3 RBI",Final,True,True
 2026-10-15,hr,4,Jackson Chourio,694192,Milwaukee Brewers,849810,Tyler Glasnow,R,1,0.1686,0.1686,0.03308812467627538,4.491,1.051,1.174,0.931,0.892,27,606,5,5,0,0,0,0-5 | K,Final,True,False
-2026-10-16,hit,1,Steven Kwan,680757,Cleveland Guardians,849817,Nick Martinez,R,1,1.18,0.7443,0.007007396954553253,4.491,0.984,0.899,1.066,0.99,3,675,,,,,,,,,
-2026-10-16,hit,2,Yandy Díaz,650490,Tampa Bay Rays,849817,Shawn Armstrong,R,1,1.07,0.7039,0.020540017773284455,4.491,0.944,0.899,0.931,0.932,22,712,,,,,,,,,
-2026-10-16,hr,1,Jonathan Aranda,666018,Tampa Bay Rays,849817,Shawn Armstrong,R,2,0.1323,0.1323,0.03522853046026043,4.402,0.981,0.899,0.931,0.932,23,693,,,,,,,,,
-2026-10-16,hr,2,Jo Adell,666176,Cleveland Guardians,849817,Nick Martinez,R,4,0.1269,0.1269,0.02619947099507547,4.197,0.914,0.899,1.066,0.99,23,695,,,,,,,,,
+2026-10-16,hit,1,Steven Kwan,680757,Cleveland Guardians,849817,Nick Martinez,R,1,1.18,0.7443,0.007007396954553253,4.491,0.984,0.899,1.066,0.99,3,675,0,0,0,0,0,Did not play,Postponed,True,
+2026-10-16,hit,2,Yandy Díaz,650490,Tampa Bay Rays,849817,Shawn Armstrong,R,1,1.07,0.7039,0.020540017773284455,4.491,0.944,0.899,0.931,0.932,22,712,0,0,0,0,0,Did not play,Postponed,True,
+2026-10-16,hr,1,Jonathan Aranda,666018,Tampa Bay Rays,849817,Shawn Armstrong,R,2,0.1323,0.1323,0.03522853046026043,4.402,0.981,0.899,0.931,0.932,23,693,0,0,0,0,0,Did not play,Postponed,True,
+2026-10-16,hr,2,Jo Adell,666176,Cleveland Guardians,849817,Nick Martinez,R,4,0.1269,0.1269,0.02619947099507547,4.197,0.914,0.899,1.066,0.99,23,695,0,0,0,0,0,Did not play,Postponed,True,
