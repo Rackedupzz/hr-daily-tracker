@@ -1,7 +1,7 @@
 {
  "bot": "HOMER",
  "date": "2026-10-17",
- "built_at": "2026-10-17 20:33:13",
+ "built_at": "2026-10-17 23:06:10",
  "book_through": "2026-10-17",
  "league": {
   "pa": 184852,
@@ -658,7 +658,7 @@
  },
  "hr_picks": [
   {
-   "rules_prob": 0.12066915445163173,
+   "rules_prob": 0.11812442937074674,
    "xhr_rate": 0.044729397112750605,
    "hr_rate": 0.05158104119976321,
    "recent_rate": 0.041141601831852066,
@@ -680,11 +680,11 @@
    "park": 0.937,
    "weather": 0.85,
    "weather_note": "cold 51&deg;F knocks balls down",
-   "exp_pa": 4.45,
-   "slot": null,
+   "exp_pa": 4.35,
+   "slot": 4,
    "usual_slot": 3,
-   "pa_vs_sp": 2.47,
-   "pa_vs_pen": 1.98,
+   "pa_vs_sp": 2.42,
+   "pa_vs_pen": 1.93,
    "sp_hand": "R",
    "bat_side": "R",
    "lg": 0.03048384653668881,
@@ -695,11 +695,11 @@
    "matchup": "Tampa Bay Rays @ Cleveland Guardians",
    "venue": "Progressive Field",
    "sp_name": "Shawn Armstrong",
-   "model_prob": 0.12306831552004857,
+   "model_prob": 0.11902084078747477,
    "injury_note": null,
-   "lineup_posted": false,
-   "lineup_confirmed": false,
-   "prob": 0.15248298834901552,
+   "lineup_posted": true,
+   "lineup_confirmed": true,
+   "prob": 0.1400767545199467,
    "method": "learned",
    "contrib": {
     "xhr": 0.3638,
@@ -711,19 +711,19 @@
     "pen": -0.0277,
     "park": -0.037,
     "weather": -0.2088,
-    "exp_pa": 0.1033,
+    "exp_pa": 0.0558,
     "sample": 0.0783
    },
    "take": [
     "Contact quality: 33.6 xHR in 712 PA (1.47&times; league) <span class='muted'>(+44% odds)</span>",
     "Proven power: 42 HR in 712 PA <span class='muted'>(+13% odds)</span>",
-    "Lineup not posted; usually bats 3 (4.5 trips) <span class='muted'>(+11% odds)</span>",
+    "Established: 712 PA of track record <span class='muted'>(+8% odds)</span>",
     "Knock: Weather 0.85&times;: cold 51&deg;F knocks balls down <span class='muted'>(-19% odds)</span>"
    ],
-   "market_prob": 0.18709990048095493,
-   "book_implied": 0.228261878586765,
-   "book_price": "+338",
-   "book_edge": -0.33198224209367944,
+   "market_prob": 0.18288383324262883,
+   "book_implied": 0.22311827655600716,
+   "book_price": "+348",
+   "book_edge": -0.37218610379152595,
    "grade": "C",
    "evidence": {
     "grade": "C",
@@ -735,7 +735,7 @@
     "avg_prob": 0.1548
    },
    "tag": "LIKE IT",
-   "edge": 0.029414672828966953
+   "edge": 0.021055913732471926
   }
  ],
  "hit_picks": [
@@ -841,9 +841,9 @@
    "team": "Tampa Bay Rays",
    "game_pk": 849816,
    "matchup": "Tampa Bay Rays @ Cleveland Guardians",
-   "prob": 0.15248298834901552,
-   "model_prob": 0.12306831552004857,
-   "edge": 0.029414672828966953,
+   "prob": 0.1400767545199467,
+   "model_prob": 0.11902084078747477,
+   "edge": 0.021055913732471926,
    "barrel_rate": 0.0559210662592203,
    "sp_name": "Shawn Armstrong",
    "park": 0.937,
@@ -964,16 +964,16 @@
    "weather": 0.85
   },
   {
-   "batter": "Liam Hicks",
-   "batter_id": 689414,
-   "team": "Tampa Bay Rays",
+   "batter": "Chase DeLauter",
+   "batter_id": 800050,
+   "team": "Cleveland Guardians",
    "game_pk": 849816,
    "matchup": "Tampa Bay Rays @ Cleveland Guardians",
-   "prob": 0.0646828786652412,
-   "model_prob": 0.06366595248706848,
-   "edge": 0.001016926178172714,
-   "barrel_rate": 0.03207405174204946,
-   "sp_name": "Shawn Armstrong",
+   "prob": 0.10618513499058699,
+   "model_prob": 0.10387023481055983,
+   "edge": 0.0023149001800271546,
+   "barrel_rate": 0.04451532144659263,
+   "sp_name": "Nick Martinez",
    "park": 0.937,
    "weather": 0.85
   }
@@ -1009,7 +1009,7 @@
    "void": 0,
    "pending": 0
   },
-  "graded_at": "2026-10-17 20:33:06",
+  "graded_at": "2026-10-17 23:06:03",
   "complete": false
  }
 }

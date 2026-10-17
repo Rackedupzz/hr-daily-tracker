@@ -1,8 +1,8 @@
 {
   "date": "2026-10-17",
-  "built_at": "2026-10-17 20:33:06",
+  "built_at": "2026-10-17 23:06:03",
   "results": {
-    "fetched_at": "2026-10-17 20:33:06",
+    "fetched_at": "2026-10-17 23:06:03",
     "final_games": 0,
     "live_games": 0,
     "upcoming_games": 1,
@@ -35,7 +35,7 @@
     "avg_projected_hr": 0.1234,
     "picks_dnp": 0,
     "settled": false,
-    "built_at": "2026-10-17 20:33:06",
+    "built_at": "2026-10-17 23:06:03",
     "hr_level": 0.9866000033372111,
     "model_version": "2026.10.01-stack"
   },
@@ -50,7 +50,7 @@
       "game_pk": 849816,
       "opponent_sp": "Shawn Armstrong",
       "facing_hand": "R",
-      "lineup_slot": null,
+      "lineup_slot": 2,
       "projected": 0.126,
       "projected_prob": 0.126,
       "projected_per_pa": 0.03317873548207488,
@@ -143,7 +143,7 @@
       "game_pk": 849816,
       "opponent_sp": "Shawn Armstrong",
       "facing_hand": "R",
-      "lineup_slot": null,
+      "lineup_slot": 1,
       "projected": 1.07,
       "projected_prob": 0.7039,
       "projected_per_pa": 0.019344883467838067,
