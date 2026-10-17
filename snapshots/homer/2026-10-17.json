@@ -1,7 +1,7 @@
 {
  "bot": "HOMER",
  "date": "2026-10-17",
- "built_at": "2026-10-17 17:54:23",
+ "built_at": "2026-10-17 20:33:13",
  "book_through": "2026-10-17",
  "league": {
   "pa": 184852,
@@ -11,8 +11,8 @@
  },
  "method": "learned",
  "evidence": {
-  "fitted_at": "2026-10-16 18:49:44",
-  "through": "2026-10-15",
+  "fitted_at": "2026-10-17 17:54:55",
+  "through": "2026-10-16",
   "hits_serve": "learned",
   "hit_scores": {
    "learned": {
@@ -658,7 +658,7 @@
  },
  "hr_picks": [
   {
-   "rules_prob": 0.14073592484225517,
+   "rules_prob": 0.12066915445163173,
    "xhr_rate": 0.044729397112750605,
    "hr_rate": 0.05158104119976321,
    "recent_rate": 0.041141601831852066,
@@ -678,8 +678,8 @@
    "pen_index": 0.8698441885172837,
    "platoon": 0.9888176413694223,
    "park": 0.937,
-   "weather": 1.0,
-   "weather_note": "",
+   "weather": 0.85,
+   "weather_note": "cold 51&deg;F knocks balls down",
    "exp_pa": 4.45,
    "slot": null,
    "usual_slot": 3,
@@ -695,11 +695,11 @@
    "matchup": "Tampa Bay Rays @ Cleveland Guardians",
    "venue": "Progressive Field",
    "sp_name": "Shawn Armstrong",
-   "model_prob": 0.1410072150538924,
+   "model_prob": 0.12306831552004857,
    "injury_note": null,
    "lineup_posted": false,
    "lineup_confirmed": false,
-   "prob": 0.17065921378207796,
+   "prob": 0.15248298834901552,
    "method": "learned",
    "contrib": {
     "xhr": 0.3638,
@@ -710,19 +710,20 @@
     "sp_fly": 0.0275,
     "pen": -0.0277,
     "park": -0.037,
-    "weather": -0.0479,
+    "weather": -0.2088,
     "exp_pa": 0.1033,
     "sample": 0.0783
    },
    "take": [
     "Contact quality: 33.6 xHR in 712 PA (1.47&times; league) <span class='muted'>(+44% odds)</span>",
     "Proven power: 42 HR in 712 PA <span class='muted'>(+13% odds)</span>",
-    "Lineup not posted; usually bats 3 (4.5 trips) <span class='muted'>(+11% odds)</span>"
+    "Lineup not posted; usually bats 3 (4.5 trips) <span class='muted'>(+11% odds)</span>",
+    "Knock: Weather 0.85&times;: cold 51&deg;F knocks balls down <span class='muted'>(-19% odds)</span>"
    ],
    "market_prob": 0.18709990048095493,
    "book_implied": 0.228261878586765,
    "book_price": "+338",
-   "book_edge": -0.25235341600324035,
+   "book_edge": -0.33198224209367944,
    "grade": "C",
    "evidence": {
     "grade": "C",
@@ -734,7 +735,7 @@
     "avg_prob": 0.1548
    },
    "tag": "LIKE IT",
-   "edge": 0.029651998728185552
+   "edge": 0.029414672828966953
   }
  ],
  "hit_picks": [
@@ -759,7 +760,7 @@
    "pen_hit_index": 0.9549643469942398,
    "park": 1.011,
    "exp_pa": 4.65,
-   "slot": null,
+   "slot": 1,
    "usual_slot": 1,
    "sp_hand": "R",
    "lg_hit": 0.2179311016380672,
@@ -773,12 +774,12 @@
    "sp_name": "Nick Martinez",
    "model_prob": 0.7442642746085482,
    "injury_note": null,
-   "lineup_posted": false,
-   "lineup_confirmed": false,
+   "lineup_posted": true,
+   "lineup_confirmed": true,
    "prob": 0.7341823454997206,
    "method": "learned",
    "take": [
-    "Usually bats 1: 4.7 trips <span class='muted'>(+28% odds)</span>",
+    "Batting 1: 4.7 trips to the plate <span class='muted'>(+28% odds)</span>",
     "Strikeout rate 12% (league 22%) <span class='muted'>(+20% odds)</span>",
     "Nick Martinez strikes out 17% (league 22%) <span class='muted'>(+15% odds)</span>",
     "Knock: Walk rate 13% &mdash; walks are trips without a hit chance <span class='muted'>(-5% odds)</span>"
@@ -840,13 +841,13 @@
    "team": "Tampa Bay Rays",
    "game_pk": 849816,
    "matchup": "Tampa Bay Rays @ Cleveland Guardians",
-   "prob": 0.17065921378207796,
-   "model_prob": 0.1410072150538924,
-   "edge": 0.029651998728185552,
+   "prob": 0.15248298834901552,
+   "model_prob": 0.12306831552004857,
+   "edge": 0.029414672828966953,
    "barrel_rate": 0.0559210662592203,
    "sp_name": "Shawn Armstrong",
    "park": 0.937,
-   "weather": 1.0
+   "weather": 0.85
   },
   {
    "batter": "Yandy D\u00edaz",
@@ -854,13 +855,13 @@
    "team": "Tampa Bay Rays",
    "game_pk": 849816,
    "matchup": "Tampa Bay Rays @ Cleveland Guardians",
-   "prob": 0.12960392372694787,
-   "model_prob": 0.11009177711812389,
-   "edge": 0.019512146608823985,
+   "prob": 0.11129111506036757,
+   "model_prob": 0.09436755284283825,
+   "edge": 0.016923562217529317,
    "barrel_rate": 0.055898649929864375,
    "sp_name": "Shawn Armstrong",
    "park": 0.937,
-   "weather": 1.0
+   "weather": 0.85
   },
   {
    "batter": "Jo Adell",
@@ -868,13 +869,27 @@
    "team": "Cleveland Guardians",
    "game_pk": 849816,
    "matchup": "Tampa Bay Rays @ Cleveland Guardians",
-   "prob": 0.15351607166381162,
-   "model_prob": 0.13854438315496312,
-   "edge": 0.014971688508848502,
+   "prob": 0.13511664181743702,
+   "model_prob": 0.1207550140923943,
+   "edge": 0.014361627725042722,
    "barrel_rate": 0.06189203795492293,
    "sp_name": "Nick Martinez",
    "park": 0.937,
-   "weather": 1.0
+   "weather": 0.85
+  },
+  {
+   "batter": "Jos\u00e9 Ram\u00edrez",
+   "batter_id": 608070,
+   "team": "Cleveland Guardians",
+   "game_pk": 849816,
+   "matchup": "Tampa Bay Rays @ Cleveland Guardians",
+   "prob": 0.10186333177728786,
+   "model_prob": 0.08924252342490692,
+   "edge": 0.012620808352380941,
+   "barrel_rate": 0.04085053094604203,
+   "sp_name": "Nick Martinez",
+   "park": 0.937,
+   "weather": 0.85
   },
   {
    "batter": "Nathaniel Lowe",
@@ -882,30 +897,30 @@
    "team": "Cleveland Guardians",
    "game_pk": 849816,
    "matchup": "Tampa Bay Rays @ Cleveland Guardians",
-   "prob": 0.12510192379015275,
-   "model_prob": 0.11475582752960785,
-   "edge": 0.010346096260544904,
+   "prob": 0.10590370181058444,
+   "model_prob": 0.09864953652439437,
+   "edge": 0.007254165286190065,
    "barrel_rate": 0.05580988030656447,
    "sp_name": "Nick Martinez",
    "park": 0.937,
-   "weather": 1.0
-  },
-  {
-   "batter": "Petey Halpin",
-   "batter_id": 690984,
-   "team": "Cleveland Guardians",
-   "game_pk": 849816,
-   "matchup": "Tampa Bay Rays @ Cleveland Guardians",
-   "prob": 0.10456516815983954,
-   "model_prob": 0.09591828327397427,
-   "edge": 0.008646884885865277,
-   "barrel_rate": 0.06374381845189246,
-   "sp_name": "Nick Martinez",
-   "park": 0.937,
-   "weather": 1.0
+   "weather": 0.85
   }
  ],
  "fades": [
+  {
+   "batter": "Steven Kwan",
+   "batter_id": 680757,
+   "team": "Cleveland Guardians",
+   "game_pk": 849816,
+   "matchup": "Tampa Bay Rays @ Cleveland Guardians",
+   "prob": 0.02696,
+   "model_prob": 0.04326877823892905,
+   "edge": -0.01630877823892905,
+   "barrel_rate": 0.008655589044658964,
+   "sp_name": "Nick Martinez",
+   "park": 0.937,
+   "weather": 0.85
+  },
   {
    "batter": "Taylor Walls",
    "batter_id": 670764,
@@ -913,54 +928,12 @@
    "game_pk": 849816,
    "matchup": "Tampa Bay Rays @ Cleveland Guardians",
    "prob": 0.02696,
-   "model_prob": 0.043845997439783325,
-   "edge": -0.016885997439783324,
+   "model_prob": 0.03564044576335569,
+   "edge": -0.00868044576335569,
    "barrel_rate": 0.029825250786718494,
    "sp_name": "Shawn Armstrong",
    "park": 0.937,
-   "weather": 1.0
-  },
-  {
-   "batter": "Travis Bazzana",
-   "batter_id": 683953,
-   "team": "Cleveland Guardians",
-   "game_pk": 849816,
-   "matchup": "Tampa Bay Rays @ Cleveland Guardians",
-   "prob": 0.10584711168529518,
-   "model_prob": 0.11602238802812079,
-   "edge": -0.010175276342825612,
-   "barrel_rate": 0.05950241608832227,
-   "sp_name": "Nick Martinez",
-   "park": 0.937,
-   "weather": 1.0
-  },
-  {
-   "batter": "Steven Kwan",
-   "batter_id": 680757,
-   "team": "Cleveland Guardians",
-   "game_pk": 849816,
-   "matchup": "Tampa Bay Rays @ Cleveland Guardians",
-   "prob": 0.043881442837782905,
-   "model_prob": 0.052739206068343585,
-   "edge": -0.00885776323056068,
-   "barrel_rate": 0.008655589044658964,
-   "sp_name": "Nick Martinez",
-   "park": 0.937,
-   "weather": 1.0
-  },
-  {
-   "batter": "Patrick Bailey",
-   "batter_id": 672275,
-   "team": "Cleveland Guardians",
-   "game_pk": 849816,
-   "matchup": "Tampa Bay Rays @ Cleveland Guardians",
-   "prob": 0.12702698544648688,
-   "model_prob": 0.1318504077805176,
-   "edge": -0.004823422334030714,
-   "barrel_rate": 0.062064486093485666,
-   "sp_name": "Nick Martinez",
-   "park": 0.937,
-   "weather": 1.0
+   "weather": 0.85
   },
   {
    "batter": "Richie Palacios",
@@ -968,13 +941,41 @@
    "team": "Tampa Bay Rays",
    "game_pk": 849816,
    "matchup": "Tampa Bay Rays @ Cleveland Guardians",
-   "prob": 0.06077929435961017,
-   "model_prob": 0.06434854309847446,
-   "edge": -0.0035692487388642863,
+   "prob": 0.045715480447244175,
+   "model_prob": 0.05335932687112894,
+   "edge": -0.007643846423884763,
    "barrel_rate": 0.03227614181740413,
    "sp_name": "Shawn Armstrong",
    "park": 0.937,
-   "weather": 1.0
+   "weather": 0.85
+  },
+  {
+   "batter": "Patrick Bailey",
+   "batter_id": 672275,
+   "team": "Cleveland Guardians",
+   "game_pk": 849816,
+   "matchup": "Tampa Bay Rays @ Cleveland Guardians",
+   "prob": 0.11255039290782419,
+   "model_prob": 0.11449058985452631,
+   "edge": -0.0019401969467021246,
+   "barrel_rate": 0.062064486093485666,
+   "sp_name": "Nick Martinez",
+   "park": 0.937,
+   "weather": 0.85
+  },
+  {
+   "batter": "Liam Hicks",
+   "batter_id": 689414,
+   "team": "Tampa Bay Rays",
+   "game_pk": 849816,
+   "matchup": "Tampa Bay Rays @ Cleveland Guardians",
+   "prob": 0.0646828786652412,
+   "model_prob": 0.06366595248706848,
+   "edge": 0.001016926178172714,
+   "barrel_rate": 0.03207405174204946,
+   "sp_name": "Shawn Armstrong",
+   "park": 0.937,
+   "weather": 0.85
   }
  ],
  "locked": [],
@@ -1008,7 +1009,7 @@
    "void": 0,
    "pending": 0
   },
-  "graded_at": "2026-10-17 17:54:15",
+  "graded_at": "2026-10-17 20:33:06",
   "complete": false
  }
 }

@@ -1,7 +1,7 @@
 {
   "date": "2026-10-17",
-  "built_at": "2026-10-17 17:54:15",
-  "fetched_at": "2026-10-17 17:54:15",
+  "built_at": "2026-10-17 20:33:06",
+  "fetched_at": "2026-10-17 20:33:06",
   "games": [
     {
       "game_pk": 849816,
@@ -13,7 +13,7 @@
       "away_sp_hand": "R",
       "home_sp_hand": "R",
       "state": "Preview",
-      "detailed": "Scheduled",
+      "detailed": "Pre-Game",
       "inning": null,
       "away_score": null,
       "home_score": null,
@@ -22,7 +22,7 @@
           "batter": "Jonathan Aranda",
           "batter_id": 666018,
           "team": "Tampa Bay Rays",
-          "prob_hr": 0.1441521454185228,
+          "prob_hr": 0.12602890111640283,
           "facing_hand": "R",
           "season": "23 HR / 693 PA",
           "result": null
@@ -31,7 +31,7 @@
           "batter": "Junior Caminero",
           "batter_id": 691406,
           "team": "Tampa Bay Rays",
-          "prob_hr": 0.1410072150538924,
+          "prob_hr": 0.12306831552004857,
           "facing_hand": "R",
           "season": "42 HR / 726 PA",
           "result": null
@@ -40,7 +40,7 @@
           "batter": "Jo Adell",
           "batter_id": 666176,
           "team": "Cleveland Guardians",
-          "prob_hr": 0.13854438315496312,
+          "prob_hr": 0.1207550140923943,
           "facing_hand": "R",
           "season": "23 HR / 695 PA",
           "result": null
