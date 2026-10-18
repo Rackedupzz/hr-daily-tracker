@@ -1,7 +1,7 @@
 {
  "bot": "HOMER",
  "date": "2026-10-18",
- "built_at": "2026-10-18 20:37:50",
+ "built_at": "2026-10-18 23:04:29",
  "book_through": "2026-10-18",
  "league": {
   "pa": 184926,
@@ -739,7 +739,13 @@
     "avg_prob": 0.0989
    },
    "tag": "SPRINKLE",
-   "edge": 0.00532735581458911
+   "edge": 0.00532735581458911,
+   "result": {
+    "hr": 0,
+    "summary": "0-3 | 2 K",
+    "final": false,
+    "state": "In Progress"
+   }
   }
  ],
  "hit_picks": [
@@ -802,7 +808,14 @@
     "rate": 0.6686,
     "avg_prob": 0.6639
    },
-   "tag": "LIKE IT"
+   "tag": "LIKE IT",
+   "result": {
+    "hits": 2,
+    "summary": "2-4 | 2B, R",
+    "final": true,
+    "dnp": false,
+    "state": "In Progress"
+   }
   }
  ],
  "parlays": [],
@@ -835,7 +848,13 @@
     "Tampa Bay Rays lineup 0.314 wOBA vs 0.306"
    ],
    "model_pick_prob": 0.5290930652388298,
-   "tag": "SMALL PLAY"
+   "tag": "SMALL PLAY",
+   "result": {
+    "final": false,
+    "home_score": 1,
+    "away_score": 3,
+    "state": "In Progress"
+   }
   }
  ],
  "likes": [
@@ -846,12 +865,12 @@
    "game_pk": 849817,
    "matchup": "Tampa Bay Rays @ Cleveland Guardians",
    "prob": 0.02696,
-   "model_prob": 0.020513083160813392,
-   "edge": 0.0064469168391866095,
+   "model_prob": 0.021142923049751367,
+   "edge": 0.005817076950248634,
    "barrel_rate": 0.0047583075104556775,
    "sp_name": "Parker Messick",
    "park": 0.937,
-   "weather": 0.91
+   "weather": 0.937
   },
   {
    "batter": "Junior Caminero",
@@ -859,13 +878,13 @@
    "team": "Tampa Bay Rays",
    "game_pk": 849817,
    "matchup": "Tampa Bay Rays @ Cleveland Guardians",
-   "prob": 0.12963715422841687,
-   "model_prob": 0.12430979841382776,
-   "edge": 0.00532735581458911,
+   "prob": 0.1310378056772177,
+   "model_prob": 0.1265641243753248,
+   "edge": 0.004473681301892907,
    "barrel_rate": 0.0574226710084464,
    "sp_name": "Parker Messick",
    "park": 0.937,
-   "weather": 0.91
+   "weather": 0.937
   },
   {
    "batter": "Jo Adell",
@@ -873,13 +892,13 @@
    "team": "Cleveland Guardians",
    "game_pk": 849817,
    "matchup": "Tampa Bay Rays @ Cleveland Guardians",
-   "prob": 0.12853114518535516,
-   "model_prob": 0.12342372206461343,
-   "edge": 0.005107423120741736,
+   "prob": 0.12995718059222894,
+   "model_prob": 0.12567033653841297,
+   "edge": 0.0042868440538159636,
    "barrel_rate": 0.0616514723617816,
    "sp_name": "Drew Rasmussen",
    "park": 0.937,
-   "weather": 0.91
+   "weather": 0.937
   },
   {
    "batter": "Yandy D\u00edaz",
@@ -887,27 +906,27 @@
    "team": "Tampa Bay Rays",
    "game_pk": 849817,
    "matchup": "Tampa Bay Rays @ Cleveland Guardians",
-   "prob": 0.10409785620894046,
-   "model_prob": 0.10168063076880127,
-   "edge": 0.002417225440139198,
+   "prob": 0.105344582529549,
+   "model_prob": 0.10371030336043595,
+   "edge": 0.0016342791691130454,
    "barrel_rate": 0.05740604369894619,
    "sp_name": "Parker Messick",
    "park": 0.937,
-   "weather": 0.91
+   "weather": 0.937
   },
   {
-   "batter": "Jonny DeLuca",
-   "batter_id": 676356,
-   "team": "Tampa Bay Rays",
+   "batter": "Nathaniel Lowe",
+   "batter_id": 663993,
+   "team": "Cleveland Guardians",
    "game_pk": 849817,
    "matchup": "Tampa Bay Rays @ Cleveland Guardians",
-   "prob": 0.058900469703112655,
-   "model_prob": 0.05814161651064812,
-   "edge": 0.0007588531924645342,
-   "barrel_rate": 0.022775975914516924,
-   "sp_name": "Parker Messick",
+   "prob": 0.10165608184974854,
+   "model_prob": 0.10149379709616103,
+   "edge": 0.0001622847535875105,
+   "barrel_rate": 0.05534122832033326,
+   "sp_name": "Drew Rasmussen",
    "park": 0.937,
-   "weather": 0.91
+   "weather": 0.937
   }
  ],
  "fades": [
@@ -917,13 +936,13 @@
    "team": "Cleveland Guardians",
    "game_pk": 849817,
    "matchup": "Tampa Bay Rays @ Cleveland Guardians",
-   "prob": 0.08492848791286366,
-   "model_prob": 0.10346053445478433,
-   "edge": -0.01853204654192067,
+   "prob": 0.08495205242126772,
+   "model_prob": 0.10551002756653298,
+   "edge": -0.020557975145265264,
    "barrel_rate": 0.059217565008781156,
    "sp_name": "Drew Rasmussen",
    "park": 0.937,
-   "weather": 0.91
+   "weather": 0.937
   },
   {
    "batter": "Steven Kwan",
@@ -932,12 +951,12 @@
    "game_pk": 849817,
    "matchup": "Tampa Bay Rays @ Cleveland Guardians",
    "prob": 0.02696,
-   "model_prob": 0.04390938686393216,
-   "edge": -0.016949386863932155,
+   "model_prob": 0.045062286726786395,
+   "edge": -0.018102286726786394,
    "barrel_rate": 0.00859314239049876,
    "sp_name": "Drew Rasmussen",
    "park": 0.937,
-   "weather": 0.91
+   "weather": 0.937
   },
   {
    "batter": "Patrick Bailey",
@@ -945,13 +964,13 @@
    "team": "Cleveland Guardians",
    "game_pk": 849817,
    "matchup": "Tampa Bay Rays @ Cleveland Guardians",
-   "prob": 0.10369672098287647,
-   "model_prob": 0.1169826835569285,
-   "edge": -0.013285962574052027,
+   "prob": 0.10518868413648147,
+   "model_prob": 0.1191706391587896,
+   "edge": -0.013981955022308132,
    "barrel_rate": 0.06121017092329658,
    "sp_name": "Drew Rasmussen",
    "park": 0.937,
-   "weather": 0.91
+   "weather": 0.937
   },
   {
    "batter": "Ben Williamson",
@@ -960,12 +979,12 @@
    "game_pk": 849817,
    "matchup": "Tampa Bay Rays @ Cleveland Guardians",
    "prob": 0.02696,
-   "model_prob": 0.037611050935876585,
-   "edge": -0.010651050935876583,
+   "model_prob": 0.03863549441330616,
+   "edge": -0.011675494413306158,
    "barrel_rate": 0.01471876346980427,
    "sp_name": "Parker Messick",
    "park": 0.937,
-   "weather": 0.91
+   "weather": 0.937
   },
   {
    "batter": "Taylor Walls",
@@ -974,15 +993,17 @@
    "game_pk": 849817,
    "matchup": "Tampa Bay Rays @ Cleveland Guardians",
    "prob": 0.02696,
-   "model_prob": 0.035622564955521636,
-   "edge": -0.008662564955521635,
+   "model_prob": 0.036604742717203875,
+   "edge": -0.009644742717203874,
    "barrel_rate": 0.02964398712591935,
    "sp_name": "Parker Messick",
    "park": 0.937,
-   "weather": 0.91
+   "weather": 0.937
   }
  ],
- "locked": [],
+ "locked": [
+  849817
+ ],
  "record": {
   "hr": {
    "hit": 0,
@@ -996,10 +1017,10 @@
    "pending": 1
   },
   "hits": {
-   "hit": 0,
-   "scored": 0,
+   "hit": 1,
+   "scored": 1,
    "dnp": 0,
-   "pending": 1
+   "pending": 0
   },
   "parlays": {
    "won": 0,
@@ -1013,7 +1034,7 @@
    "void": 0,
    "pending": 0
   },
-  "graded_at": "2026-10-18 20:37:43",
+  "graded_at": "2026-10-18 23:04:24",
   "complete": false
  }
 }
