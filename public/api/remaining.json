@@ -1,7 +1,7 @@
 {
   "date": "2026-10-18",
-  "built_at": "2026-10-18 18:04:53",
-  "fetched_at": "2026-10-18 18:04:53",
+  "built_at": "2026-10-18 20:37:43",
+  "fetched_at": "2026-10-18 20:37:43",
   "games": [
     {
       "game_pk": 849817,
@@ -22,7 +22,7 @@
           "batter": "Junior Caminero",
           "batter_id": 691406,
           "team": "Tampa Bay Rays",
-          "prob_hr": 0.122622654950533,
+          "prob_hr": 0.12430979841382776,
           "facing_hand": "L",
           "season": "42 HR / 731 PA",
           "result": null
@@ -31,7 +31,7 @@
           "batter": "Jo Adell",
           "batter_id": 666176,
           "team": "Cleveland Guardians",
-          "prob_hr": 0.12174249153980775,
+          "prob_hr": 0.12342372206461343,
           "facing_hand": "R",
           "season": "23 HR / 699 PA",
           "result": null
@@ -40,7 +40,7 @@
           "batter": "Jonathan Aranda",
           "batter_id": 666018,
           "team": "Tampa Bay Rays",
-          "prob_hr": 0.11862732350488076,
+          "prob_hr": 0.12028710874687534,
           "facing_hand": "L",
           "season": "23 HR / 698 PA",
           "result": null
