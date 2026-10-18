@@ -1,7 +1,7 @@
 {
   "date": "2026-10-17",
-  "built_at": "2026-10-17 23:06:03",
-  "fetched_at": "2026-10-17 23:06:03",
+  "built_at": "2026-10-18 01:01:12",
+  "fetched_at": "2026-10-18 01:01:12",
   "games": [
     {
       "game_pk": 849816,
@@ -12,38 +12,68 @@
       "home_sp": "Shawn Armstrong",
       "away_sp_hand": "R",
       "home_sp_hand": "R",
-      "state": "Preview",
-      "detailed": "Pre-Game",
-      "inning": "1st",
-      "away_score": 0,
-      "home_score": 0,
+      "state": "Live",
+      "detailed": "In Progress",
+      "inning": "4th",
+      "away_score": 1,
+      "home_score": 1,
       "hr": [
         {
           "batter": "Jonathan Aranda",
           "batter_id": 666018,
           "team": "Tampa Bay Rays",
-          "prob_hr": 0.12602890111640283,
+          "prob_hr": 0.1279591958058207,
           "facing_hand": "R",
           "season": "23 HR / 693 PA",
-          "result": null
+          "result": {
+            "pa": 2,
+            "ab": 2,
+            "hits": 1,
+            "hr": 0,
+            "rbi": 1,
+            "summary": "1-2 | RBI",
+            "state": "Live",
+            "detailed": "In Progress",
+            "final": false
+          }
         },
         {
           "batter": "Jo Adell",
           "batter_id": 666176,
           "team": "Cleveland Guardians",
-          "prob_hr": 0.1207550140923943,
+          "prob_hr": 0.12264594661855538,
           "facing_hand": "R",
           "season": "23 HR / 695 PA",
-          "result": null
+          "result": {
+            "pa": 1,
+            "ab": 1,
+            "hits": 0,
+            "hr": 0,
+            "rbi": 0,
+            "summary": "0-1",
+            "state": "Live",
+            "detailed": "In Progress",
+            "final": false
+          }
         },
         {
           "batter": "Junior Caminero",
           "batter_id": 691406,
           "team": "Tampa Bay Rays",
-          "prob_hr": 0.11902084078747477,
+          "prob_hr": 0.12089826117412741,
           "facing_hand": "R",
           "season": "42 HR / 726 PA",
-          "result": null
+          "result": {
+            "pa": 2,
+            "ab": 2,
+            "hits": 0,
+            "hr": 0,
+            "rbi": 0,
+            "summary": "0-2",
+            "state": "Live",
+            "detailed": "In Progress",
+            "final": false
+          }
         }
       ],
       "hits": [
@@ -53,7 +83,17 @@
           "team": "Cleveland Guardians",
           "projected_hits": 1.18,
           "prob_at_least_one": 0.7442642746085482,
-          "result": null,
+          "result": {
+            "pa": 2,
+            "ab": 2,
+            "hits": 1,
+            "hr": 0,
+            "rbi": 0,
+            "summary": "1-2 | R",
+            "state": "Live",
+            "detailed": "In Progress",
+            "final": false
+          },
           "matchup": {
             "pa": 6,
             "hits": 2,
@@ -72,7 +112,17 @@
           "team": "Cleveland Guardians",
           "projected_hits": 1.13,
           "prob_at_least_one": 0.7302418013128128,
-          "result": null,
+          "result": {
+            "pa": 1,
+            "ab": 1,
+            "hits": 1,
+            "hr": 0,
+            "rbi": 1,
+            "summary": "1-1 | RBI",
+            "state": "Live",
+            "detailed": "In Progress",
+            "final": false
+          },
           "matchup": null
         },
         {
@@ -81,7 +131,17 @@
           "team": "Cleveland Guardians",
           "projected_hits": 1.12,
           "prob_at_least_one": 0.7243640816390837,
-          "result": null,
+          "result": {
+            "pa": 1,
+            "ab": 1,
+            "hits": 0,
+            "hr": 0,
+            "rbi": 0,
+            "summary": "0-1",
+            "state": "Live",
+            "detailed": "In Progress",
+            "final": false
+          },
           "matchup": null
         }
       ]
