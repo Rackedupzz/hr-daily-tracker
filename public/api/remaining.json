@@ -1,28 +1,28 @@
 {
   "date": "2026-10-19",
-  "built_at": "2026-10-19 10:43:07",
-  "fetched_at": "2026-10-19 10:43:07",
+  "built_at": "2026-10-19 20:34:37",
+  "fetched_at": "2026-10-19 20:34:37",
   "games": [
     {
       "game_pk": 849815,
       "away": "Cleveland Guardians",
       "home": "Tampa Bay Rays",
       "venue": "Tropicana Field",
-      "away_sp": null,
+      "away_sp": "Shawn Armstrong",
       "home_sp": "Freddy Peralta",
       "away_sp_hand": "R",
       "home_sp_hand": "R",
       "state": "Preview",
-      "detailed": "Scheduled",
-      "inning": null,
-      "away_score": null,
-      "home_score": null,
+      "detailed": "Pre-Game",
+      "inning": "1st",
+      "away_score": 0,
+      "home_score": 0,
       "hr": [
         {
           "batter": "Junior Caminero",
           "batter_id": 691406,
           "team": "Tampa Bay Rays",
-          "prob_hr": 0.17077167113062658,
+          "prob_hr": 0.1597925409812735,
           "facing_hand": "R",
           "season": "42 HR / 734 PA",
           "result": null
@@ -31,7 +31,7 @@
           "batter": "Jo Adell",
           "batter_id": 666176,
           "team": "Cleveland Guardians",
-          "prob_hr": 0.16004780676055022,
+          "prob_hr": 0.15859671731504865,
           "facing_hand": "R",
           "season": "23 HR / 702 PA",
           "result": null
@@ -40,7 +40,7 @@
           "batter": "Jonathan Aranda",
           "batter_id": 666018,
           "team": "Tampa Bay Rays",
-          "prob_hr": 0.142007172421566,
+          "prob_hr": 0.13601318415873007,
           "facing_hand": "R",
           "season": "23 HR / 702 PA",
           "result": null
@@ -60,8 +60,8 @@
           "batter": "Yandy D\u00edaz",
           "batter_id": 650490,
           "team": "Tampa Bay Rays",
-          "projected_hits": 1.09,
-          "prob_at_least_one": 0.7133985360588992,
+          "projected_hits": 1.07,
+          "prob_at_least_one": 0.7051843716379229,
           "result": null,
           "matchup": null
         },
