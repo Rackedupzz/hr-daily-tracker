@@ -315,3 +315,7 @@ date,kind,rank,batter,batter_id,team,game_pk,opponent_sp,facing_hand,lineup_slot
 2026-10-18,hit,2,Steven Kwan,680757,Cleveland Guardians,849817,Drew Rasmussen,R,1,1.03,0.6883,0.006044405703452833,4.491,0.983,0.933,1.068,0.829,3,679,4,4,2,0,0,2-4 | R,Final,True,True
 2026-10-18,hr,1,Junior Caminero,691406,Tampa Bay Rays,849817,Parker Messick,L,4,0.1243,0.1243,0.027286052004720965,4.197,0.902,0.933,0.931,0.829,42,731,4,4,1,0,0,1-4 | 2 K,Final,True,False
 2026-10-18,hr,2,Jo Adell,666176,Cleveland Guardians,849817,Drew Rasmussen,R,4,0.1234,0.1234,0.022775475903999007,4.197,0.916,0.933,1.068,0.829,23,699,4,3,0,0,0,"0-3 | BB, K",Final,True,False
+2026-10-19,hit,1,Steven Kwan,680757,Cleveland Guardians,849815,Freddy Peralta,R,,1.1,0.7184,0.007731355453508696,4.491,0.964,1.0,1.068,1.015,3,682,,,,,,,,,
+2026-10-19,hit,2,Yandy Díaz,650490,Tampa Bay Rays,849815,,R,,1.09,0.7134,0.030999083277215025,4.491,1.124,1.0,0.928,1.0,23,721,,,,,,,,,
+2026-10-19,hr,1,Junior Caminero,691406,Tampa Bay Rays,849815,,R,,0.1708,0.1708,0.05357408116349984,4.303,1.222,1.0,0.928,1.0,42,734,,,,,,,,,
+2026-10-19,hr,2,Jo Adell,666176,Cleveland Guardians,849815,Freddy Peralta,R,,0.16,0.16,0.038593198873340784,4.197,1.189,1.0,1.068,1.015,23,702,,,,,,,,,
