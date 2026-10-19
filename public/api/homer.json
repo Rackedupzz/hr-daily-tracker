@@ -4,7 +4,7 @@
   "card": {
     "bot": "HOMER",
     "date": "2026-10-18",
-    "built_at": "2026-10-18 23:04:29",
+    "built_at": "2026-10-19 01:12:09",
     "book_through": "2026-10-18",
     "league": {
       "pa": 184926,
@@ -745,9 +745,9 @@
         "edge": 0.00532735581458911,
         "result": {
           "hr": 0,
-          "summary": "0-3 | 2 K",
-          "final": false,
-          "state": "In Progress"
+          "summary": "1-4 | 2 K",
+          "final": true,
+          "state": "Final"
         }
       }
     ],
@@ -813,11 +813,11 @@
         },
         "tag": "LIKE IT",
         "result": {
-          "hits": 2,
-          "summary": "2-4 | 2B, R",
+          "hits": 3,
+          "summary": "3-5 | 2B, R",
           "final": true,
           "dnp": false,
-          "state": "In Progress"
+          "state": "Final"
         }
       }
     ],
@@ -853,10 +853,12 @@
         "model_pick_prob": 0.5290930652388298,
         "tag": "SMALL PLAY",
         "result": {
-          "final": false,
+          "final": true,
+          "won": true,
           "home_score": 1,
           "away_score": 3,
-          "state": "In Progress"
+          "total": 4,
+          "state": "Final"
         }
       }
     ],
@@ -1010,14 +1012,14 @@
     "record": {
       "hr": {
         "hit": 0,
-        "scored": 0,
+        "scored": 1,
         "dnp": 0,
-        "pending": 1
+        "pending": 0
       },
       "games": {
-        "won": 0,
+        "won": 1,
         "lost": 0,
-        "pending": 1
+        "pending": 0
       },
       "hits": {
         "hit": 1,
@@ -1037,15 +1039,15 @@
         "void": 0,
         "pending": 0
       },
-      "graded_at": "2026-10-18 23:04:24",
-      "complete": false
+      "graded_at": "2026-10-19 01:12:03",
+      "complete": true
     }
   },
   "record": {
     "hr_hit": 24,
-    "hr_scored": 104,
-    "hr_expected": 20.4,
-    "games_won": 135,
+    "hr_scored": 105,
+    "hr_expected": 20.53,
+    "games_won": 136,
     "games_lost": 84,
     "hits_hit": 62,
     "hits_scored": 90,
@@ -1057,15 +1059,15 @@
       {
         "date": "2026-10-18",
         "hr_hit": 0,
-        "hr_scored": 0,
-        "hr_expected": 0,
-        "games_won": 0,
+        "hr_scored": 1,
+        "hr_expected": 0.13,
+        "games_won": 1,
         "games_lost": 0,
         "hits_hit": 1,
         "hits_scored": 1,
         "parlays_won": 0,
         "parlays_lost": 0,
-        "complete": false,
+        "complete": true,
         "backfilled": false
       },
       {
