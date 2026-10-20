@@ -1,11 +1,11 @@
 {
   "date": "2026-10-19",
-  "built_at": "2026-10-19 20:34:37",
+  "built_at": "2026-10-20 00:18:22",
   "results": {
-    "fetched_at": "2026-10-19 20:34:37",
+    "fetched_at": "2026-10-20 00:18:22",
     "final_games": 0,
-    "live_games": 0,
-    "upcoming_games": 1,
+    "live_games": 1,
+    "upcoming_games": 0,
     "picks": {
       "hit": 0,
       "scored": 0,
@@ -19,7 +19,7 @@
       "pending": 2
     },
     "parlays": {},
-    "any": false
+    "any": true
   },
   "summary": {
     "date": "2026-10-19",
@@ -35,7 +35,7 @@
     "avg_projected_hr": 0.1592,
     "picks_dnp": 0,
     "settled": false,
-    "built_at": "2026-10-19 20:34:37",
+    "built_at": "2026-10-20 00:18:22",
     "hr_level": 0.985600515838756,
     "model_version": "2026.10.01-stack"
   },
@@ -92,14 +92,14 @@
       "sp_hr_index": 1.015,
       "season_hr": 23,
       "season_pa": 702,
-      "result_pa": null,
-      "result_ab": null,
-      "result_hits": null,
-      "result_hr": null,
-      "result_rbi": null,
-      "result_line": "",
-      "game_state": "",
-      "final": null,
+      "result_pa": 1,
+      "result_ab": 1,
+      "result_hits": 0,
+      "result_hr": 0,
+      "result_rbi": 0,
+      "result_line": "0-1",
+      "game_state": "In Progress",
+      "final": false,
       "won": null
     },
     {
@@ -123,14 +123,14 @@
       "sp_hr_index": 1.015,
       "season_hr": 3,
       "season_pa": 682,
-      "result_pa": null,
-      "result_ab": null,
-      "result_hits": null,
-      "result_hr": null,
-      "result_rbi": null,
-      "result_line": "",
-      "game_state": "",
-      "final": null,
+      "result_pa": 1,
+      "result_ab": 1,
+      "result_hits": 1,
+      "result_hr": 0,
+      "result_rbi": 0,
+      "result_line": "1-1",
+      "game_state": "In Progress",
+      "final": false,
       "won": null
     },
     {
@@ -154,14 +154,14 @@
       "sp_hr_index": 0.919,
       "season_hr": 23,
       "season_pa": 721,
-      "result_pa": null,
-      "result_ab": null,
-      "result_hits": null,
-      "result_hr": null,
-      "result_rbi": null,
-      "result_line": "",
-      "game_state": "",
-      "final": null,
+      "result_pa": 1,
+      "result_ab": 1,
+      "result_hits": 0,
+      "result_hr": 0,
+      "result_rbi": 0,
+      "result_line": "0-1",
+      "game_state": "In Progress",
+      "final": false,
       "won": null
     }
   ],
