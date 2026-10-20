@@ -1,7 +1,7 @@
 {
   "date": "2026-10-23",
-  "built_at": "2026-10-20 19:13:10",
-  "fetched_at": "2026-10-20 19:13:10",
+  "built_at": "2026-10-20 23:11:40",
+  "fetched_at": "2026-10-20 23:11:40",
   "games": [
     {
       "game_pk": 849805,
@@ -22,7 +22,7 @@
           "batter": "Jackson Chourio",
           "batter_id": 694192,
           "team": "Milwaukee Brewers",
-          "prob_hr": 0.16516327039823347,
+          "prob_hr": 0.16516327039823353,
           "facing_hand": "R",
           "season": "27 HR / 611 PA",
           "result": null
@@ -40,7 +40,7 @@
           "batter": "Jake Bauers",
           "batter_id": 641343,
           "team": "Milwaukee Brewers",
-          "prob_hr": 0.156164715144344,
+          "prob_hr": 0.15616471514434388,
           "facing_hand": "R",
           "season": "27 HR / 612 PA",
           "result": null
