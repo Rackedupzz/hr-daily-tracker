@@ -4,7 +4,7 @@
   "card": {
     "bot": "HOMER",
     "date": "2026-10-19",
-    "built_at": "2026-10-20 00:18:28",
+    "built_at": "2026-10-20 04:43:19",
     "book_through": "2026-10-19",
     "league": {
       "pa": 184978,
@@ -738,10 +738,10 @@
         "tag": "LIKE IT",
         "edge": 0.014223314221843614,
         "result": {
-          "hr": 0,
-          "summary": "",
-          "final": false,
-          "state": "In Progress"
+          "hr": 1,
+          "summary": "2-3 | HR, BB, 2 RBI",
+          "final": true,
+          "state": "Final"
         }
       }
     ],
@@ -808,10 +808,10 @@
         "tag": "LOVE IT",
         "result": {
           "hits": 1,
-          "summary": "1-1",
+          "summary": "1-4 | BB",
           "final": true,
           "dnp": false,
-          "state": "In Progress"
+          "state": "Final"
         }
       }
     ],
@@ -847,10 +847,12 @@
         "model_pick_prob": 0.556938754385727,
         "tag": "SMALL PLAY",
         "result": {
-          "final": false,
-          "home_score": 0,
-          "away_score": 0,
-          "state": "In Progress"
+          "final": true,
+          "won": true,
+          "home_score": 7,
+          "away_score": 3,
+          "total": 10,
+          "state": "Final"
         }
       }
     ],
@@ -918,8 +920,8 @@
         "game_pk": 849815,
         "matchup": "Cleveland Guardians @ Tampa Bay Rays",
         "prob": 0.17305030036137367,
-        "model_prob": 0.16057081198030224,
-        "edge": 0.012479488381071435,
+        "model_prob": 0.16057081198030226,
+        "edge": 0.012479488381071407,
         "barrel_rate": 0.05731766566713982,
         "sp_name": "Shawn Armstrong",
         "park": 1.077,
@@ -962,8 +964,8 @@
         "game_pk": 849815,
         "matchup": "Cleveland Guardians @ Tampa Bay Rays",
         "prob": 0.1581961947649508,
-        "model_prob": 0.15937307294551328,
-        "edge": -0.001176878180562474,
+        "model_prob": 0.1593730729455133,
+        "edge": -0.0011768781805625017,
         "barrel_rate": 0.061530569526620116,
         "sp_name": "Freddy Peralta",
         "park": 1.077,
@@ -976,8 +978,8 @@
         "game_pk": 849815,
         "matchup": "Cleveland Guardians @ Tampa Bay Rays",
         "prob": 0.05127822405756903,
-        "model_prob": 0.052083246214676276,
-        "edge": -0.0008050221571072463,
+        "model_prob": 0.052083246214676214,
+        "edge": -0.0008050221571071839,
         "barrel_rate": 0.008545833828175137,
         "sp_name": "Freddy Peralta",
         "park": 1.077,
@@ -990,8 +992,8 @@
         "game_pk": 849815,
         "matchup": "Cleveland Guardians @ Tampa Bay Rays",
         "prob": 0.06144905232234206,
-        "model_prob": 0.061319084805565756,
-        "edge": 0.00012996751677630397,
+        "model_prob": 0.061319084805565784,
+        "edge": 0.00012996751677627622,
         "barrel_rate": 0.03198610782622072,
         "sp_name": "Shawn Armstrong",
         "park": 1.077,
@@ -1003,15 +1005,15 @@
     ],
     "record": {
       "hr": {
-        "hit": 0,
-        "scored": 0,
+        "hit": 1,
+        "scored": 1,
         "dnp": 0,
-        "pending": 1
+        "pending": 0
       },
       "games": {
-        "won": 0,
+        "won": 1,
         "lost": 0,
-        "pending": 1
+        "pending": 0
       },
       "hits": {
         "hit": 1,
@@ -1031,15 +1033,15 @@
         "void": 0,
         "pending": 0
       },
-      "graded_at": "2026-10-20 00:18:22",
-      "complete": false
+      "graded_at": "2026-10-20 04:43:11",
+      "complete": true
     }
   },
   "record": {
-    "hr_hit": 24,
-    "hr_scored": 105,
-    "hr_expected": 20.53,
-    "games_won": 136,
+    "hr_hit": 25,
+    "hr_scored": 106,
+    "hr_expected": 20.7,
+    "games_won": 137,
     "games_lost": 84,
     "hits_hit": 63,
     "hits_scored": 91,
@@ -1050,16 +1052,16 @@
     "days": [
       {
         "date": "2026-10-19",
-        "hr_hit": 0,
-        "hr_scored": 0,
-        "hr_expected": 0,
-        "games_won": 0,
+        "hr_hit": 1,
+        "hr_scored": 1,
+        "hr_expected": 0.17,
+        "games_won": 1,
         "games_lost": 0,
         "hits_hit": 1,
         "hits_scored": 1,
         "parlays_won": 0,
         "parlays_lost": 0,
-        "complete": false,
+        "complete": true,
         "backfilled": false
       },
       {
