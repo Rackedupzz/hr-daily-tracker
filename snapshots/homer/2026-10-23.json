@@ -1,7 +1,7 @@
 {
  "bot": "HOMER",
  "date": "2026-10-23",
- "built_at": "2026-10-20 23:11:46",
+ "built_at": "2026-10-21 04:37:10",
  "book_through": "2026-10-23",
  "league": {
   "pa": 185056,
@@ -694,7 +694,7 @@
    "matchup": "Tampa Bay Rays @ Milwaukee Brewers",
    "venue": "American Family Field",
    "sp_name": "TBD",
-   "model_prob": 0.16516327039823353,
+   "model_prob": 0.16516327039823347,
    "injury_note": null,
    "lineup_posted": false,
    "lineup_confirmed": false,
@@ -732,7 +732,7 @@
     "avg_prob": 0.1791
    },
    "tag": "LOVE IT",
-   "edge": 0.011566162770878241
+   "edge": 0.011566162770878297
   }
  ],
  "hit_picks": [
@@ -852,8 +852,8 @@
    "game_pk": 849805,
    "matchup": "Tampa Bay Rays @ Milwaukee Brewers",
    "prob": 0.13786881359785308,
-   "model_prob": 0.12517226422568112,
-   "edge": 0.012696549372171961,
+   "model_prob": 0.125172264225681,
+   "edge": 0.012696549372172072,
    "barrel_rate": 0.05663387350649894,
    "sp_name": "TBD",
    "park": 1.057,
@@ -866,8 +866,8 @@
    "game_pk": 849805,
    "matchup": "Tampa Bay Rays @ Milwaukee Brewers",
    "prob": 0.17672943316911177,
-   "model_prob": 0.16516327039823353,
-   "edge": 0.011566162770878241,
+   "model_prob": 0.16516327039823347,
+   "edge": 0.011566162770878297,
    "barrel_rate": 0.07635484538034086,
    "sp_name": "TBD",
    "park": 1.057,
@@ -894,8 +894,8 @@
    "game_pk": 849805,
    "matchup": "Tampa Bay Rays @ Milwaukee Brewers",
    "prob": 0.0847605430265645,
-   "model_prob": 0.07947439811795186,
-   "edge": 0.005286144908612636,
+   "model_prob": 0.07947439811795187,
+   "edge": 0.005286144908612622,
    "barrel_rate": 0.03155772950774424,
    "sp_name": "TBD",
    "park": 1.057,
@@ -924,8 +924,8 @@
    "game_pk": 849805,
    "matchup": "Tampa Bay Rays @ Milwaukee Brewers",
    "prob": 0.1384126440942392,
-   "model_prob": 0.15616471514434388,
-   "edge": -0.01775207105010468,
+   "model_prob": 0.156164715144344,
+   "edge": -0.01775207105010479,
    "barrel_rate": 0.08305593337697093,
    "sp_name": "TBD",
    "park": 1.057,
@@ -966,8 +966,8 @@
    "game_pk": 849805,
    "matchup": "Tampa Bay Rays @ Milwaukee Brewers",
    "prob": 0.05978982051828825,
-   "model_prob": 0.07065550143827963,
-   "edge": -0.010865680919991377,
+   "model_prob": 0.0706555014382796,
+   "edge": -0.01086568091999135,
    "barrel_rate": 0.031609422466023,
    "sp_name": "TBD",
    "park": 1.057,
@@ -1005,7 +1005,7 @@
    "void": 0,
    "pending": 0
   },
-  "graded_at": "2026-10-20 23:11:40",
+  "graded_at": "2026-10-21 04:37:02",
   "complete": false
  }
 }
