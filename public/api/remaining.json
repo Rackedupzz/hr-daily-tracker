@@ -1,7 +1,7 @@
 {
   "date": "2026-10-23",
-  "built_at": "2026-10-21 10:06:10",
-  "fetched_at": "2026-10-21 10:06:10",
+  "built_at": "2026-10-21 19:18:27",
+  "fetched_at": "2026-10-21 19:18:27",
   "games": [
     {
       "game_pk": 849805,
@@ -9,7 +9,7 @@
       "home": "Milwaukee Brewers",
       "venue": "American Family Field",
       "away_sp": null,
-      "home_sp": null,
+      "home_sp": "Jacob Misiorowski",
       "away_sp_hand": "R",
       "home_sp_hand": "R",
       "state": "Preview",
@@ -28,15 +28,6 @@
           "result": null
         },
         {
-          "batter": "Junior Caminero",
-          "batter_id": 691406,
-          "team": "Tampa Bay Rays",
-          "prob_hr": 0.1587220701477134,
-          "facing_hand": "R",
-          "season": "43 HR / 738 PA",
-          "result": null
-        },
-        {
           "batter": "Jake Bauers",
           "batter_id": 641343,
           "team": "Milwaukee Brewers",
@@ -44,18 +35,18 @@
           "facing_hand": "R",
           "season": "27 HR / 612 PA",
           "result": null
+        },
+        {
+          "batter": "William Contreras",
+          "batter_id": 661388,
+          "team": "Milwaukee Brewers",
+          "prob_hr": 0.15220483531127987,
+          "facing_hand": "R",
+          "season": "21 HR / 675 PA",
+          "result": null
         }
       ],
       "hits": [
-        {
-          "batter": "Yandy D\u00edaz",
-          "batter_id": 650490,
-          "team": "Tampa Bay Rays",
-          "projected_hits": 1.07,
-          "prob_at_least_one": 0.7066962256157381,
-          "result": null,
-          "matchup": null
-        },
         {
           "batter": "Jackson Chourio",
           "batter_id": 694192,
@@ -71,6 +62,15 @@
           "team": "Milwaukee Brewers",
           "projected_hits": 1.01,
           "prob_at_least_one": 0.6824120928521704,
+          "result": null,
+          "matchup": null
+        },
+        {
+          "batter": "Brice Turang",
+          "batter_id": 668930,
+          "team": "Milwaukee Brewers",
+          "projected_hits": 0.93,
+          "prob_at_least_one": 0.6485289983887375,
           "result": null,
           "matchup": null
         }
