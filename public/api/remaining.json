@@ -1,14 +1,14 @@
 {
   "date": "2026-10-23",
-  "built_at": "2026-10-22 19:14:12",
-  "fetched_at": "2026-10-22 19:14:12",
+  "built_at": "2026-10-22 23:19:35",
+  "fetched_at": "2026-10-22 23:19:35",
   "games": [
     {
       "game_pk": 849805,
       "away": "Tampa Bay Rays",
       "home": "Milwaukee Brewers",
       "venue": "American Family Field",
-      "away_sp": null,
+      "away_sp": "Nick Martinez",
       "home_sp": "Jacob Misiorowski",
       "away_sp_hand": "R",
       "home_sp_hand": "R",
@@ -22,7 +22,7 @@
           "batter": "Jackson Chourio",
           "batter_id": 694192,
           "team": "Milwaukee Brewers",
-          "prob_hr": 0.16516327039823347,
+          "prob_hr": 0.16369313882457034,
           "facing_hand": "R",
           "season": "27 HR / 611 PA",
           "result": null
@@ -31,7 +31,7 @@
           "batter": "Jake Bauers",
           "batter_id": 641343,
           "team": "Milwaukee Brewers",
-          "prob_hr": 0.156164715144344,
+          "prob_hr": 0.15472134688145228,
           "facing_hand": "R",
           "season": "27 HR / 612 PA",
           "result": null
@@ -40,7 +40,7 @@
           "batter": "William Contreras",
           "batter_id": 661388,
           "team": "Milwaukee Brewers",
-          "prob_hr": 0.15220483531127987,
+          "prob_hr": 0.15077471551340996,
           "facing_hand": "R",
           "season": "21 HR / 675 PA",
           "result": null
@@ -51,8 +51,8 @@
           "batter": "Jackson Chourio",
           "batter_id": 694192,
           "team": "Milwaukee Brewers",
-          "projected_hits": 1.01,
-          "prob_at_least_one": 0.6797771087905324,
+          "projected_hits": 1.09,
+          "prob_at_least_one": 0.7142747553859392,
           "result": null,
           "matchup": null
         },
@@ -60,8 +60,8 @@
           "batter": "William Contreras",
           "batter_id": 661388,
           "team": "Milwaukee Brewers",
-          "projected_hits": 1.01,
-          "prob_at_least_one": 0.6824120928521704,
+          "projected_hits": 1.09,
+          "prob_at_least_one": 0.7170519550786698,
           "result": null,
           "matchup": null
         },
@@ -69,8 +69,8 @@
           "batter": "Brice Turang",
           "batter_id": 668930,
           "team": "Milwaukee Brewers",
-          "projected_hits": 0.93,
-          "prob_at_least_one": 0.6485289983887375,
+          "projected_hits": 1.02,
+          "prob_at_least_one": 0.687073017410956,
           "result": null,
           "matchup": null
         }
