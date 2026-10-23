@@ -1,7 +1,7 @@
 {
   "date": "2026-10-23",
-  "built_at": "2026-10-23 19:09:17",
-  "fetched_at": "2026-10-23 19:09:17",
+  "built_at": "2026-10-23 23:07:05",
+  "fetched_at": "2026-10-23 23:07:05",
   "games": [
     {
       "game_pk": 849805,
@@ -13,16 +13,16 @@
       "away_sp_hand": "R",
       "home_sp_hand": "R",
       "state": "Preview",
-      "detailed": "Scheduled",
-      "inning": null,
-      "away_score": null,
-      "home_score": null,
+      "detailed": "Pre-Game",
+      "inning": "1st",
+      "away_score": 0,
+      "home_score": 0,
       "hr": [
         {
           "batter": "Jackson Chourio",
           "batter_id": 694192,
           "team": "Milwaukee Brewers",
-          "prob_hr": 0.16369313882457034,
+          "prob_hr": 0.16144662609776053,
           "facing_hand": "R",
           "season": "27 HR / 611 PA",
           "result": null
@@ -31,7 +31,7 @@
           "batter": "Jake Bauers",
           "batter_id": 641343,
           "team": "Milwaukee Brewers",
-          "prob_hr": 0.15472134688145228,
+          "prob_hr": 0.16115640150512697,
           "facing_hand": "R",
           "season": "27 HR / 612 PA",
           "result": null
@@ -40,7 +40,7 @@
           "batter": "William Contreras",
           "batter_id": 661388,
           "team": "Milwaukee Brewers",
-          "prob_hr": 0.15077471551340996,
+          "prob_hr": 0.14418522193086256,
           "facing_hand": "R",
           "season": "21 HR / 675 PA",
           "result": null
@@ -60,17 +60,17 @@
           "batter": "William Contreras",
           "batter_id": 661388,
           "team": "Milwaukee Brewers",
-          "projected_hits": 1.09,
-          "prob_at_least_one": 0.7170519550786698,
+          "projected_hits": 1.07,
+          "prob_at_least_one": 0.7095762026274843,
           "result": null,
           "matchup": null
         },
         {
-          "batter": "Brice Turang",
-          "batter_id": 668930,
+          "batter": "Jake Bauers",
+          "batter_id": 641343,
           "team": "Milwaukee Brewers",
-          "projected_hits": 1.02,
-          "prob_at_least_one": 0.687073017410956,
+          "projected_hits": 1.0,
+          "prob_at_least_one": 0.6783972116475991,
           "result": null,
           "matchup": null
         }
