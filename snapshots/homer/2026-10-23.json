@@ -1,7 +1,7 @@
 {
  "bot": "HOMER",
  "date": "2026-10-23",
- "built_at": "2026-10-23 04:40:49",
+ "built_at": "2026-10-23 10:00:35",
  "book_through": "2026-10-23",
  "league": {
   "pa": 185056,
@@ -694,7 +694,7 @@
    "matchup": "Tampa Bay Rays @ Milwaukee Brewers",
    "venue": "American Family Field",
    "sp_name": "Nick Martinez",
-   "model_prob": 0.16369313882457032,
+   "model_prob": 0.16369313882457034,
    "injury_note": null,
    "lineup_posted": false,
    "lineup_confirmed": false,
@@ -732,7 +732,7 @@
     "avg_prob": 0.1791
    },
    "tag": "LOVE IT",
-   "edge": 0.020921357909619492
+   "edge": 0.020921357909619465
   }
  ],
  "hit_picks": [
@@ -838,8 +838,8 @@
    "game_pk": 849805,
    "matchup": "Tampa Bay Rays @ Milwaukee Brewers",
    "prob": 0.1846144967341898,
-   "model_prob": 0.16369313882457032,
-   "edge": 0.020921357909619492,
+   "model_prob": 0.16369313882457034,
+   "edge": 0.020921357909619465,
    "barrel_rate": 0.07635484538034086,
    "sp_name": "Nick Martinez",
    "park": 1.057,
@@ -866,8 +866,8 @@
    "game_pk": 849805,
    "matchup": "Tampa Bay Rays @ Milwaukee Brewers",
    "prob": 0.1264240091299792,
-   "model_prob": 0.11271047357555396,
-   "edge": 0.01371353555442524,
+   "model_prob": 0.1127104735755539,
+   "edge": 0.013713535554425296,
    "barrel_rate": 0.05663387350649894,
    "sp_name": "Jacob Misiorowski",
    "park": 1.057,
@@ -894,8 +894,8 @@
    "game_pk": 849805,
    "matchup": "Tampa Bay Rays @ Milwaukee Brewers",
    "prob": 0.1588723376979199,
-   "model_prob": 0.1547213468814523,
-   "edge": 0.004150990816467581,
+   "model_prob": 0.15472134688145228,
+   "edge": 0.004150990816467609,
    "barrel_rate": 0.08305593337697093,
    "sp_name": "Nick Martinez",
    "park": 1.057,
@@ -924,8 +924,8 @@
    "game_pk": 849805,
    "matchup": "Tampa Bay Rays @ Milwaukee Brewers",
    "prob": 0.02815,
-   "model_prob": 0.04068785366690737,
-   "edge": -0.012537853666907371,
+   "model_prob": 0.040687853666907366,
+   "edge": -0.012537853666907364,
    "barrel_rate": 0.029372522405328942,
    "sp_name": "Jacob Misiorowski",
    "park": 1.057,
@@ -966,8 +966,8 @@
    "game_pk": 849805,
    "matchup": "Tampa Bay Rays @ Milwaukee Brewers",
    "prob": 0.06570974829453971,
-   "model_prob": 0.07000881325818148,
-   "edge": -0.004299064963641769,
+   "model_prob": 0.07000881325818142,
+   "edge": -0.004299064963641713,
    "barrel_rate": 0.03155772950774424,
    "sp_name": "Jacob Misiorowski",
    "park": 1.057,
@@ -1005,7 +1005,7 @@
    "void": 0,
    "pending": 0
   },
-  "graded_at": "2026-10-23 04:40:41",
+  "graded_at": "2026-10-23 10:00:29",
   "complete": false
  }
 }
