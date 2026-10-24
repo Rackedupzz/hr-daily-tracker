@@ -1,8 +1,8 @@
 {
   "date": "2026-10-24",
-  "built_at": "2026-10-24 20:46:55",
+  "built_at": "2026-10-24 23:09:35",
   "results": {
-    "fetched_at": "2026-10-24 20:46:55",
+    "fetched_at": "2026-10-24 23:09:35",
     "final_games": 0,
     "live_games": 0,
     "upcoming_games": 1,
@@ -35,7 +35,7 @@
     "avg_projected_hr": 0.1527,
     "picks_dnp": 0,
     "settled": false,
-    "built_at": "2026-10-24 20:46:55",
+    "built_at": "2026-10-24 23:09:35",
     "hr_level": 0.9861136965119542,
     "model_version": "2026.10.01-stack"
   },

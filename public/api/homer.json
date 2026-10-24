@@ -4,7 +4,7 @@
   "card": {
     "bot": "HOMER",
     "date": "2026-10-24",
-    "built_at": "2026-10-24 20:47:03",
+    "built_at": "2026-10-24 23:09:41",
     "book_through": "2026-10-24",
     "league": {
       "pa": 185123,
@@ -691,7 +691,7 @@
         "matchup": "Tampa Bay Rays @ Milwaukee Brewers",
         "venue": "American Family Field",
         "sp_name": "Logan Henderson",
-        "model_prob": 0.1547872105996558,
+        "model_prob": 0.15478721059965578,
         "injury_note": null,
         "lineup_posted": true,
         "lineup_confirmed": true,
@@ -729,7 +729,7 @@
           "avg_prob": 0.1786
         },
         "tag": "LOVE IT",
-        "edge": 0.019336337162946138
+        "edge": 0.019336337162946166
       }
     ],
     "hit_picks": [
@@ -836,8 +836,8 @@
         "game_pk": 849802,
         "matchup": "Tampa Bay Rays @ Milwaukee Brewers",
         "prob": 0.17412354776260194,
-        "model_prob": 0.1547872105996558,
-        "edge": 0.019336337162946138,
+        "model_prob": 0.15478721059965578,
+        "edge": 0.019336337162946166,
         "barrel_rate": 0.056803867605292685,
         "sp_name": "Logan Henderson",
         "park": 1.05,
@@ -892,8 +892,8 @@
         "game_pk": 849802,
         "matchup": "Tampa Bay Rays @ Milwaukee Brewers",
         "prob": 0.15840483465658375,
-        "model_prob": 0.14742911824785054,
-        "edge": 0.01097571640873321,
+        "model_prob": 0.14742911824785057,
+        "edge": 0.010975716408733183,
         "barrel_rate": 0.08081220962171069,
         "sp_name": "Logan Henderson",
         "park": 1.05,
@@ -936,8 +936,8 @@
         "game_pk": 849802,
         "matchup": "Tampa Bay Rays @ Milwaukee Brewers",
         "prob": 0.030657583930838315,
-        "model_prob": 0.05193632639882039,
-        "edge": -0.021278742467982076,
+        "model_prob": 0.0519363263988204,
+        "edge": -0.021278742467982083,
         "barrel_rate": 0.029284077190937022,
         "sp_name": "Logan Henderson",
         "park": 1.05,
@@ -1003,7 +1003,7 @@
         "void": 0,
         "pending": 0
       },
-      "graded_at": "2026-10-24 20:46:55",
+      "graded_at": "2026-10-24 23:09:35",
       "complete": false
     }
   },

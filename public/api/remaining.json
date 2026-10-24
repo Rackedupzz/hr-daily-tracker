@@ -1,7 +1,7 @@
 {
   "date": "2026-10-24",
-  "built_at": "2026-10-24 20:46:55",
-  "fetched_at": "2026-10-24 20:46:55",
+  "built_at": "2026-10-24 23:09:35",
+  "fetched_at": "2026-10-24 23:09:35",
   "games": [
     {
       "game_pk": 849802,
@@ -22,7 +22,7 @@
           "batter": "Junior Caminero",
           "batter_id": 691406,
           "team": "Tampa Bay Rays",
-          "prob_hr": 0.1547872105996558,
+          "prob_hr": 0.15478721059965578,
           "facing_hand": "R",
           "season": "43 HR / 742 PA",
           "result": null
