@@ -1,7 +1,7 @@
 {
   "date": "2026-10-24",
-  "built_at": "2026-10-24 18:06:13",
-  "fetched_at": "2026-10-24 18:06:13",
+  "built_at": "2026-10-24 20:46:55",
+  "fetched_at": "2026-10-24 20:46:55",
   "games": [
     {
       "game_pk": 849802,
@@ -13,16 +13,16 @@
       "away_sp_hand": "R",
       "home_sp_hand": "R",
       "state": "Preview",
-      "detailed": "Scheduled",
-      "inning": null,
-      "away_score": null,
-      "home_score": null,
+      "detailed": "Pre-Game",
+      "inning": "1st",
+      "away_score": 0,
+      "home_score": 0,
       "hr": [
         {
           "batter": "Junior Caminero",
           "batter_id": 691406,
           "team": "Tampa Bay Rays",
-          "prob_hr": 0.15927249300978735,
+          "prob_hr": 0.1547872105996558,
           "facing_hand": "R",
           "season": "43 HR / 742 PA",
           "result": null
@@ -31,18 +31,18 @@
           "batter": "Jackson Chourio",
           "batter_id": 694192,
           "team": "Milwaukee Brewers",
-          "prob_hr": 0.15042881762779087,
+          "prob_hr": 0.15046392432835753,
           "facing_hand": "R",
           "season": "27 HR / 615 PA",
           "result": null
         },
         {
-          "batter": "Jonathan Aranda",
-          "batter_id": 666018,
-          "team": "Tampa Bay Rays",
-          "prob_hr": 0.1473942816293753,
+          "batter": "Jake Bauers",
+          "batter_id": 641343,
+          "team": "Milwaukee Brewers",
+          "prob_hr": 0.14878607413740966,
           "facing_hand": "R",
-          "season": "23 HR / 711 PA",
+          "season": "27 HR / 616 PA",
           "result": null
         }
       ],
@@ -57,20 +57,20 @@
           "matchup": null
         },
         {
+          "batter": "Chandler Simpson",
+          "batter_id": 802415,
+          "team": "Tampa Bay Rays",
+          "projected_hits": 0.98,
+          "prob_at_least_one": 0.6711020133776237,
+          "result": null,
+          "matchup": null
+        },
+        {
           "batter": "Jackson Chourio",
           "batter_id": 694192,
           "team": "Milwaukee Brewers",
           "projected_hits": 0.93,
           "prob_at_least_one": 0.6479953961512201,
-          "result": null,
-          "matchup": null
-        },
-        {
-          "batter": "William Contreras",
-          "batter_id": 661388,
-          "team": "Milwaukee Brewers",
-          "projected_hits": 0.93,
-          "prob_at_least_one": 0.6511735783557729,
           "result": null,
           "matchup": null
         }
