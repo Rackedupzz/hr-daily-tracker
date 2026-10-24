@@ -1,7 +1,7 @@
 {
  "bot": "HOMER",
  "date": "2026-10-23",
- "built_at": "2026-10-24 01:35:52",
+ "built_at": "2026-10-24 04:28:43",
  "book_through": "2026-10-23",
  "league": {
   "pa": 185056,
@@ -735,9 +735,9 @@
    "edge": 0.023167870636429277,
    "result": {
     "hr": 0,
-    "summary": "1-2 | K, R",
-    "final": false,
-    "state": "In Progress"
+    "summary": "2-4 | K, RBI, R",
+    "final": true,
+    "state": "Final"
    }
   }
  ],
@@ -802,11 +802,11 @@
    },
    "tag": "BANK IT &#128176;",
    "result": {
-    "hits": 1,
-    "summary": "1-2 | K, R",
+    "hits": 2,
+    "summary": "2-4 | K, RBI, R",
     "final": true,
     "dnp": false,
-    "state": "In Progress"
+    "state": "Final"
    }
   }
  ],
@@ -842,10 +842,12 @@
    "model_pick_prob": 0.6572602344170732,
    "tag": "HAMMER",
    "result": {
-    "final": false,
-    "home_score": 2,
-    "away_score": 1,
-    "state": "In Progress"
+    "final": true,
+    "won": true,
+    "home_score": 3,
+    "away_score": 2,
+    "total": 5,
+    "state": "Final"
    }
   }
  ],
@@ -999,14 +1001,14 @@
  "record": {
   "hr": {
    "hit": 0,
-   "scored": 0,
+   "scored": 1,
    "dnp": 0,
-   "pending": 1
+   "pending": 0
   },
   "games": {
-   "won": 0,
+   "won": 1,
    "lost": 0,
-   "pending": 1
+   "pending": 0
   },
   "hits": {
    "hit": 1,
@@ -1026,7 +1028,7 @@
    "void": 0,
    "pending": 0
   },
-  "graded_at": "2026-10-24 01:35:47",
-  "complete": false
+  "graded_at": "2026-10-24 04:28:39",
+  "complete": true
  }
 }
