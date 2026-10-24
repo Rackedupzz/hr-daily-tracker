@@ -1,7 +1,7 @@
 {
   "date": "2026-10-23",
-  "built_at": "2026-10-23 23:07:05",
-  "fetched_at": "2026-10-23 23:07:05",
+  "built_at": "2026-10-24 01:35:47",
+  "fetched_at": "2026-10-24 01:35:47",
   "games": [
     {
       "game_pk": 849805,
@@ -12,38 +12,68 @@
       "home_sp": "Jacob Misiorowski",
       "away_sp_hand": "R",
       "home_sp_hand": "R",
-      "state": "Preview",
-      "detailed": "Pre-Game",
-      "inning": "1st",
-      "away_score": 0,
-      "home_score": 0,
+      "state": "Live",
+      "detailed": "In Progress",
+      "inning": "5th",
+      "away_score": 1,
+      "home_score": 2,
       "hr": [
         {
           "batter": "Jackson Chourio",
           "batter_id": 694192,
           "team": "Milwaukee Brewers",
-          "prob_hr": 0.16144662609776053,
+          "prob_hr": 0.1606564734644396,
           "facing_hand": "R",
           "season": "27 HR / 611 PA",
-          "result": null
+          "result": {
+            "pa": 2,
+            "ab": 2,
+            "hits": 1,
+            "hr": 0,
+            "rbi": 0,
+            "summary": "1-2 | K, R",
+            "state": "Live",
+            "detailed": "In Progress",
+            "final": false
+          }
         },
         {
           "batter": "Jake Bauers",
           "batter_id": 641343,
           "team": "Milwaukee Brewers",
-          "prob_hr": 0.16115640150512697,
+          "prob_hr": 0.1603667073746917,
           "facing_hand": "R",
           "season": "27 HR / 612 PA",
-          "result": null
+          "result": {
+            "pa": 2,
+            "ab": 2,
+            "hits": 0,
+            "hr": 0,
+            "rbi": 0,
+            "summary": "0-2 | K",
+            "state": "Live",
+            "detailed": "In Progress",
+            "final": false
+          }
         },
         {
           "batter": "William Contreras",
           "batter_id": 661388,
           "team": "Milwaukee Brewers",
-          "prob_hr": 0.14418522193086256,
+          "prob_hr": 0.14342691272057276,
           "facing_hand": "R",
           "season": "21 HR / 675 PA",
-          "result": null
+          "result": {
+            "pa": 2,
+            "ab": 2,
+            "hits": 1,
+            "hr": 0,
+            "rbi": 1,
+            "summary": "1-2 | RBI",
+            "state": "Live",
+            "detailed": "In Progress",
+            "final": false
+          }
         }
       ],
       "hits": [
@@ -53,7 +83,17 @@
           "team": "Milwaukee Brewers",
           "projected_hits": 1.09,
           "prob_at_least_one": 0.7142747553859392,
-          "result": null,
+          "result": {
+            "pa": 2,
+            "ab": 2,
+            "hits": 1,
+            "hr": 0,
+            "rbi": 0,
+            "summary": "1-2 | K, R",
+            "state": "Live",
+            "detailed": "In Progress",
+            "final": false
+          },
           "matchup": null
         },
         {
@@ -62,7 +102,17 @@
           "team": "Milwaukee Brewers",
           "projected_hits": 1.07,
           "prob_at_least_one": 0.7095762026274843,
-          "result": null,
+          "result": {
+            "pa": 2,
+            "ab": 2,
+            "hits": 1,
+            "hr": 0,
+            "rbi": 1,
+            "summary": "1-2 | RBI",
+            "state": "Live",
+            "detailed": "In Progress",
+            "final": false
+          },
           "matchup": null
         },
         {
@@ -71,7 +121,17 @@
           "team": "Milwaukee Brewers",
           "projected_hits": 1.0,
           "prob_at_least_one": 0.6783972116475991,
-          "result": null,
+          "result": {
+            "pa": 2,
+            "ab": 2,
+            "hits": 0,
+            "hr": 0,
+            "rbi": 0,
+            "summary": "0-2 | K",
+            "state": "Live",
+            "detailed": "In Progress",
+            "final": false
+          },
           "matchup": null
         }
       ]

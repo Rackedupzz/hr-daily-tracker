@@ -4,7 +4,7 @@
   "card": {
     "bot": "HOMER",
     "date": "2026-10-23",
-    "built_at": "2026-10-23 23:07:11",
+    "built_at": "2026-10-24 01:35:52",
     "book_through": "2026-10-23",
     "league": {
       "pa": 185056,
@@ -735,7 +735,13 @@
           "avg_prob": 0.1791
         },
         "tag": "LOVE IT",
-        "edge": 0.023167870636429277
+        "edge": 0.023167870636429277,
+        "result": {
+          "hr": 0,
+          "summary": "1-2 | K, R",
+          "final": false,
+          "state": "In Progress"
+        }
       }
     ],
     "hit_picks": [
@@ -797,7 +803,14 @@
           "rate": 0.7245,
           "avg_prob": 0.7191
         },
-        "tag": "BANK IT &#128176;"
+        "tag": "BANK IT &#128176;",
+        "result": {
+          "hits": 1,
+          "summary": "1-2 | K, R",
+          "final": true,
+          "dnp": false,
+          "state": "In Progress"
+        }
       }
     ],
     "parlays": [],
@@ -830,7 +843,13 @@
           "Milwaukee Brewers lineup 0.322 wOBA vs 0.314"
         ],
         "model_pick_prob": 0.6572602344170732,
-        "tag": "HAMMER"
+        "tag": "HAMMER",
+        "result": {
+          "final": false,
+          "home_score": 2,
+          "away_score": 1,
+          "state": "In Progress"
+        }
       }
     ],
     "likes": [
@@ -841,8 +860,8 @@
         "game_pk": 849805,
         "matchup": "Tampa Bay Rays @ Milwaukee Brewers",
         "prob": 0.1846144967341898,
-        "model_prob": 0.16144662609776053,
-        "edge": 0.023167870636429277,
+        "model_prob": 0.1606564734644396,
+        "edge": 0.023958023269750217,
         "barrel_rate": 0.07635484538034086,
         "sp_name": "Nick Martinez",
         "park": 1.057,
@@ -855,8 +874,8 @@
         "game_pk": 849805,
         "matchup": "Tampa Bay Rays @ Milwaukee Brewers",
         "prob": 0.1264240091299792,
-        "model_prob": 0.11080202521984413,
-        "edge": 0.01562198391013507,
+        "model_prob": 0.11013293514244869,
+        "edge": 0.016291073987530505,
         "barrel_rate": 0.05663387350649894,
         "sp_name": "Jacob Misiorowski",
         "park": 1.057,
@@ -869,8 +888,8 @@
         "game_pk": 849805,
         "matchup": "Tampa Bay Rays @ Milwaukee Brewers",
         "prob": 0.15260583406148448,
-        "model_prob": 0.1383622821459965,
-        "edge": 0.014243551915487984,
+        "model_prob": 0.13761685282154176,
+        "edge": 0.014988981239942717,
         "barrel_rate": 0.05700792559745496,
         "sp_name": "Jacob Misiorowski",
         "park": 1.057,
@@ -883,8 +902,8 @@
         "game_pk": 849805,
         "matchup": "Tampa Bay Rays @ Milwaukee Brewers",
         "prob": 0.12867126238437518,
-        "model_prob": 0.12120223508492482,
-        "edge": 0.0074690272994503565,
+        "model_prob": 0.12050127724013483,
+        "edge": 0.008169985144240346,
         "barrel_rate": 0.057817926160872904,
         "sp_name": "Nick Martinez",
         "park": 1.057,
@@ -897,8 +916,8 @@
         "game_pk": 849805,
         "matchup": "Tampa Bay Rays @ Milwaukee Brewers",
         "prob": 0.16666816580485982,
-        "model_prob": 0.16115640150512697,
-        "edge": 0.005511764299732852,
+        "model_prob": 0.1603667073746917,
+        "edge": 0.006301458430168133,
         "barrel_rate": 0.08305593337697093,
         "sp_name": "Nick Martinez",
         "park": 1.057,
@@ -913,8 +932,8 @@
         "game_pk": 849805,
         "matchup": "Tampa Bay Rays @ Milwaukee Brewers",
         "prob": 0.02815,
-        "model_prob": 0.039729731896939374,
-        "edge": -0.011579731896939373,
+        "model_prob": 0.03939591020623928,
+        "edge": -0.01124591020623928,
         "barrel_rate": 0.029372522405328942,
         "sp_name": "Jacob Misiorowski",
         "park": 1.057,
@@ -927,8 +946,8 @@
         "game_pk": 849805,
         "matchup": "Tampa Bay Rays @ Milwaukee Brewers",
         "prob": 0.058308848818518444,
-        "model_prob": 0.0656630703555332,
-        "edge": -0.00735422153701476,
+        "model_prob": 0.06518019274224415,
+        "edge": -0.006871343923725709,
         "barrel_rate": 0.026804433014699088,
         "sp_name": "Nick Martinez",
         "park": 1.057,
@@ -941,23 +960,9 @@
         "game_pk": 849805,
         "matchup": "Tampa Bay Rays @ Milwaukee Brewers",
         "prob": 0.12702206676818947,
-        "model_prob": 0.13266071071498314,
-        "edge": -0.00563864394679367,
+        "model_prob": 0.13192896531853104,
+        "edge": -0.004906898550341571,
         "barrel_rate": 0.07357254625232769,
-        "sp_name": "Nick Martinez",
-        "park": 1.057,
-        "weather": 1.0
-      },
-      {
-        "batter": "William Contreras",
-        "batter_id": 661388,
-        "team": "Milwaukee Brewers",
-        "game_pk": 849805,
-        "matchup": "Tampa Bay Rays @ Milwaukee Brewers",
-        "prob": 0.1391683418096227,
-        "model_prob": 0.14418522193086256,
-        "edge": -0.005016880121239853,
-        "barrel_rate": 0.05191067114122499,
         "sp_name": "Nick Martinez",
         "park": 1.057,
         "weather": 1.0
@@ -969,15 +974,31 @@
         "game_pk": 849805,
         "matchup": "Tampa Bay Rays @ Milwaukee Brewers",
         "prob": 0.06115469206733711,
-        "model_prob": 0.06599231752389255,
-        "edge": -0.0048376254565554375,
+        "model_prob": 0.06550776879562975,
+        "edge": -0.004353076728292639,
         "barrel_rate": 0.022443742768332952,
         "sp_name": "Jacob Misiorowski",
         "park": 1.057,
         "weather": 1.0
+      },
+      {
+        "batter": "William Contreras",
+        "batter_id": 661388,
+        "team": "Milwaukee Brewers",
+        "game_pk": 849805,
+        "matchup": "Tampa Bay Rays @ Milwaukee Brewers",
+        "prob": 0.1391683418096227,
+        "model_prob": 0.14342691272057276,
+        "edge": -0.004258570910950055,
+        "barrel_rate": 0.05191067114122499,
+        "sp_name": "Nick Martinez",
+        "park": 1.057,
+        "weather": 1.0
       }
     ],
-    "locked": [],
+    "locked": [
+      849805
+    ],
     "record": {
       "hr": {
         "hit": 0,
@@ -991,10 +1012,10 @@
         "pending": 1
       },
       "hits": {
-        "hit": 0,
-        "scored": 0,
+        "hit": 1,
+        "scored": 1,
         "dnp": 0,
-        "pending": 1
+        "pending": 0
       },
       "parlays": {
         "won": 0,
@@ -1008,7 +1029,7 @@
         "void": 0,
         "pending": 0
       },
-      "graded_at": "2026-10-23 23:07:05",
+      "graded_at": "2026-10-24 01:35:47",
       "complete": false
     }
   },
@@ -1018,8 +1039,8 @@
     "hr_expected": 20.7,
     "games_won": 137,
     "games_lost": 84,
-    "hits_hit": 63,
-    "hits_scored": 91,
+    "hits_hit": 64,
+    "hits_scored": 92,
     "parlays_won": 27,
     "parlays_lost": 39,
     "five_won": 0,
@@ -1032,8 +1053,8 @@
         "hr_expected": 0,
         "games_won": 0,
         "games_lost": 0,
-        "hits_hit": 0,
-        "hits_scored": 0,
+        "hits_hit": 1,
+        "hits_scored": 1,
         "parlays_won": 0,
         "parlays_lost": 0,
         "complete": false,
