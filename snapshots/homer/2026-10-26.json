@@ -1,0 +1,1006 @@
+{
+ "bot": "HOMER",
+ "date": "2026-10-26",
+ "built_at": "2026-10-25 18:24:21",
+ "book_through": "2026-10-26",
+ "league": {
+  "pa": 185199,
+  "hr_rate": 0.03045912774906992,
+  "woba": 0.3125800895252328,
+  "games": 2466
+ },
+ "method": "learned",
+ "evidence": {
+  "fitted_at": "2026-10-24 18:06:37",
+  "through": "2026-10-23",
+  "hits_serve": "learned",
+  "hit_scores": {
+   "learned": {
+    "n": 32724,
+    "log_loss": 0.66227,
+    "brier": 0.23484,
+    "auc": 0.5722,
+    "accuracy": 0.6104,
+    "accuracy_se": 0.0027
+   },
+   "rules": {
+    "n": 32724,
+    "log_loss": 0.66646,
+    "brier": 0.23681,
+    "auc": 0.5666,
+    "accuracy": 0.6076,
+    "accuracy_se": 0.0027
+   },
+   "baseline": {
+    "n": 32724,
+    "log_loss": 0.66887,
+    "brier": 0.2379,
+    "auc": 0.5569,
+    "accuracy": 0.6073,
+    "accuracy_se": 0.0027
+   }
+  },
+  "hit_picks": {
+   "calibrated": {
+    "days": 154,
+    "picks": 836,
+    "hit": 595,
+    "rate": 0.7117,
+    "rate_se": 0.0157,
+    "expected": 600.1
+   },
+   "rules": {
+    "days": 154,
+    "picks": 836,
+    "hit": 572,
+    "rate": 0.6842,
+    "rate_se": 0.0161,
+    "expected": 621.3
+   },
+   "base": {
+    "days": 154,
+    "picks": 836,
+    "hit": 574,
+    "rate": 0.6866,
+    "rate_se": 0.016,
+    "expected": 621.3
+   }
+  },
+  "hit_grades": [
+   {
+    "grade": "A",
+    "min_prob": 0.7046,
+    "top_share": 0.05,
+    "n": 1453,
+    "hit": 1053,
+    "rate": 0.7247,
+    "avg_prob": 0.719
+   },
+   {
+    "grade": "B",
+    "min_prob": 0.6739,
+    "top_share": 0.13,
+    "n": 2324,
+    "hit": 1586,
+    "rate": 0.6824,
+    "avg_prob": 0.6909
+   },
+   {
+    "grade": "C",
+    "min_prob": 0.6518,
+    "top_share": 0.3,
+    "n": 4941,
+    "hit": 3307,
+    "rate": 0.6693,
+    "avg_prob": 0.665
+   },
+   {
+    "grade": "D",
+    "min_prob": 0.0,
+    "top_share": 1.0,
+    "n": 20342,
+    "hit": 11947,
+    "rate": 0.5873,
+    "avg_prob": 0.5884
+   }
+  ],
+  "hit_weights": [
+   {
+    "feature": "exp_pa",
+    "label": "Lineup spot (trips to the plate)",
+    "odds_per_sd": 0.1793,
+    "overlap": false
+   },
+   {
+    "feature": "sp_k",
+    "label": "Starter's strikeout rate",
+    "odds_per_sd": -0.0578,
+    "overlap": false
+   },
+   {
+    "feature": "k_rate",
+    "label": "Strikeout rate",
+    "odds_per_sd": -0.0545,
+    "overlap": false
+   },
+   {
+    "feature": "hit_park",
+    "label": "Ballpark (hits)",
+    "odds_per_sd": 0.0494,
+    "overlap": false
+   },
+   {
+    "feature": "sample",
+    "label": "Size of track record",
+    "odds_per_sd": 0.0468,
+    "overlap": false
+   },
+   {
+    "feature": "xhit",
+    "label": "Expected hits (contact quality)",
+    "odds_per_sd": 0.0463,
+    "overlap": false
+   },
+   {
+    "feature": "pen_hit",
+    "label": "Opposing bullpen hits allowed",
+    "odds_per_sd": 0.0422,
+    "overlap": false
+   },
+   {
+    "feature": "hit_platoon",
+    "label": "League platoon edge (hits)",
+    "odds_per_sd": -0.0401,
+    "overlap": true
+   },
+   {
+    "feature": "sp_hit",
+    "label": "Starter's hits allowed",
+    "odds_per_sd": 0.0353,
+    "overlap": false
+   },
+   {
+    "feature": "bb_rate",
+    "label": "Walk rate",
+    "odds_per_sd": -0.034,
+    "overlap": false
+   }
+  ],
+  "hit_dropped": [
+   {
+    "dropped": "hit_form",
+    "log_loss_before": 0.662383,
+    "log_loss_after": 0.662332
+   },
+   {
+    "dropped": "hit_split",
+    "log_loss_before": 0.662332,
+    "log_loss_after": 0.662301
+   },
+   {
+    "dropped": "hit_rate",
+    "log_loss_before": 0.662301,
+    "log_loss_after": 0.662275
+   }
+  ],
+  "hit_board_rate": 0.6157,
+  "parlays": {
+   "hit5": {
+    "legs": 5,
+    "days": 133,
+    "won": 22,
+    "rate": 0.1654,
+    "predicted": 0.196774,
+    "expected_wins": 26.171,
+    "wins_on": [
+     "2026-05-16",
+     "2026-05-26",
+     "2026-05-27",
+     "2026-06-05",
+     "2026-06-07",
+     "2026-06-11",
+     "2026-06-13",
+     "2026-06-16",
+     "2026-06-29",
+     "2026-07-04",
+     "2026-07-11",
+     "2026-07-17",
+     "2026-07-19",
+     "2026-07-23",
+     "2026-07-25",
+     "2026-08-04",
+     "2026-08-06",
+     "2026-08-08",
+     "2026-08-18",
+     "2026-09-01",
+     "2026-09-11",
+     "2026-09-23"
+    ],
+    "leg_rate": 0.7083,
+    "leg_projected": 0.7223
+   },
+   "multi5": {
+    "legs": 5,
+    "days": 133,
+    "won": 3,
+    "rate": 0.0226,
+    "predicted": 0.002963,
+    "expected_wins": 0.394,
+    "wins_on": [
+     "2026-05-27",
+     "2026-06-05",
+     "2026-06-29"
+    ],
+    "leg_rate": 0.3203,
+    "leg_projected": 0.3117
+   },
+   "hr5": {
+    "legs": 5,
+    "days": 133,
+    "won": 0,
+    "rate": 0.0,
+    "predicted": 0.000487,
+    "expected_wins": 0.065,
+    "wins_on": [],
+    "leg_rate": 0.2045,
+    "leg_projected": 0.2168
+   },
+   "win5": {
+    "legs": 5,
+    "days": 133,
+    "won": 7,
+    "rate": 0.0526,
+    "predicted": 0.076054,
+    "expected_wins": 10.115,
+    "wins_on": [
+     "2026-05-29",
+     "2026-06-08",
+     "2026-07-03",
+     "2026-08-29",
+     "2026-09-20",
+     "2026-09-25",
+     "2026-09-27"
+    ],
+    "leg_rate": 0.6075,
+    "leg_projected": 0.5969
+   },
+   "chalk5": {
+    "legs": 5,
+    "days": 133,
+    "won": 22,
+    "rate": 0.1654,
+    "predicted": 0.196895,
+    "expected_wins": 26.187,
+    "wins_on": [
+     "2026-05-16",
+     "2026-05-26",
+     "2026-05-27",
+     "2026-06-05",
+     "2026-06-07",
+     "2026-06-11",
+     "2026-06-13",
+     "2026-06-16",
+     "2026-06-29",
+     "2026-07-04",
+     "2026-07-11",
+     "2026-07-17",
+     "2026-07-19",
+     "2026-07-23",
+     "2026-07-25",
+     "2026-08-04",
+     "2026-08-06",
+     "2026-08-08",
+     "2026-08-18",
+     "2026-09-01",
+     "2026-09-11",
+     "2026-09-23"
+    ],
+    "leg_rate": 0.7083,
+    "leg_projected": 0.7224
+   },
+   "early10": {
+    "legs": 10,
+    "days": 100,
+    "won": 0,
+    "rate": 0.0,
+    "predicted": 0.009941,
+    "expected_wins": 0.994,
+    "wins_on": [],
+    "leg_rate": 0.666,
+    "leg_projected": 0.6582,
+    "by_kind": {
+     "hits1": {
+      "n": 897,
+      "projected": 0.7064,
+      "hit": 0.7246
+     },
+     "hr": {
+      "n": 100,
+      "projected": 0.2247,
+      "hit": 0.15
+     },
+     "win": {
+      "n": 3,
+      "projected": 0.6943,
+      "hit": 0.3333
+     }
+    }
+   },
+   "late10": {
+    "legs": 10,
+    "days": 102,
+    "won": 0,
+    "rate": 0.0,
+    "predicted": 0.010444,
+    "expected_wins": 1.065,
+    "wins_on": [],
+    "leg_rate": 0.6412,
+    "leg_projected": 0.6613,
+    "by_kind": {
+     "hits1": {
+      "n": 911,
+      "projected": 0.7096,
+      "hit": 0.6905
+     },
+     "hr": {
+      "n": 102,
+      "projected": 0.2269,
+      "hit": 0.2059
+     },
+     "win": {
+      "n": 7,
+      "projected": 0.7005,
+      "hit": 0.5714
+     }
+    }
+   }
+  },
+  "book": {
+   "margins": {
+    "hr": 1.22,
+    "hits": 1.065
+   },
+   "legs": {
+    "hr_prob": {
+     "legs": 705,
+     "actual": 0.2085,
+     "homer": 0.2149,
+     "market": 0.1809,
+     "break_even": 0.2207,
+     "roi": -0.0402
+    },
+    "hr_value": {
+     "legs": 705,
+     "actual": 0.1872,
+     "homer": 0.1905,
+     "market": 0.1407,
+     "break_even": 0.1716,
+     "roi": 0.1172
+    },
+    "hit_prob": {
+     "legs": 705,
+     "actual": 0.7092,
+     "homer": 0.7202,
+     "market": 0.6722,
+     "break_even": 0.7159,
+     "roi": -0.0086
+    },
+    "hit_value": {
+     "legs": 705,
+     "actual": 0.6865,
+     "homer": 0.7025,
+     "market": 0.6335,
+     "break_even": 0.6747,
+     "roi": 0.0201
+    }
+   }
+  },
+  "hr_serve": "learned",
+  "games_serve": "rules",
+  "hr_scores": {
+   "learned": {
+    "n": 32724,
+    "log_loss": 0.3541,
+    "brier": 0.1022,
+    "auc": 0.6134,
+    "accuracy": 0.8824,
+    "accuracy_se": 0.0018
+   },
+   "rules": {
+    "n": 32724,
+    "log_loss": 0.35468,
+    "brier": 0.10228,
+    "auc": 0.6071,
+    "accuracy": 0.8824,
+    "accuracy_se": 0.0018
+   },
+   "baseline": {
+    "n": 32724,
+    "log_loss": 0.35689,
+    "brier": 0.10272,
+    "auc": 0.5916,
+    "accuracy": 0.8824,
+    "accuracy_se": 0.0018
+   }
+  },
+  "hr_picks": {
+   "calibrated": {
+    "days": 154,
+    "picks": 836,
+    "hit": 171,
+    "rate": 0.2045,
+    "rate_se": 0.014,
+    "expected": 177.6
+   },
+   "rules": {
+    "days": 154,
+    "picks": 836,
+    "hit": 159,
+    "rate": 0.1902,
+    "rate_se": 0.0136,
+    "expected": 173.7
+   },
+   "base": {
+    "days": 154,
+    "picks": 836,
+    "hit": 164,
+    "rate": 0.1962,
+    "rate_se": 0.0137,
+    "expected": 182.4
+   }
+  },
+  "hr_weights": [
+   {
+    "feature": "xhr",
+    "label": "Expected HR rate (contact quality)",
+    "odds_per_sd": 0.3227,
+    "overlap": false
+   },
+   {
+    "feature": "exp_pa",
+    "label": "Lineup spot (trips to the plate)",
+    "odds_per_sd": 0.1443,
+    "overlap": false
+   },
+   {
+    "feature": "weather",
+    "label": "Temperature & wind",
+    "odds_per_sd": 0.1097,
+    "overlap": false
+   },
+   {
+    "feature": "sp_fly",
+    "label": "Starter's fly-ball rate",
+    "odds_per_sd": 0.0943,
+    "overlap": false
+   },
+   {
+    "feature": "park",
+    "label": "Ballpark",
+    "odds_per_sd": 0.0577,
+    "overlap": false
+   },
+   {
+    "feature": "barrel",
+    "label": "Barrel rate",
+    "odds_per_sd": -0.0573,
+    "overlap": true
+   },
+   {
+    "feature": "hr",
+    "label": "Actual HR rate",
+    "odds_per_sd": 0.0569,
+    "overlap": false
+   },
+   {
+    "feature": "sample",
+    "label": "Size of track record",
+    "odds_per_sd": 0.0518,
+    "overlap": false
+   },
+   {
+    "feature": "form",
+    "label": "Last 21 days vs season",
+    "odds_per_sd": 0.0484,
+    "overlap": false
+   },
+   {
+    "feature": "sp_hr",
+    "label": "Starter's HR allowed",
+    "odds_per_sd": 0.0411,
+    "overlap": false
+   }
+  ],
+  "hr_dropped": [
+   {
+    "dropped": "sp_form",
+    "log_loss_before": 0.35422,
+    "log_loss_after": 0.354158
+   },
+   {
+    "dropped": "split",
+    "log_loss_before": 0.354158,
+    "log_loss_after": 0.354125
+   },
+   {
+    "dropped": "platoon",
+    "log_loss_before": 0.354125,
+    "log_loss_after": 0.354104
+   },
+   {
+    "dropped": "pen",
+    "log_loss_before": 0.354104,
+    "log_loss_after": 0.3541
+   }
+  ],
+  "grades": [
+   {
+    "grade": "A",
+    "min_prob": 0.1941,
+    "top_share": 0.05,
+    "n": 1453,
+    "hit": 313,
+    "rate": 0.2154,
+    "avg_prob": 0.2126
+   },
+   {
+    "grade": "B",
+    "min_prob": 0.1703,
+    "top_share": 0.13,
+    "n": 2324,
+    "hit": 421,
+    "rate": 0.1812,
+    "avg_prob": 0.1786
+   },
+   {
+    "grade": "C",
+    "min_prob": 0.1383,
+    "top_share": 0.3,
+    "n": 4941,
+    "hit": 771,
+    "rate": 0.156,
+    "avg_prob": 0.155
+   },
+   {
+    "grade": "D",
+    "min_prob": 0.0,
+    "top_share": 1.0,
+    "n": 20342,
+    "hit": 2041,
+    "rate": 0.1003,
+    "avg_prob": 0.0992
+   }
+  ],
+  "board_rate": 0.122,
+  "game_scores": {
+   "learned": {
+    "n": 1801,
+    "log_loss": 0.68139,
+    "brier": 0.24423,
+    "auc": 0.5791,
+    "accuracy": 0.5552,
+    "accuracy_se": 0.0117
+   },
+   "rules": {
+    "n": 1801,
+    "log_loss": 0.6812,
+    "brier": 0.2441,
+    "auc": 0.5811,
+    "accuracy": 0.5608,
+    "accuracy_se": 0.0117
+   },
+   "home_team": {
+    "n": 1801,
+    "log_loss": 0.69185,
+    "brier": 0.24935,
+    "auc": 0.5,
+    "accuracy": 0.5258,
+    "accuracy_se": 0.0118
+   }
+  },
+  "game_weights": [
+   {
+    "feature": "starter",
+    "label": "Starting pitcher matchup",
+    "odds_per_sd": 0.238,
+    "overlap": false
+   },
+   {
+    "feature": "bullpen",
+    "label": "Bullpen matchup",
+    "odds_per_sd": 0.1528,
+    "overlap": false
+   },
+   {
+    "feature": "record",
+    "label": "Season run differential",
+    "odds_per_sd": 0.0784,
+    "overlap": false
+   }
+  ],
+  "confidence": [
+   {
+    "label": "Strong",
+    "min_prob": 0.6,
+    "n": 270,
+    "won": 171,
+    "rate": 0.6333
+   },
+   {
+    "label": "Lean",
+    "min_prob": 0.55,
+    "n": 591,
+    "won": 342,
+    "rate": 0.5787
+   },
+   {
+    "label": "Coin flip",
+    "min_prob": 0.0,
+    "n": 940,
+    "won": 497,
+    "rate": 0.5287
+   }
+  ],
+  "house_winners": {
+   "n": 1937,
+   "accuracy": 0.5467217346411978,
+   "accuracy_se": 0.01131099490937996,
+   "brier": 0.24697265034737342,
+   "log_loss": 0.6870700122028418
+  }
+ },
+ "hr_picks": [
+  {
+   "rules_prob": 0.17342698211770702,
+   "xhr_rate": 0.0448110463947629,
+   "hr_rate": 0.0400170889448179,
+   "recent_rate": 0.0430549441724449,
+   "recent_pa": 38,
+   "recent_hr": 1,
+   "season_pa": 615,
+   "season_hr": 27,
+   "season_xhr": 29.28102377026234,
+   "barrel_rate": 0.07523066621650978,
+   "hard_rate": 0.47417840375586856,
+   "split_index": 1.0036684595866967,
+   "split_pa": 438,
+   "split_hr": 16,
+   "sp_index": 0.9761691570859165,
+   "sp_fly": 0.28753847227675944,
+   "sp_form_index": 1.1731638895805478,
+   "pen_index": 1.1249798750948121,
+   "platoon": 0.9896081202157728,
+   "park": 1.083,
+   "weather": 1.0,
+   "weather_note": "",
+   "exp_pa": 4.65,
+   "slot": null,
+   "usual_slot": 1,
+   "pa_vs_sp": 2.73,
+   "pa_vs_pen": 1.92,
+   "sp_hand": "R",
+   "bat_side": "R",
+   "lg": 0.03045912774906992,
+   "batter": "Jackson Chourio",
+   "batter_id": 694192,
+   "team": "Milwaukee Brewers",
+   "game_pk": 849804,
+   "matchup": "Milwaukee Brewers @ Tampa Bay Rays",
+   "venue": "Tropicana Field",
+   "sp_name": "Freddy Peralta",
+   "model_prob": 0.17134159423798964,
+   "injury_note": null,
+   "lineup_posted": false,
+   "lineup_confirmed": false,
+   "prob": 0.18124927456446255,
+   "method": "learned",
+   "contrib": {
+    "xhr": 0.3675,
+    "hr": 0.0627,
+    "form": 0.005,
+    "barrel": -0.0447,
+    "sp_hr": -0.0045,
+    "sp_fly": 0.0728,
+    "park": 0.0467,
+    "weather": -0.0476,
+    "exp_pa": 0.2003,
+    "sample": 0.0662
+   },
+   "take": [
+    "Contact quality: 29.3 xHR in 615 PA (1.47&times; league) <span class='muted'>(+44% odds)</span>",
+    "Lineup not posted; usually bats 1 (4.7 trips) <span class='muted'>(+22% odds)</span>",
+    "Freddy Peralta lives in the air: 29% fly balls <span class='muted'>(+8% odds)</span>"
+   ],
+   "market_prob": 0.16714653465848706,
+   "book_implied": 0.2039187722833542,
+   "book_price": "+390",
+   "book_edge": -0.1111692536447374,
+   "grade": "B",
+   "evidence": {
+    "grade": "B",
+    "min_prob": 0.1703,
+    "top_share": 0.13,
+    "n": 2324,
+    "hit": 421,
+    "rate": 0.1812,
+    "avg_prob": 0.1786
+   },
+   "tag": "LOVE IT",
+   "edge": 0.009907680326472906
+  }
+ ],
+ "hit_picks": [
+  {
+   "rules_prob": 0.6843849938121118,
+   "season_pa": 637,
+   "season_hits": 184,
+   "avg_line": 0.28885400313971743,
+   "hit_rate": 0.27191143153623965,
+   "xhit_rate": 0.22580291811973136,
+   "recent_hit_rate": 0.2781833614524657,
+   "recent_pa": 31,
+   "recent_hits": 9,
+   "k_rate": 0.1073562664448866,
+   "bb_rate": 0.05174264520832439,
+   "split_index": 1.0293211005205563,
+   "split_pa": 218,
+   "split_hits": 61,
+   "platoon": 0.9805393278374467,
+   "sp_hit_index": 0.9823814205172074,
+   "sp_k_rate": 0.22044836287350697,
+   "pen_hit_index": 0.9234662330994515,
+   "park": 1.008,
+   "exp_pa": 4.25,
+   "slot": null,
+   "usual_slot": 5,
+   "sp_hand": "L",
+   "lg_hit": 0.21794934097916296,
+   "lg_k": 0.22326254461417178,
+   "batter": "Chandler Simpson",
+   "batter_id": 802415,
+   "team": "Tampa Bay Rays",
+   "game_pk": 849804,
+   "matchup": "Milwaukee Brewers @ Tampa Bay Rays",
+   "venue": "Tropicana Field",
+   "sp_name": "Robert Gasser",
+   "model_prob": 0.6806806021129133,
+   "injury_note": null,
+   "lineup_posted": false,
+   "lineup_confirmed": false,
+   "prob": 0.6986032392728624,
+   "method": "learned",
+   "take": [
+    "Strikeout rate 11% (league 22%) <span class='muted'>(+25% odds)</span>",
+    "Walk rate 5% &mdash; walks are trips without a hit chance <span class='muted'>(+12% odds)</span>",
+    "Established: 637 PA of track record <span class='muted'>(+6% odds)</span>",
+    "Knock: Opposing bullpen allows hits at 0.92&times; league <span class='muted'>(-7% odds)</span>"
+   ],
+   "market_prob": 0.6860446152459234,
+   "book_implied": 0.7306375152369085,
+   "book_price": "-271",
+   "book_edge": -0.04384428022924469,
+   "grade": "B",
+   "evidence": {
+    "grade": "B",
+    "min_prob": 0.6739,
+    "top_share": 0.13,
+    "n": 2324,
+    "hit": 1586,
+    "rate": 0.6824,
+    "avg_prob": 0.6909
+   },
+   "tag": "LOVE IT"
+  }
+ ],
+ "parlays": [],
+ "parlay_rules": "house-2026-10-06",
+ "game_picks": [
+  {
+   "game_pk": 849804,
+   "matchup": "Milwaukee Brewers @ Tampa Bay Rays",
+   "away": "Milwaukee Brewers",
+   "home": "Tampa Bay Rays",
+   "venue": "Tropicana Field",
+   "pick": "Milwaukee Brewers",
+   "pick_side": "away",
+   "win_prob": 0.5401534353811384,
+   "confidence": "Coin flip",
+   "evidence": {
+    "label": "Coin flip",
+    "min_prob": 0.0,
+    "n": 940,
+    "won": 497,
+    "rate": 0.5287
+   },
+   "method": "rules",
+   "away_runs": 4.69,
+   "home_runs": 4.31,
+   "total": 9.0,
+   "park_runs": 1.027,
+   "take": [
+    "Pitching edge: Robert Gasser allows 0.304 wOBA, Freddy Peralta 0.314",
+    "Milwaukee Brewers lineup 0.322 wOBA vs 0.314"
+   ],
+   "model_pick_prob": 0.5291639345501363,
+   "tag": "SMALL PLAY"
+  }
+ ],
+ "likes": [
+  {
+   "batter": "Jake Bauers",
+   "batter_id": 641343,
+   "team": "Milwaukee Brewers",
+   "game_pk": 849804,
+   "matchup": "Milwaukee Brewers @ Tampa Bay Rays",
+   "prob": 0.1672585002312812,
+   "model_prob": 0.14407367399381735,
+   "edge": 0.023184826237463846,
+   "barrel_rate": 0.08198401319345015,
+   "sp_name": "Freddy Peralta",
+   "park": 1.083,
+   "weather": 1.0
+  },
+  {
+   "batter": "Victor Mesa Jr.",
+   "batter_id": 683748,
+   "team": "Tampa Bay Rays",
+   "game_pk": 849804,
+   "matchup": "Milwaukee Brewers @ Tampa Bay Rays",
+   "prob": 0.12716616013809875,
+   "model_prob": 0.10405452143821682,
+   "edge": 0.023111638699881934,
+   "barrel_rate": 0.062243295744325425,
+   "sp_name": "Robert Gasser",
+   "park": 1.083,
+   "weather": 1.0
+  },
+  {
+   "batter": "Junior Caminero",
+   "batter_id": 691406,
+   "team": "Tampa Bay Rays",
+   "game_pk": 849804,
+   "matchup": "Milwaukee Brewers @ Tampa Bay Rays",
+   "prob": 0.17922532110501624,
+   "model_prob": 0.16342954301218449,
+   "edge": 0.015795778092831753,
+   "barrel_rate": 0.05640034950187705,
+   "sp_name": "Robert Gasser",
+   "park": 1.083,
+   "weather": 1.0
+  },
+  {
+   "batter": "Liam Hicks",
+   "batter_id": 689414,
+   "team": "Tampa Bay Rays",
+   "game_pk": 849804,
+   "matchup": "Milwaukee Brewers @ Tampa Bay Rays",
+   "prob": 0.08509833367889612,
+   "model_prob": 0.07012136429360724,
+   "edge": 0.014976969385288877,
+   "barrel_rate": 0.03322094292304083,
+   "sp_name": "Robert Gasser",
+   "park": 1.083,
+   "weather": 1.0
+  },
+  {
+   "batter": "Brice Turang",
+   "batter_id": 668930,
+   "team": "Milwaukee Brewers",
+   "game_pk": 849804,
+   "matchup": "Milwaukee Brewers @ Tampa Bay Rays",
+   "prob": 0.1463065889633692,
+   "model_prob": 0.13235028965030868,
+   "edge": 0.013956299313060527,
+   "barrel_rate": 0.05927941794044991,
+   "sp_name": "Freddy Peralta",
+   "park": 1.083,
+   "weather": 1.0
+  }
+ ],
+ "fades": [
+  {
+   "batter": "Taylor Walls",
+   "batter_id": 670764,
+   "team": "Tampa Bay Rays",
+   "game_pk": 849804,
+   "matchup": "Milwaukee Brewers @ Tampa Bay Rays",
+   "prob": 0.030022720823605582,
+   "model_prob": 0.057081164162506255,
+   "edge": -0.027058443338900673,
+   "barrel_rate": 0.029282976474801964,
+   "sp_name": "Robert Gasser",
+   "park": 1.083,
+   "weather": 1.0
+  },
+  {
+   "batter": "William Contreras",
+   "batter_id": 661388,
+   "team": "Milwaukee Brewers",
+   "game_pk": 849804,
+   "matchup": "Milwaukee Brewers @ Tampa Bay Rays",
+   "prob": 0.14389110388788232,
+   "model_prob": 0.159464249947164,
+   "edge": -0.015573146059281673,
+   "barrel_rate": 0.05117193093971342,
+   "sp_name": "Freddy Peralta",
+   "park": 1.083,
+   "weather": 1.0
+  },
+  {
+   "batter": "Cooper Pratt",
+   "batter_id": 806198,
+   "team": "Milwaukee Brewers",
+   "game_pk": 849804,
+   "matchup": "Milwaukee Brewers @ Tampa Bay Rays",
+   "prob": 0.06531351776244829,
+   "model_prob": 0.07126423267785903,
+   "edge": -0.005950714915410743,
+   "barrel_rate": 0.029808385950605563,
+   "sp_name": "Freddy Peralta",
+   "park": 1.083,
+   "weather": 1.0
+  },
+  {
+   "batter": "Jonny DeLuca",
+   "batter_id": 676356,
+   "team": "Tampa Bay Rays",
+   "game_pk": 849804,
+   "matchup": "Milwaukee Brewers @ Tampa Bay Rays",
+   "prob": 0.07397829804420776,
+   "model_prob": 0.07901606981417761,
+   "edge": -0.005037771769969848,
+   "barrel_rate": 0.022061573782651576,
+   "sp_name": "Robert Gasser",
+   "park": 1.083,
+   "weather": 1.0
+  },
+  {
+   "batter": "Sal Frelick",
+   "batter_id": 686217,
+   "team": "Milwaukee Brewers",
+   "game_pk": 849804,
+   "matchup": "Milwaukee Brewers @ Tampa Bay Rays",
+   "prob": 0.06316334891728281,
+   "model_prob": 0.06658995534737512,
+   "edge": -0.0034266064300923077,
+   "barrel_rate": 0.028980689327235007,
+   "sp_name": "Freddy Peralta",
+   "park": 1.083,
+   "weather": 1.0
+  }
+ ],
+ "locked": [],
+ "record": {
+  "hr": {
+   "hit": 0,
+   "scored": 0,
+   "dnp": 0,
+   "pending": 1
+  },
+  "games": {
+   "won": 0,
+   "lost": 0,
+   "pending": 1
+  },
+  "hits": {
+   "hit": 0,
+   "scored": 0,
+   "dnp": 0,
+   "pending": 1
+  },
+  "parlays": {
+   "won": 0,
+   "lost": 0,
+   "void": 0,
+   "pending": 0
+  },
+  "five_picks": {
+   "won": 0,
+   "lost": 0,
+   "void": 0,
+   "pending": 0
+  },
+  "graded_at": "2026-10-25 18:24:15",
+  "complete": false
+ }
+}

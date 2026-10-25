@@ -1,6 +1,80 @@
 {
-  "date": "2026-10-24",
-  "built_at": "2026-10-25 04:33:40",
-  "fetched_at": "2026-10-25 09:46:14",
-  "games": []
+  "date": "2026-10-26",
+  "built_at": "2026-10-25 18:24:15",
+  "fetched_at": "2026-10-25 18:24:15",
+  "games": [
+    {
+      "game_pk": 849804,
+      "away": "Milwaukee Brewers",
+      "home": "Tampa Bay Rays",
+      "venue": "Tropicana Field",
+      "away_sp": "Robert Gasser",
+      "home_sp": "Freddy Peralta",
+      "away_sp_hand": "L",
+      "home_sp_hand": "R",
+      "state": "Preview",
+      "detailed": "Scheduled",
+      "inning": null,
+      "away_score": null,
+      "home_score": null,
+      "hr": [
+        {
+          "batter": "Jackson Chourio",
+          "batter_id": 694192,
+          "team": "Milwaukee Brewers",
+          "prob_hr": 0.17134159423798964,
+          "facing_hand": "R",
+          "season": "27 HR / 620 PA",
+          "result": null
+        },
+        {
+          "batter": "Junior Caminero",
+          "batter_id": 691406,
+          "team": "Tampa Bay Rays",
+          "prob_hr": 0.16342954301218449,
+          "facing_hand": "L",
+          "season": "43 HR / 746 PA",
+          "result": null
+        },
+        {
+          "batter": "William Contreras",
+          "batter_id": 661388,
+          "team": "Milwaukee Brewers",
+          "prob_hr": 0.159464249947164,
+          "facing_hand": "R",
+          "season": "21 HR / 684 PA",
+          "result": null
+        }
+      ],
+      "hits": [
+        {
+          "batter": "Yandy D\u00edaz",
+          "batter_id": 650490,
+          "team": "Tampa Bay Rays",
+          "projected_hits": 1.07,
+          "prob_at_least_one": 0.7061007102221677,
+          "result": null,
+          "matchup": null
+        },
+        {
+          "batter": "Jackson Chourio",
+          "batter_id": 694192,
+          "team": "Milwaukee Brewers",
+          "projected_hits": 1.03,
+          "prob_at_least_one": 0.6908233361007678,
+          "result": null,
+          "matchup": null
+        },
+        {
+          "batter": "William Contreras",
+          "batter_id": 661388,
+          "team": "Milwaukee Brewers",
+          "projected_hits": 1.03,
+          "prob_at_least_one": 0.6936699628900038,
+          "result": null,
+          "matchup": null
+        }
+      ]
+    }
+  ]
 }
