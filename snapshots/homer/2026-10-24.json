@@ -1,7 +1,7 @@
 {
  "bot": "HOMER",
  "date": "2026-10-24",
- "built_at": "2026-10-24 23:09:41",
+ "built_at": "2026-10-25 04:33:48",
  "book_through": "2026-10-24",
  "league": {
   "pa": 185123,
@@ -726,7 +726,13 @@
     "avg_prob": 0.1786
    },
    "tag": "LOVE IT",
-   "edge": 0.019336337162946166
+   "edge": 0.019336337162946166,
+   "result": {
+    "hr": 0,
+    "summary": "1-4 | RBI, R",
+    "final": true,
+    "state": "Final"
+   }
   }
  ],
  "hit_picks": [
@@ -789,7 +795,14 @@
     "rate": 0.6693,
     "avg_prob": 0.665
    },
-   "tag": "LIKE IT"
+   "tag": "LIKE IT",
+   "result": {
+    "hits": 0,
+    "summary": "0-5 | 3 K, R",
+    "final": true,
+    "dnp": false,
+    "state": "Final"
+   }
   }
  ],
  "parlays": [],
@@ -822,7 +835,15 @@
     "Milwaukee Brewers lineup 0.322 wOBA vs 0.314"
    ],
    "model_pick_prob": 0.5648246894348895,
-   "tag": "LEAN"
+   "tag": "LEAN",
+   "result": {
+    "final": true,
+    "won": true,
+    "home_score": 5,
+    "away_score": 4,
+    "total": 9,
+    "state": "Final"
+   }
   }
  ],
  "likes": [
@@ -833,8 +854,8 @@
    "game_pk": 849802,
    "matchup": "Tampa Bay Rays @ Milwaukee Brewers",
    "prob": 0.17412354776260194,
-   "model_prob": 0.15478721059965578,
-   "edge": 0.019336337162946166,
+   "model_prob": 0.15321522868514043,
+   "edge": 0.020908319077461518,
    "barrel_rate": 0.056803867605292685,
    "sp_name": "Logan Henderson",
    "park": 1.05,
@@ -847,8 +868,8 @@
    "game_pk": 849802,
    "matchup": "Tampa Bay Rays @ Milwaukee Brewers",
    "prob": 0.14666096226094433,
-   "model_prob": 0.12921361336081624,
-   "edge": 0.017447348900128085,
+   "model_prob": 0.12775530741137686,
+   "edge": 0.018905654849567466,
    "barrel_rate": 0.05792040908313461,
    "sp_name": "Logan Henderson",
    "park": 1.05,
@@ -861,8 +882,8 @@
    "game_pk": 849802,
    "matchup": "Tampa Bay Rays @ Milwaukee Brewers",
    "prob": 0.12416234743619425,
-   "model_prob": 0.10863248876690405,
-   "edge": 0.0155298586692902,
+   "model_prob": 0.10729770417526371,
+   "edge": 0.01686464326093054,
    "barrel_rate": 0.06273875340858691,
    "sp_name": "Logan Henderson",
    "park": 1.05,
@@ -875,8 +896,8 @@
    "game_pk": 849802,
    "matchup": "Tampa Bay Rays @ Milwaukee Brewers",
    "prob": 0.16242589838881621,
-   "model_prob": 0.15046392432835753,
-   "edge": 0.01196197406045868,
+   "model_prob": 0.14890818956207968,
+   "edge": 0.01351770882673653,
    "barrel_rate": 0.07586899546390656,
    "sp_name": "Drew Rasmussen",
    "park": 1.05,
@@ -889,8 +910,8 @@
    "game_pk": 849802,
    "matchup": "Tampa Bay Rays @ Milwaukee Brewers",
    "prob": 0.15840483465658375,
-   "model_prob": 0.14742911824785057,
-   "edge": 0.010975716408733183,
+   "model_prob": 0.14588549889531544,
+   "edge": 0.012519335761268319,
    "barrel_rate": 0.08081220962171069,
    "sp_name": "Logan Henderson",
    "park": 1.05,
@@ -905,8 +926,8 @@
    "game_pk": 849802,
    "matchup": "Tampa Bay Rays @ Milwaukee Brewers",
    "prob": 0.03580237898195008,
-   "model_prob": 0.06020320830630989,
-   "edge": -0.02440082932435981,
+   "model_prob": 0.059287868297981154,
+   "edge": -0.023485489316031075,
    "barrel_rate": 0.026585815335945534,
    "sp_name": "Drew Rasmussen",
    "park": 1.05,
@@ -919,8 +940,8 @@
    "game_pk": 849802,
    "matchup": "Tampa Bay Rays @ Milwaukee Brewers",
    "prob": 0.1019967628932926,
-   "model_prob": 0.12493386964710959,
-   "edge": -0.022937106753816994,
+   "model_prob": 0.1234988191822857,
+   "edge": -0.0215020562889931,
    "barrel_rate": 0.07299256130961654,
    "sp_name": "Drew Rasmussen",
    "park": 1.05,
@@ -933,8 +954,8 @@
    "game_pk": 849802,
    "matchup": "Tampa Bay Rays @ Milwaukee Brewers",
    "prob": 0.030657583930838315,
-   "model_prob": 0.0519363263988204,
-   "edge": -0.021278742467982083,
+   "model_prob": 0.05111368573333769,
+   "edge": -0.020456101802499373,
    "barrel_rate": 0.029284077190937022,
    "sp_name": "Logan Henderson",
    "park": 1.05,
@@ -947,8 +968,8 @@
    "game_pk": 849802,
    "matchup": "Tampa Bay Rays @ Milwaukee Brewers",
    "prob": 0.10197201457640176,
-   "model_prob": 0.11758781338315176,
-   "edge": -0.01561579880675,
+   "model_prob": 0.11619562226329463,
+   "edge": -0.014223607686892875,
    "barrel_rate": 0.06523333112044905,
    "sp_name": "Drew Rasmussen",
    "park": 1.05,
@@ -961,32 +982,34 @@
    "game_pk": 849802,
    "matchup": "Tampa Bay Rays @ Milwaukee Brewers",
    "prob": 0.13425822267755047,
-   "model_prob": 0.14878607413740966,
-   "edge": -0.014527851459859187,
+   "model_prob": 0.14723696481871487,
+   "edge": -0.012978742141164401,
    "barrel_rate": 0.08240975611130545,
    "sp_name": "Drew Rasmussen",
    "park": 1.05,
    "weather": 1.0
   }
  ],
- "locked": [],
+ "locked": [
+  849802
+ ],
  "record": {
   "hr": {
    "hit": 0,
-   "scored": 0,
+   "scored": 1,
    "dnp": 0,
-   "pending": 1
+   "pending": 0
   },
   "games": {
-   "won": 0,
+   "won": 1,
    "lost": 0,
-   "pending": 1
+   "pending": 0
   },
   "hits": {
    "hit": 0,
-   "scored": 0,
+   "scored": 1,
    "dnp": 0,
-   "pending": 1
+   "pending": 0
   },
   "parlays": {
    "won": 0,
@@ -1000,7 +1023,7 @@
    "void": 0,
    "pending": 0
   },
-  "graded_at": "2026-10-24 23:09:35",
-  "complete": false
+  "graded_at": "2026-10-25 04:33:41",
+  "complete": true
  }
 }
