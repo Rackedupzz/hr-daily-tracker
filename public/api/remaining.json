@@ -1,7 +1,7 @@
 {
   "date": "2026-10-26",
-  "built_at": "2026-10-26 04:37:20",
-  "fetched_at": "2026-10-26 04:37:21",
+  "built_at": "2026-10-26 11:02:22",
+  "fetched_at": "2026-10-26 11:02:22",
   "games": [
     {
       "game_pk": 849804,
@@ -22,7 +22,7 @@
           "batter": "Jackson Chourio",
           "batter_id": 694192,
           "team": "Milwaukee Brewers",
-          "prob_hr": 0.17134159423798964,
+          "prob_hr": 0.17134159423798961,
           "facing_hand": "R",
           "season": "27 HR / 620 PA",
           "result": null
@@ -31,7 +31,7 @@
           "batter": "Junior Caminero",
           "batter_id": 691406,
           "team": "Tampa Bay Rays",
-          "prob_hr": 0.16342954301218449,
+          "prob_hr": 0.1634295430121845,
           "facing_hand": "L",
           "season": "43 HR / 746 PA",
           "result": null
@@ -40,7 +40,7 @@
           "batter": "William Contreras",
           "batter_id": 661388,
           "team": "Milwaukee Brewers",
-          "prob_hr": 0.159464249947164,
+          "prob_hr": 0.15946424994716393,
           "facing_hand": "R",
           "season": "21 HR / 684 PA",
           "result": null
