@@ -1,7 +1,7 @@
 {
  "bot": "HOMER",
  "date": "2026-10-26",
- "built_at": "2026-10-25 21:44:15",
+ "built_at": "2026-10-26 00:14:43",
  "book_through": "2026-10-26",
  "league": {
   "pa": 185199,
@@ -694,7 +694,7 @@
    "matchup": "Milwaukee Brewers @ Tampa Bay Rays",
    "venue": "Tropicana Field",
    "sp_name": "Freddy Peralta",
-   "model_prob": 0.17134159423798964,
+   "model_prob": 0.17134159423798961,
    "injury_note": null,
    "lineup_posted": false,
    "lineup_confirmed": false,
@@ -732,7 +732,7 @@
     "avg_prob": 0.1789
    },
    "tag": "LOVE IT",
-   "edge": 0.008039433660276651
+   "edge": 0.00803943366027668
   }
  ],
  "hit_picks": [
@@ -853,8 +853,8 @@
    "game_pk": 849804,
    "matchup": "Milwaukee Brewers @ Tampa Bay Rays",
    "prob": 0.16611756097182623,
-   "model_prob": 0.14407367399381735,
-   "edge": 0.02204388697800888,
+   "model_prob": 0.14407367399381743,
+   "edge": 0.022043886978008798,
    "barrel_rate": 0.08198401319345015,
    "sp_name": "Freddy Peralta",
    "park": 1.083,
@@ -881,8 +881,8 @@
    "game_pk": 849804,
    "matchup": "Milwaukee Brewers @ Tampa Bay Rays",
    "prob": 0.177348844351372,
-   "model_prob": 0.16342954301218449,
-   "edge": 0.013919301339187506,
+   "model_prob": 0.1634295430121845,
+   "edge": 0.013919301339187479,
    "barrel_rate": 0.05640034950187705,
    "sp_name": "Robert Gasser",
    "park": 1.083,
@@ -925,8 +925,8 @@
    "game_pk": 849804,
    "matchup": "Milwaukee Brewers @ Tampa Bay Rays",
    "prob": 0.14271613543302086,
-   "model_prob": 0.159464249947164,
-   "edge": -0.016748114514143125,
+   "model_prob": 0.15946424994716393,
+   "edge": -0.01674811451414307,
    "barrel_rate": 0.05117193093971342,
    "sp_name": "Freddy Peralta",
    "park": 1.083,
@@ -939,8 +939,8 @@
    "game_pk": 849804,
    "matchup": "Milwaukee Brewers @ Tampa Bay Rays",
    "prob": 0.0720301169917292,
-   "model_prob": 0.07901606981417761,
-   "edge": -0.006985952822448405,
+   "model_prob": 0.07901606981417762,
+   "edge": -0.0069859528224484185,
    "barrel_rate": 0.022061573782651576,
    "sp_name": "Robert Gasser",
    "park": 1.083,
@@ -1006,7 +1006,7 @@
    "void": 0,
    "pending": 0
   },
-  "graded_at": "2026-10-25 21:44:09",
+  "graded_at": "2026-10-26 00:14:35",
   "complete": false
  }
 }
