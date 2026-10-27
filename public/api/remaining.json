@@ -1,7 +1,7 @@
 {
   "date": "2026-10-27",
-  "built_at": "2026-10-27 10:28:39",
-  "fetched_at": "2026-10-27 10:28:39",
+  "built_at": "2026-10-27 20:04:46",
+  "fetched_at": "2026-10-27 20:04:46",
   "games": [
     {
       "game_pk": 849803,
@@ -13,7 +13,7 @@
       "away_sp_hand": "R",
       "home_sp_hand": "R",
       "state": "Preview",
-      "detailed": "Scheduled",
+      "detailed": "Pre-Game",
       "inning": null,
       "away_score": null,
       "home_score": null,
@@ -22,7 +22,7 @@
           "batter": "Jackson Chourio",
           "batter_id": 694192,
           "team": "Milwaukee Brewers",
-          "prob_hr": 0.17221234553817907,
+          "prob_hr": 0.1698177135286399,
           "facing_hand": "R",
           "season": "27 HR / 625 PA",
           "result": null
@@ -31,7 +31,7 @@
           "batter": "Junior Caminero",
           "batter_id": 691406,
           "team": "Tampa Bay Rays",
-          "prob_hr": 0.1621556564450638,
+          "prob_hr": 0.16437188557502,
           "facing_hand": "R",
           "season": "43 HR / 749 PA",
           "result": null
@@ -40,7 +40,7 @@
           "batter": "William Contreras",
           "batter_id": 661388,
           "team": "Milwaukee Brewers",
-          "prob_hr": 0.15950552860520395,
+          "prob_hr": 0.15716621642713038,
           "facing_hand": "R",
           "season": "21 HR / 689 PA",
           "result": null
@@ -57,20 +57,20 @@
           "matchup": null
         },
         {
-          "batter": "Chandler Simpson",
-          "batter_id": 802415,
-          "team": "Tampa Bay Rays",
-          "projected_hits": 1.01,
-          "prob_at_least_one": 0.685972482255927,
-          "result": null,
-          "matchup": null
-        },
-        {
           "batter": "Jackson Chourio",
           "batter_id": 694192,
           "team": "Milwaukee Brewers",
           "projected_hits": 1.01,
           "prob_at_least_one": 0.6800676776932751,
+          "result": null,
+          "matchup": null
+        },
+        {
+          "batter": "Liam Hicks",
+          "batter_id": 689414,
+          "team": "Tampa Bay Rays",
+          "projected_hits": 1.0,
+          "prob_at_least_one": 0.6820398174190015,
           "result": null,
           "matchup": null
         }
