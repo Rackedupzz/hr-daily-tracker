@@ -1,7 +1,7 @@
 {
  "bot": "HOMER",
  "date": "2026-10-26",
- "built_at": "2026-10-26 20:28:16",
+ "built_at": "2026-10-27 00:24:00",
  "book_through": "2026-10-26",
  "league": {
   "pa": 185199,
@@ -11,8 +11,8 @@
  },
  "method": "learned",
  "evidence": {
-  "fitted_at": "2026-10-25 18:24:45",
-  "through": "2026-10-24",
+  "fitted_at": "2026-10-26 20:28:36",
+  "through": "2026-10-25",
   "hits_serve": "learned",
   "hit_scores": {
    "learned": {
@@ -732,7 +732,13 @@
     "avg_prob": 0.1789
    },
    "tag": "LOVE IT",
-   "edge": 0.010430705254558525
+   "edge": 0.010430705254558525,
+   "result": {
+    "hr": 0,
+    "summary": "1-1",
+    "final": false,
+    "state": "In Progress"
+   }
   }
  ],
  "hit_picks": [
@@ -795,7 +801,14 @@
     "rate": 0.7247,
     "avg_prob": 0.7188
    },
-   "tag": "BANK IT &#128176;"
+   "tag": "BANK IT &#128176;",
+   "result": {
+    "hits": 0,
+    "summary": "",
+    "final": false,
+    "dnp": false,
+    "state": "In Progress"
+   }
   }
  ],
  "parlays": [],
@@ -828,7 +841,13 @@
     "Milwaukee Brewers lineup 0.322 wOBA vs 0.314"
    ],
    "model_pick_prob": 0.5291639345501363,
-   "tag": "SMALL PLAY"
+   "tag": "SMALL PLAY",
+   "result": {
+    "final": false,
+    "home_score": 0,
+    "away_score": 0,
+    "state": "In Progress"
+   }
   }
  ],
  "likes": [
@@ -853,8 +872,8 @@
    "game_pk": 849804,
    "matchup": "Milwaukee Brewers @ Tampa Bay Rays",
    "prob": 0.16611756097182623,
-   "model_prob": 0.1418215679489992,
-   "edge": 0.024295993022827034,
+   "model_prob": 0.15023689804529916,
+   "edge": 0.015880662926527067,
    "barrel_rate": 0.08198401319345015,
    "sp_name": "Freddy Peralta",
    "park": 1.083,
@@ -866,9 +885,9 @@
    "team": "Milwaukee Brewers",
    "game_pk": 849804,
    "matchup": "Milwaukee Brewers @ Tampa Bay Rays",
-   "prob": 0.14541886386259262,
-   "model_prob": 0.13017952520766668,
-   "edge": 0.015239338654925938,
+   "prob": 0.13205202737725544,
+   "model_prob": 0.11689009503401307,
+   "edge": 0.015161932343242368,
    "barrel_rate": 0.05927941794044991,
    "sp_name": "Freddy Peralta",
    "park": 1.083,
@@ -924,9 +943,9 @@
    "team": "Milwaukee Brewers",
    "game_pk": 849804,
    "matchup": "Milwaukee Brewers @ Tampa Bay Rays",
-   "prob": 0.14271613543302086,
-   "model_prob": 0.15712517610259216,
-   "edge": -0.0144090406695713,
+   "prob": 0.13776185447350958,
+   "model_prob": 0.15262581984234702,
+   "edge": -0.01486396536883744,
    "barrel_rate": 0.05117193093971342,
    "sp_name": "Freddy Peralta",
    "park": 1.083,
@@ -975,7 +994,9 @@
    "weather": 1.0
   }
  ],
- "locked": [],
+ "locked": [
+  849804
+ ],
  "record": {
   "hr": {
    "hit": 0,
@@ -1006,7 +1027,7 @@
    "void": 0,
    "pending": 0
   },
-  "graded_at": "2026-10-26 20:28:12",
+  "graded_at": "2026-10-27 00:23:56",
   "complete": false
  }
 }
