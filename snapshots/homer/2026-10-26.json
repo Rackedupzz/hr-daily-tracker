@@ -1,7 +1,7 @@
 {
  "bot": "HOMER",
  "date": "2026-10-26",
- "built_at": "2026-10-27 00:24:00",
+ "built_at": "2026-10-27 04:56:40",
  "book_through": "2026-10-26",
  "league": {
   "pa": 185199,
@@ -735,9 +735,9 @@
    "edge": 0.010430705254558525,
    "result": {
     "hr": 0,
-    "summary": "1-1",
-    "final": false,
-    "state": "In Progress"
+    "summary": "4-5 | 2B, K, RBI",
+    "final": true,
+    "state": "Final"
    }
   }
  ],
@@ -804,10 +804,10 @@
    "tag": "BANK IT &#128176;",
    "result": {
     "hits": 0,
-    "summary": "",
-    "final": false,
+    "summary": "0-3 | CS",
+    "final": true,
     "dnp": false,
-    "state": "In Progress"
+    "state": "Final"
    }
   }
  ],
@@ -843,10 +843,12 @@
    "model_pick_prob": 0.5291639345501363,
    "tag": "SMALL PLAY",
    "result": {
-    "final": false,
-    "home_score": 0,
-    "away_score": 0,
-    "state": "In Progress"
+    "final": true,
+    "won": true,
+    "home_score": 1,
+    "away_score": 10,
+    "total": 11,
+    "state": "Final"
    }
   }
  ],
@@ -858,8 +860,8 @@
    "game_pk": 849804,
    "matchup": "Milwaukee Brewers @ Tampa Bay Rays",
    "prob": 0.12453336952439158,
-   "model_prob": 0.09672575799878656,
-   "edge": 0.027807611525605014,
+   "model_prob": 0.09672575799878651,
+   "edge": 0.02780761152560507,
    "barrel_rate": 0.062243295744325425,
    "sp_name": "Robert Gasser",
    "park": 1.083,
@@ -872,8 +874,8 @@
    "game_pk": 849804,
    "matchup": "Milwaukee Brewers @ Tampa Bay Rays",
    "prob": 0.16611756097182623,
-   "model_prob": 0.15023689804529916,
-   "edge": 0.015880662926527067,
+   "model_prob": 0.15023689804529913,
+   "edge": 0.015880662926527095,
    "barrel_rate": 0.08198401319345015,
    "sp_name": "Freddy Peralta",
    "park": 1.083,
@@ -900,8 +902,8 @@
    "game_pk": 849804,
    "matchup": "Milwaukee Brewers @ Tampa Bay Rays",
    "prob": 0.1752379253984941,
-   "model_prob": 0.16107161691537583,
-   "edge": 0.014166308483118256,
+   "model_prob": 0.16107161691537586,
+   "edge": 0.014166308483118228,
    "barrel_rate": 0.05640034950187705,
    "sp_name": "Robert Gasser",
    "park": 1.083,
@@ -930,8 +932,8 @@
    "game_pk": 849804,
    "matchup": "Milwaukee Brewers @ Tampa Bay Rays",
    "prob": 0.03154496962853196,
-   "model_prob": 0.05578583531024695,
-   "edge": -0.02424086568171499,
+   "model_prob": 0.05578583531024694,
+   "edge": -0.024240865681714976,
    "barrel_rate": 0.029282976474801964,
    "sp_name": "Robert Gasser",
    "park": 1.083,
@@ -944,8 +946,8 @@
    "game_pk": 849804,
    "matchup": "Milwaukee Brewers @ Tampa Bay Rays",
    "prob": 0.13776185447350958,
-   "model_prob": 0.15262581984234702,
-   "edge": -0.01486396536883744,
+   "model_prob": 0.15262581984234705,
+   "edge": -0.014863965368837467,
    "barrel_rate": 0.05117193093971342,
    "sp_name": "Freddy Peralta",
    "park": 1.083,
@@ -972,8 +974,8 @@
    "game_pk": 849804,
    "matchup": "Milwaukee Brewers @ Tampa Bay Rays",
    "prob": 0.1379398932173308,
-   "model_prob": 0.1451123655683521,
-   "edge": -0.007172472351021308,
+   "model_prob": 0.14511236556835214,
+   "edge": -0.007172472351021336,
    "barrel_rate": 0.05450977497471769,
    "sp_name": "Robert Gasser",
    "park": 1.083,
@@ -986,8 +988,8 @@
    "game_pk": 849804,
    "matchup": "Milwaukee Brewers @ Tampa Bay Rays",
    "prob": 0.07688951303623834,
-   "model_prob": 0.08212330251379144,
-   "edge": -0.005233789477553097,
+   "model_prob": 0.08212330251379138,
+   "edge": -0.005233789477553041,
    "barrel_rate": 0.022061573782651576,
    "sp_name": "Robert Gasser",
    "park": 1.083,
@@ -1000,20 +1002,20 @@
  "record": {
   "hr": {
    "hit": 0,
-   "scored": 0,
+   "scored": 1,
    "dnp": 0,
-   "pending": 1
+   "pending": 0
   },
   "games": {
-   "won": 0,
+   "won": 1,
    "lost": 0,
-   "pending": 1
+   "pending": 0
   },
   "hits": {
    "hit": 0,
-   "scored": 0,
+   "scored": 1,
    "dnp": 0,
-   "pending": 1
+   "pending": 0
   },
   "parlays": {
    "won": 0,
@@ -1027,7 +1029,7 @@
    "void": 0,
    "pending": 0
   },
-  "graded_at": "2026-10-27 00:23:56",
-  "complete": false
+  "graded_at": "2026-10-27 04:56:32",
+  "complete": true
  }
 }
