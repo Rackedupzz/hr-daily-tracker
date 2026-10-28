@@ -335,7 +335,7 @@ date,kind,rank,batter,batter_id,team,game_pk,opponent_sp,facing_hand,lineup_slot
 2026-10-27,hit,2,Jackson Chourio,694192,Milwaukee Brewers,849803,Griffin Jax,R,1,1.01,0.6801,0.03349244968382768,4.491,1.165,0.98,1.061,1.05,27,625,6,6,2,0,0,"2-6 | 2B, 2 K",Final,True,True
 2026-10-27,hr,1,Jackson Chourio,694192,Milwaukee Brewers,849803,Griffin Jax,R,1,0.1698,0.1698,0.03349244968382768,4.491,1.165,0.98,1.061,1.05,27,625,6,6,2,0,0,"2-6 | 2B, 2 K",Final,True,False
 2026-10-27,hr,2,Junior Caminero,691406,Tampa Bay Rays,849803,Dustin May,R,3,0.155,0.155,0.04583482098517632,4.303,1.237,0.98,0.893,0.85,43,749,5,5,1,0,0,"1-5 | K, R",Final,True,False
-2026-10-28,hit,1,Jackson Chourio,694192,Milwaukee Brewers,849799,,R,,1.03,0.6914,0.03216538287311438,4.491,1.163,1.0,1.062,1.0,27,631,,,,,,,,,
-2026-10-28,hit,2,Yandy Díaz,650490,Tampa Bay Rays,849799,Jacob Misiorowski,R,,0.9,0.6355,0.024590227420330065,4.491,1.132,1.0,0.889,0.771,24,744,,,,,,,,,
-2026-10-28,hr,1,Jackson Chourio,694192,Milwaukee Brewers,849799,,R,,0.1678,0.1678,0.03216538287311438,4.491,1.163,1.0,1.062,1.0,27,631,,,,,,,,,
-2026-10-28,hr,2,Junior Caminero,691406,Tampa Bay Rays,849799,Jacob Misiorowski,R,,0.1455,0.1455,0.04202618357526237,4.197,1.237,1.0,0.889,0.771,43,754,,,,,,,,,
+2026-10-28,hit,1,Jackson Chourio,694192,Milwaukee Brewers,849799,Drew Rasmussen,R,,0.97,0.6627,0.02521185708477761,4.491,1.163,0.98,1.062,0.8,27,631,,,,,,,,,
+2026-10-28,hit,2,Yandy Díaz,650490,Tampa Bay Rays,849799,Jacob Misiorowski,R,1,0.9,0.6355,0.024098706164224496,4.491,1.132,0.98,0.889,0.771,24,744,,,,,,,,,
+2026-10-28,hr,1,Jackson Chourio,694192,Milwaukee Brewers,849799,Drew Rasmussen,R,,0.1525,0.1525,0.02521185708477761,4.491,1.163,0.98,1.062,0.8,27,631,,,,,,,,,
+2026-10-28,hr,2,Junior Caminero,691406,Tampa Bay Rays,849799,Jacob Misiorowski,R,3,0.1476,0.1476,0.041186144067406574,4.303,1.237,0.98,0.889,0.771,43,754,,,,,,,,,
